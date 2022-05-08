@@ -1,3 +1,30 @@
 @tailwind base;
+
+@layer base {
+    @font-face {
+        font-family: 'Open Sans';
+        font-weight: 400;
+        src: url('/public/fonts/OpenSans-Regular.woff2') format('woff2'), url('/public/fonts/OpenSans-Regular.woff') format('woff');
+    }
+
+    @font-face {
+        font-family: 'Poppins';
+        font-weight: 700;
+        src: url('/public/fonts/Poppins-Bold.woff2') format('woff2'), url('/public/fonts/Poppins-Bold.woff') format('woff');
+    }
+
+    @font-face {
+        font-family: 'Poppins';
+        font-weight: 800;
+        src: url('/public/fonts/Poppins-ExtraBold.woff2') format('woff2'), url('/public/fonts/Poppins-ExtraBold.woff') format('woff');
+    }
+
+    @font-face {
+        font-family: 'Poppins';
+        font-weight: 900;
+        src: url('/public/fonts/Poppins-Black.woff2') format('woff2'), url('/public/fonts/Poppins-Black.woff') format('woff');
+    }
+}
+
 @tailwind components;
 @tailwind utilities;
