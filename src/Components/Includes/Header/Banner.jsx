@@ -13,7 +13,7 @@ function Banner() {
 						</button>
 					</div>
 				</div>
-				<div className="max-w-full mt-20 sm:mt-0">
+				<div className="max-w-full sm:mt-0">
 					<img
 						src="/images/banners/banner-1.png"
 						alt=""
