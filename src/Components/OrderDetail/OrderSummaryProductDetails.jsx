@@ -1,6 +1,11 @@
-
-function OrderSummaryProductDetails({name, description, image, quantity, price}) {
-  return (
+function OrderSummaryProductDetails({
+	name,
+	description,
+	image,
+	quantity,
+	price,
+}) {
+	return (
 		<div className="">
 			<div className="flex items-top space-x-3 md:space-x-6">
 				<img
@@ -12,9 +17,7 @@ function OrderSummaryProductDetails({name, description, image, quantity, price})
 					<p className="font-poppins text-[15px] md:text-lg text-gray-700">
 						{name}
 					</p>
-					<p className="text-sm md:text-base">
-						{description}
-					</p>
+					<p className="text-sm md:text-base">{description}</p>
 					<div className="flex space-x-6 md:space-x-12 text-sm md:text-base">
 						<p className="">
 							Price: <span>TK.{price}</span>
@@ -23,7 +26,7 @@ function OrderSummaryProductDetails({name, description, image, quantity, price})
 							Qty: <span>{quantity}</span>
 						</p>
 						<p className="">
-							Total: <span>TK.{quantity*price}</span>
+							Total: <span>TK.{quantity * price}</span>
 						</p>
 					</div>
 				</div>
@@ -32,4 +35,4 @@ function OrderSummaryProductDetails({name, description, image, quantity, price})
 	);
 }
 
-export default OrderSummaryProductDetails
+export default OrderSummaryProductDetails;
