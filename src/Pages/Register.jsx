@@ -1,8 +1,10 @@
-
-function Login() {
-  return (
+function Register() {
+	return (
 		<div className="backdrop h-screen w-full bg-black bg-opacity-50 flex justify-center items-center">
-			<div className="modal flex bg-white py-2 w-full h-full md:h-fit md:w-fit md:pl-12 justify-center md:justify-between items-center">
+			<div className="modal flex bg-white md:space-x-10 py-8 w-full h-full md:h-fit md:w-fit md:px-12 justify-center items-center">
+				<div className="modal-image hidden md:block">
+					<img src="/images/auth/register.svg" alt="" className="" />
+				</div>
 				<div className="modal-content space-y-10">
 					<div className="modal-header">
 						<p className="text-3xl font-[700] text-gray-600">
@@ -21,20 +23,21 @@ function Login() {
 									placeholder="Email or Phone"
 									className="rounded-md w-full focus:outline-none focus:border-green-600 focus:ring-0"
 								/>
-								<div className="w-full space-y-2">
-									<input
-										type="password"
-										name=""
-										placeholder="Password"
-										className="rounded-md w-full focus:outline-none focus:border-green-600 focus:ring-0"
-									/>
-									<p className="text-right text-gray-500 hover:cursor-pointer hover:text-[#1778CD] text-sm italic">
-										Forget password?
-									</p>
-								</div>
+								<input
+									type="password"
+									name=""
+									placeholder="Password"
+									className="rounded-md w-full focus:outline-none focus:border-green-600 focus:ring-0"
+								/>
+								<input
+									type="password"
+									name=""
+									placeholder="Confirm Password"
+									className="rounded-md w-full focus:outline-none focus:border-green-600 focus:ring-0"
+								/>
 
-								<button className="bg-[#1778CD] hover:bg-[#045195] text-white w-3/4 md:w-2/3 px-10 py-2 rounded-xl">
-									Sign In
+								<button className="bg-[#1778CD] hover:bg-[#045195] text-white w-3/4 md:w-fit px-10 py-2 rounded-xl">
+									Sign Up
 								</button>
 							</form>
 						</div>
@@ -55,21 +58,17 @@ function Login() {
 								<p className="">Sign up with Google</p>
 							</button>
 							<p className="text-gray-500">
-								New here?{" "}
+								Already have an account?{" "}
 								<a href="#login" className="text-green-600">
-									Create an account
+									Sign in
 								</a>
 							</p>
 						</div>
 					</div>
-				</div>
-
-				<div className="modal-image hidden md:block">
-					<img src="/images/auth/login.svg" alt="" className="" />
 				</div>
 			</div>
 		</div>
 	);
 }
 
-export default Login
+export default Register;

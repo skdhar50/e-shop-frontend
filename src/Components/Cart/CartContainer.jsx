@@ -1,232 +1,180 @@
 import { useState } from "react";
+import CartItem from "./CartItem";
+import CheckoutSummary from "./CheckoutSummary";
 
-function CartContainer({ cart = 3 }) {
-	const [allSelected, setAllSelected] = useState(false);
-	const [totalPrice, setTotalPrice] = useState(0);
+function CartContainer({ shipping = 50 }) {
+
+	const cartProducts = [
+		{
+			id: 1,
+			title: "Lorem, ipsum dolor sit amet consectetur adipisicing.",
+			miniDiscription:
+				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem.",
+			price: 300,
+			image: "/images/products/2.jpg",
+			count: 1,
+			isSelected: false,
+		},
+		{
+			id: 2,
+			title: "Lorem, ipsum dolor sit amet consectetur adipisicing.",
+			miniDiscription:
+				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem.",
+			price: 250,
+			image: "/images/products/5.jpg",
+			count: 1,
+			isSelected: false,
+		},
+		{
+			id: 3,
+			title: "Lorem, ipsum dolor sit amet consectetur adipisicing.",
+			miniDiscription:
+				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem.",
+			price: 400,
+			image: "/images/products/9.jpg",
+			count: 1,
+			isSelected: false,
+		},
+	];
+
+	const [cartItems, setCartItems] = useState(cartProducts);
+
+	const decreaseCartItem = (item) => () => {
+		const newCartItems = [...cartItems];
+		const index = newCartItems.indexOf(item);
+		const newItem = { ...item };
+
+		if (newItem.count === 0) {
+			return;
+		}
+
+		newItem.count = newItem.count - 1;
+		newCartItems[index] = newItem;
+		setCartItems(newCartItems);
+	};
+
+	const increaseCartItem = (item) => () => {
+		const newCartItems = [...cartItems];
+		const index = newCartItems.indexOf(item);
+		const newItem = { ...item };
+
+		if (newItem.count === 8) {
+			return;
+		}
+
+		newItem.count = newItem.count + 1;
+		newCartItems[index] = newItem;
+		setCartItems(newCartItems);
+	};
+
+	const removeCartItem = (item) => () => {
+		const newCartItems = [...cartItems];
+		const index = newCartItems.indexOf(item);
+		newCartItems.splice(index, 1);
+		setCartItems(newCartItems);
+	};
+
+	const getCartTotal = () => {
+		let total = 0;
+		cartItems.forEach((item) => {
+			if (item.isSelected) total += item.price * item.count;
+		});
+		return total;
+	};
+
+	const getPayAblePrice = () => {
+		const payable = getCartTotal() + shipping;
+		return payable;
+	};
+
+	const setIsSelected = (item) => () => {
+		const newCartItems = [...cartItems];
+		const index = newCartItems.indexOf(item);
+		const newItem = { ...item };
+		newItem.isSelected = !newItem.isSelected;
+		newCartItems[index] = newItem;
+		setCartItems(newCartItems);
+	};
+
+	// NOTE: This is a temporary solution to make the cart items selected.
+	const setAllSelected = () => {
+		const newCartItems = [...cartItems];
+		newCartItems.forEach((item) => {
+			if(item.isSelected)
+				item.isSelected = false;
+			item.isSelected = !item.isSelected;
+		});
+		setCartItems(newCartItems);
+	};
 
 	return (
 		<div className="md:px-6 xl:container antialiased">
-			<div className="mt-10 flex space-x-6">
-				<div className="border p-4 grow h-fit">
-					<div className="top-section--counter flex items-center justify-between">
-						<div className="">
-							<button
-								className="flex items-center space-x-2"
-								onClick={() => setAllSelected(!allSelected)}
-							>
-								{!allSelected ? (
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										className="h-6 w-6"
-										fill="none"
-										viewBox="0 0 24 24"
-										stroke="currentColor"
-										strokeWidth="2"
-									>
-										<path
-											strokeLinecap="round"
-											strokeLinejoin="round"
-											d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-										/>
-									</svg>
-								) : (
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										className="h-5 w-5"
-										viewBox="0 0 20 20"
-										fill="currentColor"
-									>
-										<path
-											fill-rule="evenodd"
-											d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-											clip-rule="evenodd"
-										/>
-									</svg>
-								)}
-								<p className="">Select All ({cart})</p>
-							</button>
-						</div>
-						<div className="flex items-center space-x-4">
-							<p className="">Total:</p>
-							<p className="">{totalPrice} TK</p>
-						</div>
-					</div>
-					<div className="cart--items space-y-6 pt-8">
-						<div className="cart--items--item flex items-center justify-between">
-							<div className="flex items-center space-x-2">
-								<div className="flex items-center">
+			<div className="mt-10 md:flex md:space-x-6 space-y-5 md:space-y-0">
+				<div className="border p-4 grow h-fit shadow space-y-8 py-6">
+					{cartItems.length > 0 ? (
+						<>
+							<div className="top-section--counter flex items-center justify-between px-4">
+								{/* Select all button */}
+								<div className="flex space-x-2 items-center">
 									<input
 										type="checkbox"
-										className="h-4 w-4"
-										onChange={() => setAllSelected(!allSelected)}
+										className="text-green-700 focus:outline-none focus:ring-0 cursor-pointer"
+										// onChange={() => setAllSelected()}
 									/>
-									<img
-										src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
-										alt=""
-										className="h-8 w-8"
-									/>
-
-									<div className="flex items-center space-x-2">
-										<p className="">
-											<span className="font-bold">
-												Apple MacBook Pro 13-inch
-											</span>
-											<span className="text-gray-600">
-												(16GB RAM, 512GB Storage)
-											</span>
-										</p>
-										<p className="">
-											<span className="text-gray-600">1 x</span>
-											<span className="text-gray-600">1,000 TK</span>
-										</p>
-									</div>
+									<p className="">Select all</p>
+								</div>
+								{/* Total amount of selection*/}
+								<div className="flex text-xl items-center space-x-4 pr-4">
+									<p className="font-[600] text-gray-700">Total:</p>
+									<p className="text-green-700">{getCartTotal()} TK</p>
 								</div>
 							</div>
-							<div className="flex items-center space-x-2">
-								<button className="text-gray-600">
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										className="h-6 w-6"
-										fill="none"
-										viewBox="0 0 24 24"
-										stroke="currentColor"
-										strokeWidth="2"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									>
-										<line x1="5" y1="12" x2="19" y2="12"></line>
-									</svg>
-								</button>
-								<button className="text-gray-600">
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										className="h-6 w-6"
-										fill="none"
-										viewBox="0 0 24 24"
-										stroke="currentColor"
-										strokeWidth="2"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									>
-										<line x1="12" y1="5" x2="12" y2="19"></line>
-										<line x1="5" y1="12" x2="19" y2="12"></line>
-									</svg>
-								</button>
-								<button className="text-gray-600">
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										className="h-6 w-6"
-										fill="none"
-										viewBox="0 0 24 24"
-										stroke="currentColor"
-										strokeWidth="2"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									>
-										<line x1="18" y1="6" x2="6" y2="18"></line>
-										<line x1="6" y1="6" x2="18" y2="18"></line>
-									</svg>
-								</button>
-							</div>
-						</div>
 
-						<div className="cart--items--item flex items-center justify-between">
-							<div className="flex items-center space-x-2">
-								<div className="flex items-center space-x-2">
-									<input
-										type="checkbox"
-										className="h-4 w-4"
-										onChange={() => setAllSelected(!allSelected)}
-									/>
-									<img
-										src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
-										alt=""
-										className="h-[100px] w-[100px] object-cover"
-									/>
+							<div className="cart--items space-y-3">
+								{/* Cart items */}
+								{cartItems.length > 0 &&
+									cartItems.map((item, index) => (
+										<CartItem
+											key={index}
+											item={item}
+											onIncrease={increaseCartItem(item)}
+											onDecrease={decreaseCartItem(item)}
+											onRemove={removeCartItem(item)}
+											onSelect={setIsSelected(item)}
+										/>
+									))}
+							</div>
 
-									<div className="flex items-center space-x-2">
-										<p className="flex flex-col">
-											<span className="font-bold">
-												Apple MacBook Pro 13-inch
-											</span>
-											<span className="text-gray-600">
-												(16GB RAM, 512GB Storage)
-											</span>
-										</p>
-										<p className="">
-											<span className="text-gray-600">1 x</span>
-											<span className="text-gray-600">1,000 TK</span>
-										</p>
-									</div>
-								</div>
-							</div>
-							<div className="flex items-center space-x-2">
-								<button className="text-gray-600">
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										className="h-6 w-6"
-										fill="none"
-										viewBox="0 0 24 24"
-										stroke="currentColor"
-										strokeWidth="2"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									>
-										<line x1="5" y1="12" x2="19" y2="12"></line>
-									</svg>
+							<div className="flex space-x-2 md:justify-end md:space-x-4 md:pr-6">
+								<button className="px-3 py-2 md:px-4 md:py-2 bg-indigo-500 text-white rounded-sm hover:bg-opacity-80">
+									Continue Shopping
 								</button>
-								<button className="text-gray-600">
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										className="h-6 w-6"
-										fill="none"
-										viewBox="0 0 24 24"
-										stroke="currentColor"
-										strokeWidth="2"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									>
-										<line x1="12" y1="5" x2="12" y2="19"></line>
-										<line x1="5" y1="12" x2="19" y2="12"></line>
-									</svg>
-								</button>
-								<button className="text-gray-600">
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										className="h-6 w-6"
-										fill="none"
-										viewBox="0 0 24 24"
-										stroke="currentColor"
-										strokeWidth="2"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									>
-										<line x1="18" y1="6" x2="6" y2="18"></line>
-										<line x1="6" y1="6" x2="18" y2="18"></line>
-									</svg>
+								<button className="px-3 py-2 md:px-4 md:py-2 bg-indigo-500 text-white rounded-sm hover:bg-opacity-80">
+									Proceed to Checkout
 								</button>
 							</div>
+						</>
+					) : (
+						<div className="flex justify-center items-center">
+							<p className="text-xl text-slate-400">
+								Cart is empty. Please select something first!
+							</p>
 						</div>
-					</div>
+					)}
 				</div>
-				<div className="checkout-summary w-[300px] border p-4 h-fit">
-					<p className="pb-4">Checkout Summary</p>
-					<div className="divide-y space-y-3">
-						<div className="flex justify-between items-center pt-3">
-							<p className="">Subtotal</p>
-							<p className="">{0} TK</p>
-						</div>
-						<div className="flex justify-between items-center pt-3">
-							<p className="">Shipping</p>
-							<p className="">{0} TK</p>
-						</div>
-						<div className="flex justify-between items-center pt-3">
-							<p className="">Total</p>
-							<p className="">{0} TK</p>
-						</div>
-						<div className="flex justify-between items-center pt-3">
-							<p className="">Payable Total</p>
-							<p className="">{0} TK</p>
+
+				<div className="checkout-summary md:w-[320px] border py-4 px-6 h-fit space-y-12">
+					{/* Checkout Summary Scction */}
+					<CheckoutSummary
+						subTotal={getCartTotal()}
+						shipping={shipping}
+						payablePrice={getPayAblePrice()}
+					/>
+					<div className="">
+						<div className="pb-4 text-xl">Apply Coupon</div>
+						<div className="flex space-x-2">
+							<input type="text" name="" id="" className="md:w-[180px] rounded" />
+							<button className="w-full bg-indigo-500 text-white rounded hover:bg-opacity-80">Apply</button>
 						</div>
 					</div>
 				</div>

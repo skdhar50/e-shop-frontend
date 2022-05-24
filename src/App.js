@@ -4,6 +4,9 @@ import OrderDetails from "Pages/OrderDetails";
 import ProductDetails from "Pages/ProductDetails";
 import Demo from "Components/Form/demo";
 import CartContainer from "Components/Cart/CartContainer";
+import Cart from "Pages/Cart";
+import Register from "Pages/Register";
+import Login from "Pages/Login";
 
 function App() {
 	return (
@@ -13,7 +16,10 @@ function App() {
 			{/* <ProductDetails /> */}
 			{/* <MultipleImageUpload /> */}
 			{/* <Demo /> */}
-			<CartContainer />
+			{/* <CartContainer /> */}
+			{/* <Cart /> */}
+			{/* <Register /> */}
+			<Login />
 		</div>
 	);
 }
