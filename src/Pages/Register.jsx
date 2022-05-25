@@ -1,7 +1,21 @@
 function Register() {
 	return (
 		<div className="backdrop h-screen w-full bg-black bg-opacity-50 flex justify-center items-center">
-			<div className="modal flex bg-white md:space-x-10 py-8 w-full h-full md:h-fit md:w-fit md:px-12 justify-center items-center">
+			<div className="modal flex bg-white md:space-x-10 py-12 w-full h-full md:h-fit md:w-fit md:pr-12 justify-center items-center relative">
+				<div className="">
+					<svg
+						className="w-6 h-6 absolute top-5 right-5 stroke-gray-500 cursor-pointer hover:stroke-[#E96115]"
+						viewBox="0 0 30 30"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<path
+							d="M25 5L5 25M25 25L5 5L25 25Z"
+							strokeWidth="2.5"
+							strokeLinecap="round"
+						/>
+					</svg>
+				</div>
 				<div className="modal-image hidden md:block">
 					<img src="/images/auth/register.svg" alt="" className="" />
 				</div>
@@ -36,7 +50,7 @@ function Register() {
 									className="rounded-md w-full focus:outline-none focus:border-green-600 focus:ring-0"
 								/>
 
-								<button className="bg-[#1778CD] hover:bg-[#045195] text-white w-3/4 md:w-fit px-10 py-2 rounded-xl">
+								<button className="bg-[#1778CD] hover:bg-[#045195] text-white w-3/4 md:w-2/3 px-10 py-2 rounded-xl">
 									Sign Up
 								</button>
 							</form>

@@ -18,8 +18,8 @@ function App() {
 			{/* <Demo /> */}
 			{/* <CartContainer /> */}
 			{/* <Cart /> */}
-			{/* <Register /> */}
-			<Login />
+			<Register />
+			{/* <Login /> */}
 		</div>
 	);
 }

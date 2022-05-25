@@ -1,9 +1,22 @@
-
 function Login() {
-  return (
+	return (
 		<div className="backdrop h-screen w-full bg-black bg-opacity-50 flex justify-center items-center">
-			<div className="modal flex bg-white py-2 w-full h-full md:h-fit md:w-fit md:pl-12 justify-center md:justify-between items-center">
-				<div className="modal-content space-y-10">
+			<div className="modal flex bg-white py-8 w-full h-full md:h-fit md:w-[700px] md:pl-12 justify-center md:justify-between items-center relative">
+				<div className="">
+					<svg
+						className="w-6 h-6 absolute top-5 right-5 stroke-gray-500 cursor-pointer hover:stroke-[#E96115]"
+						viewBox="0 0 30 30"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<path
+							d="M25 5L5 25M25 25L5 5L25 25Z"
+							strokeWidth="2.5"
+							strokeLinecap="round"
+						/>
+					</svg>
+				</div>
+				<div className="modal-content space-y-10 md:pr-6">
 					<div className="modal-header">
 						<p className="text-3xl font-[700] text-gray-600">
 							Welcome to PUCShop
@@ -64,12 +77,21 @@ function Login() {
 					</div>
 				</div>
 
-				<div className="modal-image hidden md:block">
-					<img src="/images/auth/login.svg" alt="" className="" />
+				<div className="modal-image h-full hidden relative md:flex items-center justify-center flex-grow">
+					<img
+						src="/images/auth/login.svg"
+						alt=""
+						className="object-contain w-[260px]"
+					/>
+					<img
+						src="/images/auth/no-bg.png"
+						alt=""
+						className="object-contain w-[600px] absolute pt-4"
+					/>
 				</div>
 			</div>
 		</div>
 	);
 }
 
-export default Login
+export default Login;
