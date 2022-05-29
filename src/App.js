@@ -7,6 +7,8 @@ import CartContainer from "Components/Cart/CartContainer";
 import Cart from "Pages/Cart";
 import Register from "Pages/Register";
 import Login from "Pages/Login";
+import ConfirmOrder from "Pages/ConfirmOrder";
+import CreateNewShippingAddress from "Components/Modals/CreateNewShippingAddress";
 
 function App() {
 	return (
@@ -18,8 +20,10 @@ function App() {
 			{/* <Demo /> */}
 			{/* <CartContainer /> */}
 			{/* <Cart /> */}
-			<Register />
+			{/* <Register /> */}
 			{/* <Login /> */}
+			<ConfirmOrder />
+			{/* <CreateNewShippingAddress /> */}
 		</div>
 	);
 }

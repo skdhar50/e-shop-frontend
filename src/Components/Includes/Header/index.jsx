@@ -5,7 +5,7 @@ import MobileHeader from "./MobileHeader";
 function index() {
 	return (
 		<>
-			<div className="hidden md:block space-y-7">
+			<div className="hidden md:block space-y-4">
 				<TopBarLarge />
 				<SearchBarLearge />
 				<NavBarLarge />
