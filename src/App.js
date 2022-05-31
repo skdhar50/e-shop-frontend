@@ -8,7 +8,7 @@ import Cart from "Pages/Cart";
 import Register from "Pages/Register";
 import Login from "Pages/Login";
 import ConfirmOrder from "Pages/ConfirmOrder";
-import CreateNewShippingAddress from "Components/Modals/CreateNewShippingAddress";
+import ProductList from "Pages/ProductList";
 
 function App() {
 	return (
@@ -22,8 +22,8 @@ function App() {
 			{/* <Cart /> */}
 			{/* <Register /> */}
 			{/* <Login /> */}
-			<ConfirmOrder />
-			{/* <CreateNewShippingAddress /> */}
+			{/* <ConfirmOrder /> */}
+			<ProductList />
 		</div>
 	);
 }

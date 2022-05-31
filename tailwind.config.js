@@ -4,7 +4,7 @@ module.exports = {
 		extend: {
 			container: {
 				center: true,
-				padding: "8.75rem",
+				padding: "7.5rem",
 			},
 			fontFamily: {
 				sans: ["Open Sans", "sans-serif"],

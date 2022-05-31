@@ -4,7 +4,7 @@ function Register() {
 			<div className="modal flex bg-white md:space-x-10 py-8 w-full h-full md:h-fit md:w-fit md:pr-12 justify-center items-center relative">
 				<div className="">
 					<svg
-						className="w-6 h-6 absolute top-5 left-5 stroke-gray-500 cursor-pointer hover:stroke-[#E96115]"
+						className="w-6 h-6 absolute top-5 right-5 md:left-5 stroke-gray-500 cursor-pointer hover:stroke-[#E96115]"
 						viewBox="0 0 30 30"
 						fill="none"
 						xmlns="http://www.w3.org/2000/svg"
