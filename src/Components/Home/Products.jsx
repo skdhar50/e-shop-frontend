@@ -70,15 +70,15 @@ function Products() {
 	];
 
     return (
-			<div className="2xl:container pt-12 md:pt-20 antialiased">
-				<div className="flex flex-col justify-center items-center space-y-8 px-3">
+			<div className="xl:container pt-12 md:pt-20 antialiased">
+				<div className="flex flex-col justify-center items-center space-y-8 px-6">
 					<div className="title w-full">
 						<p className="font-poppins text-center text-[20px] md:text-[26px] xl:text-[32px] text-[#353535]">
 							Featured Products
 						</p>
 					</div>
 
-					<div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-x-6 gap-y-8">
+					<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-x-6 gap-y-8">
 						{products.map((product, index) => (
 							<ProductCard key={index} {...product} />
 						))}

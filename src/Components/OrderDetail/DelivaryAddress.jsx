@@ -1,10 +1,10 @@
 function DelicaryAddress({ address, phone }) {
 	return (
-		<div className="border-2 px-4 xl:pl-6 py-4 space-y-3 h-fit grow-0 md:w-[400px]">
-			<p className="font-poppins text-[20px] md:text-[20px] xl:text-[28px] text-[#353535]">
+		<div className="border-2 px-4 xl:pl-6 py-4 space-y-3 h-fit grow-0 lg:w-[400px]">
+			<p className="text-xl md:text-2xl font-[600] text-gray-600">
 				Delivary Address
 			</p>
-			<div className="space-y-3">
+			<div className="space-y-4 text-sm md:text-base">
 				<p className="">
 					<span className="font-bold pr-2">Home/Office: </span>
 					{address}

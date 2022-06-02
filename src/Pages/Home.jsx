@@ -8,7 +8,7 @@ function Home() {
 	return (
 		<Layout title="Home">
 			<Banner />
-			<FeaturedCategories />
+			{/* <FeaturedCategories /> */}
 			<WhyUs />
 			<Products />
 		</Layout>

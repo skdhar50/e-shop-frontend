@@ -12,7 +12,7 @@ function OrderDetails() {
 		<div className="px-4 xl:container">
 			<div className="hidden md:block border-2 pb-[110px] xl:pb-[130px] pt-[20px] px-[30px] mt-8 w-full mx-auto">
 				<div className="pb-4 xl:pb-2">
-					<p className="font-poppins text-[20px] md:text-[20px] xl:text-[28px] text-[#353535]">
+					<p className="text-xl lg:text-2xl font-[600] text-gray-600">
 						Your Order Delivery Information
 					</p>
 				</div>

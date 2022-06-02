@@ -2,8 +2,8 @@ function Banner() {
 	return (
 		<div className="">
 			<div className="relative flex justify-center items-center">
-				<div className="hidden sm:block absolute md:left-[170px] xl:left-80">
-					<div className="w-fit ">
+				<div className="hidden lg:block lg:absolute xl:left-80">
+					<div className="w-fit">
 						<p className="md:text-[50px] xl:text-[70px] font-poppins text-[#851225] leading-tight">
 							Explore <br /> <span className="md:text-[70px] xl:text-[90px]">Exclusive</span>{" "}
 							<br /> Deals

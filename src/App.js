@@ -14,7 +14,7 @@ function App() {
 	return (
 		<div className="App">
 			{/* <Home /> */}
-			{/* <OrderDetails /> */}
+			<OrderDetails />
 			{/* <ProductDetails /> */}
 			{/* <MultipleImageUpload /> */}
 			{/* <Demo /> */}
@@ -23,7 +23,7 @@ function App() {
 			{/* <Register /> */}
 			{/* <Login /> */}
 			{/* <ConfirmOrder /> */}
-			<ProductList />
+			{/* <ProductList /> */}
 		</div>
 	);
 }
