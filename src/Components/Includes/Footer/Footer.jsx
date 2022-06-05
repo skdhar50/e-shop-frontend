@@ -68,7 +68,7 @@ function Footer() {
 							<div className="text-sm md:text-sm">
 								<ul className="space-y-1">
 									{list.options.map((option, index) => (
-										<li className="">
+										<li className="" key={index}>
 											<a href={option.url} className="">
 												<p className="">{option.title}</p>
 											</a>

@@ -5,27 +5,23 @@ function WhyUs() {
 	const ourFeatures = [
 		{
 			title: "Free Shipping",
-			image: "/images/icons/freeDelivery.svg",
-			description:
-				"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate officiis",
+			image: "/images/icons/free-shipping.svg",
+			width: "lg:w-3/4",
 		},
 		{
 			title: "Secure Payment",
-			image: "/images/icons/creditCard.svg",
-			description:
-				"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate officiis",
+			image: "/images/icons/secure-payment.svg",
+			width: "lg:w-3/5",
 		},
 		{
 			title: "24/7 Support",
 			image: "/images/icons/support.svg",
-			description:
-				"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate officiis",
+			width: "lg:w-3/5",
 		},
 		{
 			title: "30 Days Return",
-			image: "/images/icons/return.svg",
-			description:
-				"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate officiis",
+			image: "/images/icons/return-product.svg",
+			width: "lg:w-3/5",
 		},
 	];
 	return (
@@ -36,7 +32,7 @@ function WhyUs() {
 						Why Us?
 					</p>
 				</div>
-				<div className="grid md:grid-cols-2 gap-x-6 gap-y-8 xl:flex xl:space-x-4">
+				<div className="grid grid-cols-2 md:grid-cols-4 gap-4">
 					{ourFeatures.map((feature, index) => (
 						<WhyUsCard key={index} {...feature} />
 					))}

@@ -9,8 +9,8 @@ function NavBarLarge() {
 					{menuItems.map((menu, index) => {
 						const depthLevel = 0;
 						return (
-							<div className="w-full">
-								<MenuItems items={menu} key={index} depthLevel={depthLevel} />
+							<div className="w-full" key={index}>
+								<MenuItems items={menu} depthLevel={depthLevel} />
 							</div>
 						);
 					})}

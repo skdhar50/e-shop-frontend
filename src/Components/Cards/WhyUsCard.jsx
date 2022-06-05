@@ -1,9 +1,8 @@
-function WhyUsCard({ title, image, description }) {
+function WhyUsCard({ title, image, width }) {
 	return (
-		<div className="w-[251px] h-[270px] p-4 border-2 shadow-xl border-[#1778CD] rounded-md flex flex-col justify-center items-center space-y-4">
-			<img src={image} alt="" className="md:w-[60px] xl:w-[70px]" />
-			<p className="heading text-[#353535] font-poppins md:text-[20px] xl:text-[24px]">{title}</p>
-			<p className="description text-center text-[#5C5C5C] md:text-sm xl:text-base">{description}</p>
+		<div className="bg-gray-100 shadow-lg w-full flex flex-col justify-center items-center space-y-4 border p-6 lg:p-8 rounded border-gray-400 overflow-hidden">
+			<img src={image} alt="" className={width} />
+			<p className="font-bold text-gray-500 lg:text-lg text-center">{title}</p>
 		</div>
 	);
 }

@@ -5,12 +5,12 @@ import MobileHeader from "./MobileHeader";
 function index() {
 	return (
 		<>
-			<div className="hidden md:block space-y-4">
+			<div className="hidden lg:block space-y-4">
 				<TopBarLarge />
 				<SearchBarLearge />
 				<NavBarLarge />
 			</div>
-			<div className="md:hidden mb-[80px]">
+			<div className="lg:hidden mb-[70px]">
 				<MobileHeader />
 			</div>
 		</>
