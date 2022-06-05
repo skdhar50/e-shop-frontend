@@ -9,12 +9,10 @@ import Register from "Pages/Register";
 import Login from "Pages/Login";
 import ConfirmOrder from "Pages/ConfirmOrder";
 import ProductList from "Pages/ProductList";
-import Home2 from "Pages/Home2";
 
 function App() {
 	return (
 		<div className="App">
-			{/* <Home2 /> */}
 			<Home />
 			{/* <OrderDetails /> */}
 			{/* <ProductDetails /> */}

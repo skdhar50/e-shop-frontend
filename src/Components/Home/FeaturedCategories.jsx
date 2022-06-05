@@ -25,11 +25,11 @@ function FeaturedCategories() {
 		<div className="px-4 md:container pt-12 antialiased">
 			<div className="flex flex-col justify-center items-center space-y-8">
 				<div className="title w-full">
-					<p className="font-poppins text-center text-[22px] md:text-[26px] xl:text-[32px] text-[#353535]">
+					<p className="font-poppins text-center text-[1.38rem] md:text-[1.63rem] xl:text-[2rem] text-[#353535]">
 						Featured Categories
 					</p>
 				</div>
-				<div className="w-[350px] md:w-[700px] lg:w-[800px] xl:w-[900px]">
+				<div className="w-[21.875rem] md:w-[43.75rem] lg:w-[50rem] xl:w-[56.25rem]">
 					<Swiper
 						className=""
 						modules={[Pagination]}
@@ -41,7 +41,6 @@ function FeaturedCategories() {
 						}}
 						breakpoints={{
 							768: {
-								pagination: false,
 								allowTouchMove: false,
 								slidesPerView: 4,
 							},
@@ -49,11 +48,11 @@ function FeaturedCategories() {
 					>
 						{categories.map((category, index) => (
 							<SwiperSlide key={index}>
-								<div className="relative lg:max-w-[180px] xl:max-w-[220px]">
+								<div className="relative cursor-pointer lg:w-[11.25rem] xl:w-[13.75rem]">
 									<img
 										src={category.image}
 										alt={category.title}
-										className="h-[250px] w-full object-cover"
+										className="h-[15.625rem] w-full inset-0 object-cover"
 									/>
 									<div className="bg-black bg-opacity-60 absolute bottom-0 text-white font bold w-full h-1/2 flex justify-center items-center text-lg font-bold">
 										<p className="text-center">{category.title}</p>
