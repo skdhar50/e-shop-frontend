@@ -1,7 +1,7 @@
 function PaymentMethodCard({ isCOD = false, image, width, height }) {
 	return (
 		<div className="flex items-center bg-gray-100 w-full h-[60px] px-8 rounded-md border shadow">
-			<div className="flex items-center space-x-4 py-2">
+			<div className="flex justify-start items-center space-x-4 py-2">
 				<input
 					type="radio"
 					name="payment"
@@ -10,9 +10,13 @@ function PaymentMethodCard({ isCOD = false, image, width, height }) {
 				/>
 				<label
 					htmlFor=""
-					className={"" + (isCOD ? "flex items-center space-x-4" : "")}
+					className={isCOD ? "flex items-center space-x-4" : ""}
 				>
-					<img src={image} alt="" className={`w-[${width}px] h-[${height}px]`} />
+					<img
+						src={image}
+						alt=""
+						className={`w-[${width}px] h-[${height}px] object-cover`}
+					/>
 					{isCOD ? (
 						<span className="text-gray-600">Cash on Delivery</span>
 					) : null}

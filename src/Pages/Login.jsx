@@ -1,8 +1,11 @@
+import { useNavigate } from "react-router-dom";
+
 function Login() {
+	const navigate = useNavigate();
 	return (
-		<div className="backdrop h-screen w-full bg-black bg-opacity-50 flex justify-center items-center">
+		<div className="backdrop z-50 top-0 bottom-0 right-0 left-0 bg-black bg-opacity-50 flex justify-center items-center fixed">
 			<div className="modal flex bg-white py-8 w-full h-full md:h-fit md:w-[700px] md:pl-12 justify-center md:justify-between items-center relative">
-				<div className="">
+				<button onClick={() => navigate(-1)} className="">
 					<svg
 						className="w-6 h-6 absolute top-5 right-5 stroke-gray-500 cursor-pointer hover:stroke-[#E96115]"
 						viewBox="0 0 30 30"
@@ -15,7 +18,7 @@ function Login() {
 							strokeLinecap="round"
 						/>
 					</svg>
-				</div>
+				</button>
 				<div className="modal-content space-y-10 md:pr-6">
 					<div className="modal-header">
 						<p className="text-3xl font-[700] text-gray-600">

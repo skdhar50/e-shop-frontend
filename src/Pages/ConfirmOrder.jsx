@@ -10,8 +10,8 @@ function ConfirmOrder() {
 		{
 			isCOD: true,
 			image: "/images/icons/cod.png",
-			width: 50,
-			height: 50,
+			width: 45,
+			height: 45,
 		},
 		{ image: "/images/icons/bkash.png", width: 80, height: 40 },
 		{ image: "/images/icons/rocket.png", width: 70, height: 40 },
