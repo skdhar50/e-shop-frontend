@@ -18,10 +18,9 @@ function ProductPreview(props) {
 	} = props;
 
 	return (
-		<div className="md:flex md:space-x-8 md:px-4 py-4 md:pt-8">
+		<div className="md:flex md:space-x-8 md:px-4 py-4 md:pt-8 antialiased">
 			<div className="w-full h-fit md:w-[250px] 2xl:w-[300px] 2xl:h-[200px] md:shrink-0 md:pl-4 md:pr-3">
 				<ProductPreviewImageAndThumb images={images} />
-				{/* <img src="/images/products/8.jpg" alt="" className="w-full h-[350px] object-cover" /> */}
 			</div>
 			<div className="pt-5 md:pt-0 space-y-4">
 				<div className="space-y-4 px-4 md:px-0">
@@ -72,7 +71,7 @@ function ProductPreview(props) {
 					{/* Stock */}
 					{stock > 0 ? (
 						<p className="">
-							In Stock ({stock > 50 ? "50+" : stock} copies available)
+							<span className="text-green-600 font-bold pr-1">In Stock</span> ({stock > 50 ? "50+" : stock} copies available)
 						</p>
 					) : (
 						<p className="text-red-500">Out of Stock</p>

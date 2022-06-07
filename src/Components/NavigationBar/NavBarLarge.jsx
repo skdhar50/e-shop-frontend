@@ -3,7 +3,7 @@ import MenuItems from "./MenuItems";
 
 function NavBarLarge() {
 	return (
-		<nav className="w-full h-[45px] bg-gray-200 bg-opacity-50 flex items-center justify-center">
+		<nav className="w-full h-[45px] border border-gray-300 shadow bg-gray-100 flex items-center justify-center">
 			<div className="xl:container md:w-full">
 				<ul className="flex justify-around items-center">
 					{menuItems.map((menu, index) => {

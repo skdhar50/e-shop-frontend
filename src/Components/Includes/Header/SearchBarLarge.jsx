@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function SearchBarLearge() {
 	return (
 		<div className="xl:container">
@@ -12,7 +14,7 @@ function SearchBarLearge() {
 							id=""
 							className="border-[1px] h-12 bg-[#F6F6F6] border-[#787878] rounded-tl-lg rounded-bl-lg px-6 -mr-[2px] cursor-pointer focus:outline-none focus:border-[1px] focus:border-[#787878] focus:ring-0 bg-opacity-90 text-gray-600"
 						>
-							<option value="" selected disabled>
+							<option value="" defaultValue disabled>
 								All Categories
 							</option>
 							<option value="">Electronics</option>
@@ -35,7 +37,10 @@ function SearchBarLearge() {
 					</div>
 				</div>
 				<div className="cart">
-					<div className="flex justify-center items-center space-x-3 bg-[#3E3CA5] w-fit p-2 rounded-md hover:bg-opacity-90 cursor-pointer">
+					<Link
+						to="/cart"
+						className="flex justify-center items-center space-x-3 bg-[#3E3CA5] w-fit p-2 rounded-md hover:bg-opacity-90 cursor-pointer"
+					>
 						<img
 							src="/images/icons/cart.svg"
 							alt=""
@@ -45,7 +50,7 @@ function SearchBarLearge() {
 						<p className="md:px-[6px] xl:px-[8px] md:text-sm xl:text-base rounded-full bg-white text-red-800">
 							5
 						</p>
-					</div>
+					</Link>
 				</div>
 			</div>
 		</div>

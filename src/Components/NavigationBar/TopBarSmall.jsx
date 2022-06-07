@@ -1,3 +1,5 @@
+import {Link} from 'react-router-dom';
+
 function TopBarSmall({ handleLeftNavbar, handleRightNavbar }) {
 	return (
 		<div className="fixed top-0 w-full z-10 bg-gray-700 h-[70px] flex items-center">
@@ -10,7 +12,9 @@ function TopBarSmall({ handleLeftNavbar, handleRightNavbar }) {
 							className="w-[35px]"
 						/>
 					</button>
-					<p className="text-2xl font-poppins text-white">PUC Shop</p>
+					<Link to="/">
+						<p className="text-2xl font-poppins text-white">PUC Shop</p>
+					</Link>
 				</div>
 				<div className="">
 					<button className="" onClick={handleRightNavbar}>

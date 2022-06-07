@@ -49,7 +49,7 @@ function ConfirmOrder() {
 			)}
 			<div className="md:px-6 xl:container antialiased">
 				<div className="pb-14 space-y-4 xl:space-y-0 md:pb-0 xl:flex xl:space-x-6 mt-10">
-					<div className="md:flex-grow space-y-8 border md:shadow-md p-3 md:p-6">
+					<div className="md:flex-grow bg-white drop-shadow-sm space-y-8 border md:shadow-md p-3 md:p-6">
 						<div className="space-y-4">
 							<p className="text-xl md:text-2xl font-[600] text-gray-600">
 								Shipping Address
@@ -96,7 +96,7 @@ function ConfirmOrder() {
 						</div>
 					</div>
 
-					<div className="md:min-w-[280px] xl:min-w-[320px] h-fit border-2 p-6 md:shadow">
+					<div className="md:min-w-[280px] bg-white drop-shadow-sm xl:min-w-[320px] h-fit border-2 p-6 md:shadow">
 						<CheckoutSummary />
 					</div>
 				</div>

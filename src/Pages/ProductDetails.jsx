@@ -7,6 +7,7 @@ import CustomersReviews from "Components/ReviewsAndRatings/CustomersReviews";
 import ProductListCarousel from "Components/SliderAndCarousel/ProductListCarousel";
 import CustomersQA from "Components/ProductQA/CustomersQA";
 import Layout from "Components/Layout";
+import { Outlet } from "react-router-dom";
 
 function ProductDetails() {
 	const productDetails = {
@@ -246,8 +247,9 @@ function ProductDetails() {
 
 	return (
 		<Layout title="Product Details">
+			<Outlet />
 			<div className="md:px-6 xl:container antialiased">
-				<div className="mt-4 md:pb-4 md:flex border border-gray-300 w-full h-full">
+				<div className="mt-4 bg-white drop-shadow md:pb-4 md:flex border border-gray-300 w-full h-full">
 					{/* Product Preview Section */}
 					<ProductPreview {...productDetails} />
 
@@ -255,7 +257,7 @@ function ProductDetails() {
 					<SideSection returnDays={7} deliveryCharge={50} />
 				</div>
 
-				<div className="mt-4 pb-16 space-y-10 divide-y-2 md:space-y-10 border border-gray-300 px-3 md:px-8">
+				<div className="mt-4 pb-16 bg-white drop-shadow space-y-10 divide-y-2 md:space-y-10 border border-gray-300 px-3 md:px-8">
 					{/* Product Summary */}
 					<ProductSummary {...productSummary} />
 

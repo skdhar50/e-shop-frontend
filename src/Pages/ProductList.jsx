@@ -3,6 +3,7 @@ import RightFilterSmall from "Components/Filter/RightFilterSmall";
 import { useState } from "react";
 import FilterListItems from "Components/Filter/FilterListItems";
 import Layout from "Components/Layout";
+import { Outlet } from "react-router-dom";
 
 function ProductList() {
 	const products = [
@@ -81,6 +82,7 @@ function ProductList() {
 
 	return (
 		<Layout title="Products">
+			<Outlet />
 			<div className="2xl:container pb-12 md:mt-4">
 				<div className="sm:px-4 md:px-2 xl:px-4 flex justify-center items-top xl:space-x-4">
 					<div className="h-fit border p-6 space-y-4 shadow hidden xl:block">

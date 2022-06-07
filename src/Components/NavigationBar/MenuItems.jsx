@@ -31,19 +31,21 @@ function MenuItems({ items, depthLevel }) {
 	return (
 		<li
 			ref={ref}
-			className={`relative text-center hover:bg-gray-300 py-2 cursor-pointer`}
+			className={`relative text-center hover:bg-gray-300 cursor-pointer`}
 			onMouseEnter={onMouseEnter}
 			onMouseLeave={onMouseLeave}
 		>
 			{items.submenu ? (
 				<>
 					<button
-						className="w-full"
+						className="w-full group py-2"
 						onClick={() => setDropdown((prev) => !prev)}
 					>
 						{items.title}
 						{depthLevel > 0 ? (
-							<span className="float-right pr-3 text-gray-50">&#10093;</span>
+							<span className="float-right pr-3 text-gray-50 group-hover:text-black">
+								&#10093;
+							</span>
 						) : (
 							""
 						)}
@@ -55,9 +57,9 @@ function MenuItems({ items, depthLevel }) {
 					/>
 				</>
 			) : (
-				<a href={items.url} className="">
-					{items.title}
-				</a>
+				<p className="py-2">
+					<a href={items.url}>{items.title}</a>
+				</p>
 			)}
 		</li>
 	);

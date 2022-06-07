@@ -1,4 +1,55 @@
+import {Link} from 'react-router-dom';
+
 function RightNavbarSmall({ isOpen, handleRightNavbar }) {
+	const links = [
+		{
+			title: "Login/Register",
+			url: "login",
+			icon: "/images/icons/RightNavSmall/login.svg",
+		},
+		{
+			title: "Profile",
+			url: "",
+			icon: "/images/icons/RightNavSmall/profile.svg",
+		},
+		{
+			title: "Wishlist",
+			url: "",
+			icon: "/images/icons/RightNavSmall/wishlist.svg",
+		},
+		{
+			title: "Notifications",
+			url: "",
+			icon: "/images/icons/RightNavSmall/notification.svg",
+		},
+		{
+			title: "My Cart",
+			url: "/cart",
+			icon: "/images/icons/RightNavSmall/mycart.svg",
+		},
+		{
+			title: "My Orders",
+			url: "",
+			icon: "/images/icons/RightNavSmall/myorder.svg",
+		},
+		{
+			title: "Services",
+			url: "",
+			icon: "/images/icons/RightNavSmall/services.svg",
+		},
+		{ title: "Help", url: "", icon: "/images/icons/RightNavSmall/help.svg" },
+		{
+			title: "Location",
+			url: "",
+			icon: "/images/icons/RightNavSmall/location.svg",
+		},
+		{
+			title: "Logout (as user)",
+			url: "",
+			icon: "/images/icons/RightNavSmall/logout.svg",
+		},
+	];
+
 	return (
 		<div
 			className={
@@ -29,86 +80,18 @@ function RightNavbarSmall({ isOpen, handleRightNavbar }) {
 				</div>
 				<div className="">
 					<ul className="space-y-6 pl-4">
-						<li className="flex items-center space-x-4">
-							<img
-								src="/images/icons/RightNavSmall/login.svg"
-								alt=""
-								className="w-[25px] h-[25px]"
-							/>
-							<p className="">Login/Register</p>
-						</li>
-						<li className="flex items-center space-x-4">
-							<img
-								src="/images/icons/RightNavSmall/profile.svg"
-								alt=""
-								className="w-[25px] h-[25px]"
-							/>
-							<p className="">Profile</p>
-						</li>
-						<li className="flex items-center space-x-4">
-							<img
-								src="/images/icons/RightNavSmall/wishlist.svg"
-								alt=""
-								className="w-[25px] h-[25px]"
-							/>
-							<p className="">Wishlist</p>
-						</li>
-						<li className="flex items-center space-x-4">
-							<img
-								src="/images/icons/RightNavSmall/notification.svg"
-								alt=""
-								className="w-[25px] h-[25px]"
-							/>
-							<p className="">Notifications</p>
-						</li>
-						<li className="flex items-center space-x-4">
-							<img
-								src="/images/icons/RightNavSmall/mycart.svg"
-								alt=""
-								className="w-[25px] h-[25px]"
-							/>
-							<p className="">My Cart</p>
-						</li>
-						<li className="flex items-center space-x-4">
-							<img
-								src="/images/icons/RightNavSmall/myorder.svg"
-								alt=""
-								className="w-[25px] h-[25px]"
-							/>
-							<p className="">My Orders</p>
-						</li>
-						<li className="flex items-center space-x-4">
-							<img
-								src="/images/icons/RightNavSmall/services.svg"
-								alt=""
-								className="w-[25px] h-[25px]"
-							/>
-							<p className="">Services</p>
-						</li>
-						<li className="flex items-center space-x-4">
-							<img
-								src="/images/icons/RightNavSmall/help.svg"
-								alt=""
-								className="w-[25px] h-[25px]"
-							/>
-							<p className="">Help</p>
-						</li>
-						<li className="flex items-center space-x-4">
-							<img
-								src="/images/icons/RightNavSmall/location.svg"
-								alt=""
-								className="w-[25px] h-[25px]"
-							/>
-							<p className="">Location</p>
-						</li>
-						<li className="flex items-center space-x-4">
-							<img
-								src="/images/icons/RightNavSmall/logout.svg"
-								alt=""
-								className="w-[25px] h-[25px]"
-							/>
-							<p className="">Logout (as User)</p>
-						</li>
+						{links.map((link, index) => (
+							<li key={index}>
+								<Link to={link.url} className="flex items-center space-x-4">
+									<img
+										src={link.icon}
+										alt={link.title}
+										className="w-[25px] h-[25px]"
+									/>
+									<p className="">{link.title}</p>
+								</Link>
+							</li>
+						))}
 					</ul>
 				</div>
 			</div>

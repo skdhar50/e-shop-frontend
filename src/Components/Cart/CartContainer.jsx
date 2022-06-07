@@ -1,4 +1,5 @@
 import { useState } from "react";
+import {Link} from 'react-router-dom';
 import CartItem from "./CartItem";
 import CheckoutSummary from "./CheckoutSummary";
 
@@ -110,7 +111,7 @@ function CartContainer({ shipping = 50 }) {
 	return (
 		<div className="md:px-6 xl:container antialiased">
 			<div className="mt-10 md:flex md:space-x-6 space-y-5 md:space-y-0">
-				<div className="border p-4 grow h-fit shadow space-y-8 py-6">
+				<div className="border p-4 grow bg-white h-fit drop-shadow space-y-8 py-6">
 					{cartItems.length > 0 ? (
 						<>
 							<div className="top-section--counter flex items-center justify-between px-4">
@@ -146,12 +147,16 @@ function CartContainer({ shipping = 50 }) {
 							</div>
 
 							<div className="flex space-x-2 md:justify-end md:space-x-4 md:pr-6">
-								<button className="px-3 py-2 md:px-4 md:py-2 bg-indigo-500 text-white rounded-sm hover:bg-opacity-80">
-									Continue Shopping
-								</button>
-								<button className="px-3 py-2 md:px-4 md:py-2 bg-indigo-500 text-white rounded-sm hover:bg-opacity-80">
-									Proceed to Checkout
-								</button>
+								<Link to="/">
+									<button className="px-3 py-2 md:px-4 md:py-2 bg-indigo-500 text-white rounded-sm hover:bg-opacity-80">
+										Continue Shopping
+									</button>
+								</Link>
+								<Link to="/confirm-order">
+									<button className="px-3 py-2 md:px-4 md:py-2 bg-indigo-500 text-white rounded-sm hover:bg-opacity-80">
+										Proceed to Checkout
+									</button>
+								</Link>
 							</div>
 						</>
 					) : (
@@ -163,7 +168,7 @@ function CartContainer({ shipping = 50 }) {
 					)}
 				</div>
 
-				<div className="checkout-summary md:w-[320px] border py-4 px-6 h-fit space-y-12">
+				<div className="checkout-summary drop-shadow bg-white md:w-[320px] border py-4 px-6 h-fit space-y-12">
 					{/* Checkout Summary Scction */}
 					<CheckoutSummary
 						subTotal={getCartTotal()}
@@ -173,8 +178,15 @@ function CartContainer({ shipping = 50 }) {
 					<div className="">
 						<div className="pb-4 text-xl">Apply Coupon</div>
 						<div className="flex space-x-2">
-							<input type="text" name="" id="" className="md:w-[180px] rounded" />
-							<button className="w-full bg-indigo-500 text-white rounded hover:bg-opacity-80">Apply</button>
+							<input
+								type="text"
+								name=""
+								id=""
+								className="md:w-[180px] rounded"
+							/>
+							<button className="w-full bg-indigo-500 text-white rounded hover:bg-opacity-80">
+								Apply
+							</button>
 						</div>
 					</div>
 				</div>

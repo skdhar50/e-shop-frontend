@@ -1,11 +1,12 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
-function Login() {
+function Login({goBackTo}) {
 	const navigate = useNavigate();
+
 	return (
 		<div className="backdrop z-50 top-0 bottom-0 right-0 left-0 bg-black bg-opacity-50 flex justify-center items-center fixed">
 			<div className="modal flex bg-white py-8 w-full h-full md:h-fit md:w-[700px] md:pl-12 justify-center md:justify-between items-center relative">
-				<button onClick={() => navigate(-1)} className="">
+				<button onClick={() => navigate(goBackTo, { replace: true })} className="">
 					<svg
 						className="w-6 h-6 absolute top-5 right-5 stroke-gray-500 cursor-pointer hover:stroke-[#E96115]"
 						viewBox="0 0 30 30"
@@ -72,9 +73,9 @@ function Login() {
 							</button>
 							<p className="text-gray-500">
 								New here?{" "}
-								<a href="#login" className="text-green-600">
+								<Link to={`${goBackTo}/register`} className="text-green-600">
 									Create an account
-								</a>
+								</Link>
 							</p>
 						</div>
 					</div>
