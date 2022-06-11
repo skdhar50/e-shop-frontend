@@ -1,10 +1,9 @@
 import { useState } from "react";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 import CartItem from "./CartItem";
 import CheckoutSummary from "./CheckoutSummary";
 
 function CartContainer({ shipping = 50 }) {
-
 	const cartProducts = [
 		{
 			id: 1,
@@ -97,14 +96,20 @@ function CartContainer({ shipping = 50 }) {
 		setCartItems(newCartItems);
 	};
 
-	// NOTE: This is a temporary solution to make the cart items selected.
-	const setAllSelected = () => {
+	const setAllSelected = (event) => {
 		const newCartItems = [...cartItems];
-		newCartItems.forEach((item) => {
-			if(item.isSelected)
-				item.isSelected = false;
-			item.isSelected = !item.isSelected;
-		});
+		if (event.target.checked) {
+			newCartItems.forEach((item) => {
+				if (item.isSelected) item.isSelected = false;
+				item.isSelected = !item.isSelected;
+			});
+		} else if (!event.target.checked) {
+			newCartItems.forEach((item) => {
+				if (!item.isSelected) item.isSelected = true;
+				item.isSelected = !item.isSelected;
+			});
+		}
+
 		setCartItems(newCartItems);
 	};
 
@@ -120,7 +125,7 @@ function CartContainer({ shipping = 50 }) {
 									<input
 										type="checkbox"
 										className="text-green-700 focus:outline-none focus:ring-0 cursor-pointer"
-										// onChange={() => setAllSelected()}
+										onChange={(event) => setAllSelected(event)}
 									/>
 									<p className="">Select all</p>
 								</div>
@@ -178,12 +183,7 @@ function CartContainer({ shipping = 50 }) {
 					<div className="">
 						<div className="pb-4 text-xl">Apply Coupon</div>
 						<div className="flex space-x-2">
-							<input
-								type="text"
-								name=""
-								id=""
-								className="w-full rounded"
-							/>
+							<input type="text" name="" id="" className="w-full rounded" />
 							<button className="w-1/3 bg-indigo-500 text-white rounded hover:bg-opacity-80">
 								Apply
 							</button>
