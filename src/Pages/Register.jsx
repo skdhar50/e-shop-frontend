@@ -77,7 +77,7 @@ function Register({goBackTo}) {
 							</button>
 							<p className="text-gray-500">
 								Already have an account?{" "}
-								<Link to={`${goBackTo}/login`} className="text-green-600">
+								<Link to={`${goBackTo}login`} className="text-green-600">
 									Sign in
 								</Link>
 							</p>

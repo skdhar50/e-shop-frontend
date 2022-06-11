@@ -4,7 +4,7 @@ function CartItem({ item, onIncrease, onDecrease, onRemove, onSelect }) {
 	return (
 		<div
 			className={
-				"cart--items--item flex flex-col xl:flex-row shadow xl:items-center xl:justify-around border rounded-sm p-4 md:p-6 space-y-5 md:space-y-4 " +
+				"cart--items--item flex flex-col 2xl:flex-row shadow 2xl:items-center 2xl:justify-around border rounded-sm p-4 md:p-6 space-y-5 md:space-y-4 " +
 				(item.isSelected ? "bg-teal-50" : "")
 			}
 		>
@@ -30,7 +30,7 @@ function CartItem({ item, onIncrease, onDecrease, onRemove, onSelect }) {
 					</div>
 				</div>
 			</div>
-			<div className="flex items-center space-x-12 xl:space-x-6 justify-end xl:justify-around flex-grow">
+			<div className="flex items-center space-x-12 2xl:space-x-6 justify-end 2xl:justify-around flex-grow">
 				<p className="text-sm">
 					<span className="text-gray-600">{item.count} x </span>
 					<span className="text-gray-600">{item.price} TK</span>

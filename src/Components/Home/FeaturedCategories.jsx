@@ -50,11 +50,11 @@ function FeaturedCategories() {
 						{categories.map((category, index) => (
 							<SwiperSlide key={index}>
 								<Link to="/product-list">
-									<div className="relative cursor-pointer lg:w-[11.25rem] xl:w-[13.75rem] overflow-hidden group">
+									<div className="relative cursor-pointer lg:w-[11.25rem] xl:w-[13.75rem] shadow-lg overflow-hidden group">
 										<img
 											src={category.image}
 											alt={category.title}
-											className="h-[15.625rem] w-full inset-0 object-cover group-hover:scale-150 transition-all duration-300"
+											className="aspect-[3/4] object-cover group-hover:scale-150 transition-all duration-300"
 										/>
 										<div className="bg-black bg-opacity-60 group-hover:bg-opacity-75 absolute bottom-0 text-white font bold w-full h-1/2 flex justify-center items-center text-lg font-bold transition-all duration-300">
 											<p className="text-center">{category.title}</p>

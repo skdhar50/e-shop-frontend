@@ -20,7 +20,7 @@ function MultipleImageUpload() {
 		// console.log(e.target.files[0].name);
 		setFiles([...files, ...e.target.files]);
 		// setImagePreviewUrls(files.map((file) => URL.createObjectURL(file)));
-		console.log(typeof files);
+		// console.log(typeof files);
 	};
 
 	// console.log(typeof files);
@@ -65,6 +65,7 @@ function MultipleImageUpload() {
 					type="file"
 					name="uploadfile"
 					onChange={handleUpload}
+					accept="image/*"
 					multiple
 					className="hidden"
 					id="uploadfile"

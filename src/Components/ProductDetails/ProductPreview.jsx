@@ -124,7 +124,7 @@ function ProductPreview(props) {
 					</button>
 
 					{/* Small Screen Button */}
-					<button className="px-12 hover:bg-indigo-400 text-white font-[600] text-lg py-2 bg-indigo-500 md:hidden z-50 fixed bottom-0 left-0 right-0 w-full">
+					<button className="px-12 hover:bg-indigo-400 text-white font-[600] text-lg py-2 bg-indigo-500 md:hidden z-50 sticky bottom-0 left-0 right-0 w-full">
 						Add to Cart
 					</button>
 				</div>

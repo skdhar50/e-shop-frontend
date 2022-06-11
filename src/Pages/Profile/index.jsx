@@ -5,8 +5,8 @@ import { Outlet } from "react-router-dom";
 function index() {
 	return (
 		<Layout title="Profile">
-			<div className="px-0 md:px-6 xl:container">
-				<div className="lg:flex lg:justify-center lg:space-x-6 items-top mt-12">
+			<div className="px-0 md:px-6 xl:container antialiased">
+				<div className="lg:flex lg:justify-center lg:space-x-6 items-top mt-20">
 					<ProfileNavigation />
 
 					<Outlet />

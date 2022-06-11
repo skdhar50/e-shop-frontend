@@ -34,7 +34,7 @@ function MyAccount() {
 						</div>
 					</div>
 					<form action="" className="space-y-6">
-						<div className="grid grid-cols-2 gap-4">
+						<div className="grid sm:grid-cols-2 gap-4">
 							<input type="text" name="" placeholder="Name" className="" />
 							<input type="text" name="" placeholder="Email" className="" />
 							<input type="text" name="" placeholder="Phone" className="" />
@@ -45,7 +45,7 @@ function MyAccount() {
 							</select>
 							<input type="date" name="" id="" className="cursor-pointer" />
 						</div>
-						<button className="bg-green-600 w-1/4 py-2 text-white">Save</button>
+						<button className="bg-green-600 w-full sm:w-1/4 py-2 text-white">Save</button>
 					</form>
 				</div>
 
@@ -56,24 +56,24 @@ function MyAccount() {
 							type="password"
 							name=""
 							id=""
-							className="w-1/2"
+							className="sm:w-1/2"
 							placeholder="Current password"
 						/>
 						<input
 							type="password"
 							name=""
 							id=""
-							className="w-1/2"
+							className="sm:w-1/2"
 							placeholder="New password"
 						/>
 						<input
 							type="password"
 							name=""
 							id=""
-							className="w-1/2"
+							className="sm:w-1/2"
 							placeholder="Confirm password"
 						/>
-						<button className="bg-green-600 w-1/4 py-2 text-white">Save</button>
+						<button className="bg-green-600 w-full sm:w-1/4 py-2 text-white">Save</button>
 					</form>
 				</div>
 			</div>

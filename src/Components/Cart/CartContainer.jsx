@@ -110,7 +110,7 @@ function CartContainer({ shipping = 50 }) {
 
 	return (
 		<div className="md:px-6 xl:container antialiased">
-			<div className="mt-10 md:flex md:space-x-6 space-y-5 md:space-y-0">
+			<div className="mt-20 lg:flex lg:space-x-6 space-y-5 lg:space-y-0">
 				<div className="border p-4 grow bg-white h-fit drop-shadow space-y-8 py-6">
 					{cartItems.length > 0 ? (
 						<>
@@ -168,7 +168,7 @@ function CartContainer({ shipping = 50 }) {
 					)}
 				</div>
 
-				<div className="checkout-summary drop-shadow bg-white md:w-[320px] border py-4 px-6 h-fit space-y-12">
+				<div className="checkout-summary drop-shadow bg-white lg:w-[320px] border py-6 px-6 h-fit space-y-12">
 					{/* Checkout Summary Scction */}
 					<CheckoutSummary
 						subTotal={getCartTotal()}
@@ -182,9 +182,9 @@ function CartContainer({ shipping = 50 }) {
 								type="text"
 								name=""
 								id=""
-								className="md:w-[180px] rounded"
+								className="w-full rounded"
 							/>
-							<button className="w-full bg-indigo-500 text-white rounded hover:bg-opacity-80">
+							<button className="w-1/3 bg-indigo-500 text-white rounded hover:bg-opacity-80">
 								Apply
 							</button>
 						</div>

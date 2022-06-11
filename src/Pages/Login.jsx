@@ -73,7 +73,7 @@ function Login({goBackTo}) {
 							</button>
 							<p className="text-gray-500">
 								New here?{" "}
-								<Link to={`${goBackTo}/register`} className="text-green-600">
+								<Link to={`${goBackTo}register`} className="text-green-600">
 									Create an account
 								</Link>
 							</p>

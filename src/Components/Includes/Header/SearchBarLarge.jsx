@@ -5,7 +5,7 @@ function SearchBarLearge() {
 		<div className="xl:container">
 			<div className="flex justify-around items-center px-12">
 				<div className="logo">
-					<p className="font-poppins md:text-3xl xl:text-4xl">PUC SHOP</p>
+					<Link to="/" className="font-poppins md:text-3xl xl:text-4xl">PUC SHOP</Link>
 				</div>
 				<div className="searchBar flex items-center flex-grow px-12">
 					<div className="">

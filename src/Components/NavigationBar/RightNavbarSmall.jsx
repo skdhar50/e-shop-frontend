@@ -1,4 +1,4 @@
-import {Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 
 function RightNavbarSmall({ isOpen, handleRightNavbar }) {
 	const links = [
@@ -9,12 +9,12 @@ function RightNavbarSmall({ isOpen, handleRightNavbar }) {
 		},
 		{
 			title: "Profile",
-			url: "",
+			url: "/profile/account",
 			icon: "/images/icons/RightNavSmall/profile.svg",
 		},
 		{
 			title: "Wishlist",
-			url: "",
+			url: "/profile/wishlist",
 			icon: "/images/icons/RightNavSmall/wishlist.svg",
 		},
 		{
@@ -29,7 +29,7 @@ function RightNavbarSmall({ isOpen, handleRightNavbar }) {
 		},
 		{
 			title: "My Orders",
-			url: "",
+			url: "/profile/orders",
 			icon: "/images/icons/RightNavSmall/myorder.svg",
 		},
 		{
@@ -82,14 +82,16 @@ function RightNavbarSmall({ isOpen, handleRightNavbar }) {
 					<ul className="space-y-6 pl-4">
 						{links.map((link, index) => (
 							<li key={index}>
-								<Link to={link.url} className="flex items-center space-x-4">
-									<img
-										src={link.icon}
-										alt={link.title}
-										className="w-[25px] h-[25px]"
-									/>
-									<p className="">{link.title}</p>
-								</Link>
+								<NavLink to={link.url}>
+									<div className="flex items-center space-x-4">
+										<img
+											src={link.icon}
+											alt={link.title}
+											className="w-[25px] h-[25px]"
+										/>
+										<p className="">{link.title}</p>
+									</div>
+								</NavLink>
 							</li>
 						))}
 					</ul>

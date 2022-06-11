@@ -31,7 +31,7 @@ function ProductPreviewImageAndThumb({ images }) {
 						<img
 							src={image}
 							alt="product"
-							className="product-preview-image-swiper-slide w-full h-[450px] md:h-[350px] object-cover"
+							className="product-preview-image-swiper-slide aspect-square sm:aspect-[3/4] object-cover"
 						/>
 					</SwiperSlide>
 				))}

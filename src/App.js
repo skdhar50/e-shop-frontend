@@ -25,19 +25,19 @@ function App() {
 				</Route>
 				<Route path="/order-details" element={<OrderDetails />} />
 				<Route path="/product-details" element={<ProductDetails />}>
-					<Route path="login" element={<Login goBackTo="/product-details" />} />
+					<Route path="login" element={<Login goBackTo="/product-details/" />} />
 					<Route
 						path="register"
-						element={<Register goBackTo="/product-details" />}
+						element={<Register goBackTo="/product-details/" />}
 					/>
 				</Route>
 				<Route path="/cart" element={<Cart />} />
 				<Route path="/confirm-order" element={<ConfirmOrder />} />
 				<Route path="/product-list" element={<ProductList />}>
-					<Route path="login" element={<Login goBackTo="/product-list" />} />
+					<Route path="login" element={<Login goBackTo="/product-list/" />} />
 					<Route
 						path="register"
-						element={<Register goBackTo="/product-list" />}
+						element={<Register goBackTo="/product-list/" />}
 					/>
 				</Route>
 				<Route path="/profile" element={<Profile />}>

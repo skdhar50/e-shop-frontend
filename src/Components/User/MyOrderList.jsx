@@ -57,7 +57,7 @@ function MyOrderList() {
 						<div className="flex justify-between items-center">
 							<div className="space-y-2">
 								<p className="font-bold text-gray-600 text-sm sm:text-lg">
-									Order ID: {orders.orderId}
+									Order ID: {order.orderId}
 								</p>
 								<p className="text-gray-600 text-sm sm:text-base italic">
 									Order Date: {order.orderDate}
