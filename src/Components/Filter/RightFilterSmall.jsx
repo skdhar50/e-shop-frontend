@@ -5,7 +5,7 @@ function RightFilterSmall({ isOpen, handleRightFilter }) {
 		<div
 			className={
 				isOpen
-					? "bg-black bg-opacity-50 fixed inset-0 z-30 w-full h-screen"
+					? "bg-black bg-opacity-50 fixed inset-0 z-40 w-full h-screen"
 					: ""
 			}
 		>

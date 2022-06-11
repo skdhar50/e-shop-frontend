@@ -8,14 +8,14 @@
 
 .swiper-button-next-banner {
   right: 40px;
-  top: 55%;
-  transform: translateY(-55%);
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .swiper-button-prev-banner {
   left: 40px;
-  top: 55%;
-  transform: translateY(-55%);
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .swiper-button-next-banner, .swiper-button-prev-banner {

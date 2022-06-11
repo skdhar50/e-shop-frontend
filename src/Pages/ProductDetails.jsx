@@ -9,7 +9,21 @@ import CustomersQA from "Components/ProductQA/CustomersQA";
 import Layout from "Components/Layout";
 import { Outlet } from "react-router-dom";
 
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchProducts, STATUS } from "../Redux/Slices/ProductSlice";
+
+
 function ProductDetails() {
+	const dispatch = useDispatch();
+	const { data: products, status } = useSelector((state) => state.product);
+
+	useEffect(() => {
+		if(status === STATUS.IDLE) {
+			dispatch(fetchProducts());
+		}
+	}, [status, dispatch]);
+
 	const productDetails = {
 		images: [
 			"/images/products/8.jpg",
@@ -37,176 +51,22 @@ function ProductDetails() {
 		{
 			id: 1,
 			title: "Customers Also Bought",
-			products: [
-				{
-					title: "Gildan Ultra Cotton T‑shirt",
-					image: "/images/products/4.jpg",
-					category: "Clothing",
-				},
-				{
-					title: "Lorem ipsum dolor sit amet consectetur adipisicing",
-					image: "/images/products/1.jpg",
-					category: "Clothing",
-				},
-				{
-					title: "Gildan Ultra Cotton T‑shirt",
-					image: "/images/products/2.jpg",
-					category: "Clothing",
-				},
-				{
-					title: "Gildan Ultra Cotton T‑shirt",
-					image: "/images/products/3.jpg",
-					category: "Clothing",
-				},
-				{
-					title: "Gildan Ultra Cotton T‑shirt",
-					image: "/images/products/7.jpg",
-					category: "Clothing",
-				},
-				{
-					title: "Gildan Ultra Cotton T‑shirt",
-					image: "/images/products/5.jpg",
-					category: "Clothing",
-				},
-				{
-					title: "Gildan Ultra Cotton T‑shirt",
-					image: "/images/products/4.jpg",
-					category: "Clothing",
-				},
-				{
-					title: "Lorem ipsum dolor sit amet consectetur adipisicing",
-					image: "/images/products/1.jpg",
-					category: "Clothing",
-				},
-				{
-					title: "Gildan Ultra Cotton T‑shirt",
-					image: "/images/products/2.jpg",
-					category: "Clothing",
-				},
-				{
-					title: "Gildan Ultra Cotton T‑shirt",
-					image: "/images/products/3.jpg",
-					category: "Clothing",
-				},
-				{
-					title: "Gildan Ultra Cotton T‑shirt",
-					image: "/images/products/7.jpg",
-					category: "Clothing",
-				},
-				{
-					title: "Gildan Ultra Cotton T‑shirt",
-					image: "/images/products/5.jpg",
-					category: "Clothing",
-				},
-			],
+			products: products,
 		},
 		{
 			id: 2,
 			title: "Related Products To This Item",
-			products: [
-				{
-					title: "Gildan Ultra Cotton T‑shirt",
-					image: "/images/products/1.jpg",
-					category: "Clothing",
-				},
-				{
-					title: "Gildan Ultra Cotton T‑shirt",
-					image: "/images/products/3.jpg",
-					category: "Clothing",
-				},
-				{
-					title: "Gildan Ultra Cotton T‑shirt",
-					image: "/images/products/2.jpg",
-					category: "Clothing",
-				},
-				{
-					title: "Gildan Ultra Cotton T‑shirt",
-					image: "/images/products/7.jpg",
-					category: "Clothing",
-				},
-				{
-					title: "Gildan Ultra Cotton T‑shirt",
-					image: "/images/products/8.jpg",
-					category: "Clothing",
-				},
-				{
-					title: "Gildan Ultra Cotton T‑shirt",
-					image: "/images/products/4.jpg",
-					category: "Clothing",
-				},
-			],
+			products: products,
 		},
 		{
 			id: 3,
 			title: "Similar Category Best Selling",
-			products: [
-				{
-					title: "Gildan Ultra Cotton T‑shirt",
-					image: "/images/products/8.jpg",
-					category: "Clothing",
-				},
-				{
-					title: "Gildan Ultra Cotton T‑shirt",
-					image: "/images/products/5.jpg",
-					category: "Clothing",
-				},
-				{
-					title: "Gildan Ultra Cotton T‑shirt",
-					image: "/images/products/1.jpg",
-					category: "Clothing",
-				},
-				{
-					title: "Gildan Ultra Cotton T‑shirt",
-					image: "/images/products/7.jpg",
-					category: "Clothing",
-				},
-				{
-					title: "Gildan Ultra Cotton T‑shirt",
-					image: "/images/products/9.jpg",
-					category: "Clothing",
-				},
-				{
-					title: "Gildan Ultra Cotton T‑shirt",
-					image: "/images/products/3.jpg",
-					category: "Clothing",
-				},
-			],
+			products: products,
 		},
 		{
 			id: 4,
 			title: "Related Products",
-			products: [
-				{
-					title: "Gildan Ultra Cotton T‑shirt",
-					image: "/images/products/9.jpg",
-					category: "Clothing",
-				},
-				{
-					title: "Gildan Ultra Cotton T‑shirt",
-					image: "/images/products/1.jpg",
-					category: "Clothing",
-				},
-				{
-					title: "Gildan Ultra Cotton T‑shirt",
-					image: "/images/products/5.jpg",
-					category: "Clothing",
-				},
-				{
-					title: "Gildan Ultra Cotton T‑shirt",
-					image: "/images/products/2.jpg",
-					category: "Clothing",
-				},
-				{
-					title: "Gildan Ultra Cotton T‑shirt",
-					image: "/images/products/7.jpg",
-					category: "Clothing",
-				},
-				{
-					title: "Gildan Ultra Cotton T‑shirt",
-					image: "/images/products/8.jpg",
-					category: "Clothing",
-				},
-			],
+			products: products,
 		},
 	];
 
@@ -248,7 +108,7 @@ function ProductDetails() {
 	return (
 		<Layout title="Product Details">
 			<Outlet />
-			<div className="md:px-6 xl:container antialiased">
+			<div className="md:px-6 md:pt-1 xl:container antialiased">
 				<div className="mt-4 bg-white drop-shadow md:pb-4 md:flex border border-gray-300 w-full h-full">
 					{/* Product Preview Section */}
 					<ProductPreview {...productDetails} />
@@ -257,7 +117,7 @@ function ProductDetails() {
 					<SideSection returnDays={7} deliveryCharge={50} />
 				</div>
 
-				<div className="mt-4 pb-16 bg-white drop-shadow space-y-10 divide-y-2 md:space-y-10 border border-gray-300 px-3 md:px-8">
+				<div className="mt-4 pb-16 bg-white drop-shadow space-y-10 divide-y-2 border border-gray-300 px-3 md:px-8">
 					{/* Product Summary */}
 					<ProductSummary {...productSummary} />
 

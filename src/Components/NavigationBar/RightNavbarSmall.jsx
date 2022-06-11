@@ -13,6 +13,11 @@ function RightNavbarSmall({ isOpen, handleRightNavbar }) {
 			icon: "/images/icons/RightNavSmall/profile.svg",
 		},
 		{
+			title: "All Products",
+			url: "/product-list",
+			icon: "/images/icons/RightNavSmall/all-products.svg",
+		},
+		{
 			title: "Wishlist",
 			url: "/profile/wishlist",
 			icon: "/images/icons/RightNavSmall/wishlist.svg",
@@ -54,7 +59,7 @@ function RightNavbarSmall({ isOpen, handleRightNavbar }) {
 		<div
 			className={
 				isOpen
-					? "bg-black bg-opacity-50 fixed inset-0 z-30 w-full h-screen"
+					? "bg-black bg-opacity-50 fixed inset-0 z-50 w-full h-screen"
 					: ""
 			}
 		>
@@ -81,7 +86,7 @@ function RightNavbarSmall({ isOpen, handleRightNavbar }) {
 				<div className="">
 					<ul className="space-y-6 pl-4">
 						{links.map((link, index) => (
-							<li key={index}>
+							<li key={index} onClick={handleRightNavbar}>
 								<NavLink to={link.url}>
 									<div className="flex items-center space-x-4">
 										<img

@@ -2,6 +2,10 @@ import AvailableColors from "Components/ProductDetails/AvailableColors";
 import AvailableSizes from "Components/ProductDetails/AvailableSizes";
 import ProductPreviewImageAndThumb from "Components/SliderAndCarousel/ProductPreviewImageAndThumb";
 
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { STATUS } from "../../Redux/Slices/ProductSlice";
+
 function ProductPreview(props) {
 	const {
 		images,

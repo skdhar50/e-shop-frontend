@@ -11,20 +11,22 @@ import MyWishList from "Pages/Profile/MyWishList";
 import MyOrders from "Pages/Profile/MyOrders";
 import MyAccount from "Pages/Profile/MyAccount";
 import Profile from "Pages/Profile";
+import {Provider} from 'react-redux';
+import store from './Redux/store';
 
 function App() {
 	const location = useLocation();
 	const background = location.state && location.state.background;
 
 	return (
-		<>
+		<Provider store={store}>
 			<Routes location={background || location}>
 				<Route path="/" element={<Home />}>
 					<Route path="login" element={<Login goBackTo="/" />} />
 					<Route path="register" element={<Register goBackTo="/" />} />
 				</Route>
 				<Route path="/order-details" element={<OrderDetails />} />
-				<Route path="/product-details" element={<ProductDetails />}>
+				<Route path="/product-details/:id" element={<ProductDetails />}>
 					<Route path="login" element={<Login goBackTo="/product-details/" />} />
 					<Route
 						path="register"
@@ -52,7 +54,7 @@ function App() {
 					<Route path="login" element={<Login />} />
 				</Routes>
 			)}
-		</>
+		</Provider>
 	);
 }
 

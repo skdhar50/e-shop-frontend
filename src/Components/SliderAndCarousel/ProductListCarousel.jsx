@@ -7,6 +7,7 @@ import { Navigation } from "swiper";
 import ProductCard from "Components/Cards/ProductCard";
 
 function ProductListCarousel({ id, title, products }) {
+
 	return (
 		<div className="space-y-4 md:space-y-6 pt-10">
 			<div className="">
@@ -61,9 +62,9 @@ function ProductListCarousel({ id, title, products }) {
 					{products.map((product, index) => (
 						<SwiperSlide
 							key={index}
-							style={{ paddingTop: "10px", paddingBottom: "10px" }}
+							style={{ }}
 						>
-							<ProductCard {...product} />
+							<ProductCard product={product} />
 						</SwiperSlide>
 					))}
 				</Swiper>
