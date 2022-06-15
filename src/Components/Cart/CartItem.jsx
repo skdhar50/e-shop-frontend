@@ -25,7 +25,9 @@ function CartItem({ item, onIncrease, onDecrease, onRemove, onSelect }) {
 					<div className="md:w-[350px] cursor-pointer pl-3 md:pl-0">
 						<p className="flex flex-col space-y-2 text-xs md:text-sm">
 							<span className="font-bold text-gray-700">{item.title}</span>
-							<span className="text-gray-500 md:text-gray-600">{item.miniDiscription}</span>
+							<span className="text-gray-500 md:text-gray-600">
+								{item.discription}
+							</span>
 						</p>
 					</div>
 				</div>

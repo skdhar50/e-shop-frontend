@@ -7,7 +7,7 @@ import CustomersReviews from "Components/ReviewsAndRatings/CustomersReviews";
 import ProductListCarousel from "Components/SliderAndCarousel/ProductListCarousel";
 import CustomersQA from "Components/ProductQA/CustomersQA";
 import Layout from "Components/Layout";
-import { Outlet } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -104,6 +104,7 @@ function ProductDetails() {
 			ansDate: "12 Dec 2020",
 		},
 	];
+
 
 	return (
 		<Layout title="Product Details">

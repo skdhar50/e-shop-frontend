@@ -1,3 +1,4 @@
+import CartIcon from "Components/Cart/CartIcon";
 import { Link } from "react-router-dom";
 
 function SearchBarLearge() {
@@ -37,20 +38,7 @@ function SearchBarLearge() {
 					</div>
 				</div>
 				<div className="cart">
-					<Link
-						to="/cart"
-						className="flex justify-center items-center space-x-3 bg-[#3E3CA5] w-fit p-2 rounded-md hover:bg-opacity-90 cursor-pointer"
-					>
-						<img
-							src="/images/icons/cart.svg"
-							alt=""
-							className="md:w-6 xl:w-7"
-						/>
-						<p className="text-white xl:text-lg">Cart</p>
-						<p className="md:px-[6px] xl:px-[8px] md:text-sm xl:text-base rounded-full bg-white text-red-800">
-							5
-						</p>
-					</Link>
+					<CartIcon />
 				</div>
 			</div>
 		</div>

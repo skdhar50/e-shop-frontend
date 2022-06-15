@@ -1,77 +1,35 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import CartItem from "./CartItem";
 import CheckoutSummary from "./CheckoutSummary";
 
-function CartContainer({ shipping = 50 }) {
-	const cartProducts = [
-		{
-			id: 1,
-			title: "Lorem, ipsum dolor sit amet consectetur adipisicing.",
-			miniDiscription:
-				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem.",
-			price: 300,
-			image: "/images/products/2.jpg",
-			count: 1,
-			isSelected: false,
-		},
-		{
-			id: 2,
-			title: "Lorem, ipsum dolor sit amet consectetur adipisicing.",
-			miniDiscription:
-				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem.",
-			price: 250,
-			image: "/images/products/5.jpg",
-			count: 1,
-			isSelected: false,
-		},
-		{
-			id: 3,
-			title: "Lorem, ipsum dolor sit amet consectetur adipisicing.",
-			miniDiscription:
-				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem.",
-			price: 400,
-			image: "/images/products/9.jpg",
-			count: 1,
-			isSelected: false,
-		},
-	];
+import { useSelector, useDispatch } from "react-redux";
+import {
+	removeFromCart,
+	selectItem,
+	selectAllItems,
+	unselectAllItems,
+	increaseItemCount,
+	decreaseItemCount,
+} from "../../Redux/Slices/CartSlice";
 
-	const [cartItems, setCartItems] = useState(cartProducts);
+function CartContainer({ shipping = 50 }) {
+	const dispatch = useDispatch();
+	const cartItems = useSelector((state) => state.cart);
 
 	const decreaseCartItem = (item) => () => {
-		const newCartItems = [...cartItems];
-		const index = newCartItems.indexOf(item);
-		const newItem = { ...item };
-
-		if (newItem.count === 0) {
-			return;
+		if (item.count > 1) {
+			dispatch(decreaseItemCount(item.id));
 		}
-
-		newItem.count = newItem.count - 1;
-		newCartItems[index] = newItem;
-		setCartItems(newCartItems);
 	};
 
 	const increaseCartItem = (item) => () => {
-		const newCartItems = [...cartItems];
-		const index = newCartItems.indexOf(item);
-		const newItem = { ...item };
-
-		if (newItem.count === 8) {
-			return;
+		if (item.count < 8) {
+			dispatch(increaseItemCount(item.id));
 		}
-
-		newItem.count = newItem.count + 1;
-		newCartItems[index] = newItem;
-		setCartItems(newCartItems);
 	};
 
 	const removeCartItem = (item) => () => {
-		const newCartItems = [...cartItems];
-		const index = newCartItems.indexOf(item);
-		newCartItems.splice(index, 1);
-		setCartItems(newCartItems);
+		dispatch(removeFromCart(item.id));
 	};
 
 	const getCartTotal = () => {
@@ -88,29 +46,15 @@ function CartContainer({ shipping = 50 }) {
 	};
 
 	const setIsSelected = (item) => () => {
-		const newCartItems = [...cartItems];
-		const index = newCartItems.indexOf(item);
-		const newItem = { ...item };
-		newItem.isSelected = !newItem.isSelected;
-		newCartItems[index] = newItem;
-		setCartItems(newCartItems);
+		dispatch(selectItem(item.id));
 	};
 
 	const setAllSelected = (event) => {
-		const newCartItems = [...cartItems];
 		if (event.target.checked) {
-			newCartItems.forEach((item) => {
-				if (item.isSelected) item.isSelected = false;
-				item.isSelected = !item.isSelected;
-			});
+			dispatch(selectAllItems());
 		} else if (!event.target.checked) {
-			newCartItems.forEach((item) => {
-				if (!item.isSelected) item.isSelected = true;
-				item.isSelected = !item.isSelected;
-			});
+			dispatch(unselectAllItems());
 		}
-
-		setCartItems(newCartItems);
 	};
 
 	return (
@@ -151,7 +95,7 @@ function CartContainer({ shipping = 50 }) {
 									))}
 							</div>
 
-							<div className="flex space-x-2 md:justify-end md:space-x-4 md:pr-6">
+							<div className="flex space-x-2 justify-center md:justify-end md:space-x-4 md:pr-6">
 								<Link to="/">
 									<button className="px-3 py-2 md:px-4 md:py-2 bg-indigo-500 text-white rounded-sm hover:bg-opacity-80">
 										Continue Shopping

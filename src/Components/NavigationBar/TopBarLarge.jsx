@@ -14,9 +14,10 @@ function TopBarLarge() {
 			{ title: "English", url: "/", icon: "/images/icons/language.svg" },
 		],
 	};
+
 	return (
 		<div className="w-full h-[35px] bg-gray-200 bg-opacity-50 flex items-center justify-center">
-			<div className="xl:container ">
+			<div className="xl:container">
 				<div className="flex justify-between space-x-8">
 					<ul className="flex md:space-x-3 xl:space-x-9">
 						{links.left.map((link, index) => (
