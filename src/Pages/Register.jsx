@@ -1,12 +1,14 @@
-import { useNavigate, Link } from "react-router-dom";
+import { useAtom } from "jotai";
+import { openLoginModal, closeAllModal } from "Jotai/ModalState";
 
-function Register({goBackTo}) {
-	const navigate = useNavigate();
+function Register() {
+	const [, isOpenLoginModal] = useAtom(openLoginModal);
+	const [, isCloseAllModal] = useAtom(closeAllModal);
 
 	return (
 		<div className="backdrop z-50 top-0 bottom-0 right-0 left-0 bg-black bg-opacity-50 flex justify-center items-center fixed">
 			<div className="modal flex bg-white md:space-x-10 py-8 w-full h-full md:h-fit md:w-fit md:pr-12 justify-center items-center relative">
-				<button onClick={() => navigate(goBackTo, {replace: true})} className="">
+				<button onClick={isCloseAllModal} className="">
 					<svg
 						className="w-6 h-6 absolute top-5 right-5 md:left-5 stroke-gray-500 cursor-pointer hover:stroke-[#E96115]"
 						viewBox="0 0 30 30"
@@ -77,9 +79,9 @@ function Register({goBackTo}) {
 							</button>
 							<p className="text-gray-500">
 								Already have an account?{" "}
-								<Link to={`${goBackTo}login`} className="text-green-600">
+								<button onClick={isOpenLoginModal} className="text-green-600">
 									Sign in
-								</Link>
+								</button>
 							</p>
 						</div>
 					</div>

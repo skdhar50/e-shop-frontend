@@ -3,13 +3,13 @@ function LeftNavbarSmall({ isOpen, handleLeftNavbar }) {
 		<div
 			className={
 				isOpen
-					? "bg-black bg-opacity-50 fixed inset-0 z-30 w-full h-screen"
+					? "bg-black bg-opacity-50 fixed inset-0 z-50 w-full h-screen"
 					: ""
 			}
 		>
 			<div
 				className={
-					"bg-white w-80 h-full fixed top-0 p-6 space-y-12 transform duration-300" +
+					"bg-white w-80 h-full fixed top-0 p-6 space-y-12 transform transition-all duration-300" +
 					(isOpen
 						? " translate-x-0 ease-in opacity-100"
 						: " -translate-x-full ease-out opacity-0")

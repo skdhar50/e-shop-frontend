@@ -1,12 +1,18 @@
-import { useNavigate, Link } from "react-router-dom";
+import { useAtom } from "jotai";
+import { openRegisterModal, closeAllModal } from "Jotai/ModalState";
 
-function Login({goBackTo}) {
-	const navigate = useNavigate();
+function Login() {
+	const [, isOpenRegisterModal] = useAtom(openRegisterModal);
+	const [, isCloseAllModal] = useAtom(closeAllModal);
 
 	return (
-		<div className="backdrop z-50 top-0 bottom-0 right-0 left-0 bg-black bg-opacity-50 flex justify-center items-center fixed">
+		<div
+			className={
+				"backdrop z-50 top-0 bottom-0 right-0 left-0 bg-black bg-opacity-50 flex justify-center items-center fixed"
+			}
+		>
 			<div className="modal flex bg-white py-8 w-full h-full md:h-fit md:w-[700px] md:pl-12 justify-center md:justify-between items-center relative">
-				<button onClick={() => navigate(goBackTo, { replace: true })} className="">
+				<button onClick={isCloseAllModal} className="">
 					<svg
 						className="w-6 h-6 absolute top-5 right-5 stroke-gray-500 cursor-pointer hover:stroke-[#E96115]"
 						viewBox="0 0 30 30"
@@ -69,13 +75,16 @@ function Login({goBackTo}) {
 									alt=""
 									className="w-[25px] h-[25px]"
 								/>
-								<p className="">Sign up with Google</p>
+								<p className="hover:text-[#1778CD]">Sign up with Google</p>
 							</button>
 							<p className="text-gray-500">
 								New here?{" "}
-								<Link to={`${goBackTo}register`} className="text-green-600">
+								<button
+									onClick={isOpenRegisterModal}
+									className="text-green-600"
+								>
 									Create an account
-								</Link>
+								</button>
 							</p>
 						</div>
 					</div>

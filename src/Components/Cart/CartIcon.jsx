@@ -10,7 +10,7 @@ function CartIcon() {
 				<div className="">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
-						class="h-8 w-8 stroke-white/80 lg:stroke-gray-600"
+						className="h-8 w-8 stroke-white/80 lg:stroke-gray-600"
 						fill="none"
 						viewBox="0 0 24 24"
 						stroke="currentColor"

@@ -1,3 +1,4 @@
+import Input from 'Components/Inputs/Input';
 import React from 'react'
 
 function CreateNewShippingAddress({onCloseHandler}) {
@@ -23,30 +24,11 @@ function CreateNewShippingAddress({onCloseHandler}) {
 				</div>
 				<div className="modal-body">
 					<form action="" className="space-y-4">
-						<div className="">
-							<input
-								type="text"
-								name=""
-								placeholder="Name"
-								autoComplete="none"
-								className="w-full rounded focus:outline-none focus:border-green-600 focus:ring-0"
-							/>
-						</div>
+						<Input name="name" placeholder="Name" />
+
 						<div className="md:flex md:space-x-4 space-y-4 md:space-y-0">
-							<input
-								type="text"
-								name=""
-								placeholder="Phone"
-								autoComplete="none"
-								className="w-full rounded focus:outline-none focus:border-green-600 focus:ring-0"
-							/>
-							<input
-								type="text"
-								name=""
-								placeholder="Alternate Phone"
-								autoComplete="none"
-								className="w-full rounded focus:outline-none focus:border-green-600 focus:ring-0"
-							/>
+							<Input name="phone" placeholder="Phone" />
+							<Input name="phone2" placeholder="Alternate Phone" />
 						</div>
 						<div className="md:flex md:space-x-4 space-y-4 md:space-y-0">
 							<select
@@ -88,6 +70,7 @@ function CreateNewShippingAddress({onCloseHandler}) {
 								rows="3"
 								className="resize-none w-full rounded focus:outline-none focus:border-green-600 focus:ring-0"
 							></textarea>
+							<p className="text-sm text-red-600">Please enter a name</p>
 						</div>
 						<div className="">
 							<button className="bg-indigo-600 text-white text-lg w-full py-2 rounded hover:bg-opacity-90">

@@ -1,12 +1,10 @@
-import {NavLink} from 'react-router-dom';
+import { NavLink } from "react-router-dom";
+import { useAtom } from "jotai";
+import { openLoginModal } from "Jotai/ModalState";
 
 function RightNavbarSmall({ isOpen, handleRightNavbar }) {
+	const [, isOpenLoginModal] = useAtom(openLoginModal);
 	const links = [
-		{
-			title: "Login/Register",
-			url: "login",
-			icon: "/images/icons/RightNavSmall/login.svg",
-		},
 		{
 			title: "Profile",
 			url: "/profile/account",
@@ -55,6 +53,8 @@ function RightNavbarSmall({ isOpen, handleRightNavbar }) {
 		},
 	];
 
+
+
 	return (
 		<div
 			className={
@@ -65,7 +65,7 @@ function RightNavbarSmall({ isOpen, handleRightNavbar }) {
 		>
 			<div
 				className={
-					"bg-white w-80 h-full fixed top-0 p-6 space-y-12 transform duration-300" +
+					"bg-white w-80 h-full fixed top-0 p-6 space-y-12 transform transition-all duration-300" +
 					(isOpen
 						? " right-0 ease-in opacity-100"
 						: " translate-x-full -right-10 ease-out opacity-0")
@@ -85,6 +85,19 @@ function RightNavbarSmall({ isOpen, handleRightNavbar }) {
 				</div>
 				<div className="">
 					<ul className="space-y-6 pl-4">
+						<li onClick={handleRightNavbar}>
+							<button
+								onClick={isOpenLoginModal}
+								className="flex items-center space-x-4"
+							>
+								<img
+									src="/images/icons/RightNavSmall/login.svg"
+									alt="Login/Register"
+									className="w-[25px] h-[25px]"
+								/>
+								<p className="">Login/Register</p>
+							</button>
+						</li>
 						{links.map((link, index) => (
 							<li key={index} onClick={handleRightNavbar}>
 								<NavLink to={link.url}>

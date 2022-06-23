@@ -1,10 +1,17 @@
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useAtom } from "jotai";
+import { openLoginModal } from "Jotai/ModalState";
 
 function TopBarLarge() {
+	const [, isOpenLoginModal] = useAtom(openLoginModal);
+
 	const links = {
 		left: [
-			{ title: "Login/Register", url: "login", icon: "/images/icons/login.svg" },
-			{ title: "Track Order", url: "/order-details", icon: "/images/icons/track.svg" },
+			{
+				title: "Track Order",
+				url: "/order-details",
+				icon: "/images/icons/track.svg",
+			},
 			{ title: "Services", url: "/", icon: "/images/icons/service.svg" },
 			{ title: "Help", url: "/", icon: "/images/icons/help.svg" },
 			{ title: "Our Location", url: "/", icon: "/images/icons/location.svg" },
@@ -20,6 +27,16 @@ function TopBarLarge() {
 			<div className="xl:container">
 				<div className="flex justify-between space-x-8">
 					<ul className="flex md:space-x-3 xl:space-x-9">
+						<button onClick={isOpenLoginModal} className="">
+							<li className="flex space-x-2 cursor-pointer">
+								<img
+									src="/images/icons/login.svg"
+									alt=""
+									className="md:w-4 xl:w-6"
+								/>
+								<p className="md:text-sm xl:text-base">Login/Register</p>
+							</li>
+						</button>
 						{links.left.map((link, index) => (
 							<Link to={link.url} key={index}>
 								<li className="flex space-x-2 cursor-pointer">
