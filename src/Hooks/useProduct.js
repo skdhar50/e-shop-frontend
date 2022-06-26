@@ -7,7 +7,7 @@ const fetchProducts = () => {
 
 const fetchProductsWithFilter = (filters) => {
 	return request({
-		url: "/products",
+		url: "/product",
 		method: "POST",
 		data: { filters: filters },
 	});
@@ -15,7 +15,7 @@ const fetchProductsWithFilter = (filters) => {
 
 const fetchProductDetails = ({queryKey}) => {
 	return request({
-		url: `/products/${queryKey[1]}`,
+		url: `/product/${queryKey[1]}`,
 		method: "GET",
 	});
 };

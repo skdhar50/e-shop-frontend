@@ -5,7 +5,7 @@ const login = (user) => {
 	return request({
 		url: "user",
 		method: "POST",
-		data: { user: user },
+		data: { email: user.email, password: user.password},
 	});
 };
 

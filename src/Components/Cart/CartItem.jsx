@@ -1,11 +1,18 @@
 import React from "react";
+import { useState } from "react";
 
 function CartItem({ item, onIncrease, onDecrease, onRemove, onSelect }) {
+	const {product, count, isSelected } = item;
+	const {name: title, unitPrice: price, photos: image, description} = product;
+	// const [isSelected, setIsSelected] = useState(selected);
+
+	// console.log(isSelected);
+
 	return (
 		<div
 			className={
 				"cart--items--item flex flex-col 2xl:flex-row shadow 2xl:items-center 2xl:justify-around border rounded-sm p-4 md:p-6 space-y-5 md:space-y-4 " +
-				(item.isSelected ? "bg-teal-50" : "")
+				(isSelected ? "bg-teal-50" : "")
 			}
 		>
 			<div className="flex items-center space-x-2">
@@ -13,20 +20,20 @@ function CartItem({ item, onIncrease, onDecrease, onRemove, onSelect }) {
 					<input
 						type="checkbox"
 						className="h-4 w-4 text-green-700 focus:outline-none focus:ring-0 cursor-pointer"
-						checked={item.isSelected}
-						onChange={onSelect}
+						checked={isSelected}
+						onChange={() => onSelect()}
 					/>
 					<img
-						src={item.image}
+						src={image[0]}
 						alt=""
 						className="h-[60px] xl:h-[80px] w-[60px] xl:w-[80px] object-cover"
 					/>
 
 					<div className="md:w-[350px] cursor-pointer pl-3 md:pl-0">
 						<p className="flex flex-col space-y-2 text-xs md:text-sm">
-							<span className="font-bold text-gray-700">{item.title}</span>
+							<span className="font-bold text-gray-700">{title}</span>
 							<span className="text-gray-500 md:text-gray-600">
-								{item.discription}
+								{description}
 							</span>
 						</p>
 					</div>
@@ -34,16 +41,16 @@ function CartItem({ item, onIncrease, onDecrease, onRemove, onSelect }) {
 			</div>
 			<div className="flex items-center space-x-12 2xl:space-x-6 justify-end 2xl:justify-around flex-grow">
 				<p className="text-sm">
-					<span className="text-gray-600">{item.count} x </span>
-					<span className="text-gray-600">{item.price} TK</span>
+					<span className="text-gray-600">{count} x </span>
+					<span className="text-gray-600">{price} TK</span>
 				</p>
 				<div className="flex space-x-3">
 					<button
 						className={
 							"text-gray-600 " +
-							(item.count === 1 ? "cursor-not-allowed disabled:opacity-50" : "")
+							(count === 1 ? "cursor-not-allowed disabled:opacity-50" : "")
 						}
-						disabled={item.count === 1}
+						disabled={count === 1}
 						onClick={onDecrease}
 					>
 						<svg
@@ -60,14 +67,14 @@ function CartItem({ item, onIncrease, onDecrease, onRemove, onSelect }) {
 						</svg>
 					</button>
 					<p className="px-3 rounded-md shadow-sm py-1 text-sm border bg-white">
-						{item.count}
+						{count}
 					</p>
 					<button
 						className={
 							"text-gray-600 " +
-							(item.count === 8 ? "cursor-not-allowed disabled:opacity-50" : "")
+							(count === 8 ? "cursor-not-allowed disabled:opacity-50" : "")
 						}
-						disabled={item.count === 8}
+						disabled={count === 8}
 						onClick={onIncrease}
 					>
 						<svg

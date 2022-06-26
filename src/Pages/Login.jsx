@@ -1,9 +1,42 @@
 import { useAtom } from "jotai";
 import { openRegisterModal, closeAllModal } from "Jotai/ModalState";
+import { useState } from "react";
+import { useUserLogin } from "Hooks/useUser";
+import { useNavigate } from "react-router-dom";
+
+const INITIAL_STATE = {
+	email: "",
+	password: "",
+};
 
 function Login() {
 	const [, isOpenRegisterModal] = useAtom(openRegisterModal);
 	const [, isCloseAllModal] = useAtom(closeAllModal);
+
+	const [values, setValues] = useState(INITIAL_STATE);
+	const { mutate, isLoding, isSuccess } = useUserLogin();
+	const navigate = useNavigate();
+
+	const handleChange = (e) => {
+		setValues({
+			...values,
+			[e.target.name]: e.target.value,
+		});
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+
+		mutate(values);
+		setValues(INITIAL_STATE);
+	};
+
+	if (isSuccess) {
+		isCloseAllModal();
+		navigate("/", {
+			replace: true,
+		});
+	}
 
 	return (
 		<div
@@ -36,19 +69,26 @@ function Login() {
 						<div className="">
 							<form
 								action=""
+								method="POST"
+								onSubmit={handleSubmit}
+								encType="multipart/form-data"
 								className="flex flex-col space-y-8 justify-center items-center"
 							>
 								<input
 									type="email"
-									name=""
-									placeholder="Email or Phone"
+									name="email"
+									placeholder="Email"
+									onChange={handleChange}
+									value={values.email}
 									className="rounded-md w-full focus:outline-none focus:border-green-600 focus:ring-0"
 								/>
 								<div className="w-full space-y-2">
 									<input
 										type="password"
-										name=""
+										name="password"
 										placeholder="Password"
+										onChange={handleChange}
+										value={values.password}
 										className="rounded-md w-full focus:outline-none focus:border-green-600 focus:ring-0"
 									/>
 									<p className="text-right text-gray-500 hover:cursor-pointer hover:text-[#1778CD] text-sm italic">
@@ -56,7 +96,11 @@ function Login() {
 									</p>
 								</div>
 
-								<button className="bg-[#1778CD] hover:bg-[#045195] text-white w-3/4 md:w-2/3 px-10 py-2 rounded-xl">
+								<button
+									className={`bg-[#1778CD] hover:bg-[#045195] text-white w-3/4 md:w-2/3 px-10 py-2 rounded-xl ${
+										isLoding ? "disabled" : ""
+									}`}
+								>
 									Sign In
 								</button>
 							</form>

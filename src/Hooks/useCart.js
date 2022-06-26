@@ -16,11 +16,60 @@ const addToCart = (item) => {
 	});
 };
 
+const selectAll = (flag) => {
+	return request({
+		url: "/cart/select_all",
+		method: "PUT",
+		data: { flag: flag },
+	});
+};
+
+const selectSingle = (item) => {
+	return request({
+		url: "/cart/select_one",
+		method: "PUT",
+		data: { _id: item._id,flag: item.flag },
+	});
+}
+
 const updateCartItem = (item) => {
 	return request({
 		url: "/cart",
 		method: "PUT",
 		data: { _id: item._id, count: item.count },
+	});
+};
+
+const deleteCartItem = (item) => {
+	return request({
+		url: `/cart/${item}`,
+		method: "DELETE",
+	});
+};
+
+export const useSelectSingle = () => {
+	const queryClient = useQueryClient();
+
+	return useMutation(selectSingle, {
+		onSuccess: (data) => {
+			queryClient.invalidateQueries("cartItems");
+		},
+		onError: (err) => {
+			console.error(err);
+		},
+	});
+}
+
+export const useSelectAll = () => {
+	const queryClient = useQueryClient();
+
+	return useMutation(selectAll, {
+		onSuccess: (data) => {
+			queryClient.invalidateQueries("cartItems");
+		},
+		onError: (err) => {
+			console.error(err);
+		},
 	});
 };
 
@@ -45,6 +94,16 @@ export const useUpdateCartItem = () => {
 	const queryClient = useQueryClient();
 
 	return useMutation(updateCartItem, {
+		onSuccess: (data) => {
+			queryClient.invalidateQueries("cartItems");
+		},
+	});
+};
+
+export const useDeleteCartItem = () => {
+	const queryClient = useQueryClient();
+
+	return useMutation(deleteCartItem, {
 		onSuccess: (data) => {
 			queryClient.invalidateQueries("cartItems");
 		},

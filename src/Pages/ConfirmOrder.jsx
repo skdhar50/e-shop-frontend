@@ -4,8 +4,16 @@ import CheckoutSummary from "Components/Cart/CheckoutSummary";
 import Layout from "Components/Layout";
 import CreateNewShippingAddress from "Components/Modals/CreateNewShippingAddress";
 import { useState } from "react";
+import { useShippingAddressData } from "Hooks/useShippingAddress";
 
 function ConfirmOrder() {
+	const {
+		data: shippingAddress,
+		isLoading,
+		isError,
+		error,
+	} = useShippingAddressData();
+
 	const paymentMethods = [
 		{
 			isCOD: true,
@@ -17,23 +25,6 @@ function ConfirmOrder() {
 		{ image: "/images/icons/rocket.png", width: 70, height: 40 },
 		{ image: "/images/icons/nogod.png", width: 70, height: 35 },
 		{ image: "/images/icons/icon-ssl.png", width: 258, height: 40 },
-	];
-
-	const shippingAddress = [
-		{
-			area: "Agrabad",
-			shipTo: "John Doe",
-			phone: "0123456789",
-			address:
-				"room # 314 (annex building), supreme court bar association building, ramna, 1000",
-		},
-		{
-			area: "Agrabad",
-			shipTo: "John Doe",
-			phone: "0123456789",
-			address:
-				"room # 314 (annex building), supreme court bar association building, ramna, 1000",
-		},
 	];
 
 	const [isOpenModal, setIsOpenModal] = useState(false);
@@ -57,8 +48,11 @@ function ConfirmOrder() {
 							<div className="">
 								<form action="">
 									<ul className="space-y-2 p-2">
-										{shippingAddress.map((address, index) => (
-											<ShippingAddressCard {...address} key={index} />
+										{shippingAddress?.data.map((address, index) => (
+											<ShippingAddressCard
+												address={address}
+												key={address._id}
+											/>
 										))}
 									</ul>
 								</form>

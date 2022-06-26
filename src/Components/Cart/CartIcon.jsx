@@ -1,8 +1,19 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useCartData } from "Hooks/useCart";
+import { isAuthenticated } from "utilities/auth.utility";
 
 function CartIcon() {
-	const cartItems = useSelector((state) => state.cart);
+	// const cartItems = useSelector((state) => state.cart);
+	const {
+		data: cartItems,
+		isLoading,
+		error,
+		isError,
+	} = useCartData(isAuthenticated());
+
+	// console.log(isAuthenticated());
+
 	return (
 		<Link to="/cart">
 			<div className="relative">
@@ -25,18 +36,14 @@ function CartIcon() {
 				</div>
 				<div className="absolute -top-[0.625rem] -right-[0.625rem] md:-top-[0.75rem] md:-right-[1rem] text-white text-xs md:text-sm font-bold">
 					<div className="bg-green-600 rounded-full flex justify-center items-center w-[22px] h-[22px] sm:w-[23px] sm:h-[23px]">
-						{cartItems.length > 9 ? "9+" : cartItems.length}
+						{isAuthenticated()
+							? cartItems?.data.length > 9
+								? "9+"
+								: cartItems?.data.length
+							: "0"}
 					</div>
 				</div>
 			</div>
-
-			{/* <div className="hidden lg:flex justify-center items-center space-x-3 bg-[#3E3CA5] w-fit p-2 rounded-md hover:bg-opacity-90 cursor-pointer">
-				<img src="/images/icons/cart.svg" alt="" className="md:w-6 xl:w-7" />
-				<p className="text-white xl:text-lg">Cart</p>
-				<p className="md:px-[6px] xl:px-[8px] md:text-sm xl:text-base rounded-full bg-white text-red-800">
-					{cartItems.length > 9 ? "9+" : cartItems.length}
-				</p>
-			</div> */}
 		</Link>
 	);
 }

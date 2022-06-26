@@ -1,7 +1,9 @@
-function ShippingAddressCard({ area, shipTo, phone, address }) {
+function ShippingAddressCard({ address }) {
+	const { name, phone, phone2, city, area, zone, fullAddress } = address;
+
 	return (
 		<li className="border shadow rounded-md py-4 px-4 md:px-6">
-			<div className="md:flex space-y-4 justify-between items-center w-full py-2">
+			<div className="md:flex space-y-4 md:space-x-4 xl:space-x-6 2xl:space-x-12 justify-start items-center w-full py-2">
 				<div className="flex items-center space-x-4">
 					<input
 						type="radio"
@@ -14,22 +16,30 @@ function ShippingAddressCard({ area, shipTo, phone, address }) {
 					</label>
 				</div>
 
-				<div className="flex flex-col space-y-1 text-gray-600 text-sm md:text-base md:w-2/4 md:px-4">
+				<div className="flex flex-col flex-grow space-y-1 text-gray-600 text-sm md:text-base md:w-2/4 md:px-4">
 					<p className="">
 						<span className="font-bold text-gray-700 pr-2">Name:</span>
-						{shipTo}
+						{name}
 					</p>
 					<p className="">
 						<span className="font-bold text-gray-700 pr-2">Phone:</span>
-						{phone}
+						{phone} {phone2.length > 0 ? `, ${phone2}` : ""}
 					</p>
-					<p className="text-justify">
-						<span className="font-bold text-gray-700 pr-2">Address:</span>
-						{address}
-					</p>
+					<div className="text-justify space-y-2">
+						<div className="">
+							<span className="font-bold text-gray-700 pr-2">Address:</span>
+						<div className="">{fullAddress}</div>
+							<div className="flex justify-start space-x-6">
+								<p className="">City: {city}</p>
+								<p className="">Area: {area}</p>
+								{zone && <p className="">Zone: {zone}</p>}
+							</div>
+						</div>
+					</div>
 				</div>
 
-				<div className="space-x-8 md:space-x-4 pt-2 md:pt-0 flex">
+			</div>
+				<div className="space-x-8 md:space-x-4 mt-4 md:pt-0 justify-end flex">
 					<button className="flex justify-center items-center text-blue-500 hover:text-opacity-80 space-x-1">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -65,7 +75,6 @@ function ShippingAddressCard({ area, shipTo, phone, address }) {
 						<p className="">Delete</p>
 					</button>
 				</div>
-			</div>
 		</li>
 	);
 }

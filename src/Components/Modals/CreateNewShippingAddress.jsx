@@ -1,10 +1,41 @@
-import Input from 'Components/Inputs/Input';
-import React from 'react'
+import Input from "Components/Inputs/Input";
+import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 
-function CreateNewShippingAddress({onCloseHandler}) {
-  return (
-		<div className="backdrop z-50 top-0 bottom-0 right-0 left-0 bg-black bg-opacity-50 flex justify-center items-center fixed">
-			<div className="modal h-full md:h-fit flex flex-col justify-center bg-white px-6 py-8 space-y-6 relative">
+const INITIAL_STATE = {
+	name: "",
+	phone: "",
+	phone2: "",
+	area: "",
+	zone: "",
+	city: "",
+	fulladdress: "",
+};
+
+function CreateNewShippingAddress({ onCloseHandler }) {
+	const [values, setValues] = useState(INITIAL_STATE);
+
+	const handleChange = (e) => {
+		setValues({
+			...values,
+			[e.target.name]: e.target.value,
+		});
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		console.log(values);
+	};
+
+	useEffect(() => {
+		document.body.style.overflow = "hidden";
+		return () => (document.body.style.overflow = "unset");
+	}, []);
+
+	return (
+		<div className="backdrop z-50 top-0 bottom-0 right-0 left-0 bg-black bg-opacity-50 flex justify-center items-center fixed ">
+			<div className="modal w-full md:w-fit  h-full md:h-fit flex flex-col justify-center bg-white px-6 py-8 space-y-6 relative">
 				<div className="modal-header">
 					<h3 className="text-xl text-gray-700">Create New Shipping</h3>
 					<button onClick={onCloseHandler}>
@@ -23,49 +54,83 @@ function CreateNewShippingAddress({onCloseHandler}) {
 					</button>
 				</div>
 				<div className="modal-body">
-					<form action="" className="space-y-4">
-						<Input name="name" placeholder="Name" />
+					<form
+						action="POST"
+						onSubmit={handleSubmit}
+						encType="multipart/form-data"
+						className="space-y-4"
+					>
+						<Input
+							name="name"
+							handleChange={handleChange}
+							value={values.name}
+							placeholder="Name"
+						/>
 
 						<div className="md:flex md:space-x-4 space-y-4 md:space-y-0">
-							<Input name="phone" placeholder="Phone" />
-							<Input name="phone2" placeholder="Alternate Phone" />
+							<Input
+								name="phone"
+								handleChange={handleChange}
+								value={values.phone}
+								placeholder="Phone"
+							/>
+							<Input
+								name="phone2"
+								handleChange={handleChange}
+								value={values.phone2}
+								placeholder="Alternate Phone"
+							/>
 						</div>
 						<div className="md:flex md:space-x-4 space-y-4 md:space-y-0">
 							<select
-								name=""
-								id=""
+								name="city"
+								id="city"
+								onChange={handleChange}
+								value={values.city}
 								className="w-full rounded focus:outline-none focus:border-green-600 focus:ring-0 text-gray-600 cursor-pointer"
 							>
-								<option value="">Select City</option>
-								<option value="">Chittagong</option>
-								<option value="">Dhaka</option>
-								<option value="">Sylet</option>
+								<option value="" defaultValue disabled>
+									Select City
+								</option>
+								<option value="chittagong">Chittagong</option>
+								<option value="dhaka">Dhaka</option>
+								<option value="sylet">Sylet</option>
 							</select>
 							<select
-								name=""
-								id=""
+								name="area"
+								id="area"
+								onChange={handleChange}
+								value={values.area}
 								className="w-full rounded focus:outline-none focus:border-green-600 focus:ring-0 text-gray-600 cursor-pointer"
 							>
-								<option value="">Select Area</option>
-								<option value="">GEC</option>
-								<option value="">Agrabad</option>
-								<option value="">New Market</option>
+								<option value="" defaultValue disabled>
+									Select Area
+								</option>
+								<option value="gec">GEC</option>
+								<option value="agrabad">Agrabad</option>
+								<option value="new market">New Market</option>
 							</select>
 						</div>
 						<div className="">
 							<select
-								name=""
-								id=""
+								name="zone"
+								id="zone"
+								onChange={handleChange}
+								value={values.zone}
 								className="w-full rounded focus:outline-none focus:border-green-600 focus:ring-0 text-gray-600 cursor-pointer"
 							>
-								<option value="">Select Zone</option>
-								<option value="">Zone 1</option>
-								<option value="">Zone 2</option>
+								<option value="" defaultValue disabled>
+									Select Zone
+								</option>
+								<option value="zone 1">Zone 1</option>
+								<option value="zone 2">Zone 2</option>
 							</select>
 						</div>
 						<div className="">
 							<textarea
-								name=""
+								name="fulladdress"
+								value={values.fulladdress}
+								onChange={handleChange}
 								placeholder="Write your address here"
 								rows="3"
 								className="resize-none w-full rounded focus:outline-none focus:border-green-600 focus:ring-0"
@@ -84,4 +149,4 @@ function CreateNewShippingAddress({onCloseHandler}) {
 	);
 }
 
-export default CreateNewShippingAddress
+export default CreateNewShippingAddress;

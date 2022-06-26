@@ -6,7 +6,7 @@ function Input({
 	placeholder,
 	value,
 	error = null,
-	onChangeHandler,
+	handleChange,
 }) {
 	return (
 		<div className="space-y-1">
@@ -14,9 +14,9 @@ function Input({
 				type={type}
 				name={name}
 				placeholder={placeholder}
-				// value={value}
+				value={value}
 				autoComplete="none"
-				// onChange={onChangeHandler}
+				onChange={handleChange}
 				className={
 					`w-full rounded focus:outline-none focus:border-green-600 focus:ring-0` +
 					(error ? ` border-red-600` : ``)
