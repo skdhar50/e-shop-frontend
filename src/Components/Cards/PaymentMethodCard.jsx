@@ -1,10 +1,19 @@
-function PaymentMethodCard({ isCOD = false, image, width, height }) {
+function PaymentMethodCard({
+	isCOD = false,
+	image,
+	width,
+	height,
+	value,
+	handleSelectPayment,
+}) {
 	return (
 		<div className="flex items-center bg-gray-100 w-full h-[60px] px-8 rounded-md border shadow">
 			<div className="flex justify-start items-center space-x-4 py-2">
 				<input
 					type="radio"
 					name="payment"
+					value={value}
+					onChange={handleSelectPayment}
 					id=""
 					className="w-5 h-5 cursor-pointer text-indigo-600 focus:outline-none focus:ring-0"
 				/>

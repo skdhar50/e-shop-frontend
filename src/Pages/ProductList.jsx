@@ -4,91 +4,28 @@ import { useState, useEffect } from "react";
 import FilterListItems from "Components/Filter/FilterListItems";
 import Layout from "Components/Layout";
 import { Outlet } from "react-router-dom";
+import { useProductData } from "Hooks/useProduct";
 
 import { useSelector, useDispatch } from "react-redux";
 import {fetchProducts, STATUS} from "../Redux/Slices/ProductSlice";
+import Products from "./Products";
 
 function ProductList() {
-	// const products = [
-	// 	{
-	// 		title: "Apple The New MacBook Retina 2016 MLHA2 12 inches",
-	// 		category: "Clothes",
-	// 		image: "/images/products/1.jpg",
-	// 	},
-	// 	{
-	// 		title: "Apple The New MacBook Retina 2016 MLHA2 12 inches",
-	// 		category: "Clothes",
-	// 		image: "/images/products/2.jpg",
-	// 	},
-	// 	{
-	// 		title: "Apple The New MacBook Retina 2016 MLHA2 12 inches",
-	// 		category: "Clothes",
-	// 		image: "/images/products/5.jpg",
-	// 	},
-	// 	{
-	// 		title: "Apple The New MacBook Retina 2016 MLHA2 12 inches",
-	// 		category: "Clothes",
-	// 		image: "/images/products/7.jpg",
-	// 	},
-	// 	{
-	// 		title: "Apple The New MacBook Retina 2016 MLHA2 12 inches",
-	// 		category: "Clothes",
-	// 		image: "/images/products/9.jpg",
-	// 	},
-	// 	{
-	// 		title: "Apple The New MacBook Retina 2016 MLHA2 12 inches",
-	// 		category: "Clothes",
-	// 		image: "/images/products/8.jpg",
-	// 	},
-	// 	{
-	// 		title: "Apple The New MacBook Retina 2016 MLHA2 12 inches",
-	// 		category: "Clothes",
-	// 		image: "/images/products/4.jpg",
-	// 	},
-	// 	{
-	// 		title: "Apple The New MacBook Retina 2016 MLHA2 12 inches",
-	// 		category: "Clothes",
-	// 		image: "/images/products/3.jpg",
-	// 	},
-	// 	{
-	// 		title: "Apple The New MacBook Retina 2016 MLHA2 12 inches",
-	// 		category: "Clothes",
-	// 		image: "/images/products/2.jpg",
-	// 	},
-	// 	{
-	// 		title: "Apple The New MacBook Retina 2016 MLHA2 12 inches",
-	// 		category: "Clothes",
-	// 		image: "/images/products/1.jpg",
-	// 	},
-	// 	{
-	// 		title: "Apple The New MacBook Retina 2016 MLHA2 12 inches",
-	// 		category: "Clothes",
-	// 		image: "/images/products/7.jpg",
-	// 	},
-	// 	{
-	// 		title: "Apple The New MacBook Retina 2016 MLHA2 12 inches",
-	// 		category: "Clothes",
-	// 		image: "/images/products/9.jpg",
-	// 	},
-	// 	{
-	// 		title: "Apple The New MacBook Retina 2016 MLHA2 12 inches",
-	// 		category: "Clothes",
-	// 		image: "/images/products/3.jpg",
-	// 	},
-	// ];
-	const dispatch = useDispatch();
-	const {data : products, status} = useSelector((state) => state.product);
-
-	useEffect(() => {
-		if (status === STATUS.IDLE) {
-			dispatch(fetchProducts());
-		}
-	}, [status, dispatch]);
+	
+	const { data: products, isLoading, error, isError } = useProductData();
+	const [filters, setFilters] = useState({
+		category: [],
+		brand: [],
+	});
 
 	const [openFilter, setOpenFilter] = useState(false);
 
 	const handleRightFilter = () => {
 		setOpenFilter(!openFilter);
+	};
+
+	const handleFilter = (filter) => {
+		setFilters({ ...filter });
 	};
 
 	return (
@@ -97,7 +34,7 @@ function ProductList() {
 			<div className="2xl:container pb-12 md:mt-4">
 				<div className="sm:px-4 md:px-2 xl:px-4 flex justify-center items-top xl:space-x-4">
 					<div className="h-fit border p-6 space-y-4 bg-white shadow hidden xl:block">
-						<FilterListItems />
+						<FilterListItems handleFilter={(filter) => handleFilter(filter)} />
 					</div>
 					<RightFilterSmall
 						isOpen={openFilter}
@@ -126,9 +63,10 @@ function ProductList() {
 							</div>
 						</div>
 						<div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-x-2 lg:gap-x-4 md:gap-y-7">
-							{products.map(product => (
-								<ProductCard key={product.id} product={product} />
-							))}
+							{/* {products?.data.map((product) => (
+								<ProductCard key={product._id} product={product} />
+							))} */}
+							<Products filters={filters} />
 						</div>
 					</div>
 				</div>

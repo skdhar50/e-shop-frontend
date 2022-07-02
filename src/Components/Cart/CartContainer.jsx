@@ -9,28 +9,17 @@ import {
 	useDeleteCartItem,
 } from "Hooks/useCart";
 
-import { useSelector, useDispatch } from "react-redux";
-import {
-	removeFromCart,
-	selectItem,
-	selectAllItems,
-	unselectAllItems,
-	increaseItemCount,
-	decreaseItemCount,
-} from "../../Redux/Slices/CartSlice";
 import { useState } from "react";
+import { isAuthenticated } from "utilities/auth.utility";
 
 function CartContainer({ shipping = 50 }) {
-	// const dispatch = useDispatch();
-	// const cartItems = useSelector((state) => state.cart);
-
 	const {
 		data: cartItems,
 		isSuccess,
 		isLoading,
 		error,
 		isError,
-	} = useCartData();
+	} = useCartData(isAuthenticated());
 	const { mutate: cartItemMutation } = useUpdateCartItem();
 	const { mutate: selectAllItemsMutation } = useSelectAll();
 	const { mutate: selectSingleItemMutation } = useSelectSingle();
@@ -101,6 +90,13 @@ function CartContainer({ shipping = 50 }) {
 		});
 	};
 
+	const selectedItems = () => {
+		const items = cartItems?.data.filter((item) => item.isSelected === true);
+
+		if (items.length > 0) return true;
+		return false;
+	};
+
 	const setAllSelected = (event) => {
 		if (event.target.checked) {
 			// 	dispatch(selectAllItems());
@@ -161,7 +157,10 @@ function CartContainer({ shipping = 50 }) {
 									</button>
 								</Link>
 								<Link to="/confirm-order">
-									<button className="px-3 py-2 md:px-4 md:py-2 bg-indigo-500 text-white rounded-sm hover:bg-opacity-80">
+									<button
+										className="px-3 py-2 md:px-4 md:py-2 bg-indigo-500 text-white rounded-sm hover:bg-opacity-80 disabled:opacity-50 disabled:cursor-not-allowed"
+										disabled={!selectedItems()}
+									>
 										Proceed to Checkout
 									</button>
 								</Link>

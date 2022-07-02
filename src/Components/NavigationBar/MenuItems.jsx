@@ -41,7 +41,7 @@ function MenuItems({ items, depthLevel }) {
 						className="w-full group py-2"
 						onClick={() => setDropdown((prev) => !prev)}
 					>
-						{items.title}
+						{items.name}
 						{depthLevel > 0 ? (
 							<span className="float-right pr-3 text-gray-50 group-hover:text-black">
 								&#10093;
@@ -58,7 +58,7 @@ function MenuItems({ items, depthLevel }) {
 				</>
 			) : (
 				<p className="py-2">
-					<a href={items.url}>{items.title}</a>
+					<a href={items.url}>{items.name}</a>
 				</p>
 			)}
 		</li>

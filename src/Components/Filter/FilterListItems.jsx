@@ -1,6 +1,43 @@
 import Checkbox from "Components/Inputs/Checkbox";
+import { useCategoryData } from "Hooks/useCategory";
+import { useBrandData } from "Hooks/useBrand";
+import { useState, useEffect } from "react";
 
-function FilterListItems() {
+function FilterListItems({handleFilter}) {
+	const [checked, setChecked] = useState({
+		category: [],
+		brand: [],
+	});
+
+	const checkedItems = { ...checked };
+
+	const handleToggle = (value, title) => {
+		const currentIndex = checked[title].indexOf(value);
+		if (currentIndex === -1) {
+			checkedItems[title].push(value);
+		} else {
+			checkedItems[title].splice(currentIndex, 1);
+		}
+		setChecked(checkedItems);
+		handleFilter(checkedItems);
+	};
+
+	useEffect(() => {console.log(checked)}, [checked]);
+
+	const {
+		data: categories,
+		isLoading: categoryLoading,
+		isSuccess: categorySuccess,
+		isError: categoryError,
+	} = useCategoryData();
+
+	const {
+		data: brands,
+		isLoading: brandLoading,
+		isSuccess: brandSuccess,
+		isError: brandError,
+	} = useBrandData();
+
 	const data = [
 		{
 			title: "Categories",
@@ -72,18 +109,35 @@ function FilterListItems() {
 				</div>
 			</div>
 
-			{data.map((item, index) => (
-				<div className="border-b pb-4" key={index}>
-					<p className="pb-2 pt-2 text-lg font-[600] text-gray-600">
-						{item.title}
-					</p>
-					<div className="space-y-2">
-						{item.elements.map((element, index) => (
-							<Checkbox key={index} name={element.name} label={element.label} />
-						))}
-					</div>
+			<div className="border-b pb-4">
+				<p className="pb-2 pt-2 text-lg font-[600] text-gray-600">Categories</p>
+				<div className="space-y-2">
+					{categories?.data.map((category) => (
+						<Checkbox
+							key={category._id}
+							isChecked={checked["category"].indexOf(category.name === -1)}
+							name={category.name}
+							label={category.name}
+							handleToggle={(value) => handleToggle(value, "category")}
+						/>
+					))}
 				</div>
-			))}
+			</div>
+
+			<div className="border-b pb-4">
+				<p className="pb-2 pt-2 text-lg font-[600] text-gray-600">Brands</p>
+				<div className="space-y-2">
+					{brands?.data.map((brand) => (
+						<Checkbox
+							key={brand._id}
+							name={brand.name}
+							label={brand.name}
+							isChecked={checked["brand"].indexOf(brand.name === -1)}
+							handleToggle={(value) => handleToggle(value, "brand")}
+						/>
+					))}
+				</div>
+			</div>
 		</>
 	);
 }

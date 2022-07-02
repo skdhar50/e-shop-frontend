@@ -73,8 +73,10 @@ export const useSelectAll = () => {
 	});
 };
 
-export const useCartData = () => {
-	return useQuery("cartItems", getAllCartItems);
+export const useCartData = (isEnabled) => {
+	return useQuery("cartItems", getAllCartItems, {
+		enabled: isEnabled
+	});
 };
 
 export const useAddToCart = () => {

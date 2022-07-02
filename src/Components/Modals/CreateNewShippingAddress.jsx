@@ -1,7 +1,6 @@
 import Input from "Components/Inputs/Input";
-import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useCreateShippingAddress } from "Hooks/useShippingAddress";
 
 const INITIAL_STATE = {
 	name: "",
@@ -15,6 +14,8 @@ const INITIAL_STATE = {
 
 function CreateNewShippingAddress({ onCloseHandler }) {
 	const [values, setValues] = useState(INITIAL_STATE);
+	const { mutate: shippingAddressMutation, isSuccess } =
+		useCreateShippingAddress();
 
 	const handleChange = (e) => {
 		setValues({
@@ -26,7 +27,13 @@ function CreateNewShippingAddress({ onCloseHandler }) {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log(values);
+		shippingAddressMutation(values);
 	};
+
+	if (isSuccess) {
+		setValues(INITIAL_STATE);
+		onCloseHandler();
+	}
 
 	useEffect(() => {
 		document.body.style.overflow = "hidden";

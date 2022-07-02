@@ -6,11 +6,7 @@ import { loginModal } from "Jotai/ModalState";
 import { useAddToCart } from "Hooks/useCart";
 import { useAddToWishlist } from "Hooks/useWishlist";
 
-import { addToCart } from "../../Redux/Slices/CartSlice";
-import { useDispatch, useSelector } from "react-redux";
-
 function ProductCard({ product }) {
-	// const dispatch = useDispatch();
 	const [, setLoginModalOpen] = useAtom(loginModal);
 	const {
 		name: title,
@@ -27,30 +23,12 @@ function ProductCard({ product }) {
 	} = useAddToCart();
 	const { mutate: addToWishlistMutation } = useAddToWishlist();
 
-	// const cartItems = useSelector((state) => state.cart);
-
 	const handleAddToCart = (product) => {
 		if (!isAuthenticated()) {
 			setLoginModalOpen(true);
-			// window.alert("Login First");
 		}
 
 		addToCartMutation(product._id);
-
-		// else {
-		// 	const isPresent = cartItems.find((item) => item.id === product.id);
-
-		// 	if (isPresent === undefined) {
-		// 		const productForCart = {
-		// 			...product,
-		// 			description: product.description.slice(0, 100),
-		// 			rating: product.rating.rate,
-		// 			count: 1,
-		// 			isSelected: false,
-		// 		};
-		// 		dispatch(addToCart(productForCart));
-		// 	}
-		// }
 	};
 
 	const handleAddToWishlist = (product) => {
