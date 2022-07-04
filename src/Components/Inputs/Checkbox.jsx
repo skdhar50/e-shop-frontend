@@ -1,4 +1,4 @@
-function Checkbox({ name, label, isChecked, handleToggle }) {
+function Checkbox({ id, name, label, isChecked, handleToggle }) {
 	return (
 		<div className="flex items-center space-x-3">
 			<input
@@ -6,7 +6,7 @@ function Checkbox({ name, label, isChecked, handleToggle }) {
 				name={name}
 				id={name}
 				value={isChecked}
-				onChange={() => handleToggle(name)}
+				onChange={() => handleToggle(id)}
 				className="text-green-600 focus:ring-0 focus:outline-none cursor-pointer rounded-bl rounded-br rounded-tl"
 			/>
 			<label htmlFor={name} className="cursor-pointer">

@@ -3,7 +3,7 @@ import { useCategoryData } from "Hooks/useCategory";
 import { useBrandData } from "Hooks/useBrand";
 import { useState, useEffect } from "react";
 
-function FilterListItems({handleFilter}) {
+function FilterListItems({ handleFilter }) {
 	const [checked, setChecked] = useState({
 		category: [],
 		brand: [],
@@ -22,7 +22,7 @@ function FilterListItems({handleFilter}) {
 		handleFilter(checkedItems);
 	};
 
-	useEffect(() => {console.log(checked)}, [checked]);
+	useEffect(() => {}, [checked]);
 
 	const {
 		data: categories,
@@ -75,9 +75,30 @@ function FilterListItems({handleFilter}) {
 		<>
 			<div className="border-b pb-4 space-y-1">
 				<p className="pb-2 text-lg font-[600] text-gray-600">Sort By</p>
-				<Checkbox name="rating" label="Rating" />
-				<Checkbox name="price1" label="Price (Low to High)" />
-				<Checkbox name="price2" label="Price (High to Low)" />
+				<div className="flex flex-col space-y-2">
+					<div className="flex justify-start items-center">
+						<input type="radio" name="rating" className="mr-2" />
+						<p className="">Rating</p>
+					</div>
+					<div className="flex justify-start items-center">
+						<input
+							type="radio"
+							name="price1"
+							value="asce"
+							className="mr-2"
+						/>
+						<p className="">Price (Low to High)</p>
+					</div>
+					<div className="flex justify-start items-center">
+						<input
+							type="radio"
+							name="price2"
+							value="desc"
+							className="mr-2"
+						/>
+						<p className="">Price (High to Low)</p>
+					</div>
+				</div>
 			</div>
 
 			<div className="">
@@ -118,6 +139,7 @@ function FilterListItems({handleFilter}) {
 							isChecked={checked["category"].indexOf(category.name === -1)}
 							name={category.name}
 							label={category.name}
+							id={category._id}
 							handleToggle={(value) => handleToggle(value, "category")}
 						/>
 					))}
@@ -132,6 +154,7 @@ function FilterListItems({handleFilter}) {
 							key={brand._id}
 							name={brand.name}
 							label={brand.name}
+							id={brand._id}
 							isChecked={checked["brand"].indexOf(brand.name === -1)}
 							handleToggle={(value) => handleToggle(value, "brand")}
 						/>
