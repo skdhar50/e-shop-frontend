@@ -6,14 +6,15 @@ const fetchProducts = () => {
 };
 
 const fetchProductsWithFilter = (filters) => {
+	const { category, brand, sortBy, order } = filters;
 	return request({
 		url: "/product",
 		method: "POST",
-		data: { filters: filters },
+		data: { sortBy: sortBy, order: order, filters: { category, brand } },
 	});
 };
 
-const fetchProductDetails = ({queryKey}) => {
+const fetchProductDetails = ({ queryKey }) => {
 	return request({
 		url: `/product/${queryKey[1]}`,
 		method: "GET",

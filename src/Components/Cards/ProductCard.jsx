@@ -42,11 +42,9 @@ function ProductCard({ product }) {
 	return (
 		<div className="md:w-full md:h-fit border bg-white drop-shadow border-[#CBCBCB] hover:shadow-xl transition-all duration-200 cursor-pointer rounded-md p-4">
 			<div className="top pb-2">
-				{category?.map((cat) => (
-					<p className="category text-xs md:text-sm text-[#565656]">
-						{cat.name}
-					</p>
-				))}
+				<p className="category text-xs md:text-sm text-[#565656]">
+					{category[0].name}
+				</p>
 			</div>
 			<Link to={`/product-details/${_id}`}>
 				<div className="mid flex flex-col space-y-2  justify-start">

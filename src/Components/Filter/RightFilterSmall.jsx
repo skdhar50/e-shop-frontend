@@ -1,6 +1,6 @@
 import FilterListItems from "./FilterListItems";
 
-function RightFilterSmall({ isOpen, handleRightFilter }) {
+function RightFilterSmall({ isOpen, handleRightFilter, handleFilter }) {
 	return (
 		<div
 			className={
@@ -26,7 +26,7 @@ function RightFilterSmall({ isOpen, handleRightFilter }) {
 					</button>
 				</div>
 
-				<FilterListItems />
+				<FilterListItems handleFilter={handleFilter} />
 			</div>
 		</div>
 	);
