@@ -1,6 +1,8 @@
 import React from "react";
+import { format} from "date-fns"
 
-function CustomersReviews() {
+function CustomersReviews({review}) {
+	const {user, review : content, rating, photos, createdAt} = review;
 	return (
 		<>
 			<div className="space-y-4">
@@ -15,10 +17,10 @@ function CustomersReviews() {
 							<p className="space-x-1">
 								<span className="text-gray-500">By</span>
 								<span className="font-[600] text-gray-700">
-									Sanjoy Kumar Dhar,
+									{user.name}
 								</span>
 							</p>
-							<p className="text-gray-500 text-sm md:text-base">22 January 2022</p>
+							<p className="text-gray-500 text-sm md:text-base">{format(new Date(createdAt), 'PP')}</p>
 						</div>
 						<div className="flex space-x-6 text-sm md:text-base">
 							<img src="/images/icons/stars.svg" alt="" className="w-16" />
@@ -31,9 +33,7 @@ function CustomersReviews() {
 				</div>
 				<div className="">
 					<p className="text-sm md:text-base">
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio
-						nesciunt neque ad ipsum ducimus, natus nobis impedit excepturi eum
-						nulla. Tempore optio, autem et natus soluta ea minus ducimus saepe.
+						{content}
 					</p>
 				</div>
 				<div className="space-y-3">

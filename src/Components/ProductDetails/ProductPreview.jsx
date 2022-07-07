@@ -2,80 +2,110 @@ import AvailableColors from "Components/ProductDetails/AvailableColors";
 import AvailableSizes from "Components/ProductDetails/AvailableSizes";
 import ProductPreviewImageAndThumb from "Components/SliderAndCarousel/ProductPreviewImageAndThumb";
 
+import { isAuthenticated } from "utilities/auth.utility";
+import { useAtom } from "jotai";
+import { loginModal } from "Jotai/ModalState";
+import { useAddToCart } from "Hooks/useCart";
+import { useAddToWishlist } from "Hooks/useWishlist";
+
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { STATUS } from "../../Redux/Slices/ProductSlice";
 
-function ProductPreview(props) {
+function ProductPreview({ products }) {
 	const {
-		images,
-		colors,
-		sizes,
-		productSummary,
-		categorys,
-		productTitle,
+		_id: id,
+		photos,
+		color,
+		size,
+		description,
+		category,
+		brand,
+		name,
 		rating,
 		review,
-		stock,
-		price,
-		discountedPrice,
-	} = props;
+		quantity,
+		unitPrice,
+		discount,
+	} = products[0];
+
+	const [, setLoginModalOpen] = useAtom(loginModal);
+	const { mutate: addToCartMutation } = useAddToCart();
+	const { mutate: addToWishlistMutation } = useAddToWishlist();
+
+	const handleAddToCart = (id) => {
+		if (!isAuthenticated()) {
+			setLoginModalOpen(true);
+		}
+
+		addToCartMutation(id);
+	};
+
+	const handleAddToWishlist = (id) => {
+		if (!isAuthenticated()) {
+			setLoginModalOpen(true);
+		}
+
+		addToWishlistMutation(id);
+	};
 
 	return (
 		<div className="md:flex md:space-x-8 md:px-4 py-4 md:pt-8 antialiased">
 			<div className="w-full h-fit md:w-[250px] 2xl:w-[300px] 2xl:h-[200px] md:shrink-0 md:pl-4 md:pr-3">
-				<ProductPreviewImageAndThumb images={images} />
+				{photos && <ProductPreviewImageAndThumb photos={photos} />}
 			</div>
 			<div className="pt-5 md:pt-0 space-y-4">
 				<div className="space-y-4 px-4 md:px-0">
 					<p className="font-poppins text-[18px] md:text-xl text-gray-700">
-						{productTitle}
+						{name}
 					</p>
 					<p className="">
 						Category:
-						{categorys.map((category, index) => (
-							<span className="pl-2 italic underline" key={index}>
-								{category}
+						{category?.map((category) => (
+							<span className="pl-2 italic underline" key={category._id}>
+								{category.name}
 							</span>
 						))}
 					</p>
-					<p className="">{productSummary}</p>
+					<p className="">{description}</p>
 					<div className="space-y-2">
 						<p className="">
-							{rating} Ratings and {review} Reviews
+							{rating ? rating : "No "} Ratings and {review ? review : "No "}{" "}
+							Reviews
 						</p>
-						<img src="/images/icons/stars.svg" alt="" className="" />
+						{rating ? (
+							<img src="/images/icons/stars.svg" alt="" className="" />
+						) : (
+							""
+						)}
 					</div>
 
 					{/* Colors */}
-					<AvailableColors colors={colors} />
+					{color && <AvailableColors colors={color} />}
 
 					{/* Sizes */}
-					<AvailableSizes sizes={sizes} />
+					{size && <AvailableSizes sizes={size} />}
 
 					{/* Price */}
 					<div className="">
 						<p
 							className={
 								"" +
-								(discountedPrice
-									? "line-through"
-									: "text-xl font-[700] text-gray-800")
+								(discount ? "line-through" : "text-xl font-[700] text-gray-800")
 							}
 						>
-							TK. {price}
+							TK. {unitPrice}
 						</p>
-						{discountedPrice && (
-							<p className="text-xl font-[700] text-gray-800">
-								TK. {discountedPrice}
-							</p>
+						{discount && (
+							<p className="text-xl font-[700] text-gray-800">TK. {discount}</p>
 						)}
 					</div>
 
 					{/* Stock */}
-					{stock > 0 ? (
+					{quantity > 0 ? (
 						<p className="">
-							<span className="text-green-600 font-bold pr-1">In Stock</span> ({stock > 50 ? "50+" : stock} copies available)
+							<span className="text-green-600 font-bold pr-1">In Stock</span> (
+							{quantity > 50 ? "50+" : quantity} copies available)
 						</p>
 					) : (
 						<p className="text-red-500">Out of Stock</p>
@@ -99,7 +129,10 @@ function ProductPreview(props) {
 							</svg>
 							<p className="">Reviews</p>
 						</button>
-						<button className="text-lg px-4 w-full py-2  flex space-x-2 justify-center items-center border-2 rounded-md bg-gray-50 shadow-sm">
+						<button
+							onClick={() => handleAddToWishlist(id)}
+							className="text-lg px-4 w-full py-2  flex space-x-2 justify-center items-center border-2 rounded-md bg-gray-50 shadow-sm"
+						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								className="h-6 w-6 stroke-slate-400"
@@ -120,15 +153,24 @@ function ProductPreview(props) {
 				</div>
 
 				<div className="md:flex md:space-x-6">
-					<button className="px-8 hover:bg-indigo-400 text-white font-[600] text-lg py-2 bg-indigo-500 hidden md:block">
+					<button
+						onClick={() => handleAddToWishlist(id)}
+						className="px-8 hover:bg-indigo-400 text-white font-[600] text-lg py-2 bg-indigo-500 hidden md:block"
+					>
 						Add to Favorites
 					</button>
-					<button className="px-12 hover:bg-indigo-400 text-white font-[600] text-lg py-2 bg-indigo-500 hidden md:block">
+					<button
+						onClick={() => handleAddToCart(id)}
+						className="px-12 hover:bg-indigo-400 text-white font-[600] text-lg py-2 bg-indigo-500 hidden md:block"
+					>
 						Add to Cart
 					</button>
 
 					{/* Small Screen Button */}
-					<button className="px-12 hover:bg-indigo-400 text-white font-[600] text-lg py-2 bg-indigo-500 md:hidden z-50 sticky bottom-0 left-0 right-0 w-full">
+					<button
+						onClick={() => handleAddToCart(id)}
+						className="px-12 hover:bg-indigo-400 text-white font-[600] text-lg py-2 bg-indigo-500 md:hidden z-50 sticky bottom-0 left-0 right-0 w-full"
+					>
 						Add to Cart
 					</button>
 				</div>

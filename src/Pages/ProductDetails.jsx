@@ -8,21 +8,47 @@ import ProductListCarousel from "Components/SliderAndCarousel/ProductListCarouse
 import CustomersQA from "Components/ProductQA/CustomersQA";
 import Layout from "Components/Layout";
 import { Outlet, useParams } from "react-router-dom";
+import { useProductDetails } from "Hooks/useProduct";
+import { useReviewData } from "Hooks/useReviews";
+import { useQuestionData } from "Hooks/useQuestions";
 
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts, STATUS } from "../Redux/Slices/ProductSlice";
 
-
 function ProductDetails() {
-	const dispatch = useDispatch();
-	const { data: products, status } = useSelector((state) => state.product);
+	// const dispatch = useDispatch();
+	// const { data: products, status } = useSelector((state) => state.product);
+	const { id } = useParams();
+	const {
+		data: products,
+		isLoading: productIsLoading,
+		isError: productIsError,
+		isSuccess: productIsSuccess,
+	} = useProductDetails(id);
+	const {
+		data: reviews,
+		isLoading: reviewLoding,
+		isError: reviewError,
+		isSuccess: reviewSuccess,
+	} = useReviewData(id);
+	const {
+		data: questions,
+		isLoading: questionLoding,
+		isError: questionError,
+		isSuccess: questionSuccess,
+	} = useQuestionData(id);
 
-	useEffect(() => {
-		if(status === STATUS.IDLE) {
-			dispatch(fetchProducts());
-		}
-	}, [status, dispatch]);
+	// useEffect(() => {
+	// 	if(status === STATUS.IDLE) {
+	// 		dispatch(fetchProducts());
+	// 	}
+	// }, [status, dispatch]);
+
+	// console.log(id)
+	// if(isSuccess) {
+	// 	console.log(products.data)
+	// }
 
 	const productDetails = {
 		images: [
@@ -47,33 +73,34 @@ function ProductDetails() {
 		discountedPrice: 450,
 	};
 
-	const otherProducts = [
-		{
-			id: 1,
-			title: "Customers Also Bought",
-			products: products,
-		},
-		{
-			id: 2,
-			title: "Related Products To This Item",
-			products: products,
-		},
-		{
-			id: 3,
-			title: "Similar Category Best Selling",
-			products: products,
-		},
-		{
-			id: 4,
-			title: "Related Products",
-			products: products,
-		},
-	];
+	// const otherProducts = [
+	// 	{
+	// 		id: 1,
+	// 		title: "Customers Also Bought",
+	// 		products: products,
+	// 	},
+	// 	{
+	// 		id: 2,
+	// 		title: "Related Products To This Item",
+	// 		products: products,
+	// 	},
+	// 	{
+	// 		id: 3,
+	// 		title: "Similar Category Best Selling",
+	// 		products: products,
+	// 	},
+	// 	{
+	// 		id: 4,
+	// 		title: "Related Products",
+	// 		products: products,
+	// 	},
+	// ];
 
 	const productSummary = {
 		title: "Product Summary",
-		description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima autem et voluptatum nam nisi veritatis blanditiis iste doloribus totam est. Reprehenderit id expedita consectetur corrupti, neque similique nam quaerat, dignissimos minus sit excepturi quasi, saepe dolore facilis nulla! Assumenda harum optio, quae saepe maxime placeat quia ad eveniet rerum nulla quaerat accusantium repudiandae velit quisquam officiis voluptate totam id. Id perferendis eos repudiandae consectetur nam, et velit qui. Asperiores laborum veniam soluta enim laudantium iste commodi autem modi est exercitationem sunt quisquam illo harum eos, eum sequi qui! Nobis odit ratione repudiandae, quis doloremque pariatur inventore enim nisi illum, doloribus amet. Quam corporis quod nam excepturi eveniet natus voluptatibus omnis, at tenetur harum cumque in deserunt perspiciatis, neque mollitia, dicta soluta dolorum sapiente possimus! Ullam, adipisci sequi. Facere ea iste quos, impedit cupiditate iusto est labore sint corrupti deleniti odio magni accusamus illo unde culpa! Nostrum molestiae excepturi, aspernatur quas mollitia perferendis reiciendis qui eveniet aut maiores distinctio delectus temporibus officiis cumque inventore incidunt dolorem veniam consectetur sint omnis illo? Quis architecto molestias adipisci rem. Ut eum sunt, quod esse corporis necessitatibus animi natus tempora, dolores magni vel modi distinctio ea nobis ipsum, iure mollitia nulla. Magnam at animi expedita.",
-	}
+		description:
+			"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima autem et voluptatum nam nisi veritatis blanditiis iste doloribus totam est. Reprehenderit id expedita consectetur corrupti, neque similique nam quaerat, dignissimos minus sit excepturi quasi, saepe dolore facilis nulla! Assumenda harum optio, quae saepe maxime placeat quia ad eveniet rerum nulla quaerat accusantium repudiandae velit quisquam officiis voluptate totam id. Id perferendis eos repudiandae consectetur nam, et velit qui. Asperiores laborum veniam soluta enim laudantium iste commodi autem modi est exercitationem sunt quisquam illo harum eos, eum sequi qui! Nobis odit ratione repudiandae, quis doloremque pariatur inventore enim nisi illum, doloribus amet. Quam corporis quod nam excepturi eveniet natus voluptatibus omnis, at tenetur harum cumque in deserunt perspiciatis, neque mollitia, dicta soluta dolorum sapiente possimus! Ullam, adipisci sequi. Facere ea iste quos, impedit cupiditate iusto est labore sint corrupti deleniti odio magni accusamus illo unde culpa! Nostrum molestiae excepturi, aspernatur quas mollitia perferendis reiciendis qui eveniet aut maiores distinctio delectus temporibus officiis cumque inventore incidunt dolorem veniam consectetur sint omnis illo? Quis architecto molestias adipisci rem. Ut eum sunt, quod esse corporis necessitatibus animi natus tempora, dolores magni vel modi distinctio ea nobis ipsum, iure mollitia nulla. Magnam at animi expedita.",
+	};
 
 	const customersQAs = [
 		{
@@ -105,6 +132,9 @@ function ProductDetails() {
 		},
 	];
 
+	if (productIsLoading) {
+		return <div className="">Loading</div>;
+	}
 
 	return (
 		<Layout title="Product Details">
@@ -112,7 +142,7 @@ function ProductDetails() {
 			<div className="md:px-6 md:pt-1 xl:container antialiased">
 				<div className="mt-4 bg-white drop-shadow md:pb-4 md:flex border border-gray-300 w-full h-full">
 					{/* Product Preview Section */}
-					<ProductPreview {...productDetails} />
+					<ProductPreview products={products?.data} />
 
 					{/* Side Section */}
 					<SideSection returnDays={7} deliveryCharge={50} />
@@ -123,24 +153,31 @@ function ProductDetails() {
 					<ProductSummary {...productSummary} />
 
 					{/* Other Products */}
-					{otherProducts.map((otherProduct, index) => (
+					{/* {otherProducts.map((otherProduct, index) => (
 						<ProductListCarousel {...otherProduct} key={index} />
-					))}
+					))} */}
 
 					{/* Create Reviews And Ratings */}
 					<CreateReviewsAndRatings />
 					<div className="space-y-14 px-4 pt-10">
+						{reviews?.data.length
+							? reviews.data.map((review) => (
+									<CustomersReviews review={review} key={review._id} />
+							  ))
+							: "No reviews available."}
 						{/* Customers Reviews */}
-						<CustomersReviews />
-						<CustomersReviews />
+						{/* <CustomersReviews />
+						<CustomersReviews /> */}
 					</div>
 
-					<CreateProductQA />
+					<CreateProductQA productId={id} />
 					<div className="space-y-10 px-4 pt-10">
 						{/* Customers QA */}
-						{customersQAs.map((customersQA, index) => (
-							<CustomersQA customersQA={customersQA} key={index} />
-						))}
+						{questions?.data.length
+							? questions?.data.map((question) => (
+									<CustomersQA customersQA={question} key={question._id} />
+							  ))
+							: "No Questiones available."}
 					</div>
 				</div>
 			</div>
