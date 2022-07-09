@@ -11,6 +11,7 @@ import { Outlet, useParams } from "react-router-dom";
 import { useProductDetails } from "Hooks/useProduct";
 import { useReviewData } from "Hooks/useReviews";
 import { useQuestionData } from "Hooks/useQuestions";
+import { isAuthenticated } from "utilities/auth.utility";
 
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -148,7 +149,7 @@ function ProductDetails() {
 					))} */}
 
 					{/* Create Reviews And Ratings */}
-					<CreateReviewsAndRatings productId={id} />
+					{isAuthenticated() && <CreateReviewsAndRatings productId={id} />}
 					<div className="space-y-14 px-4 pt-10">
 						{reviews?.data.length
 							? reviews.data.map((review) => (
@@ -160,7 +161,11 @@ function ProductDetails() {
 						<CustomersReviews /> */}
 					</div>
 
-					<CreateProductQA productId={id} />
+					{isAuthenticated() ? (
+						<CreateProductQA productId={id} />
+					) : (
+						"Login to ask a question..."
+					)}
 					<div className="space-y-10 px-4 pt-10">
 						{/* Customers QA */}
 						{questions?.data.length

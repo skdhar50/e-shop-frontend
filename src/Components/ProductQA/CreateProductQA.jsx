@@ -11,9 +11,9 @@ function CreateProductQA({ productId }) {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(question);
 
 		mutate({ question: question, id: productId });
+		setQuestion("");
 	};
 
 	return (

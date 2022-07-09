@@ -1,5 +1,7 @@
 import React from "react";
 import { format } from "date-fns";
+import {REVIEW_URL} from "utilities/config.utility";
+import ReviewStar from "./ReviewStar";
 
 function CustomersReviews({ review }) {
 	const { user, review: content, rating, photos, createdAt } = review;
@@ -23,7 +25,8 @@ function CustomersReviews({ review }) {
 							</p>
 						</div>
 						<div className="flex space-x-6 text-sm md:text-base">
-							<img src="/images/icons/stars.svg" alt="" className="w-16" />
+							{/* <img src="/images/icons/stars.svg" alt="" className="w-16" /> */}
+							<ReviewStar rating={rating} />
 							<p className="text-green-600 flex items-center justify-center space-x-2">
 								<span className="">&#10004;</span>
 								<span>Verified Purchase</span>
@@ -31,16 +34,17 @@ function CustomersReviews({ review }) {
 						</div>
 					</div>
 				</div>
-				<div className="">
+				<div className="space-y-2">
 					<p className="text-sm md:text-base">{content}</p>
-					<div className="">
+					<div className="grid grid-cols-5 gap-2 w-full md:w-2/3 xl:w-1/3">
 						{photos &&
-							photos.map((photo) => (
+							photos.map((photo, index) => (
 								<>
-									<p>{photo}</p>
 									<img
-										src="http://localhost:3001/storages/reviews/61e72279632008f82b03d9500.png"
+										src={`${REVIEW_URL}/${photo}`}
 										alt="review"
+										key={index}
+										className="aspect-square max-h-20 cursor-pointer"
 									/>
 								</>
 							))}

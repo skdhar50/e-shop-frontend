@@ -1,15 +1,17 @@
 import MultipleImageUpload from "Components/Form/MultipleImageUpload";
 import { useState } from "react";
 import StarRating from "./StarRating";
-import { usePostReview } from "Hooks/useReviews";
+import { usePostReview, useIsReviewed } from "Hooks/useReviews";
+import { isAuthenticated } from "utilities/auth.utility";
 
-function ReviewsAndRatings({productId}) {
+function ReviewsAndRatings({ productId }) {
 	const [showReviewForm, setShowReviewForm] = useState(false);
 
 	const [review, setReview] = useState("");
 	const [files, setFiles] = useState([]);
 	const [rating, setRating] = useState(0);
-	const { mutate : createReviewMutation } = usePostReview(productId);
+	const { mutate: createReviewMutation } = usePostReview(productId);
+	const { data: isReviewed } = useIsReviewed(productId, isAuthenticated());
 
 	const handleReview = (review) => {
 		setReview(review);
@@ -34,15 +36,18 @@ function ReviewsAndRatings({productId}) {
 		e.preventDefault();
 
 		let formData = new FormData();
-		formData.set('review', review);
-		formData.set('rating', rating);
+		formData.set("review", review);
+		formData.set("rating", rating);
 		// formData.set('photos', files[0]);
-		files.forEach(file => {
-			formData.append('photos', file)
-		})
+		files.forEach((file) => {
+			formData.append("photos", file);
+		});
 		// console.log(formData.get('photos'));
-		createReviewMutation({value: formData, id: productId})
+		createReviewMutation({ value: formData, id: productId });
 		// console.log(files);
+		setReview("");
+		setRating(0);
+		setFiles([]);
 	};
 
 	const handleShowReviewForm = () => {
@@ -63,16 +68,18 @@ function ReviewsAndRatings({productId}) {
 							<img src="/images/icons/stars.svg" alt="" className="" />
 						</div>
 					</div>
-					<div className="hidden md:block">
-						<button
-							className="border-2 border-indigo-500 text-indigo-500 text-lg px-3 py-2 rounded-md"
-							onClick={handleShowReviewForm}
-						>
-							{showReviewForm ? "Cancel" : "Write a Review"}
-						</button>
-					</div>
+					{(!isReviewed?.data) && (
+						<div className="hidden md:block">
+							<button
+								className="border-2 border-indigo-500 text-indigo-500 text-lg px-3 py-2 rounded-md"
+								onClick={handleShowReviewForm}
+							>
+								{showReviewForm ? "Cancel" : "Write a Review"}
+							</button>
+						</div>
+					)}
 				</div>
-				{showReviewForm && (
+				{(!isReviewed?.data) && showReviewForm && (
 					<form
 						onSubmit={handleSubmit}
 						action=""
