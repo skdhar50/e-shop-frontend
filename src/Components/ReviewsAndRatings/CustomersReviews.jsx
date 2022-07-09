@@ -1,8 +1,8 @@
 import React from "react";
-import { format} from "date-fns"
+import { format } from "date-fns";
 
-function CustomersReviews({review}) {
-	const {user, review : content, rating, photos, createdAt} = review;
+function CustomersReviews({ review }) {
+	const { user, review: content, rating, photos, createdAt } = review;
 	return (
 		<>
 			<div className="space-y-4">
@@ -16,11 +16,11 @@ function CustomersReviews({review}) {
 						<div className="flex flex-col md:flex-row md:space-x-4 space-y-1 md:space-y-0">
 							<p className="space-x-1">
 								<span className="text-gray-500">By</span>
-								<span className="font-[600] text-gray-700">
-									{user.name}
-								</span>
+								<span className="font-[600] text-gray-700">{user.name}</span>
 							</p>
-							<p className="text-gray-500 text-sm md:text-base">{format(new Date(createdAt), 'PP')}</p>
+							<p className="text-gray-500 text-sm md:text-base">
+								{format(new Date(createdAt), "PP")}
+							</p>
 						</div>
 						<div className="flex space-x-6 text-sm md:text-base">
 							<img src="/images/icons/stars.svg" alt="" className="w-16" />
@@ -32,9 +32,19 @@ function CustomersReviews({review}) {
 					</div>
 				</div>
 				<div className="">
-					<p className="text-sm md:text-base">
-						{content}
-					</p>
+					<p className="text-sm md:text-base">{content}</p>
+					<div className="">
+						{photos &&
+							photos.map((photo) => (
+								<>
+									<p>{photo}</p>
+									<img
+										src="http://localhost:3001/storages/reviews/61e72279632008f82b03d9500.png"
+										alt="review"
+									/>
+								</>
+							))}
+					</div>
 				</div>
 				<div className="space-y-3">
 					<p className="text-sm text-gray-400">

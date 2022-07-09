@@ -15,6 +15,7 @@ import { useQuestionData } from "Hooks/useQuestions";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts, STATUS } from "../Redux/Slices/ProductSlice";
+import { useState } from "react";
 
 function ProductDetails() {
 	// const dispatch = useDispatch();
@@ -38,17 +39,6 @@ function ProductDetails() {
 		isError: questionError,
 		isSuccess: questionSuccess,
 	} = useQuestionData(id);
-
-	// useEffect(() => {
-	// 	if(status === STATUS.IDLE) {
-	// 		dispatch(fetchProducts());
-	// 	}
-	// }, [status, dispatch]);
-
-	// console.log(id)
-	// if(isSuccess) {
-	// 	console.log(products.data)
-	// }
 
 	const productDetails = {
 		images: [
@@ -158,7 +148,7 @@ function ProductDetails() {
 					))} */}
 
 					{/* Create Reviews And Ratings */}
-					<CreateReviewsAndRatings />
+					<CreateReviewsAndRatings productId={id} />
 					<div className="space-y-14 px-4 pt-10">
 						{reviews?.data.length
 							? reviews.data.map((review) => (

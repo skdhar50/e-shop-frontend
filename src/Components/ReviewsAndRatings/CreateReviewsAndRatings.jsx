@@ -1,9 +1,49 @@
 import MultipleImageUpload from "Components/Form/MultipleImageUpload";
 import { useState } from "react";
 import StarRating from "./StarRating";
+import { usePostReview } from "Hooks/useReviews";
 
-function ReviewsAndRatings() {
-	const [showReviewForm, setShowReviewForm] = useState(true);
+function ReviewsAndRatings({productId}) {
+	const [showReviewForm, setShowReviewForm] = useState(false);
+
+	const [review, setReview] = useState("");
+	const [files, setFiles] = useState([]);
+	const [rating, setRating] = useState(0);
+	const { mutate : createReviewMutation } = usePostReview(productId);
+
+	const handleReview = (review) => {
+		setReview(review);
+	};
+
+	const handleRating = (rating) => {
+		setRating(rating);
+	};
+
+	const handleFiles = (file) => {
+		setFiles([...files, ...file]);
+	};
+
+	const handleRemoveFile = (e, index) => {
+		e.preventDefault();
+		const newFiles = [...files];
+		newFiles.splice(index, 1);
+		setFiles(newFiles);
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+
+		let formData = new FormData();
+		formData.set('review', review);
+		formData.set('rating', rating);
+		// formData.set('photos', files[0]);
+		files.forEach(file => {
+			formData.append('photos', file)
+		})
+		// console.log(formData.get('photos'));
+		createReviewMutation({value: formData, id: productId})
+		// console.log(files);
+	};
 
 	const handleShowReviewForm = () => {
 		setShowReviewForm(!showReviewForm);
@@ -34,23 +74,35 @@ function ReviewsAndRatings() {
 				</div>
 				{showReviewForm && (
 					<form
-						onSubmit={(e) => e.preventDefault()}
+						onSubmit={handleSubmit}
 						action=""
+						encType="multipart/form-data"
 						className="border border-gray-300 py-6 px-2 md:p-4 space-y-6"
 					>
+						{/* Review */}
 						<textarea
-							name=""
-							id=""
 							rows="3"
+							value={review}
+							onChange={(e) => handleReview(e.target.value)}
 							className="w-full resize-none border-0 border-b border-b-gray-300 outline-none p-1 md:p-2 focus:ring-0 placeholder:text-sm md:placeholder:text-base placeholder:text-slate-400"
 							placeholder="Please write your honest opinion and give a rating"
 						/>
 						<div className="flex flex-col space-y-4 md:flex-row md:space-x-6 items-center">
-							<StarRating />
+							{/* Rating */}
+							<StarRating handleRating={handleRating} rating={rating} />
 
-							<MultipleImageUpload />
+							{/* Image upload */}
+							<MultipleImageUpload
+								handleFiles={handleFiles}
+								handleRemoveFile={handleRemoveFile}
+								files={files}
+							/>
 
-							<button className="w-full md:w-fit border px-6 py-2 h-fit border-indigo-500 text-indigo-500 hover:bg-indigo-500 hover:text-white">
+							<button
+								type="submit"
+								className="w-full md:w-fit border px-6 py-2 h-fit border-indigo-500 text-indigo-500 hover:bg-indigo-500 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+								disabled={rating === 0 || review.length < 4}
+							>
 								Submit
 							</button>
 						</div>
