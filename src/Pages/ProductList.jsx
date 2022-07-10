@@ -16,6 +16,8 @@ function ProductList() {
 	const [filters, setFilters] = useState({
 		category: [],
 		brand: [],
+		order: "",
+		sortBy: "",
 	});
 
 	const [openFilter, setOpenFilter] = useState(false);
@@ -39,6 +41,7 @@ function ProductList() {
 					<RightFilterSmall
 						isOpen={openFilter}
 						handleRightFilter={handleRightFilter}
+						handleFilter={(filter) => handleFilter(filter)}
 					/>
 
 					<div className="flex-grow border p-3 sm:p-6 md:p-4 lg:p-6 bg-white">

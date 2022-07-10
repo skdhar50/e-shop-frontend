@@ -1,9 +1,13 @@
 import React from "react";
+import { format } from "date-fns";
+import {REVIEW_URL} from "utilities/config.utility";
+import ReviewStar from "./ReviewStar";
 
-function CustomersReviews() {
+function CustomersReviews({ review }) {
+	const { user, review: content, rating, photos, createdAt } = review;
 	return (
 		<>
-			<div className="space-y-4">
+			<div className="space-y-4 pt-6">
 				<div className="flex space-x-6">
 					<img
 						src="/images/users/31.jpg"
@@ -14,31 +18,40 @@ function CustomersReviews() {
 						<div className="flex flex-col md:flex-row md:space-x-4 space-y-1 md:space-y-0">
 							<p className="space-x-1">
 								<span className="text-gray-500">By</span>
-								<span className="font-[600] text-gray-700">
-									Sanjoy Kumar Dhar,
-								</span>
+								<span className="font-[600] text-gray-700">{user.name}</span>
 							</p>
-							<p className="text-gray-500 text-sm md:text-base">22 January 2022</p>
+							<p className="text-gray-500 text-sm md:text-base">
+								{format(new Date(createdAt), "PP")}
+							</p>
 						</div>
 						<div className="flex space-x-6 text-sm md:text-base">
-							<img src="/images/icons/stars.svg" alt="" className="w-16" />
-							<p className="text-green-600 flex items-center justify-center space-x-2">
+							<ReviewStar rating={rating} />
+							<p className="text-green-600 text-xs md:text-sm flex items-center justify-center space-x-2">
 								<span className="">&#10004;</span>
 								<span>Verified Purchase</span>
 							</p>
 						</div>
 					</div>
 				</div>
-				<div className="">
-					<p className="text-sm md:text-base">
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio
-						nesciunt neque ad ipsum ducimus, natus nobis impedit excepturi eum
-						nulla. Tempore optio, autem et natus soluta ea minus ducimus saepe.
-					</p>
+				<div className="space-y-2">
+					<p className="text-sm md:text-base">{content}</p>
+					<div className="grid grid-cols-5 gap-2 w-full md:w-2/3 xl:w-1/3">
+						{photos &&
+							photos.map((photo, index) => (
+								<>
+									<img
+										src={`${REVIEW_URL}/${photo}`}
+										alt="review"
+										key={index}
+										className="aspect-square max-h-20 cursor-pointer"
+									/>
+								</>
+							))}
+					</div>
 				</div>
 				<div className="space-y-3">
-					<p className="text-sm text-gray-400">
-						3 out of 4 people found this review helpful. Was this review helpful
+					<p className="text-xs md:text-sm text-gray-500">
+						3 out of 4 people found this review helpful. Is this review helpful
 						to you?
 					</p>
 					<div className="flex items-center space-x-5">

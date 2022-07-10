@@ -91,12 +91,10 @@ function ConfirmOrder() {
 			"zone",
 		]);
 		setSelectedAddress(obj);
-		console.log(obj);
 	};
 
 	const handleSelectPayment = (e) => {
 		setSelectedPayment(e.target.value);
-		console.log(e.target.value);
 	};
 
 	const handleOpenModal = () => {
@@ -112,12 +110,14 @@ function ConfirmOrder() {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
+		if(!isValidToProced())
+			return;
+
 		const temp = {
 			shipping: selectedAddress,
 			payment: selectedPayment,
 			discount: 0,
 		};
-		console.log(temp);
 		placeOrderMutation(temp);
 	};
 
@@ -128,7 +128,7 @@ function ConfirmOrder() {
 			)}
 			<div className="md:px-6 xl:container antialiased">
 				<div className="pb-14 space-y-4 xl:space-y-0 md:pb-0 xl:flex xl:space-x-6 mt-10">
-					<form method="POST" onSubmit={handleSubmit}>
+					<form method="POST" encType="multipart/form-data" onSubmit={handleSubmit}>
 						<div className="md:flex-grow bg-white drop-shadow-sm space-y-8 border md:shadow-md p-3 md:p-6">
 							<div className="space-y-4">
 								<p className="text-xl md:text-2xl font-[600] text-gray-600">
@@ -136,7 +136,7 @@ function ConfirmOrder() {
 								</p>
 								<div className="">
 									<ul className="space-y-2 p-2">
-										{shippingAddress?.data.map((address, index) => (
+										{shippingAddress?.data.map((address) => (
 											<ShippingAddressCard
 												address={address}
 												key={address._id}

@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { request } from "utilities/axios.utility";
 
 const placeOrder = (data) => {
@@ -11,6 +11,17 @@ const placeOrder = (data) => {
 			shipping: data.shipping,
 		},
 	});
+};
+
+const getOrderList = () => {
+	return request({
+		url: "/order",
+		method: "GET",
+	});
+};
+
+export const useOrderData = () => {
+	return useQuery("orders", getOrderList);
 };
 
 export const usePlaceOrderData = () => {

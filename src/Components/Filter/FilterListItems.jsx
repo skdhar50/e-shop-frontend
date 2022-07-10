@@ -7,18 +7,25 @@ function FilterListItems({ handleFilter }) {
 	const [checked, setChecked] = useState({
 		category: [],
 		brand: [],
+		sortBy: "createdAt",
+		order: "",
 	});
 
 	const checkedItems = { ...checked };
 
 	const handleToggle = (value, title) => {
-		const currentIndex = checked[title].indexOf(value);
-		if (currentIndex === -1) {
-			checkedItems[title].push(value);
+		if(title === "category" || title === "brand") {
+			const currentIndex = checked[title].indexOf(value);
+			if (currentIndex === -1) {
+				checkedItems[title].push(value);
+			} else {
+				checkedItems[title].splice(currentIndex, 1);
+			}
+			setChecked(checkedItems);
 		} else {
-			checkedItems[title].splice(currentIndex, 1);
+			checkedItems["sortBy"] = title;
+			checkedItems["order"] = value;
 		}
-		setChecked(checkedItems);
 		handleFilter(checkedItems);
 	};
 
@@ -38,53 +45,26 @@ function FilterListItems({ handleFilter }) {
 		isError: brandError,
 	} = useBrandData();
 
-	const data = [
-		{
-			title: "Categories",
-			elements: [
-				{ name: "category1", label: "Category 1" },
-				{ name: "category2", label: "Category 2" },
-				{ name: "category3", label: "Category 3" },
-				{ name: "category4", label: "Category 4" },
-				{ name: "category5", label: "Category 5" },
-				{ name: "category6", label: "Category 6" },
-			],
-		},
-		{
-			title: "Brands",
-			elements: [
-				{ name: "brand1", label: "Brand 1" },
-				{ name: "brand2", label: "Brand 2" },
-				{ name: "brand3", label: "Brand 3" },
-				{ name: "brand4", label: "Brand 4" },
-				{ name: "brand5", label: "Brand 5" },
-				{ name: "brand6", label: "Brand 6" },
-			],
-		},
-		{
-			title: "Warrenty Type",
-			elements: [
-				{ name: "warrenty1", label: "Warrenty 1" },
-				{ name: "warrenty2", label: "Warrenty 2" },
-				{ name: "warrenty3", label: "Warrenty 3" },
-			],
-		},
-	];
-
 	return (
 		<>
 			<div className="border-b pb-4 space-y-1">
 				<p className="pb-2 text-lg font-[600] text-gray-600">Sort By</p>
 				<div className="flex flex-col space-y-2">
 					<div className="flex justify-start items-center">
-						<input type="radio" name="rating" className="mr-2" />
+						<input
+							type="radio"
+							name="sorting"
+							onChange={() => handleToggle("", "createdAt")}
+							className="mr-2"
+						/>
 						<p className="">Rating</p>
 					</div>
 					<div className="flex justify-start items-center">
 						<input
 							type="radio"
-							name="price1"
+							name="sorting"
 							value="asce"
+							onChange={() => handleToggle("", "unitPrice")}
 							className="mr-2"
 						/>
 						<p className="">Price (Low to High)</p>
@@ -92,8 +72,9 @@ function FilterListItems({ handleFilter }) {
 					<div className="flex justify-start items-center">
 						<input
 							type="radio"
-							name="price2"
+							name="sorting"
 							value="desc"
+							onChange={() => handleToggle("desc", "unitPrice")}
 							className="mr-2"
 						/>
 						<p className="">Price (High to Low)</p>

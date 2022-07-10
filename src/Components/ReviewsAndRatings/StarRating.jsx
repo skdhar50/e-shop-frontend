@@ -1,7 +1,6 @@
 import { useState } from "react";
 
-function StarRating() {
-	const [rating, setRating] = useState(0);
+function StarRating({ handleRating, rating }) {
 	const [hover, setHover] = useState(0);
 	return (
 		<div>
@@ -11,7 +10,7 @@ function StarRating() {
 					<button
 						type="button"
 						key={index}
-						onClick={() => setRating(index)}
+						onClick={() => handleRating(index)}
 						className={
 							(rating || hover) >= index ? "text-[#E96115]" : "text-gray-500"
 						}
