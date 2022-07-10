@@ -7,7 +7,7 @@ function CustomersReviews({ review }) {
 	const { user, review: content, rating, photos, createdAt } = review;
 	return (
 		<>
-			<div className="space-y-4">
+			<div className="space-y-4 pt-6">
 				<div className="flex space-x-6">
 					<img
 						src="/images/users/31.jpg"
@@ -25,9 +25,8 @@ function CustomersReviews({ review }) {
 							</p>
 						</div>
 						<div className="flex space-x-6 text-sm md:text-base">
-							{/* <img src="/images/icons/stars.svg" alt="" className="w-16" /> */}
 							<ReviewStar rating={rating} />
-							<p className="text-green-600 flex items-center justify-center space-x-2">
+							<p className="text-green-600 text-xs md:text-sm flex items-center justify-center space-x-2">
 								<span className="">&#10004;</span>
 								<span>Verified Purchase</span>
 							</p>
@@ -51,8 +50,8 @@ function CustomersReviews({ review }) {
 					</div>
 				</div>
 				<div className="space-y-3">
-					<p className="text-sm text-gray-400">
-						3 out of 4 people found this review helpful. Was this review helpful
+					<p className="text-xs md:text-sm text-gray-500">
+						3 out of 4 people found this review helpful. Is this review helpful
 						to you?
 					</p>
 					<div className="flex items-center space-x-5">

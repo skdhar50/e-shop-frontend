@@ -4,7 +4,6 @@ import ProductSummary from "Components/ProductDetails/ProductSummary";
 import SideSection from "Components/ProductDetails/SideSection";
 import CreateReviewsAndRatings from "Components/ReviewsAndRatings/CreateReviewsAndRatings";
 import CustomersReviews from "Components/ReviewsAndRatings/CustomersReviews";
-import ProductListCarousel from "Components/SliderAndCarousel/ProductListCarousel";
 import CustomersQA from "Components/ProductQA/CustomersQA";
 import Layout from "Components/Layout";
 import { Outlet, useParams } from "react-router-dom";
@@ -13,14 +12,7 @@ import { useReviewData } from "Hooks/useReviews";
 import { useQuestionData } from "Hooks/useQuestions";
 import { isAuthenticated } from "utilities/auth.utility";
 
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchProducts, STATUS } from "../Redux/Slices/ProductSlice";
-import { useState } from "react";
-
 function ProductDetails() {
-	// const dispatch = useDispatch();
-	// const { data: products, status } = useSelector((state) => state.product);
 	const { id } = useParams();
 	const {
 		data: products,
@@ -93,36 +85,6 @@ function ProductDetails() {
 			"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima autem et voluptatum nam nisi veritatis blanditiis iste doloribus totam est. Reprehenderit id expedita consectetur corrupti, neque similique nam quaerat, dignissimos minus sit excepturi quasi, saepe dolore facilis nulla! Assumenda harum optio, quae saepe maxime placeat quia ad eveniet rerum nulla quaerat accusantium repudiandae velit quisquam officiis voluptate totam id. Id perferendis eos repudiandae consectetur nam, et velit qui. Asperiores laborum veniam soluta enim laudantium iste commodi autem modi est exercitationem sunt quisquam illo harum eos, eum sequi qui! Nobis odit ratione repudiandae, quis doloremque pariatur inventore enim nisi illum, doloribus amet. Quam corporis quod nam excepturi eveniet natus voluptatibus omnis, at tenetur harum cumque in deserunt perspiciatis, neque mollitia, dicta soluta dolorum sapiente possimus! Ullam, adipisci sequi. Facere ea iste quos, impedit cupiditate iusto est labore sint corrupti deleniti odio magni accusamus illo unde culpa! Nostrum molestiae excepturi, aspernatur quas mollitia perferendis reiciendis qui eveniet aut maiores distinctio delectus temporibus officiis cumque inventore incidunt dolorem veniam consectetur sint omnis illo? Quis architecto molestias adipisci rem. Ut eum sunt, quod esse corporis necessitatibus animi natus tempora, dolores magni vel modi distinctio ea nobis ipsum, iure mollitia nulla. Magnam at animi expedita.",
 	};
 
-	const customersQAs = [
-		{
-			question: "How do I get a refund?",
-			customer: "Taher Bin Faizard",
-			queDate: "12 Dec 2020",
-			answer:
-				"Sorry, we don't have a refund policy yet. You can however contact us for help.",
-			ansBy: "Admin",
-			ansDate: "12 Dec 2020",
-		},
-		{
-			question: "How do I get a refund?",
-			customer: "Taher Bin Faizard",
-			queDate: "12 Dec 2020",
-			answer:
-				"Sorry, we don't have a refund policy yet. You can however contact us for help.",
-			ansBy: "Admin",
-			ansDate: "12 Dec 2020",
-		},
-		{
-			question: "How do I get a refund?",
-			customer: "Taher Bin Faizard",
-			queDate: "12 Dec 2020",
-			answer:
-				"Sorry, we don't have a refund policy yet. You can however contact us for help.",
-			ansBy: "Admin",
-			ansDate: "12 Dec 2020",
-		},
-	];
-
 	if (productIsLoading) {
 		return <div className="">Loading</div>;
 	}
@@ -139,7 +101,7 @@ function ProductDetails() {
 					<SideSection returnDays={7} deliveryCharge={50} />
 				</div>
 
-				<div className="mt-4 pb-16 bg-white drop-shadow space-y-10 divide-y-2 border border-gray-300 px-3 md:px-8">
+				<div className="mt-4 pb-16 space-y-6 bg-white drop-shadow  divide-y-2 border border-gray-300 px-3 md:px-8">
 					{/* Product Summary */}
 					<ProductSummary {...productSummary} />
 
@@ -150,15 +112,12 @@ function ProductDetails() {
 
 					{/* Create Reviews And Ratings */}
 					{isAuthenticated() && <CreateReviewsAndRatings productId={id} />}
-					<div className="space-y-14 px-4 pt-10">
+					<div className="space-y-8 px-4 pt-5 divide-y-[1px]">
 						{reviews?.data.length
 							? reviews.data.map((review) => (
 									<CustomersReviews review={review} key={review._id} />
 							  ))
 							: "No reviews available."}
-						{/* Customers Reviews */}
-						{/* <CustomersReviews />
-						<CustomersReviews /> */}
 					</div>
 
 					{isAuthenticated() ? (
