@@ -1,12 +1,5 @@
 import { useQuery } from "react-query";
-import { request } from "utilities/axios.utility";
-
-const getAllBrand = () => {
-	return request({
-		url: "/brand",
-		method: "GET",
-	});
-};
+import { getAllBrand } from "Requests/BrandRequest";
 
 export const useBrandData = () => {
 	return useQuery("brands", getAllBrand, {

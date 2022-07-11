@@ -1,33 +1,10 @@
 import { useQuery, useMutation, useQueryClient } from "react-query";
-import { request } from "utilities/axios.utility";
-
-const getWishlist = () => {
-	return request({
-		url: "/wishlist",
-		method: "GET",
-	});
-};
-
-const addToWishlist = (item) => {
-	return request({
-		url: `/wishlist/${item}`,
-		method: "POST",
-	});
-};
-
-const removeFromWishlist = (item) => {
-	return request({
-		url: `/wishlist/${item}`,
-		method: "DELETE",
-	});
-};
-
-const moveToCart = (item) => {
-	return request({
-		url: `/wishlist/${item}`,
-		method: "PUT",
-	});
-};
+import {
+	moveToCart,
+	removeFromWishlist,
+	getWishlist,
+	addToWishlist,
+} from "Requests/WishRequest";
 
 export const useMoveToCart = () => {
 	const queryClient = useQueryClient();
@@ -47,8 +24,10 @@ export const useRemoveFromWishlist = () => {
 	});
 };
 
-export const useWishlistData = () => {
-	return useQuery("wishlist", getWishlist);
+export const useWishlistData = (isEnabled) => {
+	return useQuery("wishlist", getWishlist, {
+		enabled: isEnabled
+	});
 };
 
 export const useAddToWishlist = () => {

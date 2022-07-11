@@ -12,12 +12,9 @@ function CartIcon() {
 		isError,
 	} = useCartData(isAuthenticated());
 
-	// console.log(isAuthenticated());
-
 	return (
 		<Link to="/cart">
 			<div className="relative">
-				{/* <img src="/images/icons/cart.svg" alt="" className="md:w-[40px]" /> */}
 				<div className="">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"

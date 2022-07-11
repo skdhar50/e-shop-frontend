@@ -72,7 +72,7 @@ function ProductCard({ product }) {
 							onClick={() => handleAddToWishlist(product)}
 							className="p-2 md:p-[0.625rem] rounded-full border border-[#E96115] hover:bg-[#E96115] stroke-[#E96115] hover:stroke-white"
 						>
-							<HeartIcon />
+							<HeartIcon className="w-[0.94rem] md:w-[1rem] h-fit" />
 						</button>
 						<button
 							onClick={() => handleAddToCart(product)}
