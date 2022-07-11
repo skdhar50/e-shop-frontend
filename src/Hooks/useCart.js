@@ -1,51 +1,12 @@
 import { useQuery, useMutation, useQueryClient } from "react-query";
-import { request } from "utilities/axios.utility";
-
-const getAllCartItems = () => {
-	return request({
-		url: "/cart",
-		method: "GET",
-	});
-};
-
-const addToCart = (item) => {
-	return request({
-		url: "/cart",
-		method: "POST",
-		data: { product: item },
-	});
-};
-
-const selectAll = (flag) => {
-	return request({
-		url: "/cart/select_all",
-		method: "PUT",
-		data: { flag: flag },
-	});
-};
-
-const selectSingle = (item) => {
-	return request({
-		url: "/cart/select_one",
-		method: "PUT",
-		data: { _id: item._id,flag: item.flag },
-	});
-}
-
-const updateCartItem = (item) => {
-	return request({
-		url: "/cart",
-		method: "PUT",
-		data: { _id: item._id, count: item.count },
-	});
-};
-
-const deleteCartItem = (item) => {
-	return request({
-		url: `/cart/${item}`,
-		method: "DELETE",
-	});
-};
+import {
+	selectAll,
+	selectSingle,
+	getAllCartItems,
+	addToCart,
+	updateCartItem,
+	deleteCartItem,
+} from "Requests/CartRequest";
 
 export const useSelectSingle = () => {
 	const queryClient = useQueryClient();
@@ -58,7 +19,7 @@ export const useSelectSingle = () => {
 			console.error(err);
 		},
 	});
-}
+};
 
 export const useSelectAll = () => {
 	const queryClient = useQueryClient();
@@ -75,7 +36,7 @@ export const useSelectAll = () => {
 
 export const useCartData = (isEnabled) => {
 	return useQuery("cartItems", getAllCartItems, {
-		enabled: isEnabled
+		enabled: isEnabled,
 	});
 };
 

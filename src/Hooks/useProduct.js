@@ -1,32 +1,10 @@
 import { useQuery, useInfiniteQuery } from "react-query";
-import { request } from "utilities/axios.utility";
-
-const fetchProducts = () => {
-	return request({ url: "/product", method: "GET" });
-};
-
-const fetchProductsWithFilter = (filters) => {
-	const { category, brand, sortBy, order } = filters;
-	return request({
-		url: "/product",
-		method: "POST",
-		data: { sortBy: sortBy, order: order, filters: { category, brand } },
-	});
-};
-
-const fetchProductDetails = ({ queryKey }) => {
-	return request({
-		url: `/product/${queryKey[1]}`,
-		method: "GET",
-	});
-};
-
-const searchProduct = ({ queryKey }) => {
-	return request({
-		url: `/product/search/${queryKey[1]}`,
-		method: "GET",
-	});
-};
+import {
+	fetchProductDetails,
+	fetchProductsWithFilter,
+	fetchProducts,
+	searchProduct,
+} from "Requests/ProductRequest";
 
 // Custom Hooks for Product Fetching
 export const useProductData = () => {

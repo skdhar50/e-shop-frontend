@@ -5,16 +5,24 @@ export const fetchProducts = () => {
 };
 
 export const fetchProductsWithFilter = (filters) => {
+	const { category, brand, sortBy, order } = filters;
 	return request({
-		url: "/products",
+		url: "/product",
 		method: "POST",
-		data: { filters: filters },
+		data: { sortBy: sortBy, order: order, filters: { category, brand } },
 	});
 };
 
 export const fetchProductDetails = ({ queryKey }) => {
 	return request({
-		url: `/products/${queryKey[1]}`,
+		url: `/product/${queryKey[1]}`,
+		method: "GET",
+	});
+};
+
+export const searchProduct = ({ queryKey }) => {
+	return request({
+		url: `/product/search/${queryKey[1]}`,
 		method: "GET",
 	});
 };

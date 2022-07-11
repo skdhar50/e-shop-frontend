@@ -1,35 +1,10 @@
 import { useQuery, useMutation, useQueryClient } from "react-query";
-import { request } from "utilities/axios.utility";
-
-const fetchAddresses = () => {
-	return request({
-		url: "/shippingAddress",
-		method: "GET",
-	});
-};
-
-const storeShippingAddress = (data) => {
-	return request({
-		url: "/shippingAddress",
-		method: "POST",
-		data: data,
-	});
-};
-
-const deleteShippingAddress = (address) => {
-	return request({
-		url: `/shippingAddress/${address}`,
-		method: "DELETE",
-	});
-};
-
-const updateShippingAddress = (address) => {
-	return request({
-		url: `/shippingAddress/${address}`,
-		method: "PUT",
-		data: address,
-	});
-};
+import {
+	fetchAddresses,
+	storeShippingAddress,
+	deleteShippingAddress,
+	updateShippingAddress,
+} from "Requests/ShippingAddressRequest";
 
 export const useShippingAddressData = () => {
 	return useQuery("shippingAddress", fetchAddresses);

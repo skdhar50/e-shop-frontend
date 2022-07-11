@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useAtom } from "jotai";
 import { openLoginModal } from "Jotai/ModalState";
-import {isAuthenticated} from "utilities/auth.utility";
+import { isAuthenticated } from "utilities/auth.utility";
 
 function TopBarLarge() {
 	const [, isOpenLoginModal] = useAtom(openLoginModal);
@@ -10,7 +10,7 @@ function TopBarLarge() {
 		left: [
 			{
 				title: "Track Order",
-				url: "/order-details",
+				url: "/profile/orders",
 				icon: "/images/icons/track.svg",
 			},
 			{ title: "Services", url: "/", icon: "/images/icons/service.svg" },

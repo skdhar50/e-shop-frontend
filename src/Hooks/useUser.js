@@ -1,34 +1,10 @@
 import { useQuery, useMutation } from "react-query";
-import { request } from "utilities/axios.utility";
-
-const login = (user) => {
-	return request({
-		url: "user",
-		method: "POST",
-		data: { email: user.email, password: user.password},
-	});
-};
-
-const getProfile = ({ queryKey }) => {
-	return request({
-		url: `/user/${queryKey[1]}`,
-		method: "GET",
-	});
-};
-
-const getOrders = ({ queryKey }) => {
-	return request({
-		url: `/orders/${queryKey[1]}`,
-		method: "GET",
-	});
-};
-
-const getWishList = ({ queryKey }) => {
-	return request({
-		url: `/wishlist/${queryKey[1]}`,
-		method: "GET",
-	});
-};
+import {
+	getOrders,
+	getWishList,
+	getProfile,
+	login,
+} from "Requests/UserRequest";
 
 export const useUserData = (id) => {
 	return useQuery(["user", id], getProfile);

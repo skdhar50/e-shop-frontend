@@ -2,14 +2,14 @@ import { request } from "utilities/axios.utility";
 
 export const fetchAddresses = () => {
 	return request({
-		url: "/shipping",
+		url: "/shippingAddress",
 		method: "GET",
 	});
 };
 
 export const storeShippingAddress = (data) => {
 	return request({
-		url: "/shipping",
+		url: "/shippingAddress",
 		method: "POST",
 		data: data,
 	});
@@ -17,14 +17,14 @@ export const storeShippingAddress = (data) => {
 
 export const deleteShippingAddress = (address) => {
 	return request({
-		url: `/shipping/${address}`,
+		url: `/shippingAddress/${address}`,
 		method: "DELETE",
 	});
 };
 
 export const updateShippingAddress = (address) => {
 	return request({
-		url: `/shipping/${address}`,
+		url: `/shippingAddress/${address}`,
 		method: "PUT",
 		data: address,
 	});
