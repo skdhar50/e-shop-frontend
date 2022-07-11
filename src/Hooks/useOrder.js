@@ -1,27 +1,18 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { request } from "utilities/axios.utility";
-
-const placeOrder = (data) => {
-	return request({
-		url: "/order",
-		method: "POST",
-		data: {
-			paymentMethod: data.payment,
-			discount: data.discount,
-			shipping: data.shipping,
-		},
-	});
-};
-
-const getOrderList = () => {
-	return request({
-		url: "/order",
-		method: "GET",
-	});
-};
+import {
+	getOrderList,
+	getOrderDetails,
+	placeOrder,
+} from "Requests/OrderRequest";
 
 export const useOrderData = () => {
 	return useQuery("orders", getOrderList);
+};
+
+export const useOrderDetails = (id) => {
+	return useQuery(["order", id], getOrderDetails, {
+		enabled: id !== undefined,
+	});
 };
 
 export const usePlaceOrderData = () => {

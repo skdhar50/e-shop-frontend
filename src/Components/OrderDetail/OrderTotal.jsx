@@ -1,4 +1,14 @@
-function OrderTotal({ totalItems, subTotal, discount, shipping, payable, isPaid }) {
+function OrderTotal({ orderTotal }) {
+	const {
+		totalItems,
+		subTotal,
+		discount,
+		shipping,
+		payable,
+		isPaid,
+		paymentStatus,
+	} = orderTotal;
+
 	return (
 		<div className="flex md:justify-end pt-5 border-t-2 px-2 md:px-0">
 			<div className="w-full text-sm md:text-base md:w-[350px] space-y-2">
@@ -26,7 +36,11 @@ function OrderTotal({ totalItems, subTotal, discount, shipping, payable, isPaid 
 					<p className="">Payment Status: </p>
 					{isPaid ? (
 						<p className="">
-							Paid <span className="text-gray-600 text-xs md:text-sm">(By BiKash)</span>
+							{paymentStatus}
+							{/* Paid{" "}
+							<span className="text-gray-600 text-xs md:text-sm">
+								(By BiKash)
+							</span> */}
 						</p>
 					) : (
 						<p className="">Unpaid</p>

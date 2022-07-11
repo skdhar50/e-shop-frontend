@@ -1,15 +1,12 @@
-function OrderSummaryProductDetails({
-	name,
-	description,
-	image,
-	quantity,
-	price,
-}) {
+function OrderSummaryProductDetails({ cartItem }) {
+	// console.log(cartItem[0]);
+	const { product, count: quantity } = cartItem;
+	const { name, unitPrice: price, description, photos } = product;
 	return (
 		<div className="pt-6 space-y-4 md:space-y-0">
 			<div className="flex items-top space-x-5 md:justify-around">
 				<img
-					src={image}
+					src={photos[0]}
 					alt=""
 					className="shrink-0 w-[5rem] h-[6rem] md:w-[7.5rem] md:h-[8.75rem] object-fill"
 				/>
