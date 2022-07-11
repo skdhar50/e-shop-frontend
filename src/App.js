@@ -25,8 +25,8 @@ function App() {
 	const location = useLocation();
 	const background = location.state && location.state.background;
 
-	const [login,] = useAtom(loginModal);
-	const [register,] = useAtom(registerModal);
+	const [login] = useAtom(loginModal);
+	const [register] = useAtom(registerModal);
 
 	return (
 		<Provider store={store}>
@@ -60,7 +60,7 @@ function App() {
 					</Route>
 
 					<Route path="/*" element={<PrivateRoute />}>
-						<Route path="order-details" element={<OrderDetails />} />
+						<Route path="order-details/:id" element={<OrderDetails />} />
 						<Route path="cart" element={<Cart />} />
 						<Route path="confirm-order" element={<ConfirmOrder />} />
 						<Route path="profile" element={<Profile />}>

@@ -13,12 +13,12 @@ export function CartIcon() {
 	);
 }
 
-export function HeartIcon() {
+export function HeartIcon({className}) {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			aria-hidden="true"
-			className="w-[0.94rem] md:w-[1rem] h-fit"
+			className={className}
 			viewBox="0 0 24 24"
 		>
 			<path

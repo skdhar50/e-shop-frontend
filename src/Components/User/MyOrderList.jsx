@@ -1,5 +1,6 @@
 import { useOrderData } from "Hooks/useOrder";
 import { format } from "date-fns";
+import { Link } from "react-router-dom";
 
 function MyOrderList() {
 	const { data: orders, isLoading, isError, error, isSuccess } = useOrderData();
@@ -31,9 +32,11 @@ function MyOrderList() {
 							<p className="pr-4 text-sm sm:text-base text-gray-600">
 								You ordered {order.cartItem.length} product(s)
 							</p>
-							<p className="underline italic cursor-pointer text-sm sm:text-base text-blue-600">
-								View More
-							</p>
+							<Link to={`/order-details/${order._id}`}>
+								<p className="underline italic cursor-pointer text-sm sm:text-base text-blue-600">
+									View More
+								</p>
+							</Link>
 						</div>
 						<div className="grid grid-cols-4 gap-2 sm:gap-6 text-gray-600">
 							{order?.cartItem.map((item) => (

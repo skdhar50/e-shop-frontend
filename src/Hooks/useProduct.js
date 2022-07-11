@@ -21,9 +21,22 @@ const fetchProductDetails = ({ queryKey }) => {
 	});
 };
 
+const searchProduct = ({ queryKey }) => {
+	return request({
+		url: `/product/search/${queryKey[1]}`,
+		method: "GET",
+	});
+};
+
 // Custom Hooks for Product Fetching
 export const useProductData = () => {
 	return useQuery("products", fetchProducts);
+};
+
+export const useProductSearch = (key, isEnabled) => {
+	return useQuery(["search", key], searchProduct, {
+		enabled: isEnabled,
+	});
 };
 
 export const useProductDetails = (id) => {

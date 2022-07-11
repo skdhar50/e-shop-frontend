@@ -2,58 +2,21 @@ import DelivaryAddress from "./DelivaryAddress";
 import OrderSummaryProductDetails from "./OrderSummaryProductDetails";
 import OrderTotal from "./OrderTotal";
 
-function OrdersSummary() {
-	const products = [
-		{
-			name: "Gildan Ultra Cotton T‑shirt",
-			description:
-				"A great look. Priced right. It's no wonder our customers love this 'ultra' popular....",
-			quantity: 1,
-			price: 300,
-			image: "/images/products/1.jpg",
-		},
-		{
-			name: "Gildan Ultra Cotton T‑shirt",
-			description:
-				"A great look. Priced right. It's no wonder our customers love this 'ultra' popular....",
-			quantity: 2,
-			price: 300,
-			image: "/images/products/product2.jpg",
-		},
-		{
-			name: "Gildan Ultra Cotton T‑shirt",
-			description:
-				"A great look. Priced right. It's no wonder our customers love this 'ultra' popular....",
-			quantity: 1,
-			price: 1300,
-			image: "/images/products/1.jpg",
-		},
-		{
-			name: "Gildan Ultra Cotton T‑shirt",
-			description:
-				"A great look. Priced right. It's no wonder our customers love this 'ultra' popular....",
-			quantity: 1,
-			price: 300,
-			image: "/images/products/product2.jpg",
-		},
-	];
+function OrdersSummary({ order }) {
+	const { cartItem, address, discount, paymentStatus } = order[0];
 
 	const orderTotal = {
-		totalItems: products.length,
-		subTotal: products.reduce(
-			(acc, curr) => acc + curr.price * curr.quantity,
+		totalItems: cartItem?.length,
+		subTotal: cartItem?.reduce(
+			(acc, curr) => acc + curr.product.unitPrice * curr.count,
 			0
 		),
-		discount: 30,
+		discount: discount,
 		shipping: 50,
 		payable: 0,
 		isPaid: true,
+		paymentStatus: paymentStatus,
 	};
-
-	const deliveryAddress = {
-		address: "Agrabad, Chittagong, Bangladesh, Agrabad, Chittagong, Bangladesh",
-		phone: "0123456789",
-	}
 
 	return (
 		<div className="px-4 xl:container">
@@ -66,17 +29,20 @@ function OrdersSummary() {
 					</div>
 
 					<div className="space-y-6 divide-y px-4">
-						{products.map((product, index) => (
-							<OrderSummaryProductDetails key={index} {...product} />
+						{cartItem?.map((product, index) => (
+							<OrderSummaryProductDetails
+								key={product._id}
+								cartItem={product}
+							/>
 						))}
 					</div>
 
 					<div className="md:pr-4">
-						<OrderTotal {...orderTotal} />
+						<OrderTotal orderTotal={orderTotal} />
 					</div>
 				</div>
 
-				<DelivaryAddress {...deliveryAddress} />
+				<DelivaryAddress address={address} />
 			</div>
 		</div>
 	);
