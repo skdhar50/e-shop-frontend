@@ -26,6 +26,7 @@ function CartContainer({ shipping = 50 }) {
 	const { mutate: deleteCartItemMutation } = useDeleteCartItem();
 	const [isAllSelected, setIsAllSelected] = useState(true);
 
+
 	// if (isSuccess) {
 	// 	cartItems?.data.map((item) => {
 	// 		if (!item.isSelected) {

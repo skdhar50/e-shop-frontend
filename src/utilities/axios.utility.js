@@ -1,5 +1,6 @@
 import axios from "axios";
 import { BASE_URL } from "./config.utility";
+import { toast } from "react-toastify";
 
 const axiosInstance = axios.create({
 	baseURL: BASE_URL,
@@ -15,12 +16,28 @@ export const request = ({ ...options }) => {
 	] = `Bearer ${localStorage.getItem("token")}`;
 
 	const onSuccess = (response) => {
-		return response;
+		// console.log(response);
+		if (response.data.message) {
+			toast.success(response.data.message);
+		}
+		if (response.data) return response.data;
 	};
 
 	const onError = (error) => {
 		if (error.response) {
-			console.log(error.response.data)
+			switch (error.response.data.type) {
+				case "error":
+					toast.error(error.response.data.message);
+					break;
+				case "warn":
+					toast.warn(error.response.data.message);
+					break;
+				default:
+					toast.error(error.response.data.message);
+					break;
+			}
+			// console.log(error.response.status);
+			// toast.warn(error.response.data);
 			// if (error.response.status === 401) {
 			// 	error.response.data.message = "Unauthorized";
 			// 	localStorage.removeItem("token");

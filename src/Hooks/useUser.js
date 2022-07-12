@@ -21,7 +21,7 @@ export const useWishListData = (id) => {
 export const useUserLogin = () => {
 	return useMutation(login, {
 		onSuccess: (data) => {
-			localStorage.setItem("token", data.data.token);
+			localStorage.setItem("token", data.data.data);
 		},
 		onError: (err) => {
 			console.error(err);

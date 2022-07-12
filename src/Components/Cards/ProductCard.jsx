@@ -15,12 +15,20 @@ function ProductCard({ product }) {
 		unitPrice: price,
 		_id,
 	} = product;
+
 	const {
 		mutate: addToCartMutation,
 		isLoading,
 		isSuccess,
 		isError,
+		error,
+		data
 	} = useAddToCart();
+
+	if(isError) {
+		console.log(data);
+	}
+
 	const { mutate: addToWishlistMutation } = useAddToWishlist();
 
 	const handleAddToCart = (product) => {

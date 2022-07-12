@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import Header from "Components/Includes/Header";
 import Footer from "Components/Includes/Footer/Footer";
+import Toaster from "Components/Toast/Toaster";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Index({ title, children }) {
 	const [scrollToTop, setScrollToTop] = useState(false);
@@ -30,7 +33,10 @@ function Index({ title, children }) {
 	return (
 		<div className="bg-slate-50">
 			{scrollToTop && (
-				<button onClick={handleScrollToTop} className="fixed bottom-10 right-5 md:right-10 z-50 rounded-full bg-gray-300/60 p-1.5 md:p-2 flex justify-center items-center text-gray-600">
+				<button
+					onClick={handleScrollToTop}
+					className="fixed bottom-10 right-5 md:right-10 z-50 rounded-full bg-gray-300/60 p-1.5 md:p-2 flex justify-center items-center text-gray-600"
+				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						className="h-4 w-4 md:h-6 md:w-6"
@@ -50,6 +56,18 @@ function Index({ title, children }) {
 			<Header />
 			{children}
 			<Footer />
+			<ToastContainer
+				position="bottom-right"
+				autoClose={2500}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover={false}
+			/>
+			{/* <Toaster message="Error Toaster" title="success" show={true} /> */}
 		</div>
 	);
 }
