@@ -11,6 +11,8 @@ import MyWishList from "Pages/Profile/MyWishList";
 import MyOrders from "Pages/Profile/MyOrders";
 import MyAccount from "Pages/Profile/MyAccount";
 import Profile from "Pages/Profile";
+import WeeklyOffers from "Pages/WeeklyOffers";
+import WeeklyOfferDetails from "Pages/WeeklyOfferDetails";
 import { Provider } from "react-redux";
 import store from "./Redux/store";
 import PrivateRoute from "Components/Routes/PrivateRoute";
@@ -29,7 +31,7 @@ function App() {
 	const [register] = useAtom(registerModal);
 
 	return (
-		<Provider store={store}>
+		// <Provider store={store}>
 			<QueryClientProvider client={queryClient}>
 				{login && <Login />}
 				{register && <Register />}
@@ -58,6 +60,8 @@ function App() {
 						element={<Register goBackTo="/product-list/" />}
 					/> */}
 					</Route>
+					<Route path="/offers" element={<WeeklyOffers />} />
+					<Route path="/offerDetails" element={<WeeklyOfferDetails />} />
 
 					<Route path="/*" element={<PrivateRoute />}>
 						<Route path="order-details/:id" element={<OrderDetails />} />
@@ -80,7 +84,7 @@ function App() {
 
 				<ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
 			</QueryClientProvider>
-		</Provider>
+		// </Provider>
 	);
 }
 

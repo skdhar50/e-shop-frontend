@@ -40,6 +40,7 @@ function NavBarLarge() {
 				},
 				{
 					name: "Weekly Offers",
+					url: "/offers"
 				},
 				{
 					name: "New Arrivals",
