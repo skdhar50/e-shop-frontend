@@ -7,10 +7,12 @@ import { useAddToCart } from "Hooks/useCart";
 import { useAddToWishlist } from "Hooks/useWishlist";
 
 function ProductCard({ product }) {
+	// console.log(product);
 	const [, setLoginModalOpen] = useAtom(loginModal);
 	const {
 		name: title,
 		category,
+		brand,
 		photos: image,
 		unitPrice: price,
 		_id,
@@ -54,6 +56,7 @@ function ProductCard({ product }) {
 				<div className="top pb-2">
 					<p className="category text-xs md:text-sm text-[#565656]">
 						{category[0].name}
+						{brand.name}
 					</p>
 				</div>
 				<Link to={`/product-details/${_id}`}>

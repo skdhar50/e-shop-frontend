@@ -1,5 +1,6 @@
 import ProductCard from "Components/Cards/ProductCard";
 import { useProductData } from "Hooks/useProduct";
+import {Link} from "react-router-dom"
 
 function Products() {
 	const { data: products, isLoading, error, isError } = useProductData();
@@ -27,9 +28,11 @@ function Products() {
 				</div>
 			</div>
 			<div className="flex pt-4 py-8 justify-center bg-white items-center">
-				<p className="text-xl cursor-pointer hover:text-[#E96115] hover:underline">
-					Load more
-				</p>
+				<Link to="/product-list">
+					<p className="text-xl cursor-pointer hover:text-[#E96115] hover:underline">
+						View All
+					</p>
+				</Link>
 			</div>
 		</div>
 	);

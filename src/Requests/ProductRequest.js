@@ -4,12 +4,18 @@ export const fetchProducts = () => {
 	return request({ url: "/product", method: "GET" });
 };
 
-export const fetchProductsWithFilter = (filters) => {
+export const fetchProductsWithFilter = (data) => {
+	const { skip, filters } = data;
 	const { category, brand, sortBy, order } = filters;
 	return request({
 		url: "/product",
 		method: "POST",
-		data: { sortBy: sortBy, order: order, filters: { category, brand } },
+		data: {
+			skip: skip,
+			sortBy: sortBy,
+			order: order,
+			filters: { category, brand },
+		},
 	});
 };
 
