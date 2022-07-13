@@ -7,11 +7,16 @@ import { Outlet } from "react-router-dom";
 import { useProductData } from "Hooks/useProduct";
 
 import { useSelector, useDispatch } from "react-redux";
-import {fetchProducts, STATUS} from "../Redux/Slices/ProductSlice";
+import { fetchProducts, STATUS } from "../Redux/Slices/ProductSlice";
 import Products from "./Products";
+import Pagination from "Components/Pagination/Pagination";
 
 function ProductList() {
-	
+	const [start, setStart] = useState(1);
+	const [end, setEnd] = useState(10);
+	const [currentPage, setCurrentPage] = useState(1);
+	const [pagesCount, setPagesCount] = useState(0);
+
 	const { data: products, isLoading, error, isError } = useProductData();
 	const [filters, setFilters] = useState({
 		category: [],
@@ -27,7 +32,18 @@ function ProductList() {
 	};
 
 	const handleFilter = (filter) => {
+		setCurrentPage(1);
 		setFilters({ ...filter });
+	};
+
+	const handlePageCount = (pages) => {
+		setPagesCount(pages);
+	};
+
+	const handleCurrentPage = (num) => {
+		setCurrentPage(num);
+		setStart(currentPage - 9 > 1 ? currentPage - 9 : 1);
+		setEnd(start + 9 <= pagesCount ? start + 9 : pagesCount);
 	};
 
 	return (
@@ -69,8 +85,22 @@ function ProductList() {
 							{/* {products?.data.map((product) => (
 								<ProductCard key={product._id} product={product} />
 							))} */}
-							<Products filters={filters} />
+							<Products
+								filters={filters}
+								currentPage={currentPage}
+								handlePageCount={handlePageCount}
+							/>
 						</div>
+
+						<Pagination
+							pagesCount={pagesCount}
+							start={start}
+							end={end}
+							currentPage={currentPage}
+							handleCurrentPage={handleCurrentPage}
+							onHandleStart={(value) => setStart(value)}
+							onHandleEnd={(value) => setEnd(value)}
+						/>
 					</div>
 				</div>
 			</div>

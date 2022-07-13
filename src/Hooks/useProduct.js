@@ -21,8 +21,8 @@ export const useProductDetails = (id) => {
 	return useQuery(["product", id], fetchProductDetails);
 };
 
-export const useProductDataWithFilter = (filters) => {
-	return useQuery(["products", filters], () =>
-		fetchProductsWithFilter(filters)
+export const useProductDataWithFilter = (data) => {
+	return useQuery(["products", data], () =>
+		fetchProductsWithFilter(data)
 	);
 };
