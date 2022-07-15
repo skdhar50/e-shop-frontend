@@ -1,22 +1,21 @@
 import ChangePassword from "Components/User/ChangePassword";
 import PersonalInfo from "Components/User/PersonalInfo";
-import { useState } from "react";
-import { useUpdateProfile, useProfileData } from "Hooks/useUser";
+import { useProfileData } from "Hooks/useUser";
 import { isAuthenticated } from "utilities/auth.utility";
 
-const INITIAL_PersonalInfo_STATE = {
-	name: "",
-	email: "",
-	phone: "",
-	gender: "",
-	date: "",
-};
+// const INITIAL_PersonalInfo_STATE = {
+// 	name: "",
+// 	email: "",
+// 	phone: "",
+// 	gender: "",
+// 	date: "",
+// };
 
-const INITIAL_Password_STATE = {
-	currentPassword: "",
-	newPassword: "",
-	confirmPassword: "",
-};
+// const INITIAL_Password_STATE = {
+// 	currentPassword: "",
+// 	newPassword: "",
+// 	confirmPassword: "",
+// };
 
 function MyAccount() {
 	// const [personalInfo, setPersonalInfo] = useState(INITIAL_PersonalInfo_STATE);
@@ -24,19 +23,18 @@ function MyAccount() {
 	const {
 		data: profileData,
 		isLoading,
-		isError,
 		isSuccess,
 	} = useProfileData(isAuthenticated());
 
 	let profile = {};
 
 	if (isSuccess) {
-		profile.name = profileData.data.user.name;
-		profile.email = profileData.data.user.email;
-		profile.gender = profileData?.data.gender;
-		profile.phone = profileData?.data.phone;
-		profile.birthdate = profileData?.data.birthdate;
-		profile.photo = profileData?.data.photo;
+		profile.name = profileData?.data?.user.name;
+		profile.email = profileData?.data?.user.email;
+		profile.gender = profileData?.data?.gender;
+		profile.phone = profileData?.data?.phone;
+		profile.birthdate = profileData?.data?.birthdate;
+		profile.photo = profileData?.data?.photo;
 
 		// console.log(profile);
 	}

@@ -1,11 +1,7 @@
 import { useRef, useState } from "react";
 import { formValidate } from "Helpers/FormValidator";
-import { useUpdateProfile, useProfileData } from "Hooks/useUser";
-import { isAuthenticated } from "utilities/auth.utility";
+import { useUpdateProfile } from "Hooks/useUser";
 import { PROFILE_URL } from "utilities/config.utility";
-import { useEffect } from "react";
-import _ from "lodash";
-import { format } from "date-fns";
 
 // const INITIAL_PersonalInfo_STATE = {
 // 	name: "",
@@ -104,7 +100,7 @@ function PersonalInfo({ profile }) {
 		return true;
 	};
 
-	console.log(personalInfo);
+	// console.log(personalInfo);
 
 	return (
 		<>
@@ -222,7 +218,7 @@ function PersonalInfo({ profile }) {
 								type="date"
 								name="birthdate"
 								id="birthdate"
-								value={personalInfo.birthdate.toLocaleDateString("en-CA")}
+								value={personalInfo.birthdate === "" ? personalInfo.birthdate : personalInfo.birthdate.toLocaleDateString("en-CA")}
 								onChange={handlePersonalInfoChange}
 								className="cursor-pointer w-full"
 							/>
