@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function ProfileNavigation() {
 	return (
-		<div className="hidden lg:block border-2 min-w-[260px] pb-8 drop-shadow-sm inset-0 space-y-2 h-fit">
+		<div className="hidden bg-white lg:block border-2 min-w-[260px] pb-8 drop-shadow-sm inset-0 space-y-2 h-fit">
 			<div className="flex lg:flex-col xl:flex-row px-4 py-4 pt-6 space-y-2 xl:space-y-0 justify-start items-center xl:space-x-4">
 				<img
 					src="/images/users/user-1.JPG"

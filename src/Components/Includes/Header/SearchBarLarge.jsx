@@ -1,10 +1,10 @@
 import CartIcon from "Components/Cart/CartIcon";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import { HeartIcon } from "Components/Icons/Icons";
 import { useState } from "react";
 import { useWishlistData } from "Hooks/useWishlist";
 import { useProductSearch } from "Hooks/useProduct";
-import { isAuthenticated } from "utilities/auth.utility";
+import { isAuthenticated, signOutUser } from "utilities/auth.utility";
 
 function SearchBarLearge() {
 	const [showDropdown, setShowDropdown] = useState(false);
@@ -19,6 +19,8 @@ function SearchBarLearge() {
 		searchKey,
 		searchKey.length > 0
 	);
+
+	const navigate = useNavigate();
 
 	const handleShowDropdown = () => {
 		setShowDropdown(!showDropdown);
@@ -116,7 +118,14 @@ function SearchBarLearge() {
 											</li>
 										</NavLink>
 										<button>
-											<li className="hover:bg-gray-200 px-8 py-2 cursor-pointer">
+											<li
+												onClick={() => {
+													signOutUser(() => {
+														navigate("/", { replace: true });
+													});
+												}}
+												className="hover:bg-gray-200 px-8 py-2 cursor-pointer"
+											>
 												Logout
 											</li>
 										</button>
