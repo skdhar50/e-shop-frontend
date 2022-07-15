@@ -79,9 +79,11 @@ function SearchBarLearge() {
 							<div className="absolute -top-[0.625rem] -right-[0.625rem] md:-top-[0.75rem] md:-right-[1rem] text-white text-xs md:text-sm font-bold">
 								<div className="bg-green-600 rounded-full flex justify-center items-center w-[22px] h-[22px] sm:w-[22px] sm:h-[22px]">
 									{isAuthenticated()
-										? wishList?.data[0].products.length > 9
+										? wishList?.data[0]?.products.length > 9
 											? "9+"
-											: wishList?.data[0].products.length
+											: wishList?.data[0]?.products.length > 0
+											? wishList?.data[0]?.products.length
+											: 0
 										: 0}
 								</div>
 							</div>

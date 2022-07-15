@@ -48,6 +48,7 @@ export const formValidate = (title, value) => {
 	}
 };
 
+// not working
 export const isDisableSubmission = (errorState, dataState) => {
 	Object.keys(errorState).forEach((error) => {
 		if (errorState[error].length > 0) {

@@ -1,4 +1,4 @@
-import { useQuery, useMutation } from "react-query";
+import { useQuery, useMutation, useQueryClient } from "react-query";
 import {
 	getOrders,
 	getWishList,
@@ -9,6 +9,8 @@ import {
 	updateProfile,
 	getUserProfile,
 } from "Requests/UserRequest";
+import { useAtom } from "jotai";
+import { closeAllModal } from "Jotai/ModalState";
 
 export const useUserData = (id) => {
 	return useQuery(["user", id], getProfile);
@@ -31,7 +33,7 @@ export const useProfileData = (isEnabled) => {
 export const useUserLogin = () => {
 	return useMutation(login, {
 		onSuccess: (data) => {
-			localStorage.setItem("token", data.data.data);
+			localStorage.setItem("token", data.data);
 		},
 		onError: (err) => {
 			console.error(err);
@@ -49,8 +51,13 @@ export const useChangePassword = () => {
 };
 
 export const useUserSignup = () => {
+	const [, isCloseAllModal] = useAtom(closeAllModal);
+
 	return useMutation(signup, {
-		onSuccess: (data) => {},
+		onSuccess: (data) => {
+			localStorage.setItem("token", data.data);
+			isCloseAllModal();
+		},
 		onError: (err) => {
 			console.error(err);
 		},
@@ -58,8 +65,12 @@ export const useUserSignup = () => {
 };
 
 export const useUpdateProfile = () => {
+	const queryClient = useQueryClient();
+
 	return useMutation(updateProfile, {
-		onSuccess: (data) => {},
+		onSuccess: (data) => {
+			queryClient.invalidateQueries("profile");
+		},
 		onError: (err) => {
 			console.error(err);
 		},

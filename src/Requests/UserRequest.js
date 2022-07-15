@@ -2,7 +2,7 @@ import { request } from "utilities/axios.utility";
 
 export const login = (user) => {
 	return request({
-		url: "user",
+		url: "/user",
 		method: "POST",
 		data: { email: user.email, password: user.password },
 	});
@@ -10,15 +10,15 @@ export const login = (user) => {
 
 export const signup = (user) => {
 	return request({
-		url: "",
+		url: "/user/signup",
 		method: "POST",
-		data: { email: user.email, password: user.password },
+		data: { name: user.name, email: user.email, password: user.password },
 	});
 };
 
 export const changePassword = (data) => {
 	return request({
-		url: "",
+		url: "/user/change_password",
 		method: "POST",
 		data: {
 			currentPassword: data.currentPassword,
