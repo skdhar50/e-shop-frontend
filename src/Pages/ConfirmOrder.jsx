@@ -7,12 +7,13 @@ import { useState } from "react";
 import { useShippingAddressData } from "Hooks/useShippingAddress";
 import { isAuthenticated } from "utilities/auth.utility";
 import { useCartData } from "Hooks/useCart";
-import {usePlaceOrderData} from "Hooks/useOrder";
+import { usePlaceOrderData } from "Hooks/useOrder";
 import _ from "lodash";
-
-// Problem here
+import { useNavigate } from "react-router-dom";
 
 function ConfirmOrder() {
+	const navigate = useNavigate();
+
 	const {
 		data: shippingAddress,
 		isLoading: shippingLoading,
@@ -27,8 +28,6 @@ function ConfirmOrder() {
 		error,
 		isError,
 	} = useCartData(isAuthenticated());
-
-	const {mutate: placeOrderMutation} = usePlaceOrderData();
 
 	const getCartTotal = () => {
 		let carttotal = cartItems?.data.map((item) => {
@@ -80,6 +79,24 @@ function ConfirmOrder() {
 	const [selectedAddress, setSelectedAddress] = useState({});
 	const [selectedPayment, setSelectedPayment] = useState("");
 
+	const handleNavigate = (orderId, paymentMethod) => {
+		if (paymentMethod === "cod") {
+			navigate("/profile/orders", {
+				replace: true,
+			});
+		}
+		if (paymentMethod === "card") {
+			navigate(`/payment/${orderId}`, {
+				replace: true,
+			});
+		}
+	};
+
+	const { mutate: placeOrderMutation } = usePlaceOrderData(
+		handleNavigate,
+		selectedPayment
+	);
+
 	const handleSelectAddress = (address) => {
 		const obj = _.pick(address, [
 			"area",
@@ -110,8 +127,7 @@ function ConfirmOrder() {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		if(!isValidToProced())
-			return;
+		if (!isValidToProced()) return;
 
 		const temp = {
 			shipping: selectedAddress,
@@ -120,6 +136,10 @@ function ConfirmOrder() {
 		};
 		placeOrderMutation(temp);
 	};
+	// if (orderId.length > 0) {
+	// 	console.log(orderId);
+	// 	setOrderId("");
+	// }
 
 	return (
 		<Layout title="Confirm Order">
@@ -128,7 +148,11 @@ function ConfirmOrder() {
 			)}
 			<div className="md:px-6 xl:container antialiased">
 				<div className="pb-14 space-y-4 xl:space-y-0 md:pb-0 xl:flex xl:space-x-6 mt-10">
-					<form method="POST" encType="multipart/form-data" onSubmit={handleSubmit}>
+					<form
+						method="POST"
+						encType="multipart/form-data"
+						onSubmit={handleSubmit}
+					>
 						<div className="md:flex-grow bg-white drop-shadow-sm space-y-8 border md:shadow-md p-3 md:p-6">
 							<div className="space-y-4">
 								<p className="text-xl md:text-2xl font-[600] text-gray-600">

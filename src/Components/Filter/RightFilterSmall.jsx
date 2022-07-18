@@ -1,11 +1,18 @@
 import FilterListItems from "./FilterListItems";
+import { useEffect } from "react";
 
 function RightFilterSmall({ isOpen, handleRightFilter, handleFilter }) {
+	useEffect(() => {
+		if (isOpen) {
+			document.body.style.overflow = "hidden";
+			return () => (document.body.style.overflow = "unset");
+		}
+	}, [isOpen]);
 	return (
 		<div
 			className={
 				isOpen
-					? "bg-black bg-opacity-50 fixed inset-0 z-40 w-full h-screen"
+					? "bg-black bg-opacity-50 fixed inset-0 z-50 w-full h-screen"
 					: ""
 			}
 		>

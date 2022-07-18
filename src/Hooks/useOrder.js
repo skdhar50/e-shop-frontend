@@ -15,12 +15,14 @@ export const useOrderDetails = (id) => {
 	});
 };
 
-export const usePlaceOrderData = () => {
+export const usePlaceOrderData = (handleNavigate, selectedPayment) => {
 	const queryClient = useQueryClient();
 
 	return useMutation(placeOrder, {
 		onSuccess: (data) => {
 			queryClient.invalidateQueries("cartItems");
+			console.log(data.data, selectedPayment);
+			handleNavigate(data.data, selectedPayment);
 		},
 		onError: (err) => {
 			console.error(err);
