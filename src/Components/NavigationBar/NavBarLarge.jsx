@@ -23,6 +23,7 @@ function NavBarLarge() {
 		menuItems.push({
 			name: "All Categories",
 			submenu: categories.data,
+			tag: "category"
 		});
 
 		// console.log(categories.data);
@@ -32,11 +33,13 @@ function NavBarLarge() {
 		menuItems.push({
 			name: "Brands",
 			submenu: brands.data,
+			tag: "brand"
 		});
 		menuItems.push(
 			...[
 				{
 					name: "Online Exclusive",
+					tag: "exclusive"
 				},
 				{
 					name: "Weekly Offers",
@@ -44,6 +47,7 @@ function NavBarLarge() {
 				},
 				{
 					name: "New Arrivals",
+					tag: "latest"
 				},
 			]
 		);

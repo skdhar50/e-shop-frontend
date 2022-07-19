@@ -13,7 +13,7 @@ function OfferCard() {
 					/>
 				</div>
 				<div className="px-3 py-3 text-sm">
-					<div className="border-b pb-1 border-gray-300">
+					<div className="border-b pb-1 text-xs border-gray-300">
 						From: 22 July 2022 - 24 July 2022
 					</div>
 					<div className="space-y-3 text-center pt-3">
@@ -23,8 +23,6 @@ function OfferCard() {
 						<p className="text-gray-600 text-sm">
 							Lorem, ipsum dolor sit amet consectetur adipisicing elit. Enim
 							nostrum fuga illo placeat fugit aliquam maiores eos, ut,
-							consequatur magnam autem, consequuntur beatae. Modi fuga, tenetur
-							iure corrupti omnis molestias.
 						</p>
 						<Link to="/offerDetails">
 							<button className="mt-3 px-4 py-2 bg-indigo-600 text-white font-semibold hover:bg-indigo-500">

@@ -13,7 +13,7 @@ export function CartIcon() {
 	);
 }
 
-export function HeartIcon({className}) {
+export function HeartIcon({ className }) {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -32,17 +32,36 @@ export function HeartIcon({className}) {
 	);
 }
 
-export function CartCompareIcon() {
+export function QuickView() {
 	return (
+		// <svg
+		// 	className="w-[0.94rem] md:w-[1rem] h-fit"
+		// 	viewBox="0 0 20 20"
+		// 	xmlns="http://www.w3.org/2000/svg"
+		// >
+		// 	<path
+		// 		fillRule="evenodd"
+		// 		clipRule="evenodd"
+		// 		d="M5.25875 18.8263L1.25 14.8176V13.9338L5.25875 9.92505L6.1425 10.8088L3.20125 13.7513H18.75V15.0013H3.2L6.1425 17.9426L5.25875 18.8263ZM14.7413 10.0763L18.75 6.06755V5.1838L14.7413 1.17505L13.8575 2.0588L16.7987 5.00005H1.25V6.25005H16.8L13.8575 9.19255L14.7413 10.0763Z"
+		// 	/>
+		// </svg>
 		<svg
-			className="w-[0.94rem] md:w-[1rem] h-fit"
-			viewBox="0 0 20 20"
 			xmlns="http://www.w3.org/2000/svg"
+			className="w-[0.94rem] md:w-[1rem] h-fit"
+			fill="none"
+			viewBox="0 0 24 24"
+			stroke="current"
+			strokeWidth="2"
 		>
 			<path
-				fillRule="evenodd"
-				clipRule="evenodd"
-				d="M5.25875 18.8263L1.25 14.8176V13.9338L5.25875 9.92505L6.1425 10.8088L3.20125 13.7513H18.75V15.0013H3.2L6.1425 17.9426L5.25875 18.8263ZM14.7413 10.0763L18.75 6.06755V5.1838L14.7413 1.17505L13.8575 2.0588L16.7987 5.00005H1.25V6.25005H16.8L13.8575 9.19255L14.7413 10.0763Z"
+				strokeLinecap="round"
+				strokeLinejoin="round"
+				d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+			/>
+			<path
+				strokeLinecap="round"
+				strokeLinejoin="round"
+				d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
 			/>
 		</svg>
 	);

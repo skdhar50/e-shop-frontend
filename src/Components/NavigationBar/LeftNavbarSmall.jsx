@@ -1,4 +1,15 @@
+import { useState } from "react";
+import SmallMenu from "./SmallNavbar/SmallMenu";
+import { useCategoryData } from "Hooks/useCategory";
+
 function LeftNavbarSmall({ isOpen, handleLeftNavbar }) {
+	const {
+		data: categories,
+		isLoading: categoryLoading,
+		isSuccess: categorySuccess,
+		isError: categoryError,
+	} = useCategoryData();
+
 	const data = [
 		{
 			title: "Electronics",
@@ -21,12 +32,13 @@ function LeftNavbarSmall({ isOpen, handleLeftNavbar }) {
 		{
 			title: "Clothing",
 			submenu: [
-				{ title: "Men's Fasion" },
+				{ title: "Men's Fasion", submenu: [{ title: "T-shirt"}, {title:"Pant"}]},
 				{ title: "Women's Fasion" },
 				{ title: "Children's Fasion" },
 			],
 		},
 	];
+
 	return (
 		<div
 			className={
@@ -61,57 +73,18 @@ function LeftNavbarSmall({ isOpen, handleLeftNavbar }) {
 						: " -translate-x-full ease-out opacity-0")
 				}
 			>
-				{/* <div className="flex justify-end mt-6 mr-6">
-					<button
-						className="p-2 rounded-full bg-slate-100"
-						onClick={handleLeftNavbar}
-					>
-						<img
-							src="/images/icons/LeftNavSmall/close.svg"
-							alt=""
-							className="w-[30px] h-[30px]"
-						/>
-					</button>
-				</div> */}
-
-				<div className="w-full text-sm font-medium text-gray-700">
+				<div className="w-full font-medium text-gray-700">
 					<div className="">
-						<div className="flex justify-between items-center bg-gray-50 px-5 py-4">
-							<p className="">Category Name - 1</p>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								className="h-5 w-5"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke="currentColor"
-								strokeWidth="2"
-							>
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									d="M12 4v16m8-8H4"
-								/>
-							</svg>
-						</div>
-						<div className="">
-							<div className="flex justify-between items-center px-5 py-3 bg-gray-100">
-								<p className="pl-2">Sub Category Name - 1</p>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									className="h-5 w-5"
-									fill="none"
-									viewBox="0 0 24 24"
-									stroke="currentColor"
-									strokeWidth="2"
-								>
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										d="M12 4v16m8-8H4"
-									/>
-								</svg>
-							</div>
-						</div>
+						<ul className="flex flex-col">
+							{categories?.data.map((category) => {
+								const depth = 0;
+								return (
+									<div className="" key={category._id}>
+										<SmallMenu items={category} depth={depth} />
+									</div>
+								);
+							})}
+						</ul>
 					</div>
 				</div>
 			</div>
