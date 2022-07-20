@@ -49,7 +49,7 @@ function FeaturedCategories() {
 					>
 						{categories.map((category, index) => (
 							<SwiperSlide key={index}>
-								<Link to="/product-list">
+								<Link to="/product-list/all">
 									<div className="relative cursor-pointer lg:w-[11.25rem] xl:w-[13.75rem] shadow-lg shadow-black/70 overflow-hidden group">
 										<img
 											src={category.image}

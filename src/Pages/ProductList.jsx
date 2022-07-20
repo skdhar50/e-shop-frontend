@@ -22,6 +22,7 @@ function ProductList() {
 	const [filters, setFilters] = useState({
 		category: [],
 		brand: [],
+		isExclusive: false,
 		order: "",
 		sortBy: "",
 	});
@@ -49,7 +50,6 @@ function ProductList() {
 
 	return (
 		<>
-			{/* <QuickViewCard /> */}
 			<Layout title="Products">
 				<Outlet />
 				<div className="2xl:container pb-12 md:mt-4">
@@ -87,9 +87,6 @@ function ProductList() {
 								</div>
 							</div>
 							<div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-x-2 lg:gap-x-4 md:gap-y-7">
-								{/* {products?.data.map((product) => (
-								<ProductCard key={product._id} product={product} />
-							))} */}
 								<Products
 									filters={filters}
 									currentPage={currentPage}

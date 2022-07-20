@@ -1,6 +1,6 @@
 import MenuItems from "./MenuItems";
 
-function Dropdown({ submenus, dropdown, depthLevel }) {
+function Dropdown({ submenus, dropdown, depthLevel, tag }) {
 	depthLevel = depthLevel + 1;
 
 	return (
@@ -10,7 +10,12 @@ function Dropdown({ submenus, dropdown, depthLevel }) {
 			} w-full ${dropdown ? "" : "hidden"}`}
 		>
 			{submenus.map((submenu, index) => (
-				<MenuItems items={submenu} key={index} depthLevel={depthLevel} />
+				<MenuItems
+					items={submenu}
+					key={index}
+					tag={tag}
+					depthLevel={depthLevel}
+				/>
 			))}
 		</ul>
 	);

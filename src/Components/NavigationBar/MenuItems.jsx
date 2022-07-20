@@ -1,7 +1,13 @@
 import Dropdown from "./Dropdown";
 import { useState, useEffect, useRef } from "react";
+import {
+	Link,
+	createSearchParams,
+	useNavigate,
+} from "react-router-dom";
 
-function MenuItems({ items, depthLevel }) {
+function MenuItems({ items, tag, depthLevel }) {
+	const navigate = useNavigate();
 	const [dropdown, setDropdown] = useState(false);
 	const ref = useRef();
 
@@ -28,6 +34,26 @@ function MenuItems({ items, depthLevel }) {
 		window.innerWidth > 960 && setDropdown(false);
 	};
 
+	const goToPage = (productId) => {
+		let searchString = {
+			tag: tag,
+			value: productId === undefined ? true : productId,
+			page: 1,
+		};
+
+		if (tag === "latest") {
+			searchString.sortBy = "createdAt";
+			searchString.order = 1;
+		}
+		navigate(
+			{
+				pathname: "/product-list/product",
+				search: `?${createSearchParams(searchString)}`,
+			},
+			{ replace: true }
+		);
+	};
+
 	return (
 		<li
 			ref={ref}
@@ -38,12 +64,21 @@ function MenuItems({ items, depthLevel }) {
 			{items.submenu ? (
 				<>
 					<button
-						className="w-full group py-2"
+						className="w-full group py-2 relative flex justify-center "
 						onClick={() => setDropdown((prev) => !prev)}
 					>
-						{items.name}
+						{depthLevel === 0 ? (
+							<p className="">{items.name}</p>
+						) : (
+							<p
+								onClick={() => goToPage(items._id)}
+								className=""
+							>
+								{items.name}
+							</p>
+						)}
 						{depthLevel > 0 ? (
-							<span className="float-right pr-3 text-gray-50 group-hover:text-black">
+							<span className="right-0 absolute pr-3 text-gray-50 group-hover:text-black">
 								&#10093;
 							</span>
 						) : (
@@ -53,13 +88,25 @@ function MenuItems({ items, depthLevel }) {
 					<Dropdown
 						submenus={items.submenu}
 						dropdown={dropdown}
+						tag={tag}
 						depthLevel={depthLevel}
 					/>
 				</>
 			) : (
-				<p className="py-2">
-					<a href={items.url}>{items.name}</a>
-				</p>
+				<>
+					{depthLevel === 0 && items.tag === "offers" ? (
+						<Link to="/offers">
+							<p className="py-2">{items.name}</p>
+						</Link>
+					) : (
+						<p
+							onClick={() => goToPage(items._id)}
+							className="py-2"
+						>
+							{items.name}
+						</p>
+					)}
+				</>
 			)}
 		</li>
 	);

@@ -21,6 +21,7 @@ import { useAtom } from "jotai";
 import { loginModal, registerModal } from "Jotai/ModalState";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import SingleFilterProducts from "Pages/SingleFilterProducts";
 
 const queryClient = new QueryClient();
 
@@ -54,12 +55,14 @@ function App() {
 						element={<Register goBackTo="/product-details/" />}
 					/> */}
 				</Route>
-				<Route path="/product-list" element={<ProductList />}>
+				<Route path="/product-list">
 					{/* <Route path="login" element={<Login goBackTo="/product-list/" />} />
 					<Route
 						path="register"
 						element={<Register goBackTo="/product-list/" />}
 					/> */}
+					<Route path="all" element={<ProductList />} />
+					<Route path="product" element={<SingleFilterProducts />} />
 				</Route>
 				<Route path="/offers" element={<WeeklyOffers />} />
 				<Route path="/offerDetails" element={<WeeklyOfferDetails />} />

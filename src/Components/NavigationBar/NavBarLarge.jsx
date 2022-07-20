@@ -39,11 +39,12 @@ function NavBarLarge() {
 			...[
 				{
 					name: "Online Exclusive",
-					tag: "exclusive"
+					tag: "isExclusive"
 				},
 				{
 					name: "Weekly Offers",
-					url: "/offers"
+					url: "/offers",
+					tag: "offers"
 				},
 				{
 					name: "New Arrivals",
@@ -65,7 +66,7 @@ function NavBarLarge() {
 						const depthLevel = 0;
 						return (
 							<div className="w-full" key={index}>
-								<MenuItems items={menu} depthLevel={depthLevel} />
+								<MenuItems items={menu} tag={menu.tag} depthLevel={depthLevel} />
 							</div>
 						);
 					})}

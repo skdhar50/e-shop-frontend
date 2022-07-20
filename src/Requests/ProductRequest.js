@@ -6,7 +6,7 @@ export const fetchProducts = () => {
 
 export const fetchProductsWithFilter = (data) => {
 	const { skip, filters } = data;
-	const { category, brand, sortBy, order } = filters;
+	const { category, brand, isExclusive, sortBy, order } = filters;
 	return request({
 		url: "/product",
 		method: "POST",
@@ -14,7 +14,7 @@ export const fetchProductsWithFilter = (data) => {
 			skip: skip,
 			sortBy: sortBy,
 			order: order,
-			filters: { category, brand },
+			filters: { category, brand, isExclusive },
 		},
 	});
 };

@@ -16,8 +16,7 @@ function Products({ filters, handlePageCount, currentPage }) {
 			// console.log(products)
 			handlePageCount(products?.pages);
 		}
-	}, [isSuccess, handlePageCount, products])
-
+	}, [isSuccess, handlePageCount, products]);
 
 	if (isLoading) {
 		return <div>Loading...</div>;
@@ -25,9 +24,13 @@ function Products({ filters, handlePageCount, currentPage }) {
 
 	return (
 		<>
-			{products?.data.map((product) => (
-				<ProductCard key={product._id} product={product} />
-			))}
+			{products.data.length === 0 ? (
+				<p className="">No Products Fond.</p>
+			) : (
+				products?.data.map((product) => (
+					<ProductCard key={product._id} product={product} />
+				))
+			)}
 		</>
 	);
 }
