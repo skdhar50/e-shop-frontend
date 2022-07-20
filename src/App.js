@@ -65,7 +65,7 @@ function App() {
 					<Route path="product" element={<SingleFilterProducts />} />
 				</Route>
 				<Route path="/offers" element={<WeeklyOffers />} />
-				<Route path="/offerDetails" element={<WeeklyOfferDetails />} />
+				<Route path="/offerDetails/:id" element={<WeeklyOfferDetails />} />
 
 				<Route path="/*" element={<PrivateRoute />}>
 					<Route path="order-details/:id" element={<OrderDetails />} />
