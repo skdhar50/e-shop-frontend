@@ -28,7 +28,7 @@ function Products() {
 				</div>
 			</div>
 			<div className="flex pt-4 py-8 justify-center bg-white items-center">
-				<Link to="/product-list">
+				<Link to="/product-list/all">
 					<p className="text-xl cursor-pointer hover:text-[#E96115] hover:underline">
 						View All
 					</p>

@@ -24,7 +24,7 @@ function RightNavbarSmall({ isOpen, handleRightNavbar }) {
 		},
 		{
 			title: "All Products",
-			url: "/product-list",
+			url: "/product-list/all",
 			icon: "/images/icons/RightNavSmall/all-products.svg",
 			isShow: true,
 			id: 3,

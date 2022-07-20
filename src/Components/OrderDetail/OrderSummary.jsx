@@ -20,7 +20,7 @@ function OrdersSummary({ order }) {
 
 	return (
 		<div className="px-4 xl:container">
-			<div className="lg:flex lg:space-x-4 mt-4 pb-12 space-y-4 lg:space-y-0">
+			<div className="lg:flex lg:space-x-4 pt-4 pb-12 space-y-4 lg:space-y-0">
 				<div className="border-2 flex-grow px-2 lg:px-6 space-y-6 lg:space-y-8 py-4">
 					<div className="">
 						<p className="text-xl lg:text-2xl font-[600] text-gray-600">

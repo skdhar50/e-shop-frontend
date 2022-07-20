@@ -11,26 +11,26 @@ function OrderTotal({ orderTotal }) {
 
 	return (
 		<div className="flex md:justify-end pt-5 border-t-2 px-2 md:px-0">
-			<div className="w-full text-sm md:text-base md:w-[350px] space-y-2">
+			<div className="w-full text-sm md:text-base text-gray-700 md:w-[350px] space-y-2">
 				<div className="flex justify-between items-center">
 					<p className="">Total Items: </p>
-					<p className="font-[600] text-gray-600">{totalItems} Product(s)</p>
+					<p className="font-[600] text-gray-500">{totalItems} Product(s)</p>
 				</div>
 				<div className="flex justify-between items-center">
 					<p className="">Sub-Total: </p>
-					<p className="font-[600] text-gray-600">TK.{subTotal}</p>
+					<p className="font-[600] text-gray-500">TK.{subTotal}</p>
 				</div>
 				<div className="flex justify-between items-center">
 					<p className="">Discount: </p>
-					<p className="font-[600] text-gray-600">TK.{discount}</p>
+					<p className="font-[600] text-gray-500">TK.{discount}</p>
 				</div>
 				<div className="flex justify-between items-center">
 					<p className="">Shipping: </p>
-					<p className="font-[600] text-gray-600">TK.{shipping}</p>
+					<p className="font-[600] text-gray-500">TK.{shipping}</p>
 				</div>
 				<div className="flex justify-between items-center">
 					<p className="">Payable Amount: </p>
-					<p className="font-[600] text-gray-600">TK.{payable}</p>
+					<p className="font-[600] text-gray-500">TK.{payable}</p>
 				</div>
 				<div className="flex justify-between items-center">
 					<p className="">Payment Status: </p>

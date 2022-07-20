@@ -3,8 +3,8 @@ function OrderSummaryProductDetails({ cartItem }) {
 	const { product, count: quantity } = cartItem;
 	const { name, unitPrice: price, description, photos } = product;
 	return (
-		<div className="pt-6 space-y-4 md:space-y-0">
-			<div className="flex items-top space-x-5 md:justify-around">
+		<div className="pt-6 space-y-4 text-gray-600 md:space-y-0">
+			<div className="flex items-top space-x-5 md:justify-start">
 				<img
 					src={photos[0]}
 					alt=""

@@ -11,7 +11,7 @@ function OfferDetails() {
 	if(offerLoading) {
 		return <div className="">Loading....</div>
 	}
-	console.log(offer.data[0]);
+
 	const {
 		name,
 		startDate,

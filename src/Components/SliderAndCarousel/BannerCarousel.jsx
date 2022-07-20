@@ -27,7 +27,7 @@ function BannerCarousel({banners}) {
 						<img
 							src={banner.image}
 							alt=""
-							className="w-full h-[320px] sm:h-[450px] md:h-[450px] lg:h-[500px] xl:h-[600px] object-cover"
+							className="w-full aspect-[6/4] md:aspect-[4/2] object-fit"
 						/>
 					</SwiperSlide>
 				))}

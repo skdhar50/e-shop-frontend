@@ -59,12 +59,19 @@ function SearchBarLearge() {
 							<div className="absolute z-30 bg-gray-100 rounded-md border border-gray-300 w-full mt-2 max-h-80 overflow-auto">
 								<ul className="divide-y-2 text-gray-600">
 									{searchProducts?.data.map((product) => (
-										<li
+										<Link
+											to={`/product-details/${product._id}`}
 											key={product._id}
-											className="px-6 py-2 hover:bg-gray-200 cursor-pointer"
 										>
-											{product.name}
-										</li>
+											<li className="px-6 py-2 hover:bg-gray-200 cursor-pointer flex justify-start items-center space-x-4">
+												<img
+													src={product.photos[0]}
+													alt=""
+													className="w-[50px] h-[50px]"
+												/>
+												<p className="">{product.name}</p>
+											</li>
+										</Link>
 									))}
 								</ul>
 							</div>
