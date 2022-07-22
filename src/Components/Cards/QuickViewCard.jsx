@@ -19,7 +19,7 @@ function QuickViewCard({ handleClose, product, handleCart }) {
 
 	return (
 		<div className="bg-black fixed z-[100] top-0 left-0 right-0 bottom-0 w-screen h-screen px-4 sm:px-8 bg-opacity-60 flex justify-center items-center">
-			<div className="card-vontainer relative bg-white rounded-md md:w-3/4 lg:w-2/4 xl:w-2/4 2xl:w-2/5 sm:h-[350px] p-6 flex justify-between items-center">
+			<div className="card-vontainer relative bg-white rounded-md md:w-3/4 lg:w-3/4 xl:w-2/4 2xl:w-2/5 sm:h-[350px] p-6 flex justify-between items-center">
 				<div
 					onClick={handleClose}
 					className="absolute -top-7 -right-4 md:-right-6 group bg-gray-100 rounded-full p-3 border border-gray-300 cursor-pointer"

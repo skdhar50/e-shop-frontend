@@ -4,11 +4,18 @@ import { HeartIcon } from "Components/Icons/Icons";
 import { useState } from "react";
 import { useWishlistData } from "Hooks/useWishlist";
 import { useProductSearch } from "Hooks/useProduct";
-import { isAuthenticated, signOutUser } from "utilities/auth.utility";
+import { isAuthenticated, signOutUser, userInfo } from "utilities/auth.utility";
+import { useUserData } from "Hooks/useUser";
+import { PROFILE_URL } from "utilities/config.utility";
 
 function SearchBarLearge() {
 	const [showDropdown, setShowDropdown] = useState(false);
 	const [searchKey, setSearchKey] = useState("");
+	const user = userInfo();
+	const {
+		data: profileData,
+	} = useUserData(isAuthenticated());
+
 	const {
 		data: wishList,
 		isError,
@@ -106,7 +113,13 @@ function SearchBarLearge() {
 							<div
 								className="w-[38px] h-[38px] rounded-full bg-gray-400 cursor-pointer"
 								onClick={handleShowDropdown}
-							></div>
+							>
+								<img
+									src={`${PROFILE_URL}/${profileData?.data.photo}`}
+									alt=""
+									className="aspect-1/1"
+								/>
+							</div>
 							{showDropdown && (
 								<div className="absolute z-40 right-0 mt-2">
 									<ul className="bg-gray-50 rounded-sm text-sm border border-gray-200 text-gray-600">

@@ -1,5 +1,4 @@
 function OrderSummaryProductDetails({ cartItem }) {
-	// console.log(cartItem[0]);
 	const { product, count: quantity } = cartItem;
 	const { name, unitPrice: price, description, photos } = product;
 	return (

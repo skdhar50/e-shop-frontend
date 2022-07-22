@@ -1,91 +1,20 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useAtom } from "jotai";
 import { openLoginModal } from "Jotai/ModalState";
-import { isAuthenticated } from "utilities/auth.utility";
+import { isAuthenticated, signOutUser, userInfo } from "utilities/auth.utility";
+import { links } from "Components/data/RightNavLinksSmall";
+import { useUserData } from "Hooks/useUser";
+import { PROFILE_URL } from "utilities/config.utility";
 
 function RightNavbarSmall({ isOpen, handleRightNavbar }) {
 	const [, isOpenLoginModal] = useAtom(openLoginModal);
-	const authenticated = isAuthenticated();
-
-	const links = [
-		{
-			title: "Home",
-			url: "/",
-			icon: "/images/icons/RightNavSmall/home.svg",
-			isShow: true,
-			id: 1,
-		},
-		{
-			title: "Profile",
-			url: "/profile/account",
-			icon: "/images/icons/RightNavSmall/profile.svg",
-			isShow: authenticated,
-			id: 2,
-		},
-		{
-			title: "All Products",
-			url: "/product-list/all",
-			icon: "/images/icons/RightNavSmall/all-products.svg",
-			isShow: true,
-			id: 3,
-		},
-		{
-			title: "Wishlist",
-			url: "/profile/wishlist",
-			icon: "/images/icons/RightNavSmall/wishlist.svg",
-			isShow: authenticated,
-			id: 4,
-		},
-		{
-			title: "Notifications",
-			url: "/notifications",
-			icon: "/images/icons/RightNavSmall/notification.svg",
-			isShow: authenticated,
-			id: 5,
-		},
-		{
-			title: "My Cart",
-			url: "/cart",
-			icon: "/images/icons/RightNavSmall/mycart.svg",
-			isShow: authenticated,
-			id: 6,
-		},
-		{
-			title: "My Orders",
-			url: "/profile/orders",
-			icon: "/images/icons/RightNavSmall/myorder.svg",
-			isShow: authenticated,
-			id: 7,
-		},
-		{
-			title: "Services",
-			url: "/services",
-			icon: "/images/icons/RightNavSmall/services.svg",
-			isShow: true,
-			id: 8,
-		},
-		{
-			title: "Help",
-			url: "/help",
-			icon: "/images/icons/RightNavSmall/help.svg",
-			isShow: true,
-			id: 9,
-		},
-		{
-			title: "Location",
-			url: "/location",
-			icon: "/images/icons/RightNavSmall/location.svg",
-			isShow: true,
-			id: 10,
-		},
-		{
-			title: "Logout (as user)",
-			url: "/logout",
-			icon: "/images/icons/RightNavSmall/logout.svg",
-			isShow: authenticated,
-			id: 11,
-		},
-	];
+	const user = userInfo();
+	const navigate = useNavigate();
+	const {
+		data: profileData,
+		isLoading,
+		isError,
+	} = useUserData(isAuthenticated());
 
 	return (
 		<div
@@ -121,29 +50,27 @@ function RightNavbarSmall({ isOpen, handleRightNavbar }) {
 						: " translate-x-full -right-10 ease-out opacity-0")
 				}
 			>
-				{/* <div className="">
-					<button
-						className="p-2 rounded-full bg-slate-100"
-						onClick={handleRightNavbar}
-					>
-						<img
-							src="/images/icons/RightNavSmall/close.svg"
-							alt=""
-							className="w-[30px] h-[30px]"
-						/>
-					</button>
-				</div> */}
-
-				<div className="bg-gradient-to-br from-cyan-50 to-blue-300 w-full h-1/4 flex flex-col justify-end items-end py-10 px-8">
+				<div className="bg-gradient-to-br from-cyan-50 to-blue-300 w-full h-1/4 flex flex-col justify-end items-end py-6 px-8">
 					<div className="shrink-0 rounded-full w-[100px] h-[100px] overflow-hidden">
-						<img src="/images/users/user-1.JPG" alt="" className="aspect-1/1" />
+						<img
+							src={`${PROFILE_URL}/${profileData?.data.photo}`}
+							alt=""
+							className="aspect-1/1"
+						/>
 					</div>
-					<p className="pt-2 italic text-lg text-gray-800">Sanjoy Kumar Dhar</p>
+					<div className="pr-4 flex flex-col justify-end items-end">
+						<p className="pt-2 italic font-[600] text-lg text-gray-700">
+							{user.name !== undefined ? user.name : "Guest user"}
+						</p>
+						<p className="pt-0.5 italic text-sm text-gray-700">
+							{user.email !== undefined ? user.email : "Guest user"}
+						</p>
+					</div>
 				</div>
-				<div className="px-6">
-					<ul className="space-y-6 pl-4">
+				<div className="">
+					<ul className="">
 						{!isAuthenticated() && (
-							<li onClick={handleRightNavbar}>
+							<li className="px-8 py-3" onClick={handleRightNavbar}>
 								<button
 									onClick={isOpenLoginModal}
 									className="flex items-center space-x-4"
@@ -160,7 +87,11 @@ function RightNavbarSmall({ isOpen, handleRightNavbar }) {
 						{links.map(
 							(link) =>
 								link.isShow && (
-									<li key={link.id} onClick={handleRightNavbar}>
+									<li
+										key={link.id}
+										className="px-8 py-3"
+										onClick={handleRightNavbar}
+									>
 										<NavLink
 											className={({ isActive }) =>
 												isActive ? "text-orange-500 stroke-orange-500" : ""
@@ -181,6 +112,33 @@ function RightNavbarSmall({ isOpen, handleRightNavbar }) {
 						)}
 					</ul>
 				</div>
+				{isAuthenticated() && (
+					<button
+						onClick={() => {
+							signOutUser(() => {
+								navigate("/", { replace: true });
+							});
+						}}
+						className="fixed bottom-0 border-t-2 w-full bg-slate-100"
+					>
+						<div
+							onClick={handleRightNavbar}
+							className="flex items-center text-lg space-x-4 py-4 pl-11"
+						>
+							<img
+								src="/images/icons/RightNavSmall/logout.svg"
+								alt="logout"
+								className="w-[25px] h-[25px]"
+							/>
+							<p className="">
+								Logout{" "}
+								<span className="text-sm pl-1 text-gray-700">
+									(as {user.name})
+								</span>
+							</p>
+						</div>
+					</button>
+				)}
 			</div>
 		</div>
 	);

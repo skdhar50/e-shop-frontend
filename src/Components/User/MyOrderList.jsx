@@ -6,11 +6,12 @@ function MyOrderList() {
 	const { data: orders, isLoading, isError, error, isSuccess } = useOrderData();
 
 	return (
-		<div className="border-2 drop-shadow-sm p-4 md:p-6 space-y-8 xl:flex-grow">
-			<div className="">
+		<div className="border-2 bg-white drop-shadow-sm p-4 md:p-6 space-y-8 xl:flex-grow">
+			<div className="border-b-2 pb-4">
 				<p className="text-2xl">My Orders</p>
 			</div>
 			<div className="space-y-4">
+				{orders.data.length === 0 ? <div className="text-lg text-gray-600">No order found.</div> : null}
 				{orders?.data.map((order) => (
 					<div className="border space-y-4 p-4" key={order._id}>
 						<div className="flex justify-between items-center">

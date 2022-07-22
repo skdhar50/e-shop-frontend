@@ -14,7 +14,7 @@ export const isAuthenticated = () => {
 	}
 };
 
-export const useInfo = () => {
+export const userInfo = () => {
 	const token = localStorage.getItem("token");
 	const decoded = jwt_decode(token);
 
