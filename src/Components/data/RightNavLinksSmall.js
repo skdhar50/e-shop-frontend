@@ -71,11 +71,4 @@ export const links = [
 		isShow: true,
 		id: 10,
 	},
-	// {
-	// 	title: "Logout (as user)",
-	// 	url: "/logout",
-	// 	icon: "/images/icons/RightNavSmall/logout.svg",
-	// 	isShow: isAuthenticated(),
-	// 	id: 11,
-	// },
 ];

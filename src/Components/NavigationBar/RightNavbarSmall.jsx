@@ -53,17 +53,17 @@ function RightNavbarSmall({ isOpen, handleRightNavbar }) {
 				<div className="bg-gradient-to-br from-cyan-50 to-blue-300 w-full h-1/4 flex flex-col justify-end items-end py-6 px-8">
 					<div className="shrink-0 rounded-full w-[100px] h-[100px] overflow-hidden">
 						<img
-							src={`${PROFILE_URL}/${profileData?.data.photo}`}
+							src={`${PROFILE_URL}/${profileData?.data?.photo}`}
 							alt=""
 							className="aspect-1/1"
 						/>
 					</div>
 					<div className="pr-4 flex flex-col justify-end items-end">
 						<p className="pt-2 italic font-[600] text-lg text-gray-700">
-							{user.name !== undefined ? user.name : "Guest user"}
+							{user?.name !== undefined ? user?.name : "Guest user"}
 						</p>
 						<p className="pt-0.5 italic text-sm text-gray-700">
-							{user.email !== undefined ? user.email : "Guest user"}
+							{user?.email !== undefined ? user?.email : "Guest user"}
 						</p>
 					</div>
 				</div>
@@ -133,7 +133,7 @@ function RightNavbarSmall({ isOpen, handleRightNavbar }) {
 							<p className="">
 								Logout{" "}
 								<span className="text-sm pl-1 text-gray-700">
-									(as {user.name})
+									(as {user?.name})
 								</span>
 							</p>
 						</div>

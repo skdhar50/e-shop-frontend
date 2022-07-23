@@ -12,6 +12,7 @@ function SearchBarLearge() {
 	const [showDropdown, setShowDropdown] = useState(false);
 	const [searchKey, setSearchKey] = useState("");
 	const user = userInfo();
+
 	const {
 		data: profileData,
 	} = useUserData(isAuthenticated());
@@ -72,7 +73,7 @@ function SearchBarLearge() {
 										>
 											<li className="px-6 py-2 hover:bg-gray-200 cursor-pointer flex justify-start items-center space-x-4">
 												<img
-													src={product.photos[0]}
+													src={product?.photos[0]}
 													alt=""
 													className="w-[50px] h-[50px]"
 												/>
@@ -111,11 +112,11 @@ function SearchBarLearge() {
 					{isAuthenticated() && (
 						<div className="relative">
 							<div
-								className="w-[38px] h-[38px] rounded-full bg-gray-400 cursor-pointer"
+								className="w-[38px] h-[38px] rounded-full bg-gray-400 cursor-pointer overflow-hidden"
 								onClick={handleShowDropdown}
 							>
 								<img
-									src={`${PROFILE_URL}/${profileData?.data.photo}`}
+									src={`${PROFILE_URL}/${profileData?.data?.photo}`}
 									alt=""
 									className="aspect-1/1"
 								/>
