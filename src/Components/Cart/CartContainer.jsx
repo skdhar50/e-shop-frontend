@@ -24,40 +24,20 @@ function CartContainer({ shipping = 50 }) {
 	const { mutate: selectAllItemsMutation } = useSelectAll();
 	const { mutate: selectSingleItemMutation } = useSelectSingle();
 	const { mutate: deleteCartItemMutation } = useDeleteCartItem();
-	const [isAllSelected, setIsAllSelected] = useState(true);
-
-
-	// if (isSuccess) {
-	// 	cartItems?.data.map((item) => {
-	// 		if (!item.isSelected) {
-	// 			return setIsAllSelected(false);
-	// 		}
-	// 		return true;
-	// 	});
-	// }
 
 	const decreaseCartItem = (item) => () => {
-		// if (item.count > 1) {
-		// 	dispatch(decreaseItemCount(item.id));
-		// }
-
 		if (item.count > 1) {
 			cartItemMutation({ _id: item._id, count: item.count - 1 });
 		}
 	};
 
 	const increaseCartItem = (item) => () => {
-		// if (item.count < 8) {
-		// 	dispatch(increaseItemCount(item.id));
-		// }
-
 		if (item.count < 8) {
 			cartItemMutation({ _id: item._id, count: item.count + 1 });
 		}
 	};
 
 	const removeCartItem = (item) => () => {
-		// dispatch(removeFromCart(item.id));
 		deleteCartItemMutation(item._id);
 	};
 
@@ -84,7 +64,6 @@ function CartContainer({ shipping = 50 }) {
 	};
 
 	const setIsSelected = (item) => () => {
-		// dispatch(selectItem(item.id));
 		selectSingleItemMutation({
 			_id: item._id,
 			flag: !item.isSelected,
@@ -100,16 +79,14 @@ function CartContainer({ shipping = 50 }) {
 
 	const setAllSelected = (event) => {
 		if (event.target.checked) {
-			// 	dispatch(selectAllItems());
 			selectAllItemsMutation(true);
 		} else if (!event.target.checked) {
-			// 	dispatch(unselectAllItems());
 			selectAllItemsMutation(false);
 		}
 	};
 
 	return (
-		<div className="md:px-6 xl:container antialiased">
+		<div className="px-1 md:px-6 xl:container antialiased">
 			<div className="mt-20 lg:flex lg:space-x-6 space-y-5 lg:space-y-0">
 				<div className="border p-4 grow bg-white h-fit drop-shadow space-y-8 py-6">
 					{cartItems?.data.length > 0 ? (
@@ -169,30 +146,32 @@ function CartContainer({ shipping = 50 }) {
 						</>
 					) : (
 						<div className="flex justify-center items-center">
-							<p className="text-xl text-slate-400">
-								Cart is empty. Please select something first!
-							</p>
+							<div className="text-lg text-gray-600 min-h-[100px]">
+								No items in Cart! Please select some items first!
+							</div>
 						</div>
 					)}
 				</div>
 
-				<div className="checkout-summary drop-shadow bg-white lg:w-[320px] border py-6 px-6 h-fit space-y-12">
-					{/* Checkout Summary Scction */}
-					<CheckoutSummary
-						subTotal={getCartTotal()}
-						shipping={shipping}
-						payablePrice={getPayAblePrice()}
-					/>
-					<div className="">
-						<div className="pb-4 text-xl">Apply Coupon</div>
-						<div className="flex space-x-2">
-							<input type="text" name="" id="" className="w-full rounded" />
-							<button className="w-1/3 bg-indigo-500 text-white rounded hover:bg-opacity-80">
-								Apply
-							</button>
+				{cartItems.data.length > 0 && (
+					<div className="checkout-summary drop-shadow bg-white lg:w-[320px] border py-6 px-6 h-fit space-y-12">
+						{/* Checkout Summary Scction */}
+						<CheckoutSummary
+							subTotal={getCartTotal()}
+							shipping={shipping}
+							payablePrice={getPayAblePrice()}
+						/>
+						<div className="">
+							<div className="pb-4 text-xl">Apply Coupon</div>
+							<div className="flex space-x-2">
+								<input type="text" name="" id="" className="w-full rounded" />
+								<button className="w-1/3 bg-indigo-500 text-white rounded hover:bg-opacity-80">
+									Apply
+								</button>
+							</div>
 						</div>
 					</div>
-				</div>
+				)}
 			</div>
 		</div>
 	);

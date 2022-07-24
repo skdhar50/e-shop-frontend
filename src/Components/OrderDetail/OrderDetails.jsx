@@ -3,7 +3,7 @@ import OrderDeliveryInfoCard from "Components/Cards/OrderDeliveryInfoCard";
 function OrderDetails() {
 	const orderInfo = [
 		{ title: "Order Placed", date: "04/01/2022", isDone: true, index: 1 },
-		{ title: "Order Prepared", date: "04/01/2022", isDone: true, index: 2 },
+		{ title: "Order Prepared", date: "04/01/2022", isDone: false, index: 2 },
 		{ title: "Send to Courier", date: "04/01/2022", isDone: true, index: 3 },
 		{ title: "Order Dalivared", date: "04/01/2022", isDone: false, index: 4 },
 	];
@@ -12,7 +12,7 @@ function OrderDetails() {
 		<div className="px-4 xl:container">
 			<div className="hidden md:block border-2 pb-[110px] xl:pb-[130px] pt-[20px] px-[30px] mt-8 w-full mx-auto">
 				<div className="pb-4 xl:pb-2">
-					<p className="text-xl lg:text-2xl font-[600] text-gray-600">
+					<p className="text-xl font-[600] text-gray-600">
 						Your Order Delivery Information
 					</p>
 				</div>

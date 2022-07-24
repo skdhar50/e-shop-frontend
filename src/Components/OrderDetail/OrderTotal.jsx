@@ -10,8 +10,8 @@ function OrderTotal({ orderTotal }) {
 	} = orderTotal;
 
 	return (
-		<div className="flex md:justify-end pt-5 border-t-2 px-2 md:px-0">
-			<div className="w-full text-sm md:text-base text-gray-700 md:w-[350px] space-y-2">
+		<div className="flex justify-end pt-5 border-t-2 px-2 md:px-0">
+			<div className="text-sm md:text-base text-gray-700 w-[350px] space-y-2">
 				<div className="flex justify-between items-center">
 					<p className="">Total Items: </p>
 					<p className="font-[600] text-gray-500">{totalItems} Product(s)</p>

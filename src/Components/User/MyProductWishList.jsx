@@ -75,7 +75,7 @@ function MyProductWishList() {
 						</div>
 					))}
 				{wishlsitItems.length === 0 && (
-					<div className="text-lg text-gray-600">No items in wishlist</div>
+					<div className="text-lg text-gray-600 min-h-[100px]">No items in wishlist</div>
 				)}
 			</div>
 		</div>
