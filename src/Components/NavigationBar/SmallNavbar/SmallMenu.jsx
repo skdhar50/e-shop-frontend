@@ -41,7 +41,7 @@ function SmallMenu({ items, depth }) {
 					>
 						<p
 							onClick={() => goToPage(items._id)}
-							className={`${openSubmenu ? "text-orange-500" : ""} ${
+							className={`${openSubmenu ? "text-[#004E7E]" : ""} ${
 								depth > 0 ? `pl-${depth + 1}` : ``
 							}`}
 						>
@@ -67,7 +67,7 @@ function SmallMenu({ items, depth }) {
 						{openSubmenu && (
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
-								className="h-6 w-6 text-orange-400"
+								className="h-6 w-6 text-[#004E7E]"
 								onClick={() => setOpenSubmenu((prev) => !prev)}
 								fill="none"
 								viewBox="0 0 24 24"
