@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { formValidate } from "Helpers/FormValidator";
 import { useUpdateProfile } from "Hooks/useUser";
 import { PROFILE_URL } from "utilities/config.utility";
+import PrimaryButton from "Components/Common/Buttons/PrimaryButton";
 
 // const INITIAL_PersonalInfo_STATE = {
 // 	name: "",
@@ -218,18 +219,28 @@ function PersonalInfo({ profile }) {
 								type="date"
 								name="birthdate"
 								id="birthdate"
-								value={personalInfo.birthdate === "" ? personalInfo.birthdate : personalInfo.birthdate.toLocaleDateString("en-CA")}
+								value={
+									personalInfo.birthdate === ""
+										? personalInfo.birthdate
+										: personalInfo.birthdate.toLocaleDateString("en-CA")
+								}
 								onChange={handlePersonalInfoChange}
 								className="cursor-pointer w-full"
 							/>
 						</div>
 					</div>
-					<button
+					{/* <button
 						disabled={!isValidToProced()}
 						className="bg-green-600 w-full sm:w-1/4 py-2 text-white disabled:opacity-50 disabled:cursor-not-allowed"
 					>
 						Save
-					</button>
+					</button> */}
+					<PrimaryButton
+						disabled={!isValidToProced()}
+						classes="w-full sm:w-1/4 py-2"
+					>
+						Save
+					</PrimaryButton>
 				</div>
 			</form>
 		</>

@@ -10,6 +10,8 @@ import { useCartData } from "Hooks/useCart";
 import { usePlaceOrderData } from "Hooks/useOrder";
 import _ from "lodash";
 import { useNavigate } from "react-router-dom";
+import SecondaryButton from "Components/Common/Buttons/SecondaryButton";
+import PrimaryButton from "Components/Common/Buttons/PrimaryButton";
 
 function ConfirmOrder() {
 	const navigate = useNavigate();
@@ -159,7 +161,7 @@ function ConfirmOrder() {
 									Shipping Address
 								</p>
 								<div className="">
-									<ul className="space-y-2 p-2">
+									<ul className="space-y-2 pb-3">
 										{shippingAddress?.data.map((address) => (
 											<ShippingAddressCard
 												address={address}
@@ -168,14 +170,22 @@ function ConfirmOrder() {
 											/>
 										))}
 									</ul>
-									<button
+									{/* <button
 										onClick={handleOpenModal}
 										className="bg-indigo-100 w-full rounded"
 									>
 										<p className="py-2 flex justify-center items-center text-center cursor-pointer text-indigo-600">
 											<span className="text-2xl pr-2">+</span> Add New Address
+										</p>	
+									</button> */}
+									<SecondaryButton
+										handler={handleOpenModal}
+										classes="w-full rounded"
+									>
+										<p className="py-2 flex justify-center items-center text-center cursor-pointer">
+											<span className="text-2xl pr-2">+</span> Add New Address
 										</p>
-									</button>
+									</SecondaryButton>
 								</div>
 							</div>
 
@@ -197,20 +207,20 @@ function ConfirmOrder() {
 							</div>
 
 							<div className="flex justify-end md:mt-5 relative">
-								<button
-									className="hidden bg-indigo-500 md:block hover:bg-indigo-600 rounded-sm w-1/4 py-2 text-white disabled:opacity-50 disabled:cursor-not-allowed"
+								<PrimaryButton
 									disabled={!isValidToProced()}
+									classes="hidden md:block rounded-sm w-1/4 py-2"
 									type="submit"
 								>
 									Confirm Order
-								</button>
-								<button
-									className={`md:hidden bg-indigo-500 fixed bottom-0 left-0 right-0 w-full hover:bg-indigo-600 py-3 text-lg text-white disabled:opacity-50 disabled:cursor-not-allowed`}
-									disabled={!isValidToProced()}
+								</PrimaryButton>
+								<PrimaryButton
 									type="submit"
+									disabled={!isValidToProced()}
+									classes="md:hidden w-full py-3"
 								>
 									Confirm Order
-								</button>
+								</PrimaryButton>
 							</div>
 						</div>
 

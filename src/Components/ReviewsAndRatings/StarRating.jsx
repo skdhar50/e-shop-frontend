@@ -12,7 +12,7 @@ function StarRating({ handleRating, rating }) {
 						key={index}
 						onClick={() => handleRating(index)}
 						className={
-							(rating || hover) >= index ? "text-[#E96115]" : "text-gray-500"
+							(rating || hover) >= index ? "text-[#004E7E]" : "text-gray-500"
 						}
 						onMouseEnter={() => setHover(index)}
 						onMouseLeave={() => setHover(rating)}

@@ -70,13 +70,13 @@ function ProductList() {
 								<p className="text-2xl border-b pb-3 mb-4">Products</p>
 								<div className="w-full flex justify-end xl:hidden">
 									<button
-										className="mb-6 w-[8rem] py-2 text-gray-700 bg-indigo-50 flex items-center space-x-3 justify-center right-0"
+										className="mb-6 w-[8rem] py-2 text-[#005386] bg-[#e6f0f6] border border-[#b0d0e4] flex items-center space-x-3 justify-center right-0"
 										onClick={handleRightFilter}
 									>
 										<svg
 											width="20"
 											height="13"
-											className="fill-gray-500"
+											className="fill-[#005386]"
 											fill="none"
 											xmlns="http://www.w3.org/2000/svg"
 										>

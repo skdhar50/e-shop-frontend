@@ -26,13 +26,13 @@ function WhyUs() {
 	];
 	return (
 		<div className="xl:container pt-12 md:pt-20 antialiased">
-			<div className="flex flex-col justify-center items-center space-y-8">
+			<div className="flex flex-col px-2 justify-center items-center space-y-8">
 				<div className="title w-full">
 					<p className="font-poppins text-center text-[20px] md:text-[26px] xl:text-[32px] text-[#353535]">
 						Why Us?
 					</p>
 				</div>
-				<div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+				<div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4">
 					{ourFeatures.map((feature, index) => (
 						<WhyUsCard key={index} {...feature} />
 					))}

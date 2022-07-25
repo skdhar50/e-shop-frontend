@@ -44,7 +44,7 @@ function ProductCard({ product }) {
 		if (!isAuthenticated()) {
 			setLoginModalOpen(true);
 		}
-		
+
 		addToCartMutation(product._id);
 		setopenQuickViewModal(false);
 	};
@@ -67,13 +67,12 @@ function ProductCard({ product }) {
 					handleCart={handleAddToCart}
 				/>
 			)}
-			<div className="md:w-full md:h-fit border border-[#CBCBCB]  cursor-pointer rounded-md group relative">
-				<div className="-inset-0.5 absolute group-hover:bg-gradient-to-br from-cyan-500 to-pink-500 blur opacity-60"></div>
+			<div className="md:w-full md:h-fit border border-[#CBCBCB] shadow-md cursor-pointer rounded-md group relative">
+				<div className="-inset-0.5 absolute group-hover:bg-gradient-to-br from-[#004E7E] to-[#002F4C] blur transition-all duration-200 opacity-60"></div>
 				<div className="relative p-4 bg-white rounded-md">
 					<div className="top pb-2">
 						<p className="category text-xs md:text-sm text-[#565656]">
 							{category[0].name}
-							{brand.name}
 						</p>
 					</div>
 					<Link to={`/product-details/${_id}`}>
@@ -91,7 +90,9 @@ function ProductCard({ product }) {
 					</Link>
 					<div className="mt-2 space-y-3">
 						<div className="price flex justify-between">
-							<p className="text-base md:text-xl text-[#E96115]">${price}</p>
+							<p className="text-base md:text-xl text-[#005e97] text-opacity-80 font-semibold">
+								${price}
+							</p>
 							<img
 								src="/images/icons/stars.svg"
 								alt=""
@@ -102,19 +103,19 @@ function ProductCard({ product }) {
 						<div className="buttons flex justify-around">
 							<button
 								onClick={() => handleAddToWishlist(product)}
-								className="p-2 md:p-[0.625rem] rounded-full border border-[#E96115] hover:bg-[#E96115] stroke-[#E96115] hover:stroke-white"
+								className="p-2 md:p-[0.625rem] rounded-full border border-[#005386] hover:bg-[#005E97] stroke-[#005E97] hover:stroke-[#E6F0F6] transition-all duration-150"
 							>
 								<HeartIcon className="w-[0.94rem] md:w-[1rem] h-fit" />
 							</button>
 							<button
 								onClick={() => handleAddToCart(product)}
-								className="p-2 md:p-[0.625rem] rounded-full border border-[#E96115] hover:bg-[#E96115] fill-[#E96115] hover:fill-white"
+								className="p-2 md:p-[0.625rem] rounded-full border border-[#005386] hover:bg-[#005386] fill-[#005386] hover:fill-[#E6F0F6] transition-all duration-150"
 							>
 								<CartIcon />
 							</button>
 							<button
 								onClick={handleQuickView}
-								className="p-2 md:p-[0.625rem] rounded-full border border-[#E96115] hover:bg-[#E96115] fill-[#E96115] stroke-[#E96115] hover:fill-white hover:stroke-white"
+								className="p-2 md:p-[0.625rem] rounded-full border border-[#005386] hover:bg-[#005386] fill-[#005386] stroke-[#005386] hover:fill-[#E6F0F6] hover:stroke-[#E6F0F6] transition-all duration-150"
 							>
 								<QuickView />
 							</button>

@@ -47,7 +47,7 @@ function FilterListItems({ handleFilter }) {
 
 	return (
 		<>
-			<div className="border-b pb-4 space-y-1">
+			<div className="border-b border-[#b0d0e4] pb-4 space-y-1">
 				<p className="pb-2 text-lg font-[600] text-gray-600">Sort By</p>
 				<div className="flex flex-col space-y-2">
 					<div className="flex justify-start items-center">
@@ -83,10 +83,10 @@ function FilterListItems({ handleFilter }) {
 			</div>
 
 			<div className="">
-				<p className="text-xl border-b pb-3 mb-3">Filter By</p>
+				<p className="text-xl border-b border-[#b0d0e4] pb-3 mb-3">Filter By</p>
 			</div>
 
-			<div className="border-b pb-6">
+			<div className="border-b border-[#b0d0e4] pb-6">
 				<p className="pb-2 text-lg font-[600] text-gray-600">Price</p>
 				<div className="space-y-1">
 					<div className="flex space-x-2">
@@ -104,14 +104,14 @@ function FilterListItems({ handleFilter }) {
 							placeholder="max"
 							className="w-[100px] rounded focus:outline-none focus:border-green-600 focus:ring-0"
 						/>
-						<button className="bg-indigo-100 text-indigo-600 px-2 rounded hover:bg-indigo-200">
+						<button className="bg-[#b0d0e4] text-[#0068a8] px-2 rounded hover:bg-indigo-200">
 							&#10095;
 						</button>
 					</div>
 				</div>
 			</div>
 
-			<div className="border-b pb-4">
+			<div className="border-b border-[#b0d0e4] pb-4">
 				<p className="pb-2 pt-2 text-lg font-[600] text-gray-600">Categories</p>
 				<div className="space-y-2">
 					{categories?.data.map((category) => (
@@ -127,7 +127,7 @@ function FilterListItems({ handleFilter }) {
 				</div>
 			</div>
 
-			<div className="border-b pb-4">
+			<div className="pb-4">
 				<p className="pb-2 pt-2 text-lg font-[600] text-gray-600">Brands</p>
 				<div className="space-y-2">
 					{brands?.data.map((brand) => (

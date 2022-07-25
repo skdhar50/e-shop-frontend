@@ -1,3 +1,5 @@
+import PrimaryButton from "Components/Common/Buttons/PrimaryButton";
+import SecondaryButton from "Components/Common/Buttons/SecondaryButton";
 import { Link } from "react-router-dom";
 
 function QuickViewCard({ handleClose, product, handleCart }) {
@@ -102,18 +104,18 @@ function QuickViewCard({ handleClose, product, handleCart }) {
 
 						<div className="flex space-x-3">
 							<div className="w-full">
-								<button
-									onClick={() => handleCart(product)}
-									className="px-3 py-2 w-full bg-indigo-800 text-gray-50 rounded hover:bg-indigo-700"
+								<PrimaryButton
+									handler={() => handleCart(product)}
+									classes="px-3 py-2 w-full"
 								>
 									Add To Cart
-								</button>
+								</PrimaryButton>
 							</div>
 							<div className="w-full">
 								<Link to={`/product-details/${productId}`}>
-									<button className="px-3 py-2 w-full bg-indigo-800 text-gray-50 rounded hover:bg-indigo-700">
+									<SecondaryButton classes="px-3 py-2 w-full">
 										View Details
-									</button>
+									</SecondaryButton>
 								</Link>
 							</div>
 						</div>

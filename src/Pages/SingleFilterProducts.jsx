@@ -133,7 +133,7 @@ function SingleFilterProducts() {
 								<p className="">Sort By</p>
 								<div className="relative">
 									<button
-										className="min-w-[11rem] py-2 text-gray-700 bg-indigo-100 flex items-center space-x-2 justify-center"
+										className="min-w-[11rem] py-2 text-[#005386] bg-[#e6f0f6] border border-[#b0d0e4] flex items-center space-x-2 justify-center"
 										onClick={handleDropdown}
 									>
 										{sortOption === "Default" && (
@@ -155,12 +155,12 @@ function SingleFilterProducts() {
 										<p className="">{sortOption}</p>
 									</button>
 									{openDropdown && (
-										<ul className="absolute bg-indigo-100 z-40 w-full mt-1">
+										<ul className="absolute bg-[#e6f0f6] border border-[#b0d0e4] z-40 w-full mt-1 shadow-md">
 											<li
 												onClick={() =>
 													handleSmallSort("Rating", "asce", "createdAt")
 												}
-												className="px-2 py-2 hover:bg-gray-300 cursor-pointer"
+												className="px-2 py-2 hover:bg-[#d9e8f2] cursor-pointer"
 											>
 												Rating
 											</li>
@@ -172,7 +172,7 @@ function SingleFilterProducts() {
 														"unitPrice"
 													)
 												}
-												className="px-2 py-2 hover:bg-gray-300 cursor-pointer"
+												className="px-2 py-2 hover:bg-[#d9e8f2] cursor-pointer"
 											>
 												Price (Low to High)
 											</li>
@@ -184,7 +184,7 @@ function SingleFilterProducts() {
 														"unitPrice"
 													)
 												}
-												className="px-2 py-2 hover:bg-gray-300 cursor-pointer"
+												className="px-2 py-2 hover:bg-[#d9e8f2] cursor-pointer"
 											>
 												Price (High to Low)
 											</li>

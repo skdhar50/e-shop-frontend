@@ -6,7 +6,7 @@ function MyOrderList() {
 	const { data: orders, isLoading, isError, error, isSuccess } = useOrderData();
 
 	return (
-		<div className="border-2 bg-white drop-shadow-sm p-4 md:p-6 space-y-8 xl:flex-grow">
+		<div className="border-2 bg-white drop-shadow-sm p-2 md:p-6 space-y-8 xl:flex-grow">
 			<div className="border-b-2 pb-4">
 				<p className="text-2xl">My Orders</p>
 			</div>

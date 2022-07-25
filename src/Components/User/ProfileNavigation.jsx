@@ -25,14 +25,29 @@ function ProfileNavigation() {
 			</div>
 			<div className="">
 				<ul className="text-gray-800">
-					<li className="cursor-pointer hover:bg-gray-200 px-8 py-2">
-						<NavLink to="/profile/account">My Account</NavLink>
+					<li className="cursor-pointer hover:bg-[#d9e8f2] px-8 py-2">
+						<NavLink
+							className={({ isActive }) => (isActive ? "text-[#0068a8]" : "")}
+							to="/profile/account"
+						>
+							<p className="">My Account</p>
+						</NavLink>
 					</li>
-					<li className="cursor-pointer hover:bg-gray-200 px-8 py-2">
-						<NavLink to="/profile/orders">My Orders</NavLink>
+					<li className="cursor-pointer hover:bg-[#d9e8f2] px-8 py-2">
+						<NavLink
+							className={({ isActive }) => (isActive ? "text-[#0068a8]" : "")}
+							to="/profile/orders"
+						>
+							My Orders
+						</NavLink>
 					</li>
-					<li className="cursor-pointer hover:bg-gray-200 px-8 py-2">
-						<NavLink to="/profile/wishlist">My Wishlist</NavLink>
+					<li className="cursor-pointer hover:bg-[#d9e8f2] px-8 py-2">
+						<NavLink
+							className={({ isActive }) => (isActive ? "text-[#0068a8]" : "")}
+							to="/profile/wishlist"
+						>
+							My Wishlist
+						</NavLink>
 					</li>
 				</ul>
 			</div>

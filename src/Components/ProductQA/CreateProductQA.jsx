@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useCreateQuestion } from "Hooks/useQuestions";
+import PrimaryButton from "Components/Common/Buttons/PrimaryButton";
 
 function CreateProductQA({ productId }) {
 	const [question, setQuestion] = useState("");
@@ -39,12 +40,19 @@ function CreateProductQA({ productId }) {
 						className="w-full resize-none border-0 border-b border-b-gray-300 outline-none p-1 md:p-2 focus:ring-0 placeholder:text-sm md:placeholder:text-base placeholder:text-slate-400"
 						placeholder="Didn't get the right answer you were looking for? Ask us here"
 					/>
-					<button
+					{/* <button
 						className="w-full md:w-fit border px-6 py-2 h-fit border-indigo-500 text-indigo-500 hover:bg-indigo-500 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
 						disabled={question.length === 0}
 					>
 						Submit
-					</button>
+					</button> */}
+					<PrimaryButton
+						type="submit"
+						classes="w-full md:w-fit px-6 py-2 h-fit"
+						disabled={question.length === 0}
+					>
+						Submit
+					</PrimaryButton>
 				</form>
 			</div>
 		</div>

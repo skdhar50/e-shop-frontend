@@ -67,7 +67,7 @@ function LeftNavbarSmall({ isOpen, handleLeftNavbar }) {
 			</div>
 			<div
 				className={
-					"bg-white w-80 h-full fixed top-0 overflow-auto space-y-12 transform transition-all duration-300" +
+					"bg-[#e6f0f6] w-[300px] h-full fixed top-0 overflow-auto space-y-12 transform transition-all duration-300" +
 					(isOpen
 						? " translate-x-0 ease-in opacity-100"
 						: " -translate-x-full ease-out opacity-0")
@@ -79,7 +79,7 @@ function LeftNavbarSmall({ isOpen, handleLeftNavbar }) {
 							{categories?.data.map((category) => {
 								const depth = 0;
 								return (
-									<div className="" key={category._id}>
+									<div className="text-sm sm:text-base" key={category._id}>
 										<SmallMenu items={category} depth={depth} />
 									</div>
 								);

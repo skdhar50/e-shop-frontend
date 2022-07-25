@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useChangePassword } from "Hooks/useUser";
 import { formValidate } from "Helpers/FormValidator";
+import PrimaryButton from "Components/Common/Buttons/PrimaryButton";
 
 const INITIAL_Password_STATE = {
 	currentPassword: "",
@@ -109,12 +110,18 @@ function ChangePassword() {
 						{errors.confirmPassword.length > 0 && errors.confirmPassword}
 					</p>
 				)}
-				<button
+				{/* <button
 					disabled={!isValidToProced()}
 					className="bg-green-600 w-full sm:w-1/4 py-2 text-white disabled:opacity-50 disabled:cursor-not-allowed"
 				>
 					Save
-				</button>
+				</button> */}
+				<PrimaryButton
+					disabled={!isValidToProced()}
+					classes="w-full sm:w-1/4 py-2"
+				>
+					Save
+				</PrimaryButton>
 			</form>
 		</>
 	);
