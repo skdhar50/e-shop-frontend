@@ -35,7 +35,7 @@ function Index({ title, children }) {
 			{scrollToTop && (
 				<button
 					onClick={handleScrollToTop}
-					className="fixed bottom-10 right-5 md:right-10 z-50 rounded-full bg-gray-300/60 p-1.5 md:p-2 flex justify-center items-center text-gray-600"
+					className="fixed bottom-14 right-5 md:right-10 z-50 rounded-full bg-gray-300/60 p-1.5 md:p-2 flex justify-center items-center text-gray-600"
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"

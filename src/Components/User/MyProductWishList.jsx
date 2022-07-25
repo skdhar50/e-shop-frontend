@@ -1,3 +1,5 @@
+import DangerButton from "Components/Common/Buttons/DangerButton";
+import PrimaryButton from "Components/Common/Buttons/PrimaryButton";
 import {
 	useWishlistData,
 	useRemoveFromWishlist,
@@ -33,8 +35,8 @@ function MyProductWishList() {
 	};
 
 	return (
-		<div className="border-2 drop-shadow-sm p-4 md:p-6 space-y-8 xl:flex-grow">
-			<div className="">
+		<div className="border-2 bg-white drop-shadow-sm p-4 md:p-6 space-y-8 xl:flex-grow">
+			<div className="border-b-2 pb-4">
 				<p className="text-2xl">My Wishlist</p>
 			</div>
 			<div className="space-y-4">
@@ -58,24 +60,38 @@ function MyProductWishList() {
 									<span className="italic text-indigo-400">more</span>
 								</p>
 								<div className="space-x-4 flex pt-2">
-									<button
+									{/* <button
 										onClick={() => handleMoveToCart(item)}
 										className="bg-indigo-500 text-white py-2 grow md:max-w-[150px] text-center rounded-sm"
 									>
 										Move to Cart
-									</button>
-									<button
+									</button> */}
+									<PrimaryButton
+										handler={() => handleMoveToCart(item)}
+										classes="py-2 grow md:max-w-[150px]"
+									>
+										Move to Cart
+									</PrimaryButton>
+									{/* <button
 										onClick={() => handleRemove(item)}
 										className="bg-red-500 text-white py-2 grow md:max-w-[150px] text-center rounded-sm"
 									>
 										Remove
-									</button>
+									</button> */}
+									<DangerButton
+										handler={() => handleRemove(item)}
+										classes="py-2 grow md:max-w-[150px] text-center"
+									>
+										Remove
+									</DangerButton>
 								</div>
 							</div>
 						</div>
 					))}
 				{wishlsitItems.length === 0 && (
-					<div className="">No items in wishlist</div>
+					<div className="text-lg text-gray-600 min-h-[100px]">
+						No items in wishlist
+					</div>
 				)}
 			</div>
 		</div>

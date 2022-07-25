@@ -10,7 +10,10 @@ module.exports = {
 				sans: ["Open Sans", "sans-serif"],
 				poppins: ["Poppins", "sans-serif"],
 			},
+			zIndex: {
+				100: "100",
+			},
 		},
 	},
-	plugins: [require("@tailwindcss/forms"), ],
+	plugins: [require("@tailwindcss/forms")],
 };

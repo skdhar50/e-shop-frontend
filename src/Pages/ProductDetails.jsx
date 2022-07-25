@@ -11,9 +11,15 @@ import { useProductDetails } from "Hooks/useProduct";
 import { useReviewData } from "Hooks/useReviews";
 import { useQuestionData } from "Hooks/useQuestions";
 import { isAuthenticated } from "utilities/auth.utility";
+import { useAtom } from "jotai";
+import { loginModal } from "Jotai/ModalState";
+import { useAddToCart } from "Hooks/useCart";
+import PrimaryButton from "Components/Common/Buttons/PrimaryButton";
 
 function ProductDetails() {
 	const { id } = useParams();
+	const [, setLoginModalOpen] = useAtom(loginModal);
+	const { mutate: addToCartMutation } = useAddToCart();
 	const {
 		data: products,
 		isLoading: productIsLoading,
@@ -89,11 +95,20 @@ function ProductDetails() {
 		return <div className="">Loading</div>;
 	}
 
+	
+	const handleAddToCart = (id) => {
+		if (!isAuthenticated()) {
+			setLoginModalOpen(true);
+		}
+
+		addToCartMutation(id);
+	};
+
 	return (
 		<Layout title="Product Details">
 			<Outlet />
 			<div className="md:px-6 md:pt-1 xl:container antialiased">
-				<div className="mt-4 bg-white drop-shadow md:pb-4 md:flex border border-gray-300 w-full h-full">
+				<div className="-mt-3 md:mt-4 bg-white drop-shadow md:pb-4 md:flex border border-gray-300 w-full h-full">
 					{/* Product Preview Section */}
 					<ProductPreview products={products?.data} />
 
@@ -109,6 +124,13 @@ function ProductDetails() {
 					{/* {otherProducts.map((otherProduct, index) => (
 						<ProductListCarousel {...otherProduct} key={index} />
 					))} */}
+
+					<PrimaryButton
+						handler={() => handleAddToCart(products?.data[0]?._id)}
+						classes="px-12 py-2 md:hidden z-50 sticky bottom-0 left-0 right-0 w-full"
+					>
+						Add to Cart
+					</PrimaryButton>
 
 					{/* Create Reviews And Ratings */}
 					{isAuthenticated() && <CreateReviewsAndRatings productId={id} />}

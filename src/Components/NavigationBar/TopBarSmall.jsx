@@ -3,7 +3,7 @@ import CartIcon from "Components/Cart/CartIcon";
 
 function TopBarSmall({ handleLeftNavbar, handleRightNavbar }) {
 	return (
-		<div className="fixed top-0 w-full z-40 bg-gray-700 h-[70px] flex items-center">
+		<div className="fixed top-0 w-full z-40 bg-[#002F4C] h-[70px] flex items-center">
 			<div className="flex justify-between items-center w-full px-4">
 				<div className="flex items-center space-x-8">
 					<button className="" onClick={handleLeftNavbar}>
@@ -14,7 +14,7 @@ function TopBarSmall({ handleLeftNavbar, handleRightNavbar }) {
 						/>
 					</button>
 					<Link to="/">
-						<p className="text-2xl font-poppins text-white">PUC Shop</p>
+						<p className="text-2xl font-poppins text-[#E6F0F6]">PUC Shop</p>
 					</Link>
 				</div>
 				<div className="flex items-center space-x-8">

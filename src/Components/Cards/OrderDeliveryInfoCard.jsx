@@ -12,19 +12,19 @@ function OrderDeliveryInfoCard({ title, date, isDone, index }) {
 		>
 			<div
 				className={
-					"md:p-4 md:w-[70px] md:h-[70px] xl:p-6 xl:w-[90px] xl:h-[90px] rounded-full flex items-center justify-center" +
+					"md:p-4 md:w-[70px] md:h-[70px] xl:p-6 xl:w-[80px] xl:h-[80px] rounded-full flex items-center justify-center" +
 					(isDone ? " bg-green-500" : " bg-gray-300")
 				}
 			>
 				<img
 					src="/images/icons/check.svg"
 					alt=""
-					className="w-[40px] h-[40px]"
+					className="w-[35px] h-[35px]"
 				/>
 			</div>
-			<div className="text-center pt-3 text-gray-700 md:text-sm xl:text-base">
+			<div className="text-center pt-3 text-gray-600 md:text-sm">
 				<p className="">{title}</p>
-				<p className="">{date}</p>
+				{isDone ? <p className="">{date}</p> : <p className="">Pending</p>}
 			</div>
 		</div>
 	);

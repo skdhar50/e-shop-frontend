@@ -11,15 +11,15 @@ function CartItem({ item, onIncrease, onDecrease, onRemove, onSelect }) {
 	return (
 		<div
 			className={
-				"cart--items--item flex flex-col 2xl:flex-row shadow 2xl:items-center 2xl:justify-around border rounded-sm p-4 md:p-6 space-y-5 md:space-y-4 " +
-				(isSelected ? "bg-teal-50" : "")
+				"cart--items--item flex flex-col 2xl:flex-row shadow 2xl:items-center 2xl:justify-around border rounded-sm py-4 px-3 md:p-6 space-y-5 md:space-y-4 " +
+				(isSelected ? "bg-[#e6f0f6]" : "")
 			}
 		>
 			<div className="flex items-center space-x-2">
 				<div className="flex items-center space-x-4 md:space-x-6">
 					<input
 						type="checkbox"
-						className="h-4 w-4 text-green-700 focus:outline-none focus:ring-0 cursor-pointer"
+						className="h-4 w-4 text-[#004E7E] focus:outline-none focus:ring-0 cursor-pointer"
 						checked={isSelected}
 						onChange={() => onSelect()}
 					/>

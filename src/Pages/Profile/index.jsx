@@ -5,11 +5,13 @@ import { Outlet } from "react-router-dom";
 function index() {
 	return (
 		<Layout title="Profile">
-			<div className="px-0 md:px-6 xl:container antialiased">
-				<div className="lg:flex lg:justify-center lg:space-x-6 items-top mt-20">
+			<div className="md:px-6 xl:container antialiased">
+				<div className="lg:flex lg:justify-center lg:space-x-6 items-top mt-24 lg:mt-12">
 					<ProfileNavigation />
 
-					<Outlet />
+					<div className="flex-grow">
+						<Outlet />
+					</div>
 				</div>
 			</div>
 		</Layout>

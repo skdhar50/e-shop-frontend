@@ -42,9 +42,9 @@ export const getUserProfile = () => {
 	});
 };
 
-export const getProfile = ({ queryKey }) => {
+export const getProfile = () => {
 	return request({
-		url: `/user/${queryKey[1]}`,
+		url: `/user/profile`,
 		method: "GET",
 	});
 };

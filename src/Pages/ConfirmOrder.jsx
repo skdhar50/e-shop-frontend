@@ -7,12 +7,15 @@ import { useState } from "react";
 import { useShippingAddressData } from "Hooks/useShippingAddress";
 import { isAuthenticated } from "utilities/auth.utility";
 import { useCartData } from "Hooks/useCart";
-import {usePlaceOrderData} from "Hooks/useOrder";
+import { usePlaceOrderData } from "Hooks/useOrder";
 import _ from "lodash";
-
-// Problem here
+import { useNavigate } from "react-router-dom";
+import SecondaryButton from "Components/Common/Buttons/SecondaryButton";
+import PrimaryButton from "Components/Common/Buttons/PrimaryButton";
 
 function ConfirmOrder() {
+	const navigate = useNavigate();
+
 	const {
 		data: shippingAddress,
 		isLoading: shippingLoading,
@@ -27,8 +30,6 @@ function ConfirmOrder() {
 		error,
 		isError,
 	} = useCartData(isAuthenticated());
-
-	const {mutate: placeOrderMutation} = usePlaceOrderData();
 
 	const getCartTotal = () => {
 		let carttotal = cartItems?.data.map((item) => {
@@ -80,6 +81,24 @@ function ConfirmOrder() {
 	const [selectedAddress, setSelectedAddress] = useState({});
 	const [selectedPayment, setSelectedPayment] = useState("");
 
+	const handleNavigate = (orderId, paymentMethod) => {
+		if (paymentMethod === "cod") {
+			navigate("/profile/orders", {
+				replace: true,
+			});
+		}
+		if (paymentMethod === "card") {
+			navigate(`/payment/${orderId}`, {
+				replace: true,
+			});
+		}
+	};
+
+	const { mutate: placeOrderMutation } = usePlaceOrderData(
+		handleNavigate,
+		selectedPayment
+	);
+
 	const handleSelectAddress = (address) => {
 		const obj = _.pick(address, [
 			"area",
@@ -110,8 +129,7 @@ function ConfirmOrder() {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		if(!isValidToProced())
-			return;
+		if (!isValidToProced()) return;
 
 		const temp = {
 			shipping: selectedAddress,
@@ -120,6 +138,10 @@ function ConfirmOrder() {
 		};
 		placeOrderMutation(temp);
 	};
+	// if (orderId.length > 0) {
+	// 	console.log(orderId);
+	// 	setOrderId("");
+	// }
 
 	return (
 		<Layout title="Confirm Order">
@@ -128,14 +150,18 @@ function ConfirmOrder() {
 			)}
 			<div className="md:px-6 xl:container antialiased">
 				<div className="pb-14 space-y-4 xl:space-y-0 md:pb-0 xl:flex xl:space-x-6 mt-10">
-					<form method="POST" encType="multipart/form-data" onSubmit={handleSubmit}>
+					<form
+						method="POST"
+						encType="multipart/form-data"
+						onSubmit={handleSubmit}
+					>
 						<div className="md:flex-grow bg-white drop-shadow-sm space-y-8 border md:shadow-md p-3 md:p-6">
 							<div className="space-y-4">
 								<p className="text-xl md:text-2xl font-[600] text-gray-600">
 									Shipping Address
 								</p>
 								<div className="">
-									<ul className="space-y-2 p-2">
+									<ul className="space-y-2 pb-3">
 										{shippingAddress?.data.map((address) => (
 											<ShippingAddressCard
 												address={address}
@@ -144,14 +170,22 @@ function ConfirmOrder() {
 											/>
 										))}
 									</ul>
-									<button
+									{/* <button
 										onClick={handleOpenModal}
 										className="bg-indigo-100 w-full rounded"
 									>
 										<p className="py-2 flex justify-center items-center text-center cursor-pointer text-indigo-600">
 											<span className="text-2xl pr-2">+</span> Add New Address
+										</p>	
+									</button> */}
+									<SecondaryButton
+										handler={handleOpenModal}
+										classes="w-full rounded"
+									>
+										<p className="py-2 flex justify-center items-center text-center cursor-pointer">
+											<span className="text-2xl pr-2">+</span> Add New Address
 										</p>
-									</button>
+									</SecondaryButton>
 								</div>
 							</div>
 
@@ -173,20 +207,20 @@ function ConfirmOrder() {
 							</div>
 
 							<div className="flex justify-end md:mt-5 relative">
-								<button
-									className="hidden bg-indigo-500 md:block hover:bg-indigo-600 rounded-sm w-1/4 py-2 text-white disabled:opacity-50 disabled:cursor-not-allowed"
+								<PrimaryButton
 									disabled={!isValidToProced()}
+									classes="hidden md:block rounded-sm w-1/4 py-2"
 									type="submit"
 								>
 									Confirm Order
-								</button>
-								<button
-									className={`md:hidden bg-indigo-500 fixed bottom-0 left-0 right-0 w-full hover:bg-indigo-600 py-3 text-lg text-white disabled:opacity-50 disabled:cursor-not-allowed`}
-									disabled={!isValidToProced()}
+								</PrimaryButton>
+								<PrimaryButton
 									type="submit"
+									disabled={!isValidToProced()}
+									classes="md:hidden w-full py-3"
 								>
 									Confirm Order
-								</button>
+								</PrimaryButton>
 							</div>
 						</div>
 

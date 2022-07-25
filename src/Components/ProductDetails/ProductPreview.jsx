@@ -11,6 +11,8 @@ import { useAddToWishlist } from "Hooks/useWishlist";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { STATUS } from "../../Redux/Slices/ProductSlice";
+import PrimaryButton from "Components/Common/Buttons/PrimaryButton";
+import SecondaryButton from "Components/Common/Buttons/SecondaryButton";
 
 function ProductPreview({ products }) {
 	const {
@@ -112,7 +114,7 @@ function ProductPreview({ products }) {
 					)}
 					{/* Small Screen Buttons */}
 					<div className="md:hidden w-full flex justify-between items-center space-x-2">
-						<button className="text-lg px-4 w-full py-2  flex space-x-2 justify-center items-center border-2 rounded-md bg-gray-50 shadow-sm">
+						{/* <button className="text-lg px-4 w-full py-2  flex space-x-2 justify-center items-center border-2 rounded-md bg-gray-50 shadow-sm">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								className="h-6 w-6 stroke-slate-400"
@@ -128,14 +130,31 @@ function ProductPreview({ products }) {
 								/>
 							</svg>
 							<p className="">Reviews</p>
-						</button>
-						<button
-							onClick={() => handleAddToWishlist(id)}
-							className="text-lg px-4 w-full py-2  flex space-x-2 justify-center items-center border-2 rounded-md bg-gray-50 shadow-sm"
+						</button> */}
+						<SecondaryButton classes="px-4 w-full py-2 flex space-x-2 justify-center items-center rounded-md shadow-md">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								className="h-6 w-6 stroke-[#004E7E]"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+								strokeWidth="2"
+							>
+								<path
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									d="M17 8h2a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-2v4l-4-4H9a1.994 1.994 0 0 1-1.414-.586m0 0L11 14h4a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2v4l.586-.586z"
+								/>
+							</svg>
+							<p className="">Reviews</p>
+						</SecondaryButton>
+						<SecondaryButton
+							handler={() => handleAddToWishlist(id)}
+							classes="px-4 w-full py-2 flex space-x-2 justify-center items-center rounded-md shadow-md"
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
-								className="h-6 w-6 stroke-slate-400"
+								className="h-6 w-6 stroke-[#004E7E]"
 								fill="none"
 								viewBox="0 0 24 24"
 								stroke="currentColor"
@@ -148,31 +167,24 @@ function ProductPreview({ products }) {
 								/>
 							</svg>
 							<p className="">Save</p>
-						</button>
+						</SecondaryButton>
 					</div>
 				</div>
 
 				<div className="md:flex md:space-x-6">
-					<button
-						onClick={() => handleAddToWishlist(id)}
-						className="px-8 hover:bg-indigo-400 text-white font-[600] text-lg py-2 bg-indigo-500 hidden md:block"
+					<PrimaryButton
+						handler={() => handleAddToCart(id)}
+						classes="px-12 py-2 hidden md:block"
+					>
+						Add to Cart
+					</PrimaryButton>
+
+					<SecondaryButton
+						handler={() => handleAddToWishlist(id)}
+						classes="px-8 py-2 hidden md:block"
 					>
 						Add to Favorites
-					</button>
-					<button
-						onClick={() => handleAddToCart(id)}
-						className="px-12 hover:bg-indigo-400 text-white font-[600] text-lg py-2 bg-indigo-500 hidden md:block"
-					>
-						Add to Cart
-					</button>
-
-					{/* Small Screen Button */}
-					<button
-						onClick={() => handleAddToCart(id)}
-						className="px-12 hover:bg-indigo-400 text-white font-[600] text-lg py-2 bg-indigo-500 md:hidden z-50 sticky bottom-0 left-0 right-0 w-full"
-					>
-						Add to Cart
-					</button>
+					</SecondaryButton>
 				</div>
 			</div>
 		</div>

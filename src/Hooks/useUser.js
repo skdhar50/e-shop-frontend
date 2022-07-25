@@ -12,8 +12,10 @@ import {
 import { useAtom } from "jotai";
 import { closeAllModal } from "Jotai/ModalState";
 
-export const useUserData = (id) => {
-	return useQuery(["user", id], getProfile);
+export const useUserData = (isEnabled) => {
+	return useQuery("user", getProfile, {
+		enabled: isEnabled
+	});
 };
 
 export const useOrderData = (id) => {

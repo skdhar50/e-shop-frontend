@@ -20,7 +20,7 @@ function ShippingAddressCard({ address, handleSelectAddress }) {
 						className="w-5 h-5 cursor-pointer text-indigo-600 focus:outline-none focus:ring-0"
 					/>
 					<label htmlFor="" className="">
-						<p className="text-xl text-gray-600 font-bold">{area}</p>
+						<p className="sm:text-xl text-gray-600 font-bold">{area}</p>
 					</label>
 				</div>
 
@@ -47,7 +47,7 @@ function ShippingAddressCard({ address, handleSelectAddress }) {
 				</div>
 			</div>
 			<div className="space-x-8 md:space-x-4 mt-4 md:pt-0 justify-end flex">
-				<button className="flex justify-center items-center text-blue-500 hover:text-opacity-80 space-x-1">
+				<button className="text-sm sm:text-base flex justify-center items-center text-blue-500 hover:text-opacity-80 space-x-1">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						className="h-6 w-6 text-blue-400"
@@ -66,7 +66,7 @@ function ShippingAddressCard({ address, handleSelectAddress }) {
 				</button>
 				<button
 					onClick={() => handleDelete(_id)}
-					className="flex justify-center items-center text-blue-500 group space-x-1"
+					className="text-sm sm:text-base flex justify-center items-center text-blue-500 group space-x-1"
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"

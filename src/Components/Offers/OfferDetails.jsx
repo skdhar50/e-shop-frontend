@@ -1,8 +1,27 @@
 import React from "react";
 import OfferTimeCounter from "./OfferTimeCounter";
-import {Link} from "react-router-dom"
+import { Link, useParams } from "react-router-dom";
+import { useSingleOffer } from "Hooks/useOffers";
+import { format } from "date-fns";
 
 function OfferDetails() {
+	const { id } = useParams();
+	const { data: offer, isLoading: offerLoading } = useSingleOffer(id);
+
+	if(offerLoading) {
+		return <div className="">Loading....</div>
+	}
+
+	const {
+		name,
+		startDate,
+		endDate,
+		description,
+		discountAmount,
+		limit,
+		photo,
+	} = offer?.data[0];
+
 	return (
 		<div className="md:px-6 xl:container antialiased pt-6 lg:pt-12 px-3">
 			<div className=" relative flex items-center justify-center">
@@ -29,29 +48,21 @@ function OfferDetails() {
 							</div>
 						</Link>
 						<div className="">
-							<OfferTimeCounter targetDate={new Date("24 August 2022")} />
+							<OfferTimeCounter targetDate={new Date(endDate)} />
 						</div>
 					</div>
 					<div className="">
-						<img
-							src="/images/offers/offer.jpg"
-							alt=""
-							className="aspect-[4/4]"
-						/>
+						<img src={photo} alt="" className="aspect-square w-full" />
 					</div>
 					<div className="space-y-4 px-8 md:px-12 pt-8 pb-12 bg-white">
 						<div className="border-b border-gray-300 pb-3 space-y-2">
-							<p className="text-2xl text-gray-600 font-semibold">
-								This is the offer Title
+							<p className="text-2xl text-gray-600 font-semibold">{name}</p>
+							<p className="text-sm">
+								From: {format(new Date(startDate), "PP")} -
+								{format(new Date(endDate), "PP")}
 							</p>
-							<p className="text-sm">From: 24 July 2022 - 12 August 2022</p>
 						</div>
-						<div className="text-gray-600">
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae
-							tempore error, ex, distinctio omnis incidunt laborum accusamus
-							porro velit consectetur rem soluta debitis fugiat aperiam cum quas
-							illo veritatis earum.
-						</div>
+						<div className="text-gray-600">{description}</div>
 						<div className="space-y-2">
 							<p className="font-semibold text-gray-700 text-lg">Conditions:</p>
 							<ul className="list-disc text-gray-600 space-y-2 pl-4">

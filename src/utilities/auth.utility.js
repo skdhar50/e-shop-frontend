@@ -14,8 +14,11 @@ export const isAuthenticated = () => {
 	}
 };
 
-export const useInfo = () => {
+export const userInfo = () => {
 	const token = localStorage.getItem("token");
+	if(token === null) {
+		return undefined
+	}
 	const decoded = jwt_decode(token);
 
 	return {
