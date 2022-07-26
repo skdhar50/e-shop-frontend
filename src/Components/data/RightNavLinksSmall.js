@@ -51,6 +51,13 @@ export const links = [
 		id: 7,
 	},
 	{
+		title: "Offers",
+		url: "/offers",
+		icon: "/images/icons/RightNavSmall/services.svg",
+		isShow: true,
+		id: 14,
+	},
+	{
 		title: "Services",
 		url: "/services",
 		icon: "/images/icons/RightNavSmall/services.svg",

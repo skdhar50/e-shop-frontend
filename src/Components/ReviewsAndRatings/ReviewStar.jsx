@@ -10,7 +10,7 @@ function ReviewStar({ rating }) {
 						key={index}
 						disabled={true}
 						onClick={(e) => e.preventDefault()}
-						className={rating >= index ? "text-[#E96115]" : "text-gray-500"}
+						className={rating >= index ? "text-[#004E7E]" : "text-gray-300"}
 					>
 						<span className="text-lg">&#9733;</span>
 					</button>

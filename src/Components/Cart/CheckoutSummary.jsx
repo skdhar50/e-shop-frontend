@@ -1,5 +1,5 @@
 function CheckoutSummary(props) {
-	const { subTotal = 0, shipping = 0, payablePrice = 0 } = props;
+	const { subTotal = 0, shipping = 0, discount = 0, payablePrice = 0 } = props;
 	return (
 		<div>
 			<p className="pb-4 text-xl">Checkout Summary</p>
@@ -17,8 +17,12 @@ function CheckoutSummary(props) {
 					<p className="">{subTotal + shipping} TK</p>
 				</div>
 				<div className="flex justify-between items-center pt-3">
+					<p className="">Discount</p>
+					<p className="">{discount} TK</p>
+				</div>
+				<div className="flex justify-between items-center pt-3">
 					<p className="">Payable Total</p>
-					<p className="">{payablePrice} TK</p>
+					<p className="">{payablePrice - discount} TK</p>
 				</div>
 			</div>
 		</div>

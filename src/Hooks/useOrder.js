@@ -21,7 +21,7 @@ export const usePlaceOrderData = (handleNavigate, selectedPayment) => {
 	return useMutation(placeOrder, {
 		onSuccess: (data) => {
 			queryClient.invalidateQueries("cartItems");
-			console.log(data.data, selectedPayment);
+		
 			handleNavigate(data.data, selectedPayment);
 		},
 		onError: (err) => {

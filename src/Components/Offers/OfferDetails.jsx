@@ -3,6 +3,7 @@ import OfferTimeCounter from "./OfferTimeCounter";
 import { Link, useParams } from "react-router-dom";
 import { useSingleOffer } from "Hooks/useOffers";
 import { format } from "date-fns";
+import { OFFER_URL } from "utilities/config.utility";
 
 function OfferDetails() {
 	const { id } = useParams();
@@ -52,54 +53,24 @@ function OfferDetails() {
 						</div>
 					</div>
 					<div className="">
-						<img src={photo} alt="" className="aspect-square w-full" />
+						<img
+							src={`${OFFER_URL}/${photo}`}
+							alt=""
+							className="aspect-square w-full"
+						/>
 					</div>
 					<div className="space-y-4 px-8 md:px-12 pt-8 pb-12 bg-white">
 						<div className="border-b border-gray-300 pb-3 space-y-2">
 							<p className="text-2xl text-gray-600 font-semibold">{name}</p>
-							<p className="text-sm">
-								From: {format(new Date(startDate), "PP")} -
-								{format(new Date(endDate), "PP")}
-							</p>
+							<div className="flex text-sm text-[#004E7E] font-semibold">
+								From:
+								<p className="italic font-normal pl-2">
+									{format(new Date(startDate), "PP")} -{" "}
+									{format(new Date(endDate), "PP")}
+								</p>
+							</div>
 						</div>
 						<div className="text-gray-600">{description}</div>
-						<div className="space-y-2">
-							<p className="font-semibold text-gray-700 text-lg">Conditions:</p>
-							<ul className="list-disc text-gray-600 space-y-2 pl-4">
-								<li className="">
-									Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-									Dolorem, animi.
-								</li>
-								<li className="">
-									Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-									Dolorem, animi.
-								</li>
-								<li className="">
-									Lorem ipsum dolor sit amet consectetur adipisicing elit.
-									Aperiam quasi beatae dolore fuga dolorum natus!
-								</li>
-								<li className="">
-									Lorem ipsum dolor sit amet consectetur adipisicing elit.
-									Aperiam quasi beatae dolore fuga dolorum natus!
-								</li>
-								<li className="">
-									Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-									Dolorem, animi.
-								</li>
-								<li className="">
-									Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-									Dolorem, animi.
-								</li>
-								<li className="">
-									Lorem ipsum dolor sit amet consectetur adipisicing elit.
-									Aperiam quasi beatae dolore fuga dolorum natus!
-								</li>
-								<li className="">
-									Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-									Dolorem, animi.
-								</li>
-							</ul>
-						</div>
 					</div>
 				</div>
 			</div>

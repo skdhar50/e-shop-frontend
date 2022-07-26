@@ -14,7 +14,7 @@ import { STATUS } from "../../Redux/Slices/ProductSlice";
 import PrimaryButton from "Components/Common/Buttons/PrimaryButton";
 import SecondaryButton from "Components/Common/Buttons/SecondaryButton";
 
-function ProductPreview({ products }) {
+function ProductPreview({ products, handleScrollToReview }) {
 	const {
 		_id: id,
 		photos,
@@ -131,7 +131,10 @@ function ProductPreview({ products }) {
 							</svg>
 							<p className="">Reviews</p>
 						</button> */}
-						<SecondaryButton classes="px-4 w-full py-2 flex space-x-2 justify-center items-center rounded-md shadow-md">
+						<SecondaryButton
+							handler={handleScrollToReview}
+							classes="px-4 w-full py-2 flex space-x-2 justify-center items-center rounded-md shadow-md"
+						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								className="h-6 w-6 stroke-[#004E7E]"

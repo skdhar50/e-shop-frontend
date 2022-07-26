@@ -16,7 +16,7 @@ function CustomersReviews({ review }) {
 					/>
 					<div className="space-y-1">
 						<div className="flex flex-col md:flex-row md:space-x-4 space-y-1 md:space-y-0">
-							<p className="space-x-1">
+							<p className="space-x-1 text-sm md:text-base">
 								<span className="text-gray-500">By</span>
 								<span className="font-[600] text-gray-700">{user.name}</span>
 							</p>
@@ -26,7 +26,7 @@ function CustomersReviews({ review }) {
 						</div>
 						<div className="flex space-x-6 text-sm md:text-base">
 							<ReviewStar rating={rating} />
-							<p className="text-green-600 text-xs md:text-sm flex items-center justify-center space-x-2">
+							<p className="text-green-600 text-xs md:text-sm flex items-center justify-center space-x-1 sm:space-x-2">
 								<span className="">&#10004;</span>
 								<span>Verified Purchase</span>
 							</p>

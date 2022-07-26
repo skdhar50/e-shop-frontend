@@ -95,7 +95,6 @@ function ProductDetails() {
 		return <div className="">Loading</div>;
 	}
 
-	
 	const handleAddToCart = (id) => {
 		if (!isAuthenticated()) {
 			setLoginModalOpen(true);
@@ -104,13 +103,23 @@ function ProductDetails() {
 		addToCartMutation(id);
 	};
 
+	const scrollToReview = () => {
+		document.getElementById("review--section").scrollIntoView({
+			top: true,
+			behavior: "smooth",
+		});
+	};
+
 	return (
 		<Layout title="Product Details">
 			<Outlet />
 			<div className="md:px-6 md:pt-1 xl:container antialiased">
 				<div className="-mt-3 md:mt-4 bg-white drop-shadow md:pb-4 md:flex border border-gray-300 w-full h-full">
 					{/* Product Preview Section */}
-					<ProductPreview products={products?.data} />
+					<ProductPreview
+						handleScrollToReview={scrollToReview}
+						products={products?.data}
+					/>
 
 					{/* Side Section */}
 					<SideSection returnDays={7} deliveryCharge={50} />
@@ -132,28 +141,46 @@ function ProductDetails() {
 						Add to Cart
 					</PrimaryButton>
 
+					{/* <div id="review--section" className="opacity-0"></div> */}
+
 					{/* Create Reviews And Ratings */}
-					{isAuthenticated() && <CreateReviewsAndRatings productId={id} />}
-					<div className="space-y-8 px-4 pt-5 divide-y-[1px]">
-						{reviews?.data.length
-							? reviews.data.map((review) => (
-									<CustomersReviews review={review} key={review._id} />
-							  ))
-							: "No reviews available."}
+					{isAuthenticated() ? (
+						<CreateReviewsAndRatings productId={id} />
+					) : (
+						<div className="text-gray-600 text-center pt-4">
+							Login to create a review...
+						</div>
+					)}
+
+					<div
+						id="review--section"
+						className="space-y-8 px-4 pt-5 divide-y-[1px]"
+					>
+						{reviews?.data.length ? (
+							reviews.data.map((review) => (
+								<CustomersReviews review={review} key={review._id} />
+							))
+						) : (
+							<div className="text-gray-600">No reviews available.</div>
+						)}
 					</div>
 
 					{isAuthenticated() ? (
 						<CreateProductQA productId={id} />
 					) : (
-						"Login to ask a question..."
+						<div className="text-gray-600 text-center pt-4">
+							Login to ask a question...
+						</div>
 					)}
 					<div className="space-y-10 px-4 pt-10">
 						{/* Customers QA */}
-						{questions?.data.length
-							? questions?.data.map((question) => (
-									<CustomersQA customersQA={question} key={question._id} />
-							  ))
-							: "No Questiones available."}
+						{questions?.data.length ? (
+							questions?.data.map((question) => (
+								<CustomersQA customersQA={question} key={question._id} />
+							))
+						) : (
+							<div className="text-gray-600">No Questiones available.</div>
+						)}
 					</div>
 				</div>
 			</div>

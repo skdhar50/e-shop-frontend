@@ -8,6 +8,7 @@ import { useShippingAddressData } from "Hooks/useShippingAddress";
 import { isAuthenticated } from "utilities/auth.utility";
 import { useCartData } from "Hooks/useCart";
 import { usePlaceOrderData } from "Hooks/useOrder";
+import { useCouponData } from "Hooks/useCoupon";
 import _ from "lodash";
 import { useNavigate } from "react-router-dom";
 import SecondaryButton from "Components/Common/Buttons/SecondaryButton";
@@ -61,14 +62,6 @@ function ConfirmOrder() {
 			height: 45,
 			value: "cod",
 		},
-		// { image: "/images/icons/bkash.png", width: 80, height: 40, value: "bkash" },
-		// {
-		// 	image: "/images/icons/rocket.png",
-		// 	width: 70,
-		// 	height: 40,
-		// 	value: "roket",
-		// },
-		// { image: "/images/icons/nogod.png", width: 70, height: 35, value: "nogod" },
 		{
 			image: "/images/icons/icon-ssl.png",
 			width: 258,
@@ -80,6 +73,8 @@ function ConfirmOrder() {
 	const [isOpenModal, setIsOpenModal] = useState(false);
 	const [selectedAddress, setSelectedAddress] = useState({});
 	const [selectedPayment, setSelectedPayment] = useState("");
+	const [coupon, setCoupon] = useState("");
+	const [discount, setDiscount] = useState(0);
 
 	const handleNavigate = (orderId, paymentMethod) => {
 		if (paymentMethod === "cod") {
@@ -94,10 +89,26 @@ function ConfirmOrder() {
 		}
 	};
 
+	const handleDiscount = (value) => {
+		setDiscount(value);
+	};
+
+	const handleCouponChange = (e) => {
+		e.preventDefault();
+
+		setCoupon(e.target.value);
+	};
+
 	const { mutate: placeOrderMutation } = usePlaceOrderData(
 		handleNavigate,
 		selectedPayment
 	);
+
+	const { mutate: couponMutation } = useCouponData(handleDiscount);
+
+	const handleCoupon = () => {
+		couponMutation({ coupon: coupon, amount: getCartTotal() });
+	};
 
 	const handleSelectAddress = (address) => {
 		const obj = _.pick(address, [
@@ -138,10 +149,6 @@ function ConfirmOrder() {
 		};
 		placeOrderMutation(temp);
 	};
-	// if (orderId.length > 0) {
-	// 	console.log(orderId);
-	// 	setOrderId("");
-	// }
 
 	return (
 		<Layout title="Confirm Order">
@@ -149,11 +156,12 @@ function ConfirmOrder() {
 				<CreateNewShippingAddress onCloseHandler={handleOpenModal} />
 			)}
 			<div className="md:px-6 xl:container antialiased">
-				<div className="pb-14 space-y-4 xl:space-y-0 md:pb-0 xl:flex xl:space-x-6 mt-10">
+				<div className="pb-14 pt-8 lg:pt-0 space-y-4 xl:space-y-0 md:pb-0 xl:flex xl:space-x-6 mt-10">
 					<form
 						method="POST"
 						encType="multipart/form-data"
 						onSubmit={handleSubmit}
+						className="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:justify-between w-full lg:space-x-4"
 					>
 						<div className="md:flex-grow bg-white drop-shadow-sm space-y-8 border md:shadow-md p-3 md:p-6">
 							<div className="space-y-4">
@@ -170,14 +178,7 @@ function ConfirmOrder() {
 											/>
 										))}
 									</ul>
-									{/* <button
-										onClick={handleOpenModal}
-										className="bg-indigo-100 w-full rounded"
-									>
-										<p className="py-2 flex justify-center items-center text-center cursor-pointer text-indigo-600">
-											<span className="text-2xl pr-2">+</span> Add New Address
-										</p>	
-									</button> */}
+
 									<SecondaryButton
 										handler={handleOpenModal}
 										classes="w-full rounded"
@@ -224,12 +225,30 @@ function ConfirmOrder() {
 							</div>
 						</div>
 
-						<div className="md:min-w-[280px] bg-white drop-shadow-sm xl:min-w-[320px] h-fit border-2 p-6 md:shadow">
+						<div className="md:min-w-[280px] bg-white drop-shadow-sm xl:min-w-[320px] h-fit border-2 p-6 md:shadow space-y-12">
 							<CheckoutSummary
 								subTotal={getCartTotal()}
 								shipping={50}
 								payablePrice={getPayAblePrice()}
+								discount={discount}
 							/>
+							<div className="">
+								<div className="pb-4 text-xl">Apply Coupon</div>
+								<div className="flex space-x-2">
+									<input
+										type="text"
+										placeholder="Enter Coupon"
+										name="coupon"
+										id="coupon"
+										value={coupon}
+										onChange={handleCouponChange}
+										className="w-full rounded"
+									/>
+									<PrimaryButton handler={handleCoupon} classes="w-1/3 rounded">
+										Apply
+									</PrimaryButton>
+								</div>
+							</div>
 						</div>
 					</form>
 				</div>
