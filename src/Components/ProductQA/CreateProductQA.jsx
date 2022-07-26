@@ -25,7 +25,7 @@ function CreateProductQA({ productId }) {
 				</p>
 			</div>
 			<div className="space-y-4">
-				<p className="text-gray-600">
+				<p className="text-gray-600 pl-1 text-sm sm:text-base">
 					Have a question regarding the product? Ask Us
 				</p>
 				<form

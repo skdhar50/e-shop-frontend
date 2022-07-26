@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
+import PrimaryButton from "Components/Common/Buttons/PrimaryButton";
+import { OFFER_URL } from "utilities/config.utility";
 
 function OfferCard({ offer }) {
 	const {
@@ -14,27 +16,32 @@ function OfferCard({ offer }) {
 
 	return (
 		<div className="relative">
-			<div className="-inset-0.5 absolute bg-black bg-opacity-40 blur"></div>
-			<div className="offer-card relative bg-gray-50 overflow-hidden rounded-md">
+			<div className="-inset-0.5 absolute bg-gradient-to-br from-[#004E7E] to-[#002F4C] blur transition-all duration-200 opacity-20"></div>
+			<div className="offer-card relative bg-gray-50 pb-4 border border-[#b0d0e4] overflow-hidden rounded-sm">
 				<div className="">
-					<img src={photo} alt="" className="aspect-[4/4] w-full" />
+					<img src={`${OFFER_URL}/${photo}`} alt="" className="aspect-[1/1] " />
 				</div>
-				<div className="px-3 py-3 space-y-4 text-sm">
-					<div className="border-b pb-1 text-xs font-semibold text-gray-700 border-gray-300">
-						From: {format(new Date(startDate), "PP")} -{" "}
-						{format(new Date(endDate), "PP")}
+				<div className="px-4 pb-4">
+					<div className="py-3">
+						<div className="flex text-sm pl-2 text-[#004E7E] font-semibold">
+							From:
+							<p className="italic font-normal pl-2">
+								{format(new Date(startDate), "PP")} -{" "}
+								{format(new Date(endDate), "PP")}
+							</p>
+						</div>
 					</div>
-					<div className="flex font-semibold text-gray-600 text-lg space-x-4 items-center">
-						<p className="">Discount: </p>
-						<p className="text-green-800">{discountAmount}</p>
-					</div>
-					<div className="space-y-3 text-center">
-						<p className="text-xl font-semibold text-gray-700">{name}</p>
-						<p className="text-gray-600 text-sm">{description}</p>
+					<div className="space-y-4 pt-3">
+						<div className="text-lg font-semibold text-[#004E7E] md:text-xl text-center">
+							{name}
+						</div>
+						<div className="text-sm md:text-base pb-2 text-gray-600">
+							{description}
+						</div>
 						<Link to={`/offerDetails/${id}`}>
-							<button className="mt-3 px-4 py-2 bg-indigo-600 text-white font-semibold hover:bg-indigo-500">
+							<PrimaryButton classes="text-sm sm:text-base px-5 py-2 float-right">
 								View Details
-							</button>
+							</PrimaryButton>
 						</Link>
 					</div>
 				</div>
