@@ -165,9 +165,18 @@ function ConfirmOrder() {
 					>
 						<div className="md:flex-grow bg-white drop-shadow-sm space-y-8 border md:shadow-md p-3 md:p-6">
 							<div className="space-y-4">
-								<p className="text-xl md:text-2xl font-[600] text-gray-600">
-									Shipping Address
-								</p>
+								<div className="text-xl md:text-2xl font-[600] text-gray-600 relative">
+									<p className="">
+										Shipping Address{" "}
+										<span className="text-xs font-normal italic top-0 absolute pl-2 text-red-600">
+											* (required)
+										</span>
+									</p>
+								</div>
+								<div className="text-xs md:text-sm text-gray-500 font-normal -pb-4 italic">
+									Select one or create new. You only can create 3 addresses at
+									once.
+								</div>
 								<div className="">
 									<ul className="space-y-2 pb-3">
 										{shippingAddress?.data.map((address) => (
@@ -178,22 +187,28 @@ function ConfirmOrder() {
 											/>
 										))}
 									</ul>
-
-									<SecondaryButton
-										handler={handleOpenModal}
-										classes="w-full rounded"
-									>
-										<p className="py-2 flex justify-center items-center text-center cursor-pointer">
-											<span className="text-2xl pr-2">+</span> Add New Address
-										</p>
-									</SecondaryButton>
+									{shippingAddress?.data.length < 3 && (
+										<SecondaryButton
+											handler={handleOpenModal}
+											classes="w-full rounded font-normal"
+										>
+											<p className="py-2 flex justify-center items-center text-center cursor-pointer">
+												<span className="text-2xl pr-2">+</span> Add New Address
+											</p>
+										</SecondaryButton>
+									)}
 								</div>
 							</div>
 
 							<div className="space-y-5">
-								<p className="text-xl md:text-2xl font-[600] text-gray-600">
-									Payment Method
-								</p>
+								<div className="text-xl md:text-2xl font-[600] text-gray-600">
+									<p className="relative">
+										Payment Method
+										<span className="text-xs font-normal italic top-0 absolute pl-2 text-red-600">
+											* (required)
+										</span>
+									</p>
+								</div>
 								<div className="">
 									<div action="" className="grid md:grid-cols-2 gap-4">
 										{paymentMethods.map((paymentMethod, index) => (

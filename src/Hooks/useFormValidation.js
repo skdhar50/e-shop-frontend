@@ -37,7 +37,7 @@ export const useFromValidate = (title, value) => {
 			} else {
 				return "";
 			}
-		case "address":
+		case "fullAddress":
 			if (value.length < 5) {
 				return "Address must be at least 5 characters long";
 			} else {

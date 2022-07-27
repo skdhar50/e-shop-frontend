@@ -145,7 +145,7 @@ function ProductDetails() {
 
 					{/* Create Reviews And Ratings */}
 					{isAuthenticated() ? (
-						<CreateReviewsAndRatings productId={id} />
+						<CreateReviewsAndRatings productId={id} key={id} />
 					) : (
 						<div className="text-gray-600 text-center pt-4">
 							Login to create a review...
