@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/e-shop-frontend/static/css/main.e39753fd.css",
+    "main.js": "/e-shop-frontend/static/js/main.31e970e2.js",
+    "static/media/OpenSans-Regular.woff": "/e-shop-frontend/static/media/OpenSans-Regular.03a20a68b7c3b6428403.woff",
+    "static/media/Poppins-Bold.woff": "/e-shop-frontend/static/media/Poppins-Bold.d1c550e43ca6e696c787.woff",
+    "static/media/Poppins-ExtraBold.woff": "/e-shop-frontend/static/media/Poppins-ExtraBold.743e09a29ea651a873a0.woff",
+    "static/media/Poppins-Black.woff": "/e-shop-frontend/static/media/Poppins-Black.c19d59e13c8b28b68ca5.woff",
+    "static/media/OpenSans-Regular.woff2": "/e-shop-frontend/static/media/OpenSans-Regular.1cdb8c540cb38930e28d.woff2",
+    "static/media/Poppins-Bold.woff2": "/e-shop-frontend/static/media/Poppins-Bold.02d30d49f061087e6275.woff2",
+    "static/media/Poppins-ExtraBold.woff2": "/e-shop-frontend/static/media/Poppins-ExtraBold.d41d7c2375d7f78e8305.woff2",
+    "static/media/Poppins-Black.woff2": "/e-shop-frontend/static/media/Poppins-Black.3518e64b21103e4b2d47.woff2",
+    "index.html": "/e-shop-frontend/index.html",
+    "main.e39753fd.css.map": "/e-shop-frontend/static/css/main.e39753fd.css.map",
+    "main.31e970e2.js.map": "/e-shop-frontend/static/js/main.31e970e2.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e39753fd.css",
+    "static/js/main.31e970e2.js"
+  ]
+}
