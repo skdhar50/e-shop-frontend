@@ -23,6 +23,8 @@ import { loginModal, registerModal } from "Jotai/ModalState";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import SingleFilterProducts from "Pages/SingleFilterProducts";
+import ForgetPassword from "Pages/ForgetPassword";
+import ResetPassword from "Pages/ResetPassword";
 
 const queryClient = new QueryClient();
 
@@ -65,6 +67,8 @@ function App() {
 					<Route path="all" element={<ProductList />} />
 					<Route path="product" element={<SingleFilterProducts />} />
 				</Route>
+				<Route path="/forgetpassword" element={<ForgetPassword />} />
+				<Route path="/resetpassword" element={<ResetPassword />} />
 				<Route path="/offers" element={<WeeklyOffers />} />
 				<Route path="/offerDetails/:id" element={<WeeklyOfferDetails />} />
 
