@@ -1,6 +1,6 @@
 import React from "react";
 import { format } from "date-fns";
-import {REVIEW_URL} from "utilities/config.utility";
+import { REVIEW_URL } from "utilities/config.utility";
 import ReviewStar from "./ReviewStar";
 
 function CustomersReviews({ review }) {

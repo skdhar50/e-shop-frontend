@@ -12,8 +12,10 @@ const getCoupon = (data) => {
 export const useCouponData = (handleDiscount) => {
 	return useMutation(getCoupon, {
 		onSuccess: (data) => {
-			if (data.type === "success") {
+			if (data?.type === "success") {
 				handleDiscount(data.data);
+			} else {
+				handleDiscount(0)
 			}
 		},
 		onError: (data) => {

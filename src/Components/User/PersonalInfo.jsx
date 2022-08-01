@@ -4,14 +4,6 @@ import { useUpdateProfile } from "Hooks/useUser";
 import { PROFILE_URL } from "utilities/config.utility";
 import PrimaryButton from "Components/Common/Buttons/PrimaryButton";
 
-// const INITIAL_PersonalInfo_STATE = {
-// 	name: "",
-// 	email: "",
-// 	phone: "",
-// 	gender: "",
-// 	birthdate: "",
-// };
-
 const INITIAL_ERROR_STATE = {
 	name: "",
 	email: "",

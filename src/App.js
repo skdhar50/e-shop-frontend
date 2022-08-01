@@ -10,6 +10,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import MyWishList from "Pages/Profile/MyWishList";
 import MyOrders from "Pages/Profile/MyOrders";
 import MyAccount from "Pages/Profile/MyAccount";
+import MyNotifications from "Pages/Profile/MyNotifications";
 import Profile from "Pages/Profile";
 import WeeklyOffers from "Pages/WeeklyOffers";
 import WeeklyOfferDetails from "Pages/WeeklyOfferDetails";
@@ -75,6 +76,7 @@ function App() {
 						<Route path="wishlist" element={<MyWishList />} />
 						<Route path="account" element={<MyAccount />} />
 						<Route path="orders" element={<MyOrders />} />
+						<Route path="notifications" element={<MyNotifications />} />
 					</Route>
 					<Route path="payment/:id" element={<Payment />} />
 				</Route>

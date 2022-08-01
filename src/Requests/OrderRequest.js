@@ -7,6 +7,7 @@ export const placeOrder = (data) => {
 		data: {
 			paymentMethod: data.payment,
 			discount: data.discount,
+			coupon: data.coupon,
 			shipping: data.shipping,
 		},
 	});

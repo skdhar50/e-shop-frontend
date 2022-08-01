@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { isAuthenticated, userInfo } from "utilities/auth.utility";
 import { useUserData } from "Hooks/useUser";
 import { PROFILE_URL } from "utilities/config.utility";
@@ -19,7 +19,7 @@ function ProfileNavigation() {
 					alt=""
 					className="w-[70px] h-[70px] shrink-0 object-contain aspect-auto rounded-full border border-gray-400"
 				/>
-				<div className="pt-2 text-lg text-gray-600">
+				<div className="pt-2 text-gray-600">
 					<p className="">Hello, {user.name}</p>
 				</div>
 			</div>
@@ -31,6 +31,14 @@ function ProfileNavigation() {
 							to="/profile/account"
 						>
 							<p className="">My Account</p>
+						</NavLink>
+					</li>
+					<li className="cursor-pointer hover:bg-[#d9e8f2] px-8 py-2">
+						<NavLink
+							className={({ isActive }) => (isActive ? "text-[#0068a8]" : "")}
+							to="/profile/notifications"
+						>
+							My Notifications
 						</NavLink>
 					</li>
 					<li className="cursor-pointer hover:bg-[#d9e8f2] px-8 py-2">

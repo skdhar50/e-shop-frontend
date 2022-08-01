@@ -1,15 +1,14 @@
-import { useEffect, useState } from "react";
 import PageNumber from "./PageNumber";
 
 function Pagination(props) {
 	const {
 		start,
-		end,
+		// end,
 		handleCurrentPage,
 		pagesCount,
 		currentPage,
-		onHandleStart,
-		onHandleEnd,
+		// onHandleStart,
+		// onHandleEnd,
 	} = props;
 
 	// onHandleStart(currentPage - 9 > 1 ? currentPage - 9 : 1);
@@ -34,7 +33,7 @@ function Pagination(props) {
 					isCurrentPage={currentPage === page}
 					pageNumber={page}
 					handleCurrentPage={handleCurrentPage}
-                    key={page}
+					key={page}
 				/>
 			))}
 

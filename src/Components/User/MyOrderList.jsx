@@ -1,5 +1,6 @@
-import { useOrderData } from "Hooks/useOrder";
+import PrimaryButton from "Components/Common/Buttons/PrimaryButton";
 import { format } from "date-fns";
+import { useOrderData } from "Hooks/useOrder";
 import { Link } from "react-router-dom";
 
 function MyOrderList() {
@@ -9,6 +10,16 @@ function MyOrderList() {
 		<div className="border-2 bg-white drop-shadow-sm p-2 md:p-6 space-y-8 xl:flex-grow">
 			<div className="border-b-2 pb-4">
 				<p className="text-2xl">My Orders</p>
+			</div>
+			<div className="flex items-center space-x-2 justify-end">
+				<PrimaryButton classes=" px-3 py-2">Search</PrimaryButton>
+				<input
+					type="text"
+					className="focus:border-[#004E7E] focus:ring-[#004E7E] border-[1px] focus:ring-[1px]"
+					name="order"
+					id="order"
+					placeholder="Search Order"
+				/>
 			</div>
 			<div className="space-y-4">
 				{orders?.data.length === 0 ? (
@@ -21,7 +32,7 @@ function MyOrderList() {
 							<div className="flex justify-between items-center">
 								<div className="space-y-2">
 									<p className="font-bold text-gray-600 text-sm sm:text-lg">
-										Order ID: {order._id}
+										Order ID: {order.order_id}
 									</p>
 									<p className="text-gray-600 text-sm sm:text-base italic">
 										Order Date: {format(new Date(order.createdAt), "PP")}

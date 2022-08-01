@@ -31,7 +31,7 @@ export const links = [
 	},
 	{
 		title: "Notifications",
-		url: "/notifications",
+		url: "/profile/notifications",
 		icon: "/images/icons/RightNavSmall/notification.svg",
 		isShow: isAuthenticated(),
 		id: 5,
@@ -53,7 +53,7 @@ export const links = [
 	{
 		title: "Offers",
 		url: "/offers",
-		icon: "/images/icons/RightNavSmall/services.svg",
+		icon: "/images/icons/RightNavSmall/offer.svg",
 		isShow: true,
 		id: 14,
 	},
@@ -77,26 +77,5 @@ export const links = [
 		icon: "/images/icons/RightNavSmall/location.svg",
 		isShow: true,
 		id: 10,
-	},
-	{
-		title: "Services",
-		url: "/services",
-		icon: "/images/icons/RightNavSmall/services.svg",
-		isShow: true,
-		id: 11,
-	},
-	{
-		title: "Help",
-		url: "/help",
-		icon: "/images/icons/RightNavSmall/help.svg",
-		isShow: true,
-		id: 12,
-	},
-	{
-		title: "Location",
-		url: "/location",
-		icon: "/images/icons/RightNavSmall/location.svg",
-		isShow: true,
-		id: 13,
 	},
 ];
