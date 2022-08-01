@@ -41,9 +41,8 @@ function SingleFilterProducts() {
 
 	const handleCurrentPage = (num) => {
 		setCurrentPage(num);
-		console.log(pagesCount);
 		setStart(currentPage - 9 > 1 ? currentPage - 9 : 1);
-		setEnd(start + 9 <= pagesCount ? start + 9 : pagesCount);
+		// setEnd(start + 9 <= pagesCount ? start + 9 : pagesCount);
 		searchParams.set("page", num);
 		setSearchParams(searchParams, { replace: true });
 	};
@@ -206,11 +205,11 @@ function SingleFilterProducts() {
 							<Pagination
 								pagesCount={pagesCount}
 								start={start}
-								end={end}
+								// end={end}
 								currentPage={currentPage}
 								handleCurrentPage={handleCurrentPage}
-								onHandleStart={(value) => setStart(value)}
-								onHandleEnd={(value) => setEnd(value)}
+								// onHandleStart={(value) => setStart(value)}
+								// onHandleEnd={(value) => setEnd(value)}
 							/>
 						)}
 					</div>

@@ -1,18 +1,18 @@
 import PaymentMethodCard from "Components/Cards/PaymentMethodCard";
 import ShippingAddressCard from "Components/Cards/ShippingAddressCard";
 import CheckoutSummary from "Components/Cart/CheckoutSummary";
+import PrimaryButton from "Components/Common/Buttons/PrimaryButton";
+import SecondaryButton from "Components/Common/Buttons/SecondaryButton";
 import Layout from "Components/Layout";
 import CreateNewShippingAddress from "Components/Modals/CreateNewShippingAddress";
-import { useState } from "react";
-import { useShippingAddressData } from "Hooks/useShippingAddress";
-import { isAuthenticated } from "utilities/auth.utility";
 import { useCartData } from "Hooks/useCart";
-import { usePlaceOrderData } from "Hooks/useOrder";
 import { useCouponData } from "Hooks/useCoupon";
+import { usePlaceOrderData } from "Hooks/useOrder";
+import { useShippingAddressData } from "Hooks/useShippingAddress";
 import _ from "lodash";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import SecondaryButton from "Components/Common/Buttons/SecondaryButton";
-import PrimaryButton from "Components/Common/Buttons/PrimaryButton";
+import { isAuthenticated } from "utilities/auth.utility";
 
 function ConfirmOrder() {
 	const navigate = useNavigate();
@@ -91,6 +91,10 @@ function ConfirmOrder() {
 
 	const handleDiscount = (value) => {
 		setDiscount(value);
+
+		if (value === 0) {
+			setCoupon("");
+		}
 	};
 
 	const handleCouponChange = (e) => {
@@ -145,7 +149,8 @@ function ConfirmOrder() {
 		const temp = {
 			shipping: selectedAddress,
 			payment: selectedPayment,
-			discount: 0,
+			discount: discount,
+			coupon: coupon,
 		};
 		placeOrderMutation(temp);
 	};

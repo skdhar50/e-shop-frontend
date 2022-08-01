@@ -1,7 +1,7 @@
-import { useOrderData } from "Hooks/useOrder";
-import { format } from "date-fns";
-import { Link } from "react-router-dom";
 import PrimaryButton from "Components/Common/Buttons/PrimaryButton";
+import { format } from "date-fns";
+import { useOrderData } from "Hooks/useOrder";
+import { Link } from "react-router-dom";
 
 function MyOrderList() {
 	const { data: orders, isLoading, isError, error, isSuccess } = useOrderData();
@@ -32,7 +32,7 @@ function MyOrderList() {
 							<div className="flex justify-between items-center">
 								<div className="space-y-2">
 									<p className="font-bold text-gray-600 text-sm sm:text-lg">
-										Order ID: {order._id}
+										Order ID: {order.order_id}
 									</p>
 									<p className="text-gray-600 text-sm sm:text-base italic">
 										Order Date: {format(new Date(order.createdAt), "PP")}
