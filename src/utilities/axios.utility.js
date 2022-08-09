@@ -1,11 +1,12 @@
 import axios from "axios";
-import { BASE_URL } from "./config.utility";
 import { toast } from "react-toastify";
+import { BASE_URL } from "./config.utility";
 
 const axiosInstance = axios.create({
 	baseURL: BASE_URL,
 	headers: {
 		"Content-Type": "application/json",
+		"Access-Control-Allow-Origin": '*',
 		Accept: "application/json",
 	},
 });

@@ -1,26 +1,49 @@
+import DangerButton from "Components/Common/Buttons/DangerButton";
 import React from "react";
 import { useState } from "react";
 
 function CartItem({ item, onIncrease, onDecrease, onRemove, onSelect }) {
 	const {product, count, isSelected } = item;
-	const {name: title, unitPrice: price, photos: image, description} = product;
+	const {
+		name: title,
+		unitPrice: price,
+		quantity,
+		photos: image,
+		description,
+	} = product;
 	// const [isSelected, setIsSelected] = useState(selected);
 
-	// console.log(isSelected);
+	// console.log(item)
+	console.log(isSelected)
+	// console.log(count, quantity);
 
 	return (
 		<div
 			className={
-				"cart--items--item flex flex-col 2xl:flex-row shadow 2xl:items-center 2xl:justify-around border rounded-sm py-4 px-3 md:p-6 space-y-5 md:space-y-4 " +
-				(isSelected ? "bg-[#e6f0f6]" : "")
+				"cart--items--item flex flex-col 2xl:flex-row shadow 2xl:items-center 2xl:justify-around border rounded-sm py-4 px-3 md:p-6 space-y-5 md:space-y-4 relative " +
+				(quantity >= count && isSelected ? "bg-[#e6f0f6]" : "")
 			}
 		>
+			{quantity === 0 && (
+				<div className="bg-red-900 w-full h-full right-0 top-0 bg-opacity-70 flex flex-col items-center justify-center space-y-2 absolute">
+					<p className="text-gray-50 font-semibold text-xl shadowmd-">
+						Sorry! Item is not available!
+					</p>
+					<DangerButton
+						handler={onRemove}
+						classes="px-4 py-1 font-normal text-sm sm:text-base"
+					>
+						Remove
+					</DangerButton>
+				</div>
+			)}
+
 			<div className="flex items-center space-x-2">
 				<div className="flex items-center space-x-4 md:space-x-6">
 					<input
 						type="checkbox"
 						className="h-4 w-4 text-[#004E7E] focus:outline-none focus:ring-0 cursor-pointer"
-						checked={isSelected}
+						checked={quantity >= count ? isSelected : false}
 						onChange={() => onSelect()}
 					/>
 					<img

@@ -3,11 +3,12 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "./BannerCarousel.css";
+import { IMAGE_URL } from "utilities/config.utility";
 
 import { EffectFade, Navigation, Autoplay } from "swiper";
 
 function BannerCarousel({banners}) {
-	
+	// console.log(banners)
 	return (
 		<div className="relative">
 			<Swiper
@@ -22,11 +23,12 @@ function BannerCarousel({banners}) {
 					prevEl: ".swiper-button-prev-banner",
 				}}
 			>
-				{banners.map((banner, index) => (
-					<SwiperSlide key={index}>
+				{banners.map((banner) => (
+					<SwiperSlide key={banner._id}>
+						{/* {console.log(banner)} */}
 						<img
-							src={banner.image}
-							alt=""
+							src={`${IMAGE_URL}/${banner.image_path}`}
+							alt={banner.title}
 							className="w-full aspect-[6/4] md:aspect-[4/2] object-fit"
 						/>
 					</SwiperSlide>

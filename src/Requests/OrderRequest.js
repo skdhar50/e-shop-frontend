@@ -20,9 +20,9 @@ export const getOrderDetails = ({ queryKey }) => {
 	});
 };
 
-export const getOrderList = () => {
+export const getOrderList = ({queryKey}) => {
 	return request({
-		url: "/order",
+		url: `/order?page=${queryKey[1]}`,
 		method: "GET",
 	});
 };

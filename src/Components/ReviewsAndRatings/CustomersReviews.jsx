@@ -1,16 +1,17 @@
-import React from "react";
 import { format } from "date-fns";
 import { REVIEW_URL } from "utilities/config.utility";
 import ReviewStar from "./ReviewStar";
+import { PROFILE_URL } from "utilities/config.utility";
 
 function CustomersReviews({ review }) {
-	const { user, review: content, rating, photos, createdAt } = review;
+	const { name,profileImage, review: content, rating, photos, createdAt } = review;
+	
 	return (
 		<>
 			<div className="space-y-4 pt-6">
 				<div className="flex space-x-6">
 					<img
-						src="/images/users/31.jpg"
+						src={`${PROFILE_URL}/${profileImage}`}
 						alt=""
 						className="rounded-full w-[60px] h-[60px]"
 					/>
@@ -18,7 +19,7 @@ function CustomersReviews({ review }) {
 						<div className="flex flex-col md:flex-row md:space-x-4 space-y-1 md:space-y-0">
 							<p className="space-x-1 text-sm md:text-base">
 								<span className="text-gray-500">By</span>
-								<span className="font-[600] text-gray-700">{user.name}</span>
+								<span className="font-[600] text-gray-700">{name}</span>
 							</p>
 							<p className="text-gray-500 text-sm md:text-base">
 								{format(new Date(createdAt), "PP")}
@@ -38,18 +39,16 @@ function CustomersReviews({ review }) {
 					<div className="grid grid-cols-5 gap-2 w-full md:w-2/3 xl:w-1/3">
 						{photos &&
 							photos.map((photo, index) => (
-								<>
-									<img
-										src={`${REVIEW_URL}/${photo}`}
-										alt="review"
-										key={index}
-										className="aspect-square max-h-20 cursor-pointer"
-									/>
-								</>
+								<img
+									src={`${REVIEW_URL}/${photo}`}
+									alt="review"
+									key={index}
+									className="aspect-square max-h-20 cursor-pointer"
+								/>
 							))}
 					</div>
 				</div>
-				<div className="space-y-3">
+				{/* <div className="space-y-3">
 					<p className="text-xs md:text-sm text-gray-500">
 						3 out of 4 people found this review helpful. Is this review helpful
 						to you?
@@ -88,7 +87,7 @@ function CustomersReviews({ review }) {
 							</svg>
 						</button>
 					</div>
-				</div>
+				</div> */}
 			</div>
 		</>
 	);

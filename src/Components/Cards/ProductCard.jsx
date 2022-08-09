@@ -22,6 +22,9 @@ function ProductCard({ product }) {
 		brand,
 		photos: image,
 		unitPrice: price,
+		quantity,
+		discount,
+		isExclusive,
 		_id,
 	} = product;
 
@@ -65,6 +68,9 @@ function ProductCard({ product }) {
 					product={product}
 					handleClose={handleQuickView}
 					handleCart={handleAddToCart}
+					isOutOfStock={quantity === 0}
+					isOnSale={discount > 0}
+					isExclusive={isExclusive}
 				/>
 			)}
 			<div className="md:w-full md:h-fit border border-[#CBCBCB] shadow-md cursor-pointer rounded-md group relative">
@@ -81,11 +87,34 @@ function ProductCard({ product }) {
 								{title}
 							</p>
 
-							<img
-								src={image[0]}
-								alt=""
-								className="aspect-square object-cover"
-							/>
+							<div className="relative">
+								{quantity === 0 && (
+									<img
+										src="/images/others/sold-out.png"
+										className="absolute z-30 my-auto w-full h-full aspect-auto object-contain"
+										alt=""
+									/>
+								)}
+								{discount > 0 && !isExclusive && quantity > 0 && (
+									<img
+										src="/images/others/sale.svg"
+										alt=""
+										className="absolute z-30 my-auto w-[50px] md:w-[80px] top-0 right-0 aspect-auto object-contain"
+									/>
+								)}
+								{isExclusive && quantity > 0 && (
+									<img
+										src="/images/others/exclusive.png"
+										alt=""
+										className="absolute z-30 my-auto w-[50px] md:w-[80px] -top-2 -right-4 aspect-auto object-contain"
+									/>
+								)}
+								<img
+									src={image[0]}
+									alt=""
+									className="aspect-square object-cover"
+								/>
+							</div>
 						</div>
 					</Link>
 					<div className="mt-2 space-y-3">
@@ -101,18 +130,22 @@ function ProductCard({ product }) {
 						</div>
 
 						<div className="buttons flex justify-around">
-							<button
-								onClick={() => handleAddToWishlist(product)}
-								className="p-2 md:p-[0.625rem] rounded-full border border-[#005386] hover:bg-[#005E97] stroke-[#005E97] hover:stroke-[#E6F0F6] transition-all duration-150"
-							>
-								<HeartIcon className="w-[0.94rem] md:w-[1rem] h-fit" />
-							</button>
-							<button
-								onClick={() => handleAddToCart(product)}
-								className="p-2 md:p-[0.625rem] rounded-full border border-[#005386] hover:bg-[#005386] fill-[#005386] hover:fill-[#E6F0F6] transition-all duration-150"
-							>
-								<CartIcon />
-							</button>
+							{quantity > 0 && (
+								<button
+									onClick={() => handleAddToWishlist(product)}
+									className="p-2 md:p-[0.625rem] rounded-full border border-[#005386] hover:bg-[#005E97] stroke-[#005E97] hover:stroke-[#E6F0F6] transition-all duration-150"
+								>
+									<HeartIcon className="w-[0.94rem] md:w-[1rem] h-fit" />
+								</button>
+							)}
+							{quantity > 0 && (
+								<button
+									onClick={() => handleAddToCart(product)}
+									className="p-2 md:p-[0.625rem] rounded-full border border-[#005386] hover:bg-[#005386] fill-[#005386] hover:fill-[#E6F0F6] transition-all duration-150"
+								>
+									<CartIcon />
+								</button>
+							)}
 							<button
 								onClick={handleQuickView}
 								className="p-2 md:p-[0.625rem] rounded-full border border-[#005386] hover:bg-[#005386] fill-[#005386] stroke-[#005386] hover:fill-[#E6F0F6] hover:stroke-[#E6F0F6] transition-all duration-150"

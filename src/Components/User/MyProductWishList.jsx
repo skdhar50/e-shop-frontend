@@ -5,18 +5,27 @@ import {
 	useRemoveFromWishlist,
 	useMoveToCart,
 } from "Hooks/useWishlist";
+import {useEffect} from "react";
+import {isAuthenticated} from "utilities/auth.utility"
 
-function MyProductWishList() {
+function MyProductWishList({ handlePageCount, currentPage}) {
 	const {
 		data: items,
 		isLoading,
 		isSuccess,
 		isError,
 		error,
-	} = useWishlistData();
+	} = useWishlistData({page: currentPage, isEnable: isAuthenticated()});
+	
 	const { mutate: removeMutation } = useRemoveFromWishlist();
 	const { mutate: moveToCartMutation } = useMoveToCart();
 	let wishlsitItems = [];
+
+	useEffect(() => {
+		if (isSuccess) {
+			handlePageCount(items?.pages);
+		}
+	}, [handlePageCount, isSuccess, items]);
 
 	if (isSuccess) {
 		wishlsitItems = items?.data[0]?.products ?? [];
@@ -35,10 +44,6 @@ function MyProductWishList() {
 	};
 
 	return (
-		<div className="border-2 bg-white drop-shadow-sm p-4 md:p-6 space-y-8 xl:flex-grow">
-			<div className="border-b-2 pb-4">
-				<p className="text-2xl">My Wishlist</p>
-			</div>
 			<div className="space-y-4">
 				{wishlsitItems.length > 0 &&
 					wishlsitItems.map((item) => (
@@ -60,24 +65,12 @@ function MyProductWishList() {
 									<span className="italic text-indigo-400">more</span>
 								</p>
 								<div className="space-x-4 flex pt-2">
-									{/* <button
-										onClick={() => handleMoveToCart(item)}
-										className="bg-indigo-500 text-white py-2 grow md:max-w-[150px] text-center rounded-sm"
-									>
-										Move to Cart
-									</button> */}
 									<PrimaryButton
 										handler={() => handleMoveToCart(item)}
 										classes="py-2 grow md:max-w-[150px]"
 									>
 										Move to Cart
 									</PrimaryButton>
-									{/* <button
-										onClick={() => handleRemove(item)}
-										className="bg-red-500 text-white py-2 grow md:max-w-[150px] text-center rounded-sm"
-									>
-										Remove
-									</button> */}
 									<DangerButton
 										handler={() => handleRemove(item)}
 										classes="py-2 grow md:max-w-[150px] text-center"
@@ -94,7 +87,6 @@ function MyProductWishList() {
 					</div>
 				)}
 			</div>
-		</div>
 	);
 }
 

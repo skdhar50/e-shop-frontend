@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import PrimaryButton from "Components/Common/Buttons/PrimaryButton";
-import { OFFER_URL } from "utilities/config.utility";
+import { IMAGE_URL } from "utilities/config.utility";
 
 function OfferCard({ offer }) {
 	const {
@@ -19,7 +19,7 @@ function OfferCard({ offer }) {
 			<div className="-inset-0.5 absolute bg-gradient-to-br from-[#004E7E] to-[#002F4C] blur transition-all duration-200 opacity-20"></div>
 			<div className="offer-card relative bg-gray-50 pb-4 border border-[#b0d0e4] overflow-hidden rounded-sm">
 				<div className="">
-					<img src={`${OFFER_URL}/${photo}`} alt="" className="aspect-[1/1] " />
+					<img src={`${IMAGE_URL}/${photo}`} alt="" className="aspect-[1/1] " />
 				</div>
 				<div className="px-4 pb-4">
 					<div className="py-3">

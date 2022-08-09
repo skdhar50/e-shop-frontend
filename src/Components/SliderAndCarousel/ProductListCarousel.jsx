@@ -6,19 +6,21 @@ import "./ProductListCarousel.css";
 import { Navigation } from "swiper";
 import ProductCard from "Components/Cards/ProductCard";
 
-function ProductListCarousel({ id, title, products }) {
+function ProductListCarousel({products}) {
 
 	return (
 		<div className="space-y-4 md:space-y-6 pt-10">
 			<div className="">
-				<p className="text-xl md:text-2xl font-[600] text-gray-600">{title}</p>
+				<p className="text-xl md:text-2xl font-[600] text-gray-600">
+					Related Products
+				</p>
 			</div>
 			<div className="product-card-container">
 				<Swiper
 					modules={[Navigation]}
 					navigation={{
-						nextEl: `.swiper-button-next-card-${id}`,
-						prevEl: `.swiper-button-prev-card-${id}`,
+						nextEl: `.swiper-button-next-card-1`,
+						prevEl: `.swiper-button-prev-card-1`,
 					}}
 					slidesPerView={1}
 					breakpoints={{
@@ -59,17 +61,14 @@ function ProductListCarousel({ id, title, products }) {
 						},
 					}}
 				>
-					{products.map((product, index) => (
-						<SwiperSlide
-							key={index}
-							style={{ }}
-						>
+					{products.map((product) => (
+						<SwiperSlide key={product._id} style={{}}>
 							<ProductCard product={product} />
 						</SwiperSlide>
 					))}
 				</Swiper>
 
-				<div className={`swiper-button-prev-card-${id}`}>
+				<div className={`swiper-button-prev-card-1`}>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						className="h-6 w-6"
@@ -85,7 +84,7 @@ function ProductListCarousel({ id, title, products }) {
 						/>
 					</svg>
 				</div>
-				<div className={`swiper-button-next-card-${id}`}>
+				<div className={`swiper-button-next-card-1`}>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						className="h-6 w-6"

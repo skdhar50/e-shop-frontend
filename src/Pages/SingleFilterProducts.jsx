@@ -1,8 +1,8 @@
 import Layout from "Components/Layout";
+import Pagination from "Components/Pagination/Pagination";
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import Products from "./Products";
-import Pagination from "Components/Pagination/Pagination";
 
 import { useSearchParams } from "react-router-dom";
 
@@ -42,7 +42,6 @@ function SingleFilterProducts() {
 	const handleCurrentPage = (num) => {
 		setCurrentPage(num);
 		setStart(currentPage - 9 > 1 ? currentPage - 9 : 1);
-		// setEnd(start + 9 <= pagesCount ? start + 9 : pagesCount);
 		searchParams.set("page", num);
 		setSearchParams(searchParams, { replace: true });
 	};
@@ -205,11 +204,8 @@ function SingleFilterProducts() {
 							<Pagination
 								pagesCount={pagesCount}
 								start={start}
-								// end={end}
 								currentPage={currentPage}
 								handleCurrentPage={handleCurrentPage}
-								// onHandleStart={(value) => setStart(value)}
-								// onHandleEnd={(value) => setEnd(value)}
 							/>
 						)}
 					</div>

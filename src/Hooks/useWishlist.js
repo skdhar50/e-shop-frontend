@@ -24,9 +24,9 @@ export const useRemoveFromWishlist = () => {
 	});
 };
 
-export const useWishlistData = (isEnabled) => {
-	return useQuery("wishlist", getWishlist, {
-		enabled: isEnabled
+export const useWishlistData = (data) => {
+	return useQuery(["wishlist", data.page], getWishlist, {
+		enabled: data.isEnabled,
 	});
 };
 

@@ -3,7 +3,7 @@ import OfferTimeCounter from "./OfferTimeCounter";
 import { Link, useParams } from "react-router-dom";
 import { useSingleOffer } from "Hooks/useOffers";
 import { format } from "date-fns";
-import { OFFER_URL } from "utilities/config.utility";
+import { IMAGE_URL } from "utilities/config.utility";
 
 function OfferDetails() {
 	const { id } = useParams();
@@ -54,7 +54,7 @@ function OfferDetails() {
 					</div>
 					<div className="">
 						<img
-							src={`${OFFER_URL}/${photo}`}
+							src={`${IMAGE_URL}/${photo}`}
 							alt=""
 							className="aspect-square w-full"
 						/>

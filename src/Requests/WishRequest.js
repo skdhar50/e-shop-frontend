@@ -1,10 +1,12 @@
 import { request } from "utilities/axios.utility";
 
-export const getWishlist = () => {
+export const getWishlist = ({ queryKey }) => {
+	if(queryKey[1] !== undefined) {
 	return request({
-		url: "/wishlist",
+		url: `/wishlist?page=${queryKey[1]}`,
 		method: "GET",
 	});
+}
 };
 
 export const addToWishlist = (item) => {

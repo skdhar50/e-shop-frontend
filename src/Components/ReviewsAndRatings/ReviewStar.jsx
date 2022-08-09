@@ -1,6 +1,4 @@
-import React from "react";
-
-function ReviewStar({ rating }) {
+function ReviewStar({ rating, classes = "text-lg" }) {
 	return (
 		<div>
 			{[...Array(5)].map((star, index) => {
@@ -12,7 +10,7 @@ function ReviewStar({ rating }) {
 						onClick={(e) => e.preventDefault()}
 						className={rating >= index ? "text-[#004E7E]" : "text-gray-300"}
 					>
-						<span className="text-lg">&#9733;</span>
+						<span className={classes}>&#9733;</span>
 					</button>
 				);
 			})}

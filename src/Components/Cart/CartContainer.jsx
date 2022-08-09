@@ -32,7 +32,7 @@ function CartContainer({ shipping = 50 }) {
 	};
 
 	const increaseCartItem = (item) => () => {
-		if (item.count < 8) {
+		if (item.count < 5) {
 			cartItemMutation({ _id: item._id, count: item.count + 1 });
 		}
 	};
@@ -43,7 +43,7 @@ function CartContainer({ shipping = 50 }) {
 
 	const getCartTotal = () => {
 		let carttotal = cartItems?.data.map((item) => {
-			if (item.isSelected) {
+			if (item.isSelected && item.product.quantity >= item.count) {
 				return parseInt(item.product.unitPrice) * parseInt(item.count);
 			}
 			return 0;
@@ -71,19 +71,22 @@ function CartContainer({ shipping = 50 }) {
 	};
 
 	const selectedItems = () => {
-		const items = cartItems?.data.filter((item) => item.isSelected === true);
+		const items = cartItems?.data.filter((item) => item.isSelected === true && item.product.quantity >= item.count);
 
 		if (items.length > 0) return true;
 		return false;
 	};
 
 	const setAllSelected = (event) => {
+		console.log(event.target.checked);
 		if (event.target.checked) {
 			selectAllItemsMutation(true);
 		} else if (!event.target.checked) {
 			selectAllItemsMutation(false);
 		}
 	};
+
+	// console.log(cartItems?.data)
 
 	if (isLoading) {
 		return <div className="">Loading....</div>;
@@ -101,8 +104,8 @@ function CartContainer({ shipping = 50 }) {
 										type="checkbox"
 										className="text-[#004E7E] focus:outline-none focus:ring-0 cursor-pointer"
 										checked={
-											cartItems.data.find(
-												(item) => item.isSelected === false
+											cartItems?.data.find(
+												(item) => item.count > 0 && item.isSelected === false
 											) === undefined
 										}
 										onChange={(event) => setAllSelected(event)}

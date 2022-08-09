@@ -31,6 +31,7 @@ function RightNavbarSmall({ isOpen, handleRightNavbar }) {
 					? "bg-black bg-opacity-80 fixed inset-0 z-50 w-full h-screen"
 					: ""
 			}
+			onClick={handleRightNavbar}
 		>
 			<div className="flex justify-start absolute left-[10px] top-[10px]">
 				<button className="" onClick={handleRightNavbar}>
@@ -52,10 +53,10 @@ function RightNavbarSmall({ isOpen, handleRightNavbar }) {
 			</div>
 			<div
 				className={
-					"bg-[#e6f0f6] w-[300px] h-full fixed top-0 space-y-10 transform transition-all duration-300 overflow-y-scroll" +
+					"bg-[#e6f0f6] w-[300px] h-full fixed top-0 right-0 space-y-10 transition-all duration-300 overflow-y-scroll" +
 					(isOpen
 						? " right-0 ease-in opacity-100"
-						: " translate-x-full -right-10 ease-out opacity-0")
+						: " ease-out translate-x-full -right-10 opacity-0")
 				}
 			>
 				<div className="sticky top-0 right-0 left-0 bg-gradient-to-br from-[#E6F0F6] to-[#004E7E] w-full h-fit flex flex-col justify-end items-end pt-6 pb-3 px-8">

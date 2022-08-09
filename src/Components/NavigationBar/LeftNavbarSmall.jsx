@@ -1,6 +1,5 @@
-import { useState } from "react";
-import SmallMenu from "./SmallNavbar/SmallMenu";
 import { useCategoryData } from "Hooks/useCategory";
+import SmallMenu from "./SmallNavbar/SmallMenu";
 
 function LeftNavbarSmall({ isOpen, handleLeftNavbar }) {
 	const {
@@ -32,7 +31,10 @@ function LeftNavbarSmall({ isOpen, handleLeftNavbar }) {
 		{
 			title: "Clothing",
 			submenu: [
-				{ title: "Men's Fasion", submenu: [{ title: "T-shirt"}, {title:"Pant"}]},
+				{
+					title: "Men's Fasion",
+					submenu: [{ title: "T-shirt" }, { title: "Pant" }],
+				},
 				{ title: "Women's Fasion" },
 				{ title: "Children's Fasion" },
 			],
@@ -46,6 +48,7 @@ function LeftNavbarSmall({ isOpen, handleLeftNavbar }) {
 					? "bg-black bg-opacity-80 fixed inset-0 z-50 w-full h-screen"
 					: ""
 			}
+			onClick={handleLeftNavbar}
 		>
 			<div className="flex justify-end absolute right-[10px] top-[10px]">
 				<button className="" onClick={handleLeftNavbar}>

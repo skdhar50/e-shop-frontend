@@ -9,7 +9,7 @@ import "./ProductPreviewImageAndThumb.css";
 
 import { FreeMode, Navigation, Thumbs, Pagination } from "swiper";
 
-function ProductPreviewImageAndThumb({ photos }) {
+function ProductPreviewImageAndThumb({ photos, isOutOfStock, isOnSale }) {
 	const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
 	return (
@@ -28,11 +28,27 @@ function ProductPreviewImageAndThumb({ photos }) {
 			>
 				{photos.map((photo, index) => (
 					<SwiperSlide key={index}>
-						<img
-							src={photo}
-							alt="product"
-							className="product-preview-image-swiper-slide aspect-square sm:aspect-[3/4] object-cover"
-						/>
+						<div className="relative">
+							{isOutOfStock && (
+								<img
+									src="/images/others/sold-out.png"
+									className="absolute z-30 my-auto w-full h-full aspect-auto object-contain"
+									alt=""
+								/>
+							)}
+							{isOnSale && !isOutOfStock && (
+								<img
+									src="/images/others/sale.svg"
+									alt=""
+									className="absolute z-30 my-auto w-[50px] md:w-[80px] top-0 right-0 aspect-auto object-contain"
+								/>
+							)}
+							<img
+								src={photo}
+								alt="product"
+								className="relative product-preview-image-swiper-slide aspect-square sm:aspect-[3/4] object-cover"
+							/>
+						</div>
 					</SwiperSlide>
 				))}
 			</Swiper>
