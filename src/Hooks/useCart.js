@@ -13,7 +13,6 @@ export const useSelectSingle = () => {
 
 	return useMutation(selectSingle, {
 		onSuccess: (data) => {
-			console.log(data);
 			queryClient.invalidateQueries("cartItems");
 		},
 		onError: (err) => {
@@ -28,7 +27,6 @@ export const useSelectAll = () => {
 	return useMutation(selectAll, {
 		onSuccess: (data) => {
 			queryClient.invalidateQueries("cartItems");
-			console.log(data);
 		},
 		onError: (err) => {
 			console.error(err);

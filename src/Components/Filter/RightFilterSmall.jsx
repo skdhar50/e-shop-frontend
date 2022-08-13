@@ -18,21 +18,30 @@ function RightFilterSmall({ isOpen, handleRightFilter, handleFilter }) {
 		>
 			<div
 				className={
-					"bg-[#e6f0f6] w-fit h-full fixed top-0 p-6 space-y-6 transform duration-300  overflow-auto" +
+					"bg-[#f4f4f5] w-fit h-full fixed top-0 px-12 py-6 space-y-6 transform duration-300  overflow-auto" +
 					(isOpen
 						? " pl-10 right-0 ease-in opacity-100"
 						: " translate-x-full -right-10 ease-out opacity-0")
 				}
 			>
-				<div className="">
-					<button
-						className="text-4xl text-gray-400"
-						onClick={handleRightFilter}
-					>
-						&#10140;
+				<div className="overflow-hidden -ml-4 flex justify-start items-center">
+					<button className="text-gray-600" onClick={handleRightFilter}>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							className="h-6 w-6"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							strokeWidth="2"
+						>
+							<path
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								d="M14 5l7 7m0 0l-7 7m7-7H3"
+							/>
+						</svg>
 					</button>
 				</div>
-
 				<FilterListItems handleFilter={handleFilter} />
 			</div>
 		</div>

@@ -1,36 +1,21 @@
-import { Link, createSearchParams, useNavigate } from "react-router-dom";
-import { Swiper, SwiperSlide } from "swiper/react";
+import "Components/SliderAndCarousel/ProductPreviewImageAndThumb.css";
+import { useFeaturedCategory } from "Hooks/useCategory";
+import { createSearchParams, useNavigate } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/pagination";
-import "Components/SliderAndCarousel/ProductPreviewImageAndThumb.css";
-import {useFeaturedCategory} from "Hooks/useCategory";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { IMAGE_URL } from "utilities/config.utility";
 
 import { Pagination } from "swiper";
 
 function FeaturedCategories() {
 	const navigate = useNavigate();
-	// const categories = [
-	// 	{ title: "Groceries", image: "/images/featuredCategories/groceries.jpg" },
-	// 	{
-	// 		title: "Beauty Products",
-	// 		image: "/images/featuredCategories/beautyProducts.jpg",
-	// 	},
-	// 	{
-	// 		title: "Women's Collection",
-	// 		image: "/images/featuredCategories/womenFasion.jpg",
-	// 	},
-	// 	{
-	// 		title: "Men's Collection",
-	// 		image: "/images/featuredCategories/menFasion.jpg",
-	// 	},
-	// ];
 
 	const { data: categories, isLoading, isError } = useFeaturedCategory();
 
 	const goToPage = (productId) => {
 		let searchString = {
-			tag: 'category',
+			tag: "category",
 			value: productId === undefined ? true : productId,
 			page: 1,
 		};
@@ -44,12 +29,25 @@ function FeaturedCategories() {
 		);
 	};
 
-	if(isLoading) {
-		return <div className="">Loading......</div>
+	if (isLoading) {
+		return (
+			<div className="flex flex-col pt-12 justify-center items-center">
+				<p className="font-poppins text-center text-[1.38rem] md:text-[1.63rem] xl:text-[2rem] text-[#353535]">
+					Featured Categories
+				</p>
+
+				<div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+					<div className="aspect-[3/4] bg-slate-600 h-full w-full"></div>
+					<div className="aspect-[3/4] bg-slate-600 h-full w-full"></div>
+					<div className="aspect-[3/4] bg-slate-600 h-full w-full"></div>
+					<div className="aspect-[3/4] bg-slate-600 h-full w-full"></div>
+				</div>
+			</div>
+		);
 	}
 
-	if(categories?.data?.length === 0) {
-		return <></>
+	if (categories?.data?.length === 0) {
+		return <></>;
 	}
 
 	return (

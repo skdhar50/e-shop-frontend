@@ -20,9 +20,6 @@ function Offers() {
 						))}
 					</div>
 				)}
-				{/* <div className="grid grid-cols-1 px-2 sm:px-4 md:px-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-x-6 gap-y-8 w-full">
-					<OfferCard />
-				</div> */}
 			</div>
 		</div>
 	);

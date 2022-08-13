@@ -1,16 +1,12 @@
-import ProductCard from "Components/Cards/ProductCard";
-import RightFilterSmall from "Components/Filter/RightFilterSmall";
-import { useState, useEffect } from "react";
 import FilterListItems from "Components/Filter/FilterListItems";
+import RightFilterSmall from "Components/Filter/RightFilterSmall";
 import Layout from "Components/Layout";
-import { Outlet } from "react-router-dom";
 import { useProductData } from "Hooks/useProduct";
+import { useState } from "react";
+import { Outlet } from "react-router-dom";
 
-import { useSelector, useDispatch } from "react-redux";
-import { fetchProducts, STATUS } from "../Redux/Slices/ProductSlice";
-import Products from "./Products";
 import Pagination from "Components/Pagination/Pagination";
-import QuickViewCard from "Components/Cards/QuickViewCard";
+import Products from "./Products";
 
 function ProductList() {
 	const [start, setStart] = useState(1);
@@ -54,7 +50,7 @@ function ProductList() {
 				<Outlet />
 				<div className="2xl:container pb-12 md:mt-4">
 					<div className="sm:px-4 md:px-2 xl:px-4 flex justify-center items-top xl:space-x-4">
-						<div className="h-fit border p-6 space-y-4 bg-white shadow hidden xl:block">
+						<div className="h-fit shrink-0 px-8  border py-6 space-y-4 bg-white shadow hidden xl:block">
 							<FilterListItems
 								handleFilter={(filter) => handleFilter(filter)}
 							/>

@@ -6,6 +6,7 @@ import "swiper/css/thumbs";
 import "swiper/css/pagination";
 import "swiper/css/free-mode";
 import "./ProductPreviewImageAndThumb.css";
+import { IMAGE_URL } from "utilities/config.utility";
 
 import { FreeMode, Navigation, Thumbs, Pagination } from "swiper";
 
@@ -31,7 +32,7 @@ function ProductPreviewImageAndThumb({ photos, isOutOfStock, isOnSale }) {
 						<div className="relative">
 							{isOutOfStock && (
 								<img
-									src="/images/others/sold-out.png"
+									src="/images/others/sold-out.svg"
 									className="absolute z-30 my-auto w-full h-full aspect-auto object-contain"
 									alt=""
 								/>
@@ -44,7 +45,7 @@ function ProductPreviewImageAndThumb({ photos, isOutOfStock, isOnSale }) {
 								/>
 							)}
 							<img
-								src={photo}
+								src={`${IMAGE_URL}/${photo}`}
 								alt="product"
 								className="relative product-preview-image-swiper-slide aspect-square sm:aspect-[3/4] object-cover"
 							/>
@@ -69,7 +70,7 @@ function ProductPreviewImageAndThumb({ photos, isOutOfStock, isOnSale }) {
 					{photos.map((photo, index) => (
 						<SwiperSlide key={index + 1}>
 							<img
-								src={photo}
+								src={`${IMAGE_URL}/${photo}`}
 								alt="product thumb"
 								className="product-preview-image-swiper-thumb-slide h-full object-cover"
 							/>

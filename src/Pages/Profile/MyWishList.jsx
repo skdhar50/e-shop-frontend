@@ -31,7 +31,7 @@ function MyWishList() {
 			</div>
 			<MyProductWishList handlePageCount={handlePageCount} currentPage={currentPage} />
 
-			{pagesCount !== 0 && (
+			{(pagesCount !== 0 && pagesCount !== undefined) && (
 				<>
 					<Pagination
 						pagesCount={pagesCount}

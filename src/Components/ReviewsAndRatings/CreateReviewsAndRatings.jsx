@@ -80,12 +80,6 @@ function ReviewsAndRatings({ productId, totalReview, average }) {
 					</div>
 					{!isReviewed?.data && (
 						<div className="mt-4 md:mt-0">
-							{/* <button
-								className="border-2 border-indigo-500 text-indigo-500 text-lg px-3 py-2 rounded-md"
-								onClick={handleShowReviewForm}
-							>
-								{showReviewForm ? "Cancel" : "Write a Review"}
-							</button> */}
 							<SecondaryButton
 								handler={handleShowReviewForm}
 								classes="px-3 py-2 rounded-md"
@@ -121,13 +115,6 @@ function ReviewsAndRatings({ productId, totalReview, average }) {
 								files={files}
 							/>
 
-							{/* <button
-								type="submit"
-								className="w-full md:w-fit border px-6 py-2 h-fit border-indigo-500 text-indigo-500 hover:bg-indigo-500 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
-								disabled={rating === 0 || review.length < 4}
-							>
-								Submit
-							</button> */}
 							<PrimaryButton
 								type="submit"
 								classes="w-full md:w-fit px-6 py-2 h-fit"

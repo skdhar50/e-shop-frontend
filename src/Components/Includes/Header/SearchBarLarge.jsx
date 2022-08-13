@@ -2,11 +2,12 @@ import CartIcon from "Components/Cart/CartIcon";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { HeartIcon } from "Components/Icons/Icons";
 import { useState } from "react";
-import { useWishlistData } from "Hooks/useWishlist";
+import { useAllWishlist } from "Hooks/useWishlist";
 import { useProductSearch } from "Hooks/useProduct";
 import { isAuthenticated, signOutUser } from "utilities/auth.utility";
 import { useUserData } from "Hooks/useUser";
 import { PROFILE_URL } from "utilities/config.utility";
+import { IMAGE_URL } from "utilities/config.utility";
 
 function SearchBarLearge() {
 	const [showDropdown, setShowDropdown] = useState(false);
@@ -19,7 +20,7 @@ function SearchBarLearge() {
 		isError,
 		isSuccess,
 		isLoading,
-	} = useWishlistData(isAuthenticated());
+	} = useAllWishlist(isAuthenticated());
 	const { data: searchProducts, isLoading: searchLoading } = useProductSearch(
 		searchKey,
 		searchKey.length > 0
@@ -70,7 +71,7 @@ function SearchBarLearge() {
 										>
 											<li className="px-6 py-2 hover:bg-gray-200 cursor-pointer flex justify-start items-center space-x-4">
 												<img
-													src={product?.photos[0]}
+													src={`${IMAGE_URL}/${product.photos[0]}`}
 													alt=""
 													className="w-[50px] h-[50px]"
 												/>
@@ -85,16 +86,16 @@ function SearchBarLearge() {
 				</div>
 
 				<div className="flex space-x-6 items-center">
-					<NavLink to="/profile/wishlist">
+					<NavLink to="/profile/wishlist?page=1">
 						<div className="relative cursor-pointer">
 							<HeartIcon className="h-7 w-7 stroke-1 stroke-white/80 lg:stroke-gray-600" />
 							<div className="absolute -top-[0.625rem] -right-[0.625rem] md:-top-[0.75rem] md:-right-[1rem] text-white text-xs md:text-sm font-bold">
 								<div className="bg-[#002F4C] rounded-full flex justify-center items-center w-[22px] h-[22px] sm:w-[22px] sm:h-[22px]">
 									{isAuthenticated()
-										? wishList?.data[0]?.products.length > 9
+										? wishList?.data > 9
 											? "9+"
-											: wishList?.data[0]?.products.length > 0
-											? wishList?.data[0]?.products.length
+											: wishList?.data > 0
+											? wishList?.data
 											: 0
 										: 0}
 								</div>

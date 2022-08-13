@@ -35,7 +35,7 @@ function ConfirmOrder() {
 	const getCartTotal = () => {
 		let carttotal = cartItems?.data.map((item) => {
 			if (item.isSelected) {
-				return parseInt(item.product.unitPrice) * parseInt(item.count);
+				return parseInt(item.product.price) * parseInt(item.count);
 			}
 			return 0;
 		});
@@ -103,12 +103,12 @@ function ConfirmOrder() {
 		setCoupon(e.target.value);
 	};
 
-	const { mutate: placeOrderMutation } = usePlaceOrderData(
+	const { mutate: placeOrderMutation, isLoading: placeOrderLoading } = usePlaceOrderData(
 		handleNavigate,
 		selectedPayment
 	);
 
-	const { mutate: couponMutation } = useCouponData(handleDiscount);
+	const { mutate: couponMutation, isLoading: couponLoading } = useCouponData(handleDiscount);
 
 	const handleCoupon = () => {
 		couponMutation({ coupon: coupon, amount: getCartTotal() });
@@ -238,6 +238,7 @@ function ConfirmOrder() {
 								<PrimaryButton
 									type="submit"
 									disabled={!isValidToProced()}
+									isLoading={placeOrderLoading}
 									classes="md:hidden w-full py-3"
 								>
 									Confirm Order
@@ -264,7 +265,12 @@ function ConfirmOrder() {
 										onChange={handleCouponChange}
 										className="w-full rounded"
 									/>
-									<PrimaryButton handler={handleCoupon} classes="w-1/3 rounded">
+									<PrimaryButton
+										handler={handleCoupon}
+										isLoading={couponLoading}
+										disabled={coupon.length === 0}
+										classes="w-1/3 rounded"
+									>
 										Apply
 									</PrimaryButton>
 								</div>

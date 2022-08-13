@@ -1,21 +1,14 @@
 import DangerButton from "Components/Common/Buttons/DangerButton";
-import React from "react";
-import { useState } from "react";
 
 function CartItem({ item, onIncrease, onDecrease, onRemove, onSelect }) {
-	const {product, count, isSelected } = item;
+	const { product, count, isSelected } = item;
 	const {
 		name: title,
-		unitPrice: price,
+		price,
 		quantity,
 		photos: image,
 		description,
 	} = product;
-	// const [isSelected, setIsSelected] = useState(selected);
-
-	// console.log(item)
-	console.log(isSelected)
-	// console.log(count, quantity);
 
 	return (
 		<div

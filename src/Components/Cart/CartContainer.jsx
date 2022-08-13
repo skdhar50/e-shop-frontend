@@ -15,10 +15,7 @@ import SecondaryButton from "Components/Common/Buttons/SecondaryButton";
 function CartContainer({ shipping = 50 }) {
 	const {
 		data: cartItems,
-		isSuccess,
 		isLoading,
-		error,
-		isError,
 	} = useCartData(isAuthenticated());
 	const { mutate: cartItemMutation } = useUpdateCartItem();
 	const { mutate: selectAllItemsMutation } = useSelectAll();
@@ -44,7 +41,7 @@ function CartContainer({ shipping = 50 }) {
 	const getCartTotal = () => {
 		let carttotal = cartItems?.data.map((item) => {
 			if (item.isSelected && item.product.quantity >= item.count) {
-				return parseInt(item.product.unitPrice) * parseInt(item.count);
+				return parseInt(item.product.price) * parseInt(item.count);
 			}
 			return 0;
 		});
@@ -86,11 +83,10 @@ function CartContainer({ shipping = 50 }) {
 		}
 	};
 
-	// console.log(cartItems?.data)
-
 	if (isLoading) {
 		return <div className="">Loading....</div>;
 	}
+
 	return (
 		<div className="px-1 md:px-6 xl:container antialiased">
 			<div className="mt-20 lg:flex lg:space-x-6 space-y-5 lg:space-y-0">

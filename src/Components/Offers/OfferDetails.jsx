@@ -18,8 +18,6 @@ function OfferDetails() {
 		startDate,
 		endDate,
 		description,
-		discountAmount,
-		limit,
 		photo,
 	} = offer?.data[0];
 

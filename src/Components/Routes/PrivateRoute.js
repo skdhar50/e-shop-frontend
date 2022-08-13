@@ -10,7 +10,7 @@ function PrivateRoute() {
 	const navigate = useNavigate();
 	useEffect(() => {
 		if (isOpenLoginModal) {
-			navigate(-1, { replace: true });
+			navigate(-1);
 		}
 	}, [isOpenLoginModal]);
 
@@ -18,6 +18,7 @@ function PrivateRoute() {
 		return <Outlet />;
 	} else {
 		setOpenLoginModal(true);
+		return;
 	}
 }
 

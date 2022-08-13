@@ -1,36 +1,4 @@
-import { useState } from "react";
-
 function MultipleImageUpload({ handleFiles, handleRemoveFile, files }) {
-	// const [files, setFiles] = useState([]);
-	// const [imagePreviewUrls, setImagePreviewUrls] = useState([]);
-
-	// useEffect(() => {
-	// 	if (files && files.length > 0) {
-	// 		// a new object URL is created, even if you've already created one for the same object.
-	// 		// setImagePreviewUrls(files.map((file) => URL.createObjectURL(file)));
-	// 		// console.log(imagePreviewUrls);
-	// 	}
-	// 	return () => {
-	// 		// if you want to clean up after yourself, you can easily do so by calling URL.revokeObjectURL on the object URL you created in the useEffect cleanup function.
-	// 		// files.forEach((file) => URL.revokeObjectURL(file));
-	// 	};
-	// }, [files]);
-
-	// const handleUpload = (e) => {
-	// 	// console.log(e.target.files[0].name);
-	// 	setFiles([...files, ...e.target.files]);
-	// 	// setImagePreviewUrls(files.map((file) => URL.createObjectURL(file)));
-	// 	// console.log(typeof files);
-	// };
-
-	// // console.log(typeof files);
-
-	// const handleRemove = (index) => {
-	// 	const newFiles = [...files];
-	// 	newFiles.splice(index, 1);
-	// 	setFiles(newFiles);
-	// };
-
 	return (
 		<div className="flex flex-col md:flex-row items-center justify-center md:space-x-4 w-full md:w-fit space-y-2 md:space-y-0">
 			{files && (
@@ -55,8 +23,8 @@ function MultipleImageUpload({ handleFiles, handleRemoveFile, files }) {
 
 			<div
 				className={`px-3 text-gray-500 py-2 border border-dashed border-gray-500 text-sm w-full md:w-fit ${
-					files.length >= 5
-				 ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+					files.length >= 5 ? "cursor-not-allowed" : "cursor-pointer"
+				}`}
 			>
 				<input
 					type="file"
@@ -71,8 +39,8 @@ function MultipleImageUpload({ handleFiles, handleRemoveFile, files }) {
 				<label
 					htmlFor="uploadfile"
 					className={`text-center w-full ${
-						files.length >= 5
-					 ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+						files.length >= 5 ? "cursor-not-allowed" : "cursor-pointer"
+					}`}
 				>
 					<p className="">Upload Image</p>
 					<p className="">{files.length}/5</p>

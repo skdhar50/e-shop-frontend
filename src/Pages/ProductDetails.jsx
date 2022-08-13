@@ -1,4 +1,5 @@
 import PrimaryButton from "Components/Common/Buttons/PrimaryButton";
+import BarSpinner from "Components/Common/Spinner/BarSpinner";
 import Layout from "Components/Layout";
 import ProductPreview from "Components/ProductDetails/ProductPreview";
 import ProductSummary from "Components/ProductDetails/ProductSummary";
@@ -41,9 +42,12 @@ function ProductDetails() {
 		isSuccess: questionSuccess,
 	} = useQuestionData(id);
 
-
 	if (productIsLoading) {
-		return <div className="">Loading</div>;
+		return (
+			<div className="w-full h-screen flex justify-center items-center">
+				<BarSpinner />
+			</div>
+		);
 	}
 
 	const handleAddToCart = (id) => {
@@ -80,19 +84,21 @@ function ProductDetails() {
 
 				<div className="mt-4 pb-16 space-y-6 bg-white drop-shadow  divide-y-2 border border-gray-300 px-3 md:px-8">
 					{/* Product Summary */}
-					<ProductSummary description={products?.data.description} />
+					<ProductSummary description={products?.data[0].description} />
 
 					{/* Related Products */}
 					{/* {products?.relavent.map((product) => ( */}
 					<ProductListCarousel products={products?.relavent} />
 					{/* ))} */}
 
-					{products?.data.quantity > 0 && <PrimaryButton
-						handler={() => handleAddToCart(products?.data[0]?._id)}
-						classes="px-12 py-2 md:hidden z-50 sticky bottom-0 left-0 right-0 w-full"
-					>
-						Add to Cart
-					</PrimaryButton>}
+					{products?.data.quantity > 0 && (
+						<PrimaryButton
+							handler={() => handleAddToCart(products?.data[0]?._id)}
+							classes="px-12 py-2 md:hidden z-50 sticky bottom-0 left-0 right-0 w-full"
+						>
+							Add to Cart
+						</PrimaryButton>
+					)}
 
 					{/* <div id="review--section" className="opacity-0"></div> */}
 

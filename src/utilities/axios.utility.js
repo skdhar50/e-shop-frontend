@@ -17,7 +17,6 @@ export const request = ({ ...options }) => {
 	] = `Bearer ${localStorage.getItem("token")}`;
 
 	const onSuccess = (response) => {
-		// console.log(response);
 		if (response.data.message) {
 			toast.success(response.data.message);
 		}
@@ -69,7 +68,6 @@ export const request = ({ ...options }) => {
 		} else {
 			error.response.data.message = "Something went wrong";
 			return Promise.reject(error);
-			// console.log(error)
 		}
 	};
 

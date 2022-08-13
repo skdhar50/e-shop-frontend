@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
 import { useOverallReview } from "Hooks/useReviews";
 import ReviewStar from "Components/ReviewsAndRatings/ReviewStar";
+import { IMAGE_URL } from "utilities/config.utility";
 
 function QuickViewCard({
 	handleClose,
@@ -24,15 +25,15 @@ function QuickViewCard({
 		name,
 		review,
 		quantity,
-		unitPrice,
+		price,
 		discount,
 	} = product;
 
 	const { data: rating, isLoading, isError } = useOverallReview(productId);
 
 	return ReactDOM.createPortal(
-		<div className="bg-black fixed z-50 top-0 left-0 right-0 bottom-0 w-screen h-screen px-4 sm:px-8 bg-opacity-60 flex justify-center items-center">
-			<div className="card-vontainer relative bg-white rounded-md md:w-3/4 lg:w-3/4 xl:w-2/4 2xl:w-2/5 sm:h-[350px] p-6 flex justify-between items-center">
+		<div className="bg-black fixed z-[100] top-0 left-0 right-0 bottom-0 w-screen h-screen px-4 sm:px-8 bg-opacity-60 flex justify-center items-center">
+			<div className="card-vontainer relative bg-white rounded-md md:w-3/4 lg:w-3/4 xl:w-2/4 2xl:w-2/5 h-fit p-6 flex justify-between items-center">
 				<div
 					onClick={handleClose}
 					className="absolute -top-7 -right-4 md:-right-6 group bg-gray-100 rounded-full p-3 border border-gray-300 cursor-pointer"
@@ -57,7 +58,7 @@ function QuickViewCard({
 					<div className="image h-1/2 sm:w-2/5 sm:h-full shrink-0 relative">
 						{isOutOfStock && (
 							<img
-								src="/images/others/sold-out.png"
+								src="/images/others/sold-out.svg"
 								className="absolute z-30 my-auto w-full h-full aspect-auto object-contain"
 								alt=""
 							/>
@@ -77,7 +78,7 @@ function QuickViewCard({
 							/>
 						)}
 						<img
-							src={photos[0]}
+							src={`${IMAGE_URL}/${photos[0]}`}
 							alt={name}
 							className="w-full h-full aspect-square shrink-0"
 						/>
@@ -89,7 +90,7 @@ function QuickViewCard({
 							</p>
 							<div className="flex text-sm space-x-2 text-gray-600">
 								<p className="">Category: </p>
-								<div className="flex space-x-1">
+								<div className="flex flex-wrap space-x-3">
 									{category.map((cate) => (
 										<p key={cate._id} className="underline italic">
 											{cate.name}
@@ -117,7 +118,7 @@ function QuickViewCard({
 											: "text-xl font-[700] text-gray-800")
 									}
 								>
-									TK. {unitPrice}
+									TK. {price}
 								</p>
 								{discount && (
 									<p className="text-xl font-[700] text-gray-800">
@@ -126,7 +127,7 @@ function QuickViewCard({
 								)}
 							</div>
 							<div className="text-gray-700 text-sm">
-								<p className="">{description}</p>
+								<p className="">{description.slice(0,200)}</p>
 							</div>
 							<div className="">
 								{quantity > 0 ? (

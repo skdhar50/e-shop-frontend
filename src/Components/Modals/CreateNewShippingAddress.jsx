@@ -61,14 +61,10 @@ function CreateNewShippingAddress({ onCloseHandler }) {
 			return;
 		}
 
-		console.log(values);
 		shippingAddressMutation(values);
 		setValues(INITIAL_STATE);
 		onCloseHandler();
 	};
-
-	// if (shippingAddressSuccess) {
-	// }
 
 	const hasUpazilla = (name) => {
 		const upazilla = locations?.data.find((location) => location.name === name);
@@ -108,7 +104,7 @@ function CreateNewShippingAddress({ onCloseHandler }) {
 
 	return (
 		<div className="backdrop z-50 top-0 bottom-0 right-0 left-0 bg-black bg-opacity-50 flex justify-center items-center fixed ">
-			<div className="modal w-full md:w-fit  h-full md:h-fit flex flex-col justify-center bg-white px-6 py-2 relative">
+			<div className="modal w-full md:w-fit  h-full md:h-fit flex flex-col justify-center bg-white px-6 py-6 relative">
 				<div className="modal-header">
 					<h3 className="text-xl text-gray-700">Create New Shipping</h3>
 					<button onClick={onCloseHandler}>
@@ -245,7 +241,7 @@ function CreateNewShippingAddress({ onCloseHandler }) {
 						</div>
 						<div className="">
 							<PrimaryButton
-								type="button"
+								type="submit"
 								disabled={isDisabled()}
 								classes="w-full py-2 rounded"
 							>

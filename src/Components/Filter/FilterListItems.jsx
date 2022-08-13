@@ -2,6 +2,7 @@ import Checkbox from "Components/Inputs/Checkbox";
 import { useCategoryData } from "Hooks/useCategory";
 import { useBrandData } from "Hooks/useBrand";
 import { useState, useEffect } from "react";
+import PrimaryButton from "Components/Common/Buttons/PrimaryButton";
 
 function FilterListItems({ handleFilter }) {
 	const [checked, setChecked] = useState({
@@ -57,7 +58,7 @@ function FilterListItems({ handleFilter }) {
 							onChange={() => handleToggle("", "createdAt")}
 							className="mr-2"
 						/>
-						<p className="">Rating</p>
+						<p className="">Default</p>
 					</div>
 					<div className="flex justify-start items-center">
 						<input
@@ -82,7 +83,7 @@ function FilterListItems({ handleFilter }) {
 				</div>
 			</div>
 
-			<div className="">
+			{/* <div className="">
 				<p className="text-xl border-b border-[#b0d0e4] pb-3 mb-3">Filter By</p>
 			</div>
 
@@ -104,12 +105,10 @@ function FilterListItems({ handleFilter }) {
 							placeholder="max"
 							className="w-[100px] rounded focus:outline-none focus:border-green-600 focus:ring-0"
 						/>
-						<button className="bg-[#b0d0e4] text-[#0068a8] px-2 rounded hover:bg-indigo-200">
-							&#10095;
-						</button>
+						<PrimaryButton disabled={true} classes="px-2">&#10095;</PrimaryButton>
 					</div>
 				</div>
-			</div>
+			</div> */}
 
 			<div className="border-b border-[#b0d0e4] pb-4">
 				<p className="pb-2 pt-2 text-lg font-[600] text-gray-600">Categories</p>

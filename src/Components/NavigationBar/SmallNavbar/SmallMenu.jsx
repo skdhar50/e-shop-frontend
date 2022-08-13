@@ -28,29 +28,29 @@ function SmallMenu({ items, depth }) {
 				depth === 0
 					? "bg-[#F1F5F9]"
 					: depth === 1
-					? "bg-[#E2E8F0]"
-					: "bg-[#CBD5E1]"
+					? "bg-[#e6e9ee]"
+					: "bg-[#d7dbe0]"
 			} `}
 		>
 			{items.submenu ? (
 				<>
 					<div
 						className={`flex justify-between items-center px-5 py-3 border-b-2 ${
-							depth === 1 ? "border-gray-300" : ""
+							depth === 1 ? "border-gray-200" : ""
 						}`}
 					>
 						<p
 							onClick={() => goToPage(items._id)}
-							className={`${openSubmenu ? "text-[#004E7E]" : ""} ${
-								depth > 0 ? `pl-${depth + 1}` : ``
-							}`}
+							className={` ${
+								openSubmenu ? "text-[#004E7E]" : ""
+							} ${depth > 0 ? `pl-${depth + 1}` : ``}`}
 						>
 							{items.name}
 						</p>
 						{!openSubmenu && (
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
-								className="h-5 w-5"
+								className="h-5 w-5 z-10"
 								fill="none"
 								viewBox="0 0 24 24"
 								stroke="currentColor"
@@ -67,7 +67,7 @@ function SmallMenu({ items, depth }) {
 						{openSubmenu && (
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
-								className="h-6 w-6 text-[#004E7E]"
+								className="h-6 w-6 text-[#004E7E] z-10"
 								onClick={() => setOpenSubmenu((prev) => !prev)}
 								fill="none"
 								viewBox="0 0 24 24"
@@ -82,18 +82,17 @@ function SmallMenu({ items, depth }) {
 							</svg>
 						)}
 					</div>
-					<div className="">
-						<SmallDropdown
-							submenu={items.submenu}
-							isOpen={openSubmenu}
-							depth={depth}
-						/>
-					</div>
+
+					<SmallDropdown
+						submenu={items.submenu}
+						isOpen={openSubmenu}
+						depth={depth}
+					/>
 				</>
 			) : (
 				<div
 					className={`px-5 py-4 border-b-2 ${
-						depth === 1 ? "border-gray-300" : ""
+						depth === 1 ? "border-gray-200" : ""
 					}`}
 				>
 					<p

@@ -8,15 +8,11 @@ function NavBarLarge() {
 
 	const {
 		data: categories,
-		isLoading: categoryLoading,
 		isSuccess: categorySuccess,
-		isError: categoryError,
 	} = useCategoryData();
 	const {
 		data: brands,
-		isLoading: brandLoading,
 		isSuccess: brandSuccess,
-		isError: brandError,
 	} = useBrandData();
 
 	if (categorySuccess) {
@@ -25,8 +21,6 @@ function NavBarLarge() {
 			submenu: categories.data,
 			tag: "category"
 		});
-
-		// console.log(categories.data);
 	}
 
 	if (brandSuccess) {
@@ -52,10 +46,6 @@ function NavBarLarge() {
 				},
 			]
 		);
-	}
-
-	if (brandLoading || categoryLoading) {
-		return <div className="">Loding</div>;
 	}
 
 	return (

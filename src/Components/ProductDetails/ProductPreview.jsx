@@ -20,18 +20,16 @@ function ProductPreview({ products, handleScrollToReview, average, total }) {
 		size,
 		shortDescription,
 		category,
-		brand,
 		name,
-		// rating,
-		review,
 		quantity,
-		unitPrice,
+		price,
 		discount,
 	} = products[0];
 
 	const [, setLoginModalOpen] = useAtom(loginModal);
-	const { mutate: addToCartMutation } = useAddToCart();
-	const { mutate: addToWishlistMutation } = useAddToWishlist();
+	const { mutate: addToCartMutation, isLoading: cartLoading } = useAddToCart();
+	const { mutate: addToWishlistMutation, isLoading: wishlistLoading } =
+		useAddToWishlist();
 
 	const handleAddToCart = (id) => {
 		if (!isAuthenticated()) {
@@ -80,10 +78,10 @@ function ProductPreview({ products, handleScrollToReview, average, total }) {
 					</div>
 
 					{/* Colors */}
-					{color && <AvailableColors colors={color} />}
+					{/* {color && <AvailableColors colors={color} />} */}
 
 					{/* Sizes */}
-					{size && <AvailableSizes sizes={size} />}
+					{/* {size && <AvailableSizes sizes={size} />} */}
 
 					{/* Price */}
 					<div className="">
@@ -93,7 +91,7 @@ function ProductPreview({ products, handleScrollToReview, average, total }) {
 								(discount ? "line-through" : "text-xl font-[700] text-gray-800")
 							}
 						>
-							TK. {unitPrice}
+							TK. {price}
 						</p>
 						{discount && (
 							<p className="text-xl font-[700] text-gray-800">TK. {discount}</p>
@@ -134,6 +132,7 @@ function ProductPreview({ products, handleScrollToReview, average, total }) {
 						{quantity > 0 && (
 							<SecondaryButton
 								handler={() => handleAddToWishlist(id)}
+								isLoading={wishlistLoading}
 								classes="px-4 w-full py-2 flex space-x-2 justify-center items-center rounded-md shadow-md"
 							>
 								<svg
@@ -160,14 +159,16 @@ function ProductPreview({ products, handleScrollToReview, average, total }) {
 					<div className="md:flex md:space-x-6">
 						<PrimaryButton
 							handler={() => handleAddToCart(id)}
-							classes="px-12 py-2 hidden md:block"
+							isLoading={cartLoading}
+							classes="w-[200px] h-[45px] hidden md:flex"
 						>
 							Add to Cart
 						</PrimaryButton>
 
 						<SecondaryButton
 							handler={() => handleAddToWishlist(id)}
-							classes="px-8 py-2 hidden md:block"
+							isLoading={wishlistLoading}
+							classes="w-[220px] h-[45px] hidden md:flex"
 						>
 							Add to Favorites
 						</SecondaryButton>

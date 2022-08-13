@@ -92,7 +92,7 @@ function SingleFilterProducts() {
 										onChange={(e) => handleToggle(e, "asce")}
 										className="mr-2"
 									/>
-									<p className="">Rating</p>
+									<p className="">Default</p>
 								</div>
 								<div className="flex justify-start items-center">
 									<input
