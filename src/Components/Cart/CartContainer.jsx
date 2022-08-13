@@ -75,7 +75,6 @@ function CartContainer({ shipping = 50 }) {
 	};
 
 	const setAllSelected = (event) => {
-		console.log(event.target.checked);
 		if (event.target.checked) {
 			selectAllItemsMutation(true);
 		} else if (!event.target.checked) {
@@ -156,7 +155,7 @@ function CartContainer({ shipping = 50 }) {
 				</div>
 
 				{cartItems.data.length > 0 && (
-					<div className="checkout-summary drop-shadow bg-white lg:w-[320px] border py-6 px-6 h-fit space-y-12">
+					<div className="checkout-summary shrink-0 drop-shadow bg-white lg:w-[320px] border py-6 px-6 h-fit space-y-12">
 						{/* Checkout Summary Scction */}
 						<CheckoutSummary
 							subTotal={getCartTotal()}

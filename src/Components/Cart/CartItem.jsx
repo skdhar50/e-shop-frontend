@@ -1,4 +1,5 @@
 import DangerButton from "Components/Common/Buttons/DangerButton";
+import { IMAGE_URL } from "utilities/config.utility";
 
 function CartItem({ item, onIncrease, onDecrease, onRemove, onSelect }) {
 	const { product, count, isSelected } = item;
@@ -40,16 +41,16 @@ function CartItem({ item, onIncrease, onDecrease, onRemove, onSelect }) {
 						onChange={() => onSelect()}
 					/>
 					<img
-						src={image[0]}
+						src={`${IMAGE_URL}/${image[0]}`}
 						alt=""
 						className="h-[60px] xl:h-[80px] w-[60px] xl:w-[80px] object-cover"
 					/>
 
-					<div className="md:w-[350px] cursor-pointer pl-3 md:pl-0">
+					<div className="cursor-pointer pl-3 md:pl-0 md:pb-4">
 						<p className="flex flex-col space-y-2 text-xs md:text-sm">
 							<span className="font-bold text-gray-700">{title}</span>
 							<span className="text-gray-500 md:text-gray-600">
-								{description}
+								{description.slice(0,180)}
 							</span>
 						</p>
 					</div>
