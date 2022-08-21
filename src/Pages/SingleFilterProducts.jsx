@@ -22,6 +22,7 @@ function SingleFilterProducts() {
 	const [pagesCount, setPagesCount] = useState(0);
 	const [sortOption, setSortOption] = useState("Default");
 	const [openDropdown, setOpenDropdown] = useState(false);
+	const [title, setTitle] = useState("");
 
 	const [filters, setFilters] = useState(INITIAL_STATE);
 
@@ -33,6 +34,7 @@ function SingleFilterProducts() {
 			order: searchParams.get("order"),
 		});
 		setCurrentPage(parseInt(searchParams.get("page")));
+		setTitle(searchParams.get("name"));
 	}, [searchParams]);
 
 	const handlePageCount = (pages) => {
@@ -126,7 +128,7 @@ function SingleFilterProducts() {
 
 					<div className="flex-grow border p-3 sm:p-6 md:p-4 lg:p-6 bg-white">
 						<div className="mb-6">
-							<p className="text-2xl border-b pb-3 mb-4">Products</p>
+							<p className="text-2xl border-b pb-3 mb-4">{title}</p>
 							<div className="w-full flex justify-end items-center xl:hidden space-x-4">
 								<p className="">Sort By</p>
 								<div className="relative">

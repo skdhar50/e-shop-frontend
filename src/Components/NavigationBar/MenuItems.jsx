@@ -34,8 +34,9 @@ function MenuItems({ items, tag, depthLevel }) {
 		window.innerWidth > 960 && setDropdown(false);
 	};
 
-	const goToPage = (productId) => {
+	const goToPage = (productId, name) => {
 		let searchString = {
+			name: name,
 			tag: tag,
 			value: productId === undefined ? true : productId,
 			page: 1,
@@ -47,8 +48,8 @@ function MenuItems({ items, tag, depthLevel }) {
 		}
 		navigate(
 			{
-				pathname: "/product-list/product",
-				search: `?${createSearchParams(searchString)}`,
+				pathname: `/product-list/product`,
+				search: `${createSearchParams(searchString)}`,
 			},
 			{ replace: true }
 		);
@@ -70,10 +71,7 @@ function MenuItems({ items, tag, depthLevel }) {
 						{depthLevel === 0 ? (
 							<p className="">{items.name}</p>
 						) : (
-							<p
-								onClick={() => goToPage(items._id)}
-								className=""
-							>
+							<p onClick={() => goToPage(items._id, items.name)} className="">
 								{items.name}
 							</p>
 						)}
@@ -99,10 +97,7 @@ function MenuItems({ items, tag, depthLevel }) {
 							<p className="py-2">{items.name}</p>
 						</Link>
 					) : (
-						<p
-							onClick={() => goToPage(items._id)}
-							className="py-2"
-						>
+						<p onClick={() => goToPage(items._id, items.name)} className="py-2">
 							{items.name}
 						</p>
 					)}

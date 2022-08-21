@@ -1,3 +1,5 @@
+import { IMAGE_URL } from "utilities/config.utility";
+
 function OrderSummaryProductDetails({ cartItem }) {
 	const { product, count: quantity } = cartItem;
 	const { name, unitPrice: price, description, photos } = product;
@@ -5,7 +7,7 @@ function OrderSummaryProductDetails({ cartItem }) {
 		<div className="pt-6 space-y-4 text-gray-600 md:space-y-0">
 			<div className="flex items-top space-x-5 md:justify-start">
 				<img
-					src={photos[0]}
+					src={`${IMAGE_URL}/${photos[0]}`}
 					alt=""
 					className="shrink-0 w-[5rem] h-[6rem] md:w-[7.5rem] md:h-[8.75rem] object-fill"
 				/>

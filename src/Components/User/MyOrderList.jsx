@@ -2,6 +2,7 @@ import { format } from "date-fns";
 import { useOrderData } from "Hooks/useOrder";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { IMAGE_URL } from "utilities/config.utility";
 
 function MyOrderList({ handlePageCount, currentPage }) {
 	const {
@@ -60,7 +61,7 @@ function MyOrderList({ handlePageCount, currentPage }) {
 							{order?.cartItem.map((item) => (
 								<div className="space-y-2" key={item.product._id}>
 									<img
-										src={item.product.photos[0]}
+										src={`${IMAGE_URL}/${item.product.photos[0]}`}
 										alt=""
 										className="aspect-square"
 									/>
