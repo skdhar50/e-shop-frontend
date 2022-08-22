@@ -1,7 +1,7 @@
 import FilterListItems from "./FilterListItems";
 import { useEffect } from "react";
 
-function RightFilterSmall({ isOpen, handleRightFilter, handleFilter }) {
+function RightFilterSmall({ isOpen, handleRightFilter, handleFilter, brands=[], categories=[] }) {
 	useEffect(() => {
 		if (isOpen) {
 			document.body.style.overflow = "hidden";
@@ -42,7 +42,11 @@ function RightFilterSmall({ isOpen, handleRightFilter, handleFilter }) {
 						</svg>
 					</button>
 				</div>
-				<FilterListItems handleFilter={handleFilter} />
+				<FilterListItems
+					handleFilter={handleFilter}
+					brands={brands}
+					categories={categories}
+				/>
 			</div>
 		</div>
 	);

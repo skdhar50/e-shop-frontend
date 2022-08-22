@@ -13,8 +13,9 @@ function FeaturedCategories() {
 
 	const { data: categories, isLoading, isError } = useFeaturedCategory();
 
-	const goToPage = (productId) => {
+	const goToPage = (productId, name) => {
 		let searchString = {
+			name: name,
 			tag: "category",
 			value: productId === undefined ? true : productId,
 			page: 1,
@@ -79,7 +80,7 @@ function FeaturedCategories() {
 							<SwiperSlide key={category._id}>
 								{/* <Link to="/product-list/all"> */}
 								<div
-									onClick={() => goToPage(category._id)}
+									onClick={() => goToPage(category._id, category.name)}
 									className="relative cursor-pointer lg:w-[11.25rem] xl:w-[13.75rem] shadow-lg shadow-black/70 overflow-hidden group"
 								>
 									<img

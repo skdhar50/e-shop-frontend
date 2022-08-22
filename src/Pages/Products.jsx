@@ -3,7 +3,9 @@ import ProductCard from "Components/Cards/ProductCard";
 import { useEffect } from "react";
 import ProductCardSkeleton from "Components/LoaderSkeleton/ProductCardSkeleton";
 
-function Products({ filters, handlePageCount, currentPage }) {
+function Products({ filters, handlePageCount, currentPage, handleTotalItems }) {
+	console.log(filters)
+
 	const {
 		data: products,
 		isLoading,
@@ -13,8 +15,9 @@ function Products({ filters, handlePageCount, currentPage }) {
 	useEffect(() => {
 		if (isSuccess) {
 			handlePageCount(products?.pages);
+			handleTotalItems(products?.totalItems);
 		}
-	}, [isSuccess, handlePageCount, products]);
+	}, [isSuccess, handlePageCount, products, handleTotalItems, filters]);
 
 	if (isLoading) {
 		return <ProductCardSkeleton />;
@@ -23,7 +26,7 @@ function Products({ filters, handlePageCount, currentPage }) {
 	return (
 		<>
 			{products.data.length === 0 ? (
-				<p className="">No Products Fond.</p>
+				<p className="text-gray-600 md:text-lg">No Products Found.</p>
 			) : (
 				products?.data.map((product) => (
 					<ProductCard key={product._id} product={product} />
