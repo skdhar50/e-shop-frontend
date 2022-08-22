@@ -24,7 +24,7 @@ export const links = [
 	},
 	{
 		title: "Wishlist",
-		url: "/profile/wishlist",
+		url: "/profile/wishlist?page=1",
 		icon: "/images/icons/RightNavSmall/wishlist.svg",
 		isShow: isAuthenticated(),
 		id: 4,
@@ -45,7 +45,7 @@ export const links = [
 	},
 	{
 		title: "My Orders",
-		url: "/profile/orders",
+		url: "/profile/orders?page=1",
 		icon: "/images/icons/RightNavSmall/myorder.svg",
 		isShow: isAuthenticated(),
 		id: 7,

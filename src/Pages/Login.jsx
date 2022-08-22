@@ -2,7 +2,7 @@ import { useAtom } from "jotai";
 import { openRegisterModal, closeAllModal } from "Jotai/ModalState";
 import { useState } from "react";
 import { useUserLogin } from "Hooks/useUser";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const INITIAL_STATE = {
 	email: "",
@@ -91,9 +91,11 @@ function Login() {
 										value={values.password}
 										className="rounded-md w-full focus:outline-none focus:border-green-600 focus:ring-0"
 									/>
-									<p className="text-right text-gray-500 hover:cursor-pointer hover:text-[#1778CD] text-sm italic">
-										Forget password?
-									</p>
+									<Link to="/forgetpassword">
+										<p className="text-right text-gray-500 hover:cursor-pointer hover:text-[#1778CD] text-sm italic">
+											Forget password?
+										</p>
+									</Link>
 								</div>
 
 								<button

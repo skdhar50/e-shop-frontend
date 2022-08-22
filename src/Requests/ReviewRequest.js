@@ -7,6 +7,13 @@ export const getReviews = ({ queryKey }) => {
 	});
 };
 
+export const getOverallReview = ({ queryKey }) => {
+	return request({
+		url: `/reviews/product/${queryKey[1]}`,
+		method: "GET",
+	});
+}
+
 export const createReview = (data) => {
 	return request({
 		url: `/reviews/${data.id}`,

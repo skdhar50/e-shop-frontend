@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import Header from "Components/Includes/Header";
+import CartIcon from "Components/Cart/CartIcon";
 import Footer from "Components/Includes/Footer/Footer";
-import Toaster from "Components/Toast/Toaster";
+import Header from "Components/Includes/Header";
+import { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -33,25 +33,34 @@ function Index({ title, children }) {
 	return (
 		<div className="bg-slate-50">
 			{scrollToTop && (
-				<button
-					onClick={handleScrollToTop}
-					className="fixed bottom-14 right-5 md:right-10 z-50 rounded-full bg-gray-300/60 p-1.5 md:p-2 flex justify-center items-center text-gray-600"
-				>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						className="h-4 w-4 md:h-6 md:w-6"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke="currentColor"
-						strokeWidth="2"
+				<div className="flex flex-col space-y-4 items-center fixed bottom-14 right-5 md:right-10 z-50">
+					<div
+						className={`bg-gray-100/80 p-1.5 md:p-2 hidden  ${
+							window.location.pathname === "/cart" ? "md:hidden" : "md:block"
+						}`}
 					>
-						<path
-							strokeLinecap="round"
-							strokeLinejoin="round"
-							d="M5 15l7-7 7 7"
-						/>
-					</svg>
-				</button>
+						<CartIcon />
+					</div>
+					<button
+						onClick={handleScrollToTop}
+						className=" rounded-full bg-gray-300/60 p-1.5 md:p-2 flex justify-center items-center text-gray-600"
+					>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							className="h-4 w-4 md:h-6 md:w-6"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							strokeWidth="2"
+						>
+							<path
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								d="M5 15l7-7 7 7"
+							/>
+						</svg>
+					</button>
+				</div>
 			)}
 			<Header />
 			{children}
@@ -63,9 +72,10 @@ function Index({ title, children }) {
 				newestOnTop={false}
 				closeOnClick
 				rtl={false}
-				pauseOnFocusLoss
+				pauseOnFocusLoss={false}
 				draggable
 				pauseOnHover={false}
+				limit={2}
 			/>
 			{/* <Toaster message="Error Toaster" title="success" show={true} /> */}
 		</div>

@@ -1,9 +1,8 @@
 import Checkbox from "Components/Inputs/Checkbox";
-import { useCategoryData } from "Hooks/useCategory";
-import { useBrandData } from "Hooks/useBrand";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+// import PrimaryButton from "Components/Common/Buttons/PrimaryButton";
 
-function FilterListItems({ handleFilter }) {
+function FilterListItems({ handleFilter, brands=[], categories=[] }) {
 	const [checked, setChecked] = useState({
 		category: [],
 		brand: [],
@@ -14,7 +13,7 @@ function FilterListItems({ handleFilter }) {
 	const checkedItems = { ...checked };
 
 	const handleToggle = (value, title) => {
-		if(title === "category" || title === "brand") {
+		if (title === "category" || title === "brand") {
 			const currentIndex = checked[title].indexOf(value);
 			if (currentIndex === -1) {
 				checkedItems[title].push(value);
@@ -31,19 +30,19 @@ function FilterListItems({ handleFilter }) {
 
 	useEffect(() => {}, [checked]);
 
-	const {
-		data: categories,
-		isLoading: categoryLoading,
-		isSuccess: categorySuccess,
-		isError: categoryError,
-	} = useCategoryData();
+	// const {
+	// 	data: categories,
+	// 	isLoading: categoryLoading,
+	// 	isSuccess: categorySuccess,
+	// 	isError: categoryError,
+	// } = useCategoryData();
 
-	const {
-		data: brands,
-		isLoading: brandLoading,
-		isSuccess: brandSuccess,
-		isError: brandError,
-	} = useBrandData();
+	// const {
+	// 	data: brands,
+	// 	isLoading: brandLoading,
+	// 	isSuccess: brandSuccess,
+	// 	isError: brandError,
+	// } = useBrandData();
 
 	return (
 		<>
@@ -57,14 +56,14 @@ function FilterListItems({ handleFilter }) {
 							onChange={() => handleToggle("", "createdAt")}
 							className="mr-2"
 						/>
-						<p className="">Rating</p>
+						<p className="">Default</p>
 					</div>
 					<div className="flex justify-start items-center">
 						<input
 							type="radio"
 							name="sorting"
 							value="asce"
-							onChange={() => handleToggle("", "unitPrice")}
+							onChange={() => handleToggle("", "price")}
 							className="mr-2"
 						/>
 						<p className="">Price (Low to High)</p>
@@ -74,7 +73,7 @@ function FilterListItems({ handleFilter }) {
 							type="radio"
 							name="sorting"
 							value="desc"
-							onChange={() => handleToggle("desc", "unitPrice")}
+							onChange={() => handleToggle("desc", "price")}
 							className="mr-2"
 						/>
 						<p className="">Price (High to Low)</p>
@@ -82,7 +81,7 @@ function FilterListItems({ handleFilter }) {
 				</div>
 			</div>
 
-			<div className="">
+			{/* <div className="">
 				<p className="text-xl border-b border-[#b0d0e4] pb-3 mb-3">Filter By</p>
 			</div>
 
@@ -104,44 +103,48 @@ function FilterListItems({ handleFilter }) {
 							placeholder="max"
 							className="w-[100px] rounded focus:outline-none focus:border-green-600 focus:ring-0"
 						/>
-						<button className="bg-[#b0d0e4] text-[#0068a8] px-2 rounded hover:bg-indigo-200">
-							&#10095;
-						</button>
+						<PrimaryButton disabled={true} classes="px-2">&#10095;</PrimaryButton>
 					</div>
 				</div>
-			</div>
+			</div> */}
 
-			<div className="border-b border-[#b0d0e4] pb-4">
-				<p className="pb-2 pt-2 text-lg font-[600] text-gray-600">Categories</p>
-				<div className="space-y-2">
-					{categories?.data.map((category) => (
-						<Checkbox
-							key={category._id}
-							isChecked={checked["category"].indexOf(category.name === -1)}
-							name={category.name}
-							label={category.name}
-							id={category._id}
-							handleToggle={(value) => handleToggle(value, "category")}
-						/>
-					))}
+			{categories?.length > 0 && (
+				<div className="border-b border-[#b0d0e4] pb-4">
+					<p className="pb-2 pt-2 text-lg font-[600] text-gray-600">
+						Categories
+					</p>
+					<div className="space-y-2">
+						{categories?.map((category) => (
+							<Checkbox
+								key={category._id}
+								isChecked={checked["category"].indexOf(category.name === -1)}
+								name={category.name}
+								label={category.name}
+								id={category._id}
+								handleToggle={(value) => handleToggle(value, "category")}
+							/>
+						))}
+					</div>
 				</div>
-			</div>
+			)}
 
-			<div className="pb-4">
-				<p className="pb-2 pt-2 text-lg font-[600] text-gray-600">Brands</p>
-				<div className="space-y-2">
-					{brands?.data.map((brand) => (
-						<Checkbox
-							key={brand._id}
-							name={brand.name}
-							label={brand.name}
-							id={brand._id}
-							isChecked={checked["brand"].indexOf(brand.name === -1)}
-							handleToggle={(value) => handleToggle(value, "brand")}
-						/>
-					))}
+			{brands?.length > 0 && (
+				<div className="pb-4">
+					<p className="pb-2 pt-2 text-lg font-[600] text-gray-600">Brands</p>
+					<div className="space-y-2">
+						{brands?.map((brand) => (
+							<Checkbox
+								key={brand._id}
+								name={brand.name}
+								label={brand.name}
+								id={brand._id}
+								isChecked={checked["brand"].indexOf(brand.name === -1)}
+								handleToggle={(value) => handleToggle(value, "brand")}
+							/>
+						))}
+					</div>
 				</div>
-			</div>
+			)}
 		</>
 	);
 }

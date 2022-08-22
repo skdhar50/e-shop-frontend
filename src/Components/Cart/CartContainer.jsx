@@ -15,10 +15,7 @@ import SecondaryButton from "Components/Common/Buttons/SecondaryButton";
 function CartContainer({ shipping = 50 }) {
 	const {
 		data: cartItems,
-		isSuccess,
 		isLoading,
-		error,
-		isError,
 	} = useCartData(isAuthenticated());
 	const { mutate: cartItemMutation } = useUpdateCartItem();
 	const { mutate: selectAllItemsMutation } = useSelectAll();
@@ -32,7 +29,7 @@ function CartContainer({ shipping = 50 }) {
 	};
 
 	const increaseCartItem = (item) => () => {
-		if (item.count < 8) {
+		if (item.count < 5) {
 			cartItemMutation({ _id: item._id, count: item.count + 1 });
 		}
 	};
@@ -43,8 +40,8 @@ function CartContainer({ shipping = 50 }) {
 
 	const getCartTotal = () => {
 		let carttotal = cartItems?.data.map((item) => {
-			if (item.isSelected) {
-				return parseInt(item.product.unitPrice) * parseInt(item.count);
+			if (item.isSelected && item.product.quantity >= item.count) {
+				return parseInt(item.product.price) * parseInt(item.count);
 			}
 			return 0;
 		});
@@ -71,7 +68,7 @@ function CartContainer({ shipping = 50 }) {
 	};
 
 	const selectedItems = () => {
-		const items = cartItems?.data.filter((item) => item.isSelected === true);
+		const items = cartItems?.data.filter((item) => item.isSelected === true && item.product.quantity >= item.count);
 
 		if (items.length > 0) return true;
 		return false;
@@ -88,6 +85,7 @@ function CartContainer({ shipping = 50 }) {
 	if (isLoading) {
 		return <div className="">Loading....</div>;
 	}
+
 	return (
 		<div className="px-1 md:px-6 xl:container antialiased">
 			<div className="mt-20 lg:flex lg:space-x-6 space-y-5 lg:space-y-0">
@@ -101,8 +99,8 @@ function CartContainer({ shipping = 50 }) {
 										type="checkbox"
 										className="text-[#004E7E] focus:outline-none focus:ring-0 cursor-pointer"
 										checked={
-											cartItems.data.find(
-												(item) => item.isSelected === false
+											cartItems?.data.find(
+												(item) => item.count > 0 && item.isSelected === false
 											) === undefined
 										}
 										onChange={(event) => setAllSelected(event)}
@@ -157,7 +155,7 @@ function CartContainer({ shipping = 50 }) {
 				</div>
 
 				{cartItems.data.length > 0 && (
-					<div className="checkout-summary drop-shadow bg-white lg:w-[320px] border py-6 px-6 h-fit space-y-12">
+					<div className="checkout-summary shrink-0 drop-shadow bg-white lg:w-[320px] border py-6 px-6 h-fit space-y-12">
 						{/* Checkout Summary Scction */}
 						<CheckoutSummary
 							subTotal={getCartTotal()}

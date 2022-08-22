@@ -1,6 +1,6 @@
 
-function ProductSummary({ description}) {
-  return (
+function ProductSummary({ description }) {
+	return (
 		<div className="pt-10 space-y-5">
 			<div className="">
 				<p className="text-xl md:text-2xl font-[600] text-gray-600">

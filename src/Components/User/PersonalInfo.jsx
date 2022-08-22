@@ -228,6 +228,7 @@ function PersonalInfo({ profile }) {
 						Save
 					</button> */}
 					<PrimaryButton
+					type="submit"
 						disabled={!isValidToProced()}
 						classes="w-full sm:w-1/4 py-2"
 					>

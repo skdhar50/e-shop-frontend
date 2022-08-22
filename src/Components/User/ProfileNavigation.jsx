@@ -44,7 +44,7 @@ function ProfileNavigation() {
 					<li className="cursor-pointer hover:bg-[#d9e8f2] px-8 py-2">
 						<NavLink
 							className={({ isActive }) => (isActive ? "text-[#0068a8]" : "")}
-							to="/profile/orders"
+							to="/profile/orders?page=1"
 						>
 							My Orders
 						</NavLink>
@@ -52,7 +52,7 @@ function ProfileNavigation() {
 					<li className="cursor-pointer hover:bg-[#d9e8f2] px-8 py-2">
 						<NavLink
 							className={({ isActive }) => (isActive ? "text-[#0068a8]" : "")}
-							to="/profile/wishlist"
+							to="/profile/wishlist?page=1"
 						>
 							My Wishlist
 						</NavLink>

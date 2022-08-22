@@ -6,3 +6,10 @@ export const getAllCategory = () => {
 		method: "GET",
 	});
 };
+
+export const getAllFeaturedCategory =() => {
+	return request({
+		url: "/category/featured",
+		method: "GET",
+	})
+}

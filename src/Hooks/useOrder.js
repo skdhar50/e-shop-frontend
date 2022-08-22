@@ -5,8 +5,8 @@ import {
 	placeOrder,
 } from "Requests/OrderRequest";
 
-export const useOrderData = () => {
-	return useQuery("orders", getOrderList);
+export const useOrderData = (page) => {
+	return useQuery(["orders", page], getOrderList);
 };
 
 export const useOrderDetails = (id) => {

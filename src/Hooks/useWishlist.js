@@ -4,6 +4,7 @@ import {
 	removeFromWishlist,
 	getWishlist,
 	addToWishlist,
+	getAll
 } from "Requests/WishRequest";
 
 export const useMoveToCart = () => {
@@ -24,9 +25,15 @@ export const useRemoveFromWishlist = () => {
 	});
 };
 
-export const useWishlistData = (isEnabled) => {
-	return useQuery("wishlist", getWishlist, {
-		enabled: isEnabled
+export const useWishlistData = (data) => {
+	return useQuery(["wishlist", data.page], getWishlist, {
+		enabled: data.isEnabled,
+	});
+};
+
+export const useAllWishlist = (isEnabled) => {
+	return useQuery("allWishlist", getAll, {
+		isEnabled: isEnabled,
 	});
 };
 
@@ -35,7 +42,7 @@ export const useAddToWishlist = () => {
 
 	return useMutation(addToWishlist, {
 		onSuccess: (data) => {
-			queryClient.invalidateQueries("wishlist");
+			queryClient.invalidateQueries("allWishlist");
 		},
 	});
 };

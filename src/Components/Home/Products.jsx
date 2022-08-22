@@ -1,13 +1,11 @@
 import ProductCard from "Components/Cards/ProductCard";
+import ProductCardSkeleton from "Components/LoaderSkeleton/ProductCardSkeleton";
 import { useProductData } from "Hooks/useProduct";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 
 function Products() {
 	const { data: products, isLoading, error, isError } = useProductData();
 
-	if (isLoading) {
-		return <div className="">Loding</div>;
-	}
 	if (isError) {
 		console.error(error);
 	}
@@ -22,9 +20,13 @@ function Products() {
 				</div>
 
 				<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-3 md:gap-x-6 gap-y-6">
-					{products.data.map((product) => (
-						<ProductCard key={product._id} product={product} />
-					))}
+					{isLoading ? (
+						<ProductCardSkeleton />
+					) : (
+						products?.data.map((product) => (
+							<ProductCard key={product._id} product={product} />
+						))
+					)}
 				</div>
 			</div>
 			<div className="flex pt-4 py-8 justify-center bg-white items-center">

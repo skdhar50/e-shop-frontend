@@ -1,39 +1,56 @@
-import React from "react";
-import { useState } from "react";
+import DangerButton from "Components/Common/Buttons/DangerButton";
+import { IMAGE_URL } from "utilities/config.utility";
 
 function CartItem({ item, onIncrease, onDecrease, onRemove, onSelect }) {
-	const {product, count, isSelected } = item;
-	const {name: title, unitPrice: price, photos: image, description} = product;
-	// const [isSelected, setIsSelected] = useState(selected);
-
-	// console.log(isSelected);
+	const { product, count, isSelected } = item;
+	const {
+		name: title,
+		price,
+		quantity,
+		photos: image,
+		description,
+	} = product;
 
 	return (
 		<div
 			className={
-				"cart--items--item flex flex-col 2xl:flex-row shadow 2xl:items-center 2xl:justify-around border rounded-sm py-4 px-3 md:p-6 space-y-5 md:space-y-4 " +
-				(isSelected ? "bg-[#e6f0f6]" : "")
+				"cart--items--item flex flex-col 2xl:flex-row shadow 2xl:items-center 2xl:justify-around border rounded-sm py-4 px-3 md:p-6 space-y-5 md:space-y-4 relative " +
+				(quantity >= count && isSelected ? "bg-[#e6f0f6]" : "")
 			}
 		>
+			{quantity === 0 && (
+				<div className="bg-red-900 w-full h-full right-0 top-0 bg-opacity-70 flex flex-col items-center justify-center space-y-2 absolute">
+					<p className="text-gray-50 font-semibold text-xl shadowmd-">
+						Sorry! Item is not available!
+					</p>
+					<DangerButton
+						handler={onRemove}
+						classes="px-4 py-1 font-normal text-sm sm:text-base"
+					>
+						Remove
+					</DangerButton>
+				</div>
+			)}
+
 			<div className="flex items-center space-x-2">
 				<div className="flex items-center space-x-4 md:space-x-6">
 					<input
 						type="checkbox"
 						className="h-4 w-4 text-[#004E7E] focus:outline-none focus:ring-0 cursor-pointer"
-						checked={isSelected}
+						checked={quantity >= count ? isSelected : false}
 						onChange={() => onSelect()}
 					/>
 					<img
-						src={image[0]}
+						src={`${IMAGE_URL}/${image[0]}`}
 						alt=""
 						className="h-[60px] xl:h-[80px] w-[60px] xl:w-[80px] object-cover"
 					/>
 
-					<div className="md:w-[350px] cursor-pointer pl-3 md:pl-0">
+					<div className="cursor-pointer pl-3 md:pl-0 md:pb-4">
 						<p className="flex flex-col space-y-2 text-xs md:text-sm">
 							<span className="font-bold text-gray-700">{title}</span>
 							<span className="text-gray-500 md:text-gray-600">
-								{description}
+								{description.slice(0,180)}
 							</span>
 						</p>
 					</div>

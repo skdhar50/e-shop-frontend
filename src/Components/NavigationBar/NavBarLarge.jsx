@@ -8,15 +8,11 @@ function NavBarLarge() {
 
 	const {
 		data: categories,
-		isLoading: categoryLoading,
 		isSuccess: categorySuccess,
-		isError: categoryError,
 	} = useCategoryData();
 	const {
 		data: brands,
-		isLoading: brandLoading,
 		isSuccess: brandSuccess,
-		isError: brandError,
 	} = useBrandData();
 
 	if (categorySuccess) {
@@ -25,8 +21,6 @@ function NavBarLarge() {
 			submenu: categories.data,
 			tag: "category"
 		});
-
-		// console.log(categories.data);
 	}
 
 	if (brandSuccess) {
@@ -54,19 +48,19 @@ function NavBarLarge() {
 		);
 	}
 
-	if (brandLoading || categoryLoading) {
-		return <div className="">Loding</div>;
-	}
-
 	return (
 		<nav className="w-full h-[45px] border border-gray-300 shadow bg-gray-100 flex items-center justify-center">
-			<div className="xl:container md:w-full">
+			<div className="xl:container md:w-full z-50">
 				<ul className="flex justify-around items-center">
 					{menuItems.map((menu, index) => {
 						const depthLevel = 0;
 						return (
 							<div className="w-full" key={index}>
-								<MenuItems items={menu} tag={menu.tag} depthLevel={depthLevel} />
+								<MenuItems
+									items={menu}
+									tag={menu.tag}
+									depthLevel={depthLevel}
+								/>
 							</div>
 						);
 					})}

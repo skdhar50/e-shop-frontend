@@ -1,8 +1,19 @@
 import PrimaryButton from "Components/Common/Buttons/PrimaryButton";
 import SecondaryButton from "Components/Common/Buttons/SecondaryButton";
+import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
+import { useOverallReview } from "Hooks/useReviews";
+import ReviewStar from "Components/ReviewsAndRatings/ReviewStar";
+import { IMAGE_URL } from "utilities/config.utility";
 
-function QuickViewCard({ handleClose, product, handleCart }) {
+function QuickViewCard({
+	handleClose,
+	product,
+	handleCart,
+	isOutOfStock,
+	isOnSale,
+	isExclusive
+}) {
 	const {
 		_id: productId,
 		photos,
@@ -12,16 +23,17 @@ function QuickViewCard({ handleClose, product, handleCart }) {
 		category,
 		brand,
 		name,
-		rating,
 		review,
 		quantity,
-		unitPrice,
+		price,
 		discount,
 	} = product;
 
-	return (
+	const { data: rating, isLoading, isError } = useOverallReview(productId);
+
+	return ReactDOM.createPortal(
 		<div className="bg-black fixed z-[100] top-0 left-0 right-0 bottom-0 w-screen h-screen px-4 sm:px-8 bg-opacity-60 flex justify-center items-center">
-			<div className="card-vontainer relative bg-white rounded-md md:w-3/4 lg:w-3/4 xl:w-2/4 2xl:w-2/5 sm:h-[350px] p-6 flex justify-between items-center">
+			<div className="card-vontainer relative bg-white rounded-md md:w-3/4 lg:w-3/4 xl:w-2/4 2xl:w-2/5 h-fit p-6 flex justify-between items-center">
 				<div
 					onClick={handleClose}
 					className="absolute -top-7 -right-4 md:-right-6 group bg-gray-100 rounded-full p-3 border border-gray-300 cursor-pointer"
@@ -43,21 +55,42 @@ function QuickViewCard({ handleClose, product, handleCart }) {
 				</div>
 
 				<div className="sm:flex justify-center items-center sm:space-x-4 w-full h-full">
-					<div className="image h-1/2 sm:w-2/5 sm:h-full shrink-0 ">
+					<div className="image h-1/2 sm:w-2/5 sm:h-full shrink-0 relative">
+						{isOutOfStock && (
+							<img
+								src="/images/others/sold-out.svg"
+								className="absolute z-30 my-auto w-full h-full aspect-auto object-contain"
+								alt=""
+							/>
+						)}
+						{isOnSale && !isExclusive && !isOutOfStock && (
+							<img
+								src="/images/others/sale.svg"
+								alt=""
+								className="absolute z-30 my-auto w-[50px] md:w-[80px] top-0 right-0 aspect-auto object-contain"
+							/>
+						)}
+						{isExclusive && !isOutOfStock && (
+							<img
+								src="/images/others/exclusive.png"
+								alt=""
+								className="absolute z-30 my-auto w-[50px] md:w-[80px] -top-2 -right-4 aspect-auto object-contain"
+							/>
+						)}
 						<img
-							src={photos[0]}
+							src={`${IMAGE_URL}/${photos[0]}`}
 							alt={name}
 							className="w-full h-full aspect-square shrink-0"
 						/>
 					</div>
 					<div className="content relative flex-grow space-y-2 h-full flex flex-col justify-between">
-						<div className="space-y-2">
+						<div className="space-y-3">
 							<p className="text-xl font-semibold text-gray-700 pt-2 sm:pt-0">
 								{name}
 							</p>
 							<div className="flex text-sm space-x-2 text-gray-600">
 								<p className="">Category: </p>
-								<div className="flex space-x-1">
+								<div className="flex flex-wrap space-x-3">
 									{category.map((cate) => (
 										<p key={cate._id} className="underline italic">
 											{cate.name}
@@ -65,13 +98,16 @@ function QuickViewCard({ handleClose, product, handleCart }) {
 									))}
 								</div>
 							</div>
-							<div className="flex space-x-2">
-								<p className="font-semibold text-gray-600">4.5</p>
-								<img
-									src="/images/icons/stars.svg"
-									alt=""
-									className="w-[3.44rem] md:w-[4.06rem]"
-								/>
+							<div className="flex space-x-2 items-center">
+								<p className="font-semibold text-gray-600">
+									{rating?.data.average}
+									{rating?.data.average ? ".0" : ""}
+								</p>
+								{rating?.data.average ? (
+									<ReviewStar rating={rating?.data.average} classes="text-lg" />
+								) : (
+									""
+								)}
 							</div>
 							<div className="">
 								<p
@@ -82,7 +118,7 @@ function QuickViewCard({ handleClose, product, handleCart }) {
 											: "text-xl font-[700] text-gray-800")
 									}
 								>
-									TK. {unitPrice}
+									TK. {price}
 								</p>
 								{discount && (
 									<p className="text-xl font-[700] text-gray-800">
@@ -91,7 +127,7 @@ function QuickViewCard({ handleClose, product, handleCart }) {
 								)}
 							</div>
 							<div className="text-gray-700 text-sm">
-								<p className="">{description}</p>
+								<p className="">{description.slice(0,200)}</p>
 							</div>
 							<div className="">
 								{quantity > 0 ? (
@@ -102,27 +138,30 @@ function QuickViewCard({ handleClose, product, handleCart }) {
 							</div>
 						</div>
 
-						<div className="flex space-x-3">
-							<div className="w-full">
-								<PrimaryButton
-									handler={() => handleCart(product)}
-									classes="px-3 py-2 w-full"
-								>
-									Add To Cart
-								</PrimaryButton>
+						{quantity > 0 && (
+							<div className="flex space-x-3">
+								<div className="w-full">
+									<PrimaryButton
+										handler={() => handleCart(product)}
+										classes="px-3 py-2 w-full"
+									>
+										Add To Cart
+									</PrimaryButton>
+								</div>
+								<div className="w-full">
+									<Link to={`/product-details/${productId}`}>
+										<SecondaryButton classes="px-3 py-2 w-full">
+											View Details
+										</SecondaryButton>
+									</Link>
+								</div>
 							</div>
-							<div className="w-full">
-								<Link to={`/product-details/${productId}`}>
-									<SecondaryButton classes="px-3 py-2 w-full">
-										View Details
-									</SecondaryButton>
-								</Link>
-							</div>
-						</div>
+						)}
 					</div>
 				</div>
 			</div>
-		</div>
+		</div>,
+		document.getElementById("modal")
 	);
 }
 

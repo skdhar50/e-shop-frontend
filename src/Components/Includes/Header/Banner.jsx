@@ -1,13 +1,14 @@
 import BannerCarousel from "Components/SliderAndCarousel/BannerCarousel";
+import { useCarouselData } from "Hooks/useCarousel";
 
 function Banner() {
-	const banners = [
-		{ image: "/images/banners/banner-3.jpg", url: "/" },
-		{ image: "/images/banners/banner-4.jpg", url: "/" },
-		{ image: "/images/banners/banner-5.jpg", url: "/" },
-	];
+	const { data: banners, isLoading } = useCarouselData();
 
-	return <BannerCarousel banners={banners} />;
+	if (isLoading) {
+		return <div className="w-full aspect-[6/4] md:aspect-[4/2] bg-slate-100"></div>;
+	}
+
+	return <BannerCarousel banners={banners?.data} />;
 }
 
 export default Banner;

@@ -37,10 +37,6 @@ function OrderTotal({ orderTotal }) {
 					{isPaid ? (
 						<p className="">
 							{paymentStatus}
-							{/* Paid{" "}
-							<span className="text-gray-600 text-xs md:text-sm">
-								(By BiKash)
-							</span> */}
 						</p>
 					) : (
 						<p className="">Unpaid</p>

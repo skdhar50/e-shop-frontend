@@ -1,78 +1,87 @@
+import FilterListItems from "Components/Filter/FilterListItems";
+import RightFilterSmall from "Components/Filter/RightFilterSmall";
 import Layout from "Components/Layout";
-import { useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
-import Products from "./Products";
 import Pagination from "Components/Pagination/Pagination";
-
-import { useSearchParams } from "react-router-dom";
-
-const INITIAL_STATE = {
-	category: "",
-	brand: "",
-	isExclusive: false,
-	order: "",
-	sortBy: "",
-};
+import { useRelevantBrandData } from "Hooks/useBrand";
+import { useEffect, useState } from "react";
+import { Outlet, useSearchParams } from "react-router-dom";
+import Products from "./Products";
 
 function SingleFilterProducts() {
 	let [searchParams, setSearchParams] = useSearchParams();
 	const [start, setStart] = useState(1);
-	const [end, setEnd] = useState(10);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [pagesCount, setPagesCount] = useState(0);
-	const [sortOption, setSortOption] = useState("Default");
-	const [openDropdown, setOpenDropdown] = useState(false);
+	const [title, setTitle] = useState("");
+	const [totalItems, setTotalItems] = useState(0);
 
-	const [filters, setFilters] = useState(INITIAL_STATE);
+	const [filters, setFilters] = useState({
+		category: [],
+		brand: [],
+		order: "",
+		sortBy: "",
+	});
 
 	useEffect(() => {
 		setFilters({
-			...INITIAL_STATE,
-			[searchParams.get("tag")]: searchParams.get("value"),
-			sortBy: searchParams.get("sortBy"),
-			order: searchParams.get("order"),
+			category: [],
+			brand: [],
+			order: "",
+			sortBy: "",
 		});
+
+		if (searchParams.get("tag") === "brand") {
+			setFilters({
+				...filters,
+				category: [],
+				brand: [searchParams.get("value")],
+			});
+		} else if (searchParams.get("tag") === "category") {
+			setFilters({
+				...filters,
+				category: [searchParams.get("value")],
+				brand: [],
+			});
+		}
+
 		setCurrentPage(parseInt(searchParams.get("page")));
+		setTitle(searchParams.get("name"));
 	}, [searchParams]);
+
+	const [openFilter, setOpenFilter] = useState(false);
+
+	const handleRightFilter = () => {
+		setOpenFilter(!openFilter);
+	};
+
+	const handleFilter = (filter) => {
+		setCurrentPage(1);
+
+		setFilters({
+			...filter,
+			[searchParams.get("tag")]: [searchParams.get("value")],
+		});
+	};
 
 	const handlePageCount = (pages) => {
 		setPagesCount(pages);
 	};
 
+	const { data: brands } = useRelevantBrandData(
+		searchParams.get("tag") === "category"
+			? searchParams.get("value")
+			: undefined
+	);
+
 	const handleCurrentPage = (num) => {
 		setCurrentPage(num);
 		setStart(currentPage - 9 > 1 ? currentPage - 9 : 1);
-		// setEnd(start + 9 <= pagesCount ? start + 9 : pagesCount);
 		searchParams.set("page", num);
 		setSearchParams(searchParams, { replace: true });
 	};
 
-	const handleToggle = (e, value) => {
-		searchParams.set("sortBy", e.target.value);
-		searchParams.set("order", value);
-		setSearchParams(searchParams, { replace: true });
-
-		if (e.target.value === "createdAt") {
-			setSortOption("Rating");
-		} else {
-			if (e.target.value === "unitPrice" && value === "asce") {
-				setSortOption("Price (Low to High)");
-			} else {
-				setSortOption("Price (High to Low)");
-			}
-		}
-	};
-
-	const handleDropdown = () => {
-		setOpenDropdown((prev) => !prev);
-	};
-
-	const handleSmallSort = (name, order, sort) => {
-		handleDropdown();
-		setSortOption(name);
-		searchParams.set("sortBy", sort);
-		searchParams.set("order", order);
-		setSearchParams(searchParams, { replace: true });
+	const handleTotalItems = (total) => {
+		setTotalItems(total);
 	};
 
 	return (
@@ -80,116 +89,44 @@ function SingleFilterProducts() {
 			<Outlet />
 			<div className="2xl:container pb-12 md:mt-4">
 				<div className="sm:px-4 md:px-2 xl:px-4 flex justify-center items-top xl:space-x-4">
-					<div className="h-fit shrink-0 border p-6 space-y-4 bg-white shadow hidden xl:block">
-						<div className="">
-							<p className="pb-2 text-lg font-[600] text-gray-600">Sort By</p>
-							<div className="flex flex-col space-y-2">
-								<div className="flex justify-start items-center">
-									<input
-										type="radio"
-										name="sorting"
-										value="createdAt"
-										checked={filters.sortBy === "createdAt"}
-										onChange={(e) => handleToggle(e, "asce")}
-										className="mr-2"
-									/>
-									<p className="">Rating</p>
-								</div>
-								<div className="flex justify-start items-center">
-									<input
-										type="radio"
-										name="sorting"
-										value="unitPrice"
-										checked={
-											filters.sortBy === "unitPrice" && filters.order === "asce"
-										}
-										onChange={(e) => handleToggle(e, "asce")}
-										className="mr-2"
-									/>
-									<p className="">Price (Low to High)</p>
-								</div>
-								<div className="flex justify-start items-center">
-									<input
-										type="radio"
-										name="sorting"
-										value="unitPrice"
-										checked={
-											filters.sortBy === "unitPrice" && filters.order === "desc"
-										}
-										onChange={(e) => handleToggle(e, "desc")}
-										className="mr-2"
-									/>
-									<p className="">Price (High to Low)</p>
-								</div>
-							</div>
-						</div>
+					<div className="h-fit shrink-0 px-8  border py-6 space-y-4 bg-white shadow hidden xl:block">
+						<FilterListItems
+							brands={brands?.data}
+							handleFilter={(filter) => handleFilter(filter)}
+						/>
 					</div>
+					<RightFilterSmall
+						isOpen={openFilter}
+						handleRightFilter={handleRightFilter}
+						handleFilter={(filter) => handleFilter(filter)}
+						brands={brands?.data}
+					/>
 
 					<div className="flex-grow border p-3 sm:p-6 md:p-4 lg:p-6 bg-white">
-						<div className="mb-6">
-							<p className="text-2xl border-b pb-3 mb-4">Products</p>
-							<div className="w-full flex justify-end items-center xl:hidden space-x-4">
-								<p className="">Sort By</p>
-								<div className="relative">
-									<button
-										className="min-w-[11rem] py-2 text-[#005386] bg-[#e6f0f6] border border-[#b0d0e4] flex items-center space-x-2 justify-center"
-										onClick={handleDropdown}
+						<div className="">
+							<div className="border-b pb-3 mb-4">
+								<p className="text-2xl">{title}</p>
+								<p className="text-gray-500 pt-1 text-sm">
+									({totalItems} items found)
+								</p>
+							</div>
+
+							<div className="w-full flex justify-end xl:hidden">
+								<button
+									className="mb-6 w-[8rem] py-2 text-[#005386] bg-[#e6f0f6] border border-[#b0d0e4] flex items-center space-x-3 justify-center right-0"
+									onClick={handleRightFilter}
+								>
+									<svg
+										width="20"
+										height="13"
+										className="fill-[#005386]"
+										fill="none"
+										xmlns="http://www.w3.org/2000/svg"
 									>
-										{sortOption === "Default" && (
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												className="h-5 w-5"
-												fill="none"
-												viewBox="0 0 24 24"
-												stroke="currentColor"
-												strokeWidth="2"
-											>
-												<path
-													strokeLinecap="round"
-													strokeLinejoin="round"
-													d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12"
-												/>
-											</svg>
-										)}
-										<p className="">{sortOption}</p>
-									</button>
-									{openDropdown && (
-										<ul className="absolute bg-[#e6f0f6] border border-[#b0d0e4] z-40 w-full mt-1 shadow-md">
-											<li
-												onClick={() =>
-													handleSmallSort("Rating", "asce", "createdAt")
-												}
-												className="px-2 py-2 hover:bg-[#d9e8f2] cursor-pointer"
-											>
-												Rating
-											</li>
-											<li
-												onClick={() =>
-													handleSmallSort(
-														"Price (Low to High)",
-														"asce",
-														"unitPrice"
-													)
-												}
-												className="px-2 py-2 hover:bg-[#d9e8f2] cursor-pointer"
-											>
-												Price (Low to High)
-											</li>
-											<li
-												onClick={() =>
-													handleSmallSort(
-														"Price (High to Low)",
-														"desc",
-														"unitPrice"
-													)
-												}
-												className="px-2 py-2 hover:bg-[#d9e8f2] cursor-pointer"
-											>
-												Price (High to Low)
-											</li>
-										</ul>
-									)}
-								</div>
+										<path d="M3.75 5h12.5v2.5H3.75V5ZM0 0h20v2.5H0V0Zm7.5 10h5v2.5h-5V10Z" />
+									</svg>
+									<p className="">Filter</p>
+								</button>
 							</div>
 						</div>
 
@@ -198,6 +135,7 @@ function SingleFilterProducts() {
 								filters={filters}
 								currentPage={currentPage}
 								handlePageCount={handlePageCount}
+								handleTotalItems={handleTotalItems}
 							/>
 						</div>
 
@@ -205,11 +143,8 @@ function SingleFilterProducts() {
 							<Pagination
 								pagesCount={pagesCount}
 								start={start}
-								// end={end}
 								currentPage={currentPage}
 								handleCurrentPage={handleCurrentPage}
-								// onHandleStart={(value) => setStart(value)}
-								// onHandleEnd={(value) => setEnd(value)}
 							/>
 						)}
 					</div>

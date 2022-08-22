@@ -1,6 +1,5 @@
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { useCartData } from "Hooks/useCart";
+import { Link } from "react-router-dom";
 import { isAuthenticated } from "utilities/auth.utility";
 
 function CartIcon() {

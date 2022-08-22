@@ -6,7 +6,6 @@ import {
 	searchProduct,
 } from "Requests/ProductRequest";
 
-// Custom Hooks for Product Fetching
 export const useProductData = () => {
 	return useQuery("products", fetchProducts);
 };
