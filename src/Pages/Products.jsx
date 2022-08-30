@@ -4,8 +4,6 @@ import { useEffect } from "react";
 import ProductCardSkeleton from "Components/LoaderSkeleton/ProductCardSkeleton";
 
 function Products({ filters, handlePageCount, currentPage, handleTotalItems }) {
-	console.log(filters)
-
 	const {
 		data: products,
 		isLoading,

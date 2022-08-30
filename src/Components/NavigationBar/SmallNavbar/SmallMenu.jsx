@@ -1,13 +1,14 @@
 import { useState } from "react";
 import SmallDropdown from "./SmallDropdown";
-import { Link, createSearchParams, useNavigate } from "react-router-dom";
+import { createSearchParams, useNavigate } from "react-router-dom";
 
 function SmallMenu({ items, depth }) {
 	const [openSubmenu, setOpenSubmenu] = useState(false);
 	const navigate = useNavigate();
 
-	const goToPage = (productId) => {
+	const goToPage = (productId, name) => {
 		let searchString = {
+			name: name,
 			tag: 'category',
 			value: productId,
 			page: 1,
@@ -40,7 +41,7 @@ function SmallMenu({ items, depth }) {
 						}`}
 					>
 						<p
-							onClick={() => goToPage(items._id)}
+							onClick={() => goToPage(items._id, items.name)}
 							className={` ${
 								openSubmenu ? "text-[#004E7E]" : ""
 							} ${depth > 0 ? `pl-${depth + 1}` : ``}`}
@@ -96,7 +97,7 @@ function SmallMenu({ items, depth }) {
 					}`}
 				>
 					<p
-						onClick={() => goToPage(items._id)}
+						onClick={() => goToPage(items._id, items.name)}
 						className={`  ${depth > 0 ? `pl-${depth + 1}` : ""}`}
 					>
 						{items.name}
