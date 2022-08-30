@@ -72,7 +72,7 @@ function Register() {
 	};
 
 	return (
-		<div className="backdrop z-50 top-0 bottom-0 right-0 left-0 bg-black bg-opacity-50 flex justify-center items-center fixed">
+		<div className="backdrop z-[70] top-0 bottom-0 right-0 left-0 bg-black bg-opacity-50 flex justify-center items-center fixed">
 			<div className="modal flex bg-white md:space-x-10 py-8 w-full h-full md:h-fit md:w-fit md:pr-12 justify-center items-center relative">
 				<button onClick={isCloseAllModal} className="">
 					<svg

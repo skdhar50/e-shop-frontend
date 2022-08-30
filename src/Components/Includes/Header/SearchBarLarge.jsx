@@ -85,7 +85,7 @@ function SearchBarLearge() {
 					</div>
 				</div>
 
-				<div className="flex space-x-6 items-center">
+				<div className="flex space-x-6 z-[60] items-center">
 					<NavLink to="/profile/wishlist?page=1">
 						<div className="relative cursor-pointer">
 							<HeartIcon className="h-7 w-7 stroke-1 stroke-white/80 lg:stroke-gray-600" />

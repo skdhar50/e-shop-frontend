@@ -75,21 +75,20 @@ function CreateNewShippingAddress({ onCloseHandler }) {
 	const isDisabled = () => {
 		const { name, phone, area, city, zone, fullAddress } = values;
 		if (
-			name.length === 0 ||
-			phone.length === 0 ||
-			area.length === 0 ||
-			city.length === 0 ||
-			fullAddress.length === 0 ||
-			errors.name.length > 0 ||
-			errors.phone.length > 0 ||
-			errors.zone.length > 0 ||
-			errors.fullAddress.length > 0 ||
-			errors.phone2.length > 0
+			name?.length === 0 ||
+			phone?.length === 0 ||
+			area?.length === 0 ||
+			city?.length === 0 ||
+			fullAddress?.length === 0 ||
+			errors?.name?.length > 0 ||
+			errors?.phone?.length > 0 ||
+			errors?.zone?.length > 0 ||
+			errors?.fullAddress?.length > 0
 		) {
 			return true;
 		} else {
 			const upazilla = hasUpazilla(area);
-			if (upazilla.length > 0 && zone.length === 0) {
+			if (upazilla?.length > 0 && zone?.length === 0) {
 				return true;
 			}
 		}
@@ -103,7 +102,7 @@ function CreateNewShippingAddress({ onCloseHandler }) {
 	}, []);
 
 	return (
-		<div className="backdrop z-50 top-0 bottom-0 right-0 left-0 bg-black bg-opacity-50 flex justify-center items-center fixed ">
+		<div className="backdrop z-[70] top-0 bottom-0 right-0 left-0 bg-black bg-opacity-50 flex justify-center items-center fixed ">
 			<div className="modal w-full md:w-fit  h-full md:h-fit flex flex-col justify-center bg-white px-6 py-6 relative">
 				<div className="modal-header">
 					<h3 className="text-xl text-gray-700">Create New Shipping</h3>
@@ -233,9 +232,9 @@ function CreateNewShippingAddress({ onCloseHandler }) {
 								rows="3"
 								className="resize-none w-full rounded focus:outline-none focus:border-green-600 focus:ring-0"
 							></textarea>
-							{values.fullAddress.length > 0 && (
+							{values?.fullAddress.length > 0 && (
 								<p className="text-xs md:text-sm pt-1 italic text-red-600">
-									{errors.fullAddress.length > 0 && errors.fullAddress}
+									{errors?.fullAddress.length > 0 && errors?.fullAddress}
 								</p>
 							)}
 						</div>

@@ -41,7 +41,7 @@ function Login() {
 	return (
 		<div
 			className={
-				"backdrop z-50 top-0 bottom-0 right-0 left-0 bg-black bg-opacity-50 flex justify-center items-center fixed"
+				"backdrop z-[70] top-0 bottom-0 right-0 left-0 bg-black bg-opacity-50 flex justify-center items-center fixed"
 			}
 		>
 			<div className="modal flex bg-white py-8 w-full h-full md:h-fit md:w-[700px] md:pl-12 justify-center md:justify-between items-center relative">
